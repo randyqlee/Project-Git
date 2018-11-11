@@ -10,7 +10,7 @@ public class ZombieAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spriteRenderer = renderer as SpriteRenderer;
+		spriteRenderer = GetComponent<Renderer>() as SpriteRenderer;
 	}
 	
 	// Update is called once per frame
