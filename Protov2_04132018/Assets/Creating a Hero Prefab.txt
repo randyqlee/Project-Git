@@ -1,0 +1,7 @@
+1. Copy from existing Hero prefab (ctrl+D)
+2. Modify Attributes, Hero Class, Rarity, etc.
+3. Create Skills SO.(3 skills + 1 Leaderskill)
+4. Attach created Skills SO to the Hero Script.
+5. For simulating Soul binding, drag-drop another Hero prefab to this hero's Tag Hero field.
+6. Modify the Sprite or UI of the new Hero
+7. Save
