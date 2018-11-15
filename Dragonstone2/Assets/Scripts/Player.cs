@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 
 	public GameObject spawnLocations;
 
+	public Ability ability;
+
 	
 
 	// Use this for initialization
@@ -35,6 +37,15 @@ public class Player : MonoBehaviour {
 				heroManager.rarity = deck.heroes[i].rarity;
 
 				heroGO.GetComponentInChildren<Image>().sprite = deck.heroes[i].image;
+
+
+
+				string spellScriptName = deck.heroes[i].SpellScriptName;
+				if (spellScriptName != null) {
+					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
+					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
+					Debug.Log ("Activator for " + gameObject.name);
+				}
 
 				
 

@@ -23,4 +23,8 @@ public class HeroAsset : ScriptableObject
 
 	public Rarity rarity;
 
+	[Header("SpellInfo - must be typed correctly")]
+	public string SpellScriptName;
+
+
 }
