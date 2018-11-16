@@ -18,10 +18,14 @@ public class HeroManager : MonoBehaviour
 
 	public Rarity rarity;
 
+	public CapsuleCollider2D col;
+
 
 	void Awake () {
 //		if (heroAsset != null)
 //			ReadHeroFromAsset();
+
+	col = GetComponent<CapsuleCollider2D>();
 
 
 	}
@@ -47,5 +51,10 @@ public class HeroManager : MonoBehaviour
 
 		rarity = heroAsset.rarity;
 */
+	}
+
+	void OnMouseDown ()
+	{
+		Debug.Log("Hero clicked: " + heroName);
 	}
 }

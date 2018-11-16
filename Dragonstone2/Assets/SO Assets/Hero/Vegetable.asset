@@ -18,4 +18,4 @@ MonoBehaviour:
   defense: 5
   chance: 25
   rarity: 3
-  SpellScriptName: Heal
+  ability: Fireball

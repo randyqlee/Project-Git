@@ -10,8 +10,6 @@ public class Player : MonoBehaviour {
 
 	public GameObject spawnLocations;
 
-	public Ability ability;
-
 	
 
 	// Use this for initialization
@@ -24,7 +22,8 @@ public class Player : MonoBehaviour {
 			for (int i = 0; i < deck.heroes.Count; i++)
 			{
 				Transform spawnLocation = spawnLocations.GetComponent<SpawnLocations>().spawn[i].transform;
-				var heroGO =  Instantiate(heroPrefab, spawnLocation);
+				var heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
+				
 
 				HeroManager heroManager = heroGO.GetComponent<HeroManager>();
 				heroManager.heroName = deck.heroes[i].heroName;
@@ -37,14 +36,15 @@ public class Player : MonoBehaviour {
 				heroManager.rarity = deck.heroes[i].rarity;
 
 				heroGO.GetComponentInChildren<Image>().sprite = deck.heroes[i].image;
+				heroGO.name = heroManager.heroName;
 
 
 
-				string spellScriptName = deck.heroes[i].SpellScriptName;
+				string spellScriptName = deck.heroes[i].ability;
 				if (spellScriptName != null) {
 					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
 					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
-					Debug.Log ("Activator for " + gameObject.name);
+
 				}
 
 				
