@@ -1,0 +1,17 @@
+﻿public enum DebuffList {
+	AntiBuff,
+	Bomb,
+	Brand,
+	ContinuousDamage,
+	DecreaseAtkSpeed,
+	DecreaseAttack,
+	DecreaseDefense,
+	Freeze,
+	Glancing,
+	Oblivion,
+	ReverseImmunity,
+	Silence,
+	Sleep,
+	Stun,
+	Unrecoverable,
+}

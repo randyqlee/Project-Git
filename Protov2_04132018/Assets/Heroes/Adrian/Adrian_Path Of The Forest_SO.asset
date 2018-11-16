@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df2acee0dab62443b2c0feba594486d, type: 3}
+  m_Name: Adrian_Path Of The Forest_SO
+  m_EditorClassIdentifier: 
+  objectInfo:
+    name: 
+    description: 'Path of the Forest: Increase the Attack Speed and Critical Rate
+      of the team 3 turns then attack a single enemy target. Cooldown:  4 turns'
+    icon: {fileID: 21300004, guid: a5050f35392a62449ae108a9ca201ede, type: 3}
+  cost: 4
+  skillFX: {fileID: 0}
+  currCost: 4
+  values: []
