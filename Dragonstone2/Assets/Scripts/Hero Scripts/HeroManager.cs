@@ -20,12 +20,16 @@ public class HeroManager : MonoBehaviour
 
 	public CapsuleCollider2D col;
 
+	public bool isSelected;
+	public Player player;
+
 
 	void Awake () {
 //		if (heroAsset != null)
 //			ReadHeroFromAsset();
 
 	col = GetComponent<CapsuleCollider2D>();
+	isSelected = false;
 
 
 	}
@@ -55,6 +59,16 @@ public class HeroManager : MonoBehaviour
 
 	void OnMouseDown ()
 	{
-		Debug.Log("Hero clicked: " + heroName);
+		if (player.isActive)
+		{
+			Debug.Log("Hero clicked: " + heroName);
+			GameManager.Instance.DeselectAllHeroes();
+			SelectHero();
+		}
+	}
+
+	void SelectHero()
+	{
+		isSelected = true;
 	}
 }

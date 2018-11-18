@@ -10,7 +10,11 @@ public class Player : MonoBehaviour {
 
 	public GameObject spawnLocations;
 
-	
+	public bool isActive;
+
+	void Awake () {
+		isActive = false;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +38,9 @@ public class Player : MonoBehaviour {
 				heroManager.chance = deck.heroes[i].chance;
 
 				heroManager.rarity = deck.heroes[i].rarity;
+
+				heroManager.player = this;
+				heroManager.tag = this.tag;
 
 				heroGO.GetComponentInChildren<Image>().sprite = deck.heroes[i].image;
 				heroGO.name = heroManager.heroName;
