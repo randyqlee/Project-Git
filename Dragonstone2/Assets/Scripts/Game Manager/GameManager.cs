@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour {
 		Instance = this;
 		//find all Players in the scene and store them in array
 		Players = GameObject.FindObjectsOfType<Player>();
-
-
 	}
 
 	// Use this for initialization
@@ -34,41 +32,43 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			if (Players[0].isActive)
-				{
-					Players[0].isActive = false;
-					Players[1].isActive = true;
-				}
-			else {
-					Players[1].isActive = false;
-					Players[0].isActive = true;
-			}
-		}
-		
+	
 	}
-/*
-	public void DeselectOtherHeroes (HeroManager hero)
+
+
+
+	public void Attack (HeroManager attacker, HeroManager defender)
+	{
+		int damage = attacker.attack - defender.defense;
+		
+		Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + damage + " hitpoints!");	
+
+		defender.maxHealth = defender.maxHealth - damage;
+
+		attacker.maxHealth = attacker.maxHealth - (defender.attack - attacker.defense);
+
+		
+		CheckHealth ();
+		DeselectAllHeroes ();
+		NextTurn();
+	}
+
+	void CheckHealth ()
 	{
 		foreach (Player player in Players)
 		{
-			foreach (HeroManager otherHero in player.GetComponentsInChildren<HeroManager>())
+			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
-				if (otherHero.GetInstanceID() != hero.GetInstanceID())
-				{
-					if (otherHero.isSelected)
+				if (hero.maxHealth < 0)
 					{
-						Debug.Log ("Deselecting " + otherHero.name);
-						otherHero.isSelected = false;
+						Debug.Log ("Destroying " + hero.name);
+						Destroy (hero.gameObject);
 					}
-
-				}
-				
+				hero.UpdateUI();
 
 			}
 		}
 	}
-*/
 
 	public void DeselectAllHeroes ()
 	{
@@ -85,6 +85,21 @@ public class GameManager : MonoBehaviour {
 
 			}
 		}
+	}
+
+	void NextTurn ()
+	{
+
+		if (Players[0].isActive)
+				{
+					Players[0].isActive = false;
+					Players[1].isActive = true;
+				}
+			else {
+					Players[1].isActive = false;
+					Players[0].isActive = true;
+			}
+
 	}
 
 
