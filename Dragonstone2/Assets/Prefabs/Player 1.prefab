@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 114095475046996018}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   heroPrefab: {fileID: 114149557918672390, guid: 884ec30ecdf585d429eb880ed23d12cf,
     type: 2}
   spawnLocations: {fileID: 1352220415960784}
+  isActive: 0
 --- !u!114 &114150526979289966
 MonoBehaviour:
   m_ObjectHideFlags: 1
