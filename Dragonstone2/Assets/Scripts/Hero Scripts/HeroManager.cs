@@ -11,6 +11,8 @@ public class HeroManager : MonoBehaviour
 
 	public string heroName;
 	public Sprite image;
+
+	public Image glow;
 	
 	public int maxHealth;
 	public int attack;
@@ -27,6 +29,8 @@ public class HeroManager : MonoBehaviour
 	public Text healthText;
 	public Text attackText;
 	public Text defenseText;
+
+	public Text damageText;
 
 
 	void Awake () {
@@ -45,7 +49,7 @@ public class HeroManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void ReadHeroFromAsset()
@@ -81,6 +85,7 @@ public class HeroManager : MonoBehaviour
 		Debug.Log("chance: " + chance);
 		GameManager.Instance.DeselectAllHeroes();
 		isSelected = true;
+		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
 	}
 
 	public void DisplayHero()
@@ -105,4 +110,23 @@ public class HeroManager : MonoBehaviour
 
 
 	}
+
+	public void DisplayDamageText (int damage)
+	{
+		StartCoroutine (DisplayDamage (damage));
+	}
+
+	IEnumerator DisplayDamage (int damage)
+	{
+		damage = -1 * damage;
+
+		damageText.text = damage.ToString();
+		damageText.enabled = true;
+		yield return new WaitForSeconds (1f);
+		damageText.enabled = false;
+
+		yield return null;
+	}
+
+
 }
