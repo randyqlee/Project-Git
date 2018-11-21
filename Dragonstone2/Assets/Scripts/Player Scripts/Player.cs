@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 
 	HeroManager selectedHero;
 
-	private bool dragging = false;
+	public bool dragging = false;
 
 	void Awake () {
 		isActive = false;
@@ -71,12 +71,16 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		GameObject pointerObject = UpdateMouseOver();		
+		GameObject pointerObject = UpdateMouseOver();
+	
 
 		if (pointerObject != null)
 		{
 			if(pointerObject.gameObject.GetComponent<HeroManager>() != null && isActive)
 			{
+
+
+
 				if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag && !dragging)
 				{
 
@@ -84,12 +88,9 @@ public class Player : MonoBehaviour {
 					pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
 
 					selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
+					
 
-					float x1 = pointerObject.gameObject.transform.position.x;
-					float y1 = pointerObject.gameObject.transform.position.y;
-
-					dragging = true;
-
+					dragging = true;			
 
 
 				}
@@ -102,12 +103,8 @@ public class Player : MonoBehaviour {
 
 				if (Input.GetMouseButtonUp(0) && selectedHero != null && pointerObject.gameObject.tag != gameObject.tag && dragging)
 				{
-
-
 					GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
-
 					dragging = false;
-
 				}
 
 				if (Input.GetMouseButtonUp(0))
@@ -124,7 +121,7 @@ public class Player : MonoBehaviour {
 	private GameObject UpdateMouseOver()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        //if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 25.0f, LayerMask.GetMask("Hero")))		
+
         if (hit.collider != null)
         {
 			return hit.transform.gameObject;

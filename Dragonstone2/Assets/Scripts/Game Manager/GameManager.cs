@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -26,6 +27,14 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 
 		Players[0].isActive = true;
+		foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+		{
+			var image = hero.glow.GetComponent<Image>().color;
+			image.a = 1f;
+			hero.glow.GetComponent<Image>().color = image;
+
+
+		}
 
 	}
 	
@@ -39,19 +48,27 @@ public class GameManager : MonoBehaviour {
 
 	public void Attack (HeroManager attacker, HeroManager defender)
 	{
-		int damage = attacker.attack - defender.defense;
-		
-		Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + damage + " hitpoints!");	
+		int atk_damage = attacker.attack - defender.defense;
+		int def_damage = defender.attack - attacker.defense;
 
-		defender.maxHealth = defender.maxHealth - damage;
+		Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
 
-		attacker.maxHealth = attacker.maxHealth - (defender.attack - attacker.defense);
+		defender.maxHealth = defender.maxHealth - atk_damage;
+
+		attacker.maxHealth = attacker.maxHealth - def_damage;
+
+		//display damage in UI
+
+		defender.DisplayDamageText(atk_damage);
+		attacker.DisplayDamageText(def_damage);
 
 		
 		CheckHealth ();
 		DeselectAllHeroes ();
 		NextTurn();
 	}
+
+
 
 	void CheckHealth ()
 	{
@@ -80,6 +97,7 @@ public class GameManager : MonoBehaviour {
 					{
 						Debug.Log ("Deselecting " + hero.name);
 						hero.isSelected = false;
+						hero.glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
 					}
 				
 
@@ -94,10 +112,43 @@ public class GameManager : MonoBehaviour {
 				{
 					Players[0].isActive = false;
 					Players[1].isActive = true;
+
+					foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+					{
+						var image = hero.glow.GetComponent<Image>().color;
+						image.a = 0f;
+						hero.glow.GetComponent<Image>().color = image;
+
+
+					}
+					foreach (HeroManager hero in Players[1].GetComponentsInChildren<HeroManager>())
+					{
+						var image = hero.glow.GetComponent<Image>().color;
+						image.a = 1f;
+						hero.glow.GetComponent<Image>().color = image;
+
+
+					}
 				}
 			else {
 					Players[1].isActive = false;
 					Players[0].isActive = true;
+					foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+					{
+						var image = hero.glow.GetComponent<Image>().color;
+						image.a = 1f;
+						hero.glow.GetComponent<Image>().color = image;
+
+
+					}
+					foreach (HeroManager hero in Players[1].GetComponentsInChildren<HeroManager>())
+					{
+						var image = hero.glow.GetComponent<Image>().color;
+						image.a = 0f;
+						hero.glow.GetComponent<Image>().color = image;
+
+
+					}
 			}
 
 	}
