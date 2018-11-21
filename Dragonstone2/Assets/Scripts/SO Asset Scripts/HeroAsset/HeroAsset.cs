@@ -25,7 +25,7 @@ public class HeroAsset : ScriptableObject
 
 	[Header("Abilities - must be typed correctly")]
 
-	public string ability;
+	public List<AbilityAsset> abilityAsset;
 
 
 }

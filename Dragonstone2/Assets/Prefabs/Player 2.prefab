@@ -206,6 +206,7 @@ MonoBehaviour:
   spawnLocations: {fileID: 1247197346385754}
   isActive: 0
   dragging: 0
+  heroPanel: {fileID: 0}
 --- !u!114 &114219961264691276
 MonoBehaviour:
   m_ObjectHideFlags: 1

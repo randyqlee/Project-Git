@@ -95,9 +95,7 @@ public class GameManager : MonoBehaviour {
 			{
 				if (hero.isSelected)
 					{
-						Debug.Log ("Deselecting " + hero.name);
-						hero.isSelected = false;
-						hero.glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
+						hero.DeselectHero();
 					}
 				
 

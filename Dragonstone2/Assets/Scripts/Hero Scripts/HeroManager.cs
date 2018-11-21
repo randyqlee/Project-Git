@@ -19,6 +19,9 @@ public class HeroManager : MonoBehaviour
 	public int defense;
 	public float chance;
 
+	public List<AbilityAsset> abilityAssets;
+	public List<Ability> abilities;
+
 	public Rarity rarity;
 
 	public CapsuleCollider2D col;
@@ -49,6 +52,15 @@ public class HeroManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+/* 		HeroPanel heroPanel;
+
+		if (GameObject.FindGameObjectWithTag("HeroPanel") != null && isSelected)
+			{
+				heroPanel = GameObject.FindGameObjectWithTag("HeroPanel").GetComponentInChildren<HeroPanel>();
+				heroPanel.heroPortrait.sprite = image;
+			}
+*/
+
 
 	}
 
@@ -86,6 +98,24 @@ public class HeroManager : MonoBehaviour
 		GameManager.Instance.DeselectAllHeroes();
 		isSelected = true;
 		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
+
+		player.heroPanel.SetActive(true);
+		//player.heroPanel.GetComponent<HeroPanel>().heroPortrait = image;
+		player.heroPanel.GetComponent<HeroPanel>().hero = this;
+		player.heroPanel.GetComponent<HeroPanel>().UpdateUI();
+
+	//	player.heroPanel.GetComponent<HeroPanel>().heroPortrait.GetComponentInChildren<Image>().sprite = image;
+
+				
+
+	}
+
+	public void DeselectHero()
+	{
+		Debug.Log ("Deselecting " + name);
+		isSelected = false;
+		player.heroPanel.SetActive(false);
+		glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
 	}
 
 	public void DisplayHero()

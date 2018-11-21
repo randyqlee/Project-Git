@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class AbilityAsset : ScriptableObject {
 
+	public string abilityName;
+	public Sprite icon;
 
 	[Header("AbilityInfo - must be typed correctly")]
-	public string abilityName;
+	public string abilityEffect;
+
+
 
 }
