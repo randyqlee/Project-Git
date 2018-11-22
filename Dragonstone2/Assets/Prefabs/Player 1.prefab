@@ -143,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1814716062970144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4301352565446744}
@@ -206,6 +206,7 @@ MonoBehaviour:
   spawnLocations: {fileID: 1352220415960784}
   isActive: 0
   dragging: 0
+  heroPanel: {fileID: 0}
 --- !u!114 &114150526979289966
 MonoBehaviour:
   m_ObjectHideFlags: 1

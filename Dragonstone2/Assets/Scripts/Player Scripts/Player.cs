@@ -16,6 +16,10 @@ public class Player : MonoBehaviour {
 
 	public bool dragging = false;
 
+	public GameObject heroPanel;
+	
+	HeroManager heroGO;
+
 	void Awake () {
 		isActive = false;
 	}
@@ -30,7 +34,7 @@ public class Player : MonoBehaviour {
 			for (int i = 0; i < deck.heroes.Count; i++)
 			{
 				Transform spawnLocation = spawnLocations.GetComponent<SpawnLocations>().spawn[i].transform;
-				var heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
+				heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
 				
 
 				HeroManager heroManager = heroGO.GetComponent<HeroManager>();
@@ -51,13 +55,20 @@ public class Player : MonoBehaviour {
 				heroManager.UpdateUI();
 
 
-
-				string spellScriptName = deck.heroes[i].ability;
-				if (spellScriptName != null) {
-					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
+//add the abilities script to hero object
+				for (int j = 0; j < deck.heroes[i].abilityAsset.Count; j++)
+				{
+					string spellScriptName = deck.heroes[i].abilityAsset[j].abilityEffect;
+					if (spellScriptName != null) {
+/////					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
 					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
+					heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
+					
 
+					}
 				}
+
+				heroManager.abilities.AddRange(heroGO.GetComponentsInChildren<Ability>());
 
 				
 

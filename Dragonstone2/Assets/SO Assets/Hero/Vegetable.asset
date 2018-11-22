@@ -18,4 +18,7 @@ MonoBehaviour:
   defense: 5
   chance: 25
   rarity: 3
-  ability: Fireball
+  abilityAsset:
+  - {fileID: 11400000, guid: 245710a559952f84080a67791abc6806, type: 2}
+  - {fileID: 11400000, guid: ca5909200ae0e5940b14c8bf1c2f5026, type: 2}
+  - {fileID: 11400000, guid: 1de98b967009c8948b81faca299dc263, type: 2}
