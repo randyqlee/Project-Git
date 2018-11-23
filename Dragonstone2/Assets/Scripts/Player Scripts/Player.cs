@@ -19,6 +19,9 @@ public class Player : MonoBehaviour {
 	public GameObject heroPanel;
 	
 	HeroManager heroGO;
+	bool myHeroIsSelected = false;
+
+	Button button;
 
 	void Awake () {
 		isActive = false;
@@ -82,48 +85,119 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		GameObject pointerObject = UpdateMouseOver();
-	
+		//Debug.Log (dragging);
 
-		if (pointerObject != null)
+		if (isActive)
 		{
-			if(pointerObject.gameObject.GetComponent<HeroManager>() != null && isActive)
+			GameObject pointerObject = UpdateMouseOver();
+		
+
+			if (pointerObject != null )
 			{
 
-
-
-				if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag && !dragging)
+				
+			/*	THIS IS ONLY FOR HERO DRAGGING TO ANOTHER HERO
+				if(pointerObject.gameObject.GetComponent<HeroManager>() != null && isActive)
 				{
 
 
-					pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
 
-					selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
+					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag && !dragging)
+					{
+
+
+						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
+
+						selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
+						
+
+						dragging = true;			
+
+
+					}
+
+					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
+					{
+						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
+					}
+				
+
+					if (Input.GetMouseButtonUp(0) && selectedHero != null && pointerObject.gameObject.tag != gameObject.tag && dragging)
+					{
+						GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
+						dragging = false;
+					}
+
+					if (Input.GetMouseButtonUp(0))
+					{
+						dragging = false;
+					}
+				
+				}
+			*/
+
+				//THIS IS FOR HERO ABILITY DRAGGING TO HERO
+				//HERO is selected
+				if(pointerObject.gameObject.GetComponent<HeroManager>() != null)
+				{
+					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag)
+					{
+						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
+
+						selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
+
+						myHeroIsSelected = true;
+					}
+
+					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
+					{
+						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
+						myHeroIsSelected = false;
+					}
 					
-
-					dragging = true;			
-
-
 				}
 
-				if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
+				//BUTTON is selected
+				if(pointerObject.gameObject.GetComponent<Button>() != null && myHeroIsSelected)
 				{
-					pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
-				}
-			
+					if (Input.GetMouseButtonDown(0))
+					{
+						button = pointerObject.gameObject.GetComponent<Button>();
 
-				if (Input.GetMouseButtonUp(0) && selectedHero != null && pointerObject.gameObject.tag != gameObject.tag && dragging)
-				{
-					GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
-					dragging = false;
+						dragging = true;
+						
+					}
 				}
 
-				if (Input.GetMouseButtonUp(0))
+				if (dragging)
 				{
-					dragging = false;
+					//ensure that the end of drag is pointing to a Hero
+					if (Input.GetMouseButtonUp(0) && pointerObject.gameObject.GetComponent<HeroManager>() != null)
+					{
+						//replace with applying button's ability to target
+						//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
+
+						button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroPanel>().hero,pointerObject.gameObject.GetComponent<HeroManager>());
+
+						GameManager.Instance.CheckHealth ();
+						GameManager.Instance.DeselectAllHeroes ();
+						GameManager.Instance.NextTurn();
+						//turn off dragging
+						dragging = false;
+					}
+
+					//if (Input.GetMouseButtonUp(0))
+					//{
+					//	dragging = false;
+					//}
+
 				}
-			
+
 			}
+
+			else 
+				if (Input.GetMouseButtonUp(0))
+					dragging = false;
 
 		}
 		
@@ -135,6 +209,7 @@ public class Player : MonoBehaviour {
 
         if (hit.collider != null)
         {
+			
 			return hit.transform.gameObject;
           //pointer over hero  
 		}
