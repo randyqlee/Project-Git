@@ -13,4 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Mega Smash
   icon: {fileID: 21300000, guid: 317cb045a22152b458faa0251972acd9, type: 3}
+  description: 
   abilityEffect: MegaSmash
+  abilityBuffs:
+  - buff: 0
+    duration: 0
+  abilityDebuffs: []

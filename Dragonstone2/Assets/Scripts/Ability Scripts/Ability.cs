@@ -8,4 +8,10 @@ public class Ability : MonoBehaviour {
 	{
 
 	}
+
+	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
+	{
+		Debug.Log ("Using ability: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
+
+	}
 }

@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-	void CheckHealth ()
+	public void CheckHealth ()
 	{
 		foreach (Player player in Players)
 		{
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void NextTurn ()
+	public void NextTurn ()
 	{
 
 		if (Players[0].isActive)
