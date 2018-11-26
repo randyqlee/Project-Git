@@ -14,17 +14,23 @@ public class MachCrush : Ability {
 	{
 		Debug.Log ("Using  MachCrush");
 
-		foreach (Player player in GameManager.Instance.Players )
-		{
+			GameManager.Instance.Attack (attacker, defender);
+			//TO Be FIXED
+			/*
 
-			if (player.tag != GetComponentInParent<HeroManager>().tag)
+			foreach (Player player in GameManager.Instance.Players )
 			{
-				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+
+				if (player.tag != GetComponentInParent<HeroManager>().tag)
 				{
-					GameManager.Instance.Attack (attacker, hero);
+					foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+					{
+						GameManager.Instance.Attack (attacker, hero);
+					}
 				}
 			}
-		}		
+
+			*/
 	}
 }
 

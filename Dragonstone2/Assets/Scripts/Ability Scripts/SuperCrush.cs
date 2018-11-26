@@ -16,6 +16,10 @@ public class SuperCrush : Ability {
 
 			Debug.Log ("Using  SuperCrush");
 
+			GameManager.Instance.Attack (attacker, defender);
+			//TO Be FIXED
+			/*
+
 			foreach (Player player in GameManager.Instance.Players )
 			{
 
@@ -27,6 +31,8 @@ public class SuperCrush : Ability {
 					}
 				}
 			}
+
+			*/
 		
 
 	}
