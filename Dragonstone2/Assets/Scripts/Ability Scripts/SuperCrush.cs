@@ -13,18 +13,21 @@ public class SuperCrush : Ability {
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		Debug.Log ("Using  SuperCrush");
 
-		foreach (Player player in GameManager.Instance.Players )
-		{
+			Debug.Log ("Using  SuperCrush");
 
-			if (player.tag != GetComponentInParent<HeroManager>().tag)
+			foreach (Player player in GameManager.Instance.Players )
 			{
-				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+
+				if (player.tag != GetComponentInParent<HeroManager>().tag)
 				{
-					GameManager.Instance.Attack (attacker, hero);
+					foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+					{
+						GameManager.Instance.Attack (attacker, hero);
+					}
 				}
 			}
-		}		
+		
+
 	}
 }

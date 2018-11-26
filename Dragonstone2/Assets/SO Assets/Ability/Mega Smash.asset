@@ -13,9 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Mega Smash
   icon: {fileID: 21300000, guid: 317cb045a22152b458faa0251972acd9, type: 3}
-  description: 
+  description: 'Name:  Mega Smash  Attack an enemy.  Chance to inflict Poison for
+    2 turns.'
   abilityEffect: MegaSmash
-  abilityBuffs:
-  - buff: 0
-    duration: 0
-  abilityDebuffs: []
+  abilityCoolDown: 1
+  abilityBuffs: []
+  abilityDebuffs:
+  - debuff: 10
+    duration: 2

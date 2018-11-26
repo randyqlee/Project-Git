@@ -38,6 +38,8 @@ public class HeroPanel : MonoBehaviour {
 			//map the icon and abilities to the button
 			skillsBtn[i].image.sprite = hero.abilityAssets[i].icon;
 			skillsBtn[i].gameObject.AddComponent(System.Type.GetType(hero.abilityAssets[i].abilityEffect));
+			skillsBtn[i].gameObject.GetComponent<Ability>().abilityCooldown = hero.abilityAssets[i].abilityCoolDown;
+			skillsBtn[i].gameObject.GetComponent<Ability>().remainingCooldown = hero.abilityAssets[i].abilityCoolDown;
 
 
 			if (skillsBtn[i].GetComponent<TextMesh>() == null)

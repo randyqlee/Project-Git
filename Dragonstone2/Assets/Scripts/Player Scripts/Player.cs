@@ -73,6 +73,13 @@ public class Player : MonoBehaviour {
 					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
 
 					heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
+
+					Ability[] abilityComponent = heroGO.gameObject.GetComponents<Ability>();
+
+					Debug.Log ("Cooldown: " + deck.heroes[i].abilityAsset[j].abilityCoolDown);
+
+					abilityComponent[j].abilityCooldown = deck.heroes[i].abilityAsset[j].abilityCoolDown;
+
 					
 
 					}
@@ -191,8 +198,16 @@ public class Player : MonoBehaviour {
 						
 						//check if ability is active and can be used
 
+						if (button.GetComponent<Ability>().CanUseAbility())
+						{
+							button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
 
-						button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
+							//reset cooldown
+
+
+
+						}
+						
 
 
 						//let the gamemanager decide these:
