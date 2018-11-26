@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ability : MonoBehaviour {
 
+	public int abilityCooldown;
+
 	public virtual void UseAbility ()
 	{
 

@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 114373981775035374}
   - component: {fileID: 114216751271800292}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: HeroUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,6 +370,8 @@ MonoBehaviour:
   attack: 0
   defense: 0
   chance: 0
+  abilityAssets: []
+  abilities: []
   rarity: 0
   col: {fileID: 0}
   isSelected: 0
@@ -378,6 +380,10 @@ MonoBehaviour:
   attackText: {fileID: 114133997266522186}
   defenseText: {fileID: 114119323325842318}
   damageText: {fileID: 114947341527763782}
+  heroPortrait: {fileID: 0}
+  skillsBtn: []
+  skillText: {fileID: 0}
+  heroPanel: {fileID: 1433816641337208, guid: 8f027100d3058484283f7989c4fdeace, type: 2}
 --- !u!114 &114216751271800292
 MonoBehaviour:
   m_ObjectHideFlags: 1

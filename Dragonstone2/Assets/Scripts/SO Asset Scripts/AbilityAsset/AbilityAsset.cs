@@ -11,6 +11,8 @@ public class AbilityAsset : ScriptableObject {
 	[Header("AbilityInfo - must be typed correctly")]
 	public string abilityEffect;
 
+	public int abilityCoolDown;
+
 	[System.Serializable]
 	public class AbilityBuffs {
 		public BuffList buff;
