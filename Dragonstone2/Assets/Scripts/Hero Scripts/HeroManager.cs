@@ -36,6 +36,13 @@ public class HeroManager : MonoBehaviour
 	public Text damageText;
 
 
+		public Image heroPortrait;
+	public List<Button> skillsBtn;
+
+	public GameObject skillText;
+	public GameObject heroPanel;
+
+
 	void Awake () {
 //		if (heroAsset != null)
 //			ReadHeroFromAsset();
@@ -99,10 +106,17 @@ public class HeroManager : MonoBehaviour
 		isSelected = true;
 		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
 
+		/*
 		player.heroPanel.SetActive(true);
 		//player.heroPanel.GetComponent<HeroPanel>().heroPortrait = image;
 		player.heroPanel.GetComponent<HeroPanel>().hero = this;
 		player.heroPanel.GetComponent<HeroPanel>().UpdateUI();
+		*/
+		heroPanel.SetActive(true);
+
+		//heroPanel.GetComponent<HeroPanel>().EnableMouseOver();
+		//heroPanel.GetComponent<HeroPanel>().hero = this;
+		//heroPanel.GetComponent<HeroPanel>().UpdateHeroPanel();
 
 	//	player.heroPanel.GetComponent<HeroPanel>().heroPortrait.GetComponentInChildren<Image>().sprite = image;
 
@@ -114,7 +128,9 @@ public class HeroManager : MonoBehaviour
 	{
 		Debug.Log ("Deselecting " + name);
 		isSelected = false;
-		player.heroPanel.SetActive(false);
+		//player.heroPanel.SetActive(false);
+		//heroPanel.GetComponent<HeroPanel>().DisableMouseOver();
+		heroPanel.SetActive(false);
 		glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
 	}
 
@@ -137,9 +153,20 @@ public class HeroManager : MonoBehaviour
 		healthText.text = maxHealth.ToString();
 		attackText.text = attack.ToString();
 		defenseText.text = defense.ToString();
+	}
 
+	public void CreateHeroPanel()
+	{
+
+		heroPanel = Instantiate(heroPanel);
+		heroPanel.GetComponent<HeroPanel>().hero = this;
+		heroPanel.GetComponent<HeroPanel>().CreateHeroPanel();
+		heroPanel.SetActive(false);
+		heroPanel.transform.SetParent(transform);
+	
 
 	}
+
 
 	public void DisplayDamageText (int damage)
 	{

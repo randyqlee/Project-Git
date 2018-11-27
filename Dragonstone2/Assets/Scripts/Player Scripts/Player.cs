@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using System.Reflection;
 
 public class Player : MonoBehaviour {
 
@@ -12,7 +14,7 @@ public class Player : MonoBehaviour {
 
 	public bool isActive;
 
-	HeroManager selectedHero;
+//	HeroManager selectedHero;
 
 	public bool dragging = false;
 
@@ -22,6 +24,8 @@ public class Player : MonoBehaviour {
 	bool myHeroIsSelected = false;
 
 	Button button;
+
+
 
 	void Awake () {
 		isActive = false;
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour {
 
 				heroGO.GetComponentInChildren<Image>().sprite = deck.heroes[i].image;
 				heroGO.name = heroManager.heroName;
-				heroManager.UpdateUI();
+				
 
 
 //add the abilities script to hero object
@@ -64,14 +68,27 @@ public class Player : MonoBehaviour {
 					string spellScriptName = deck.heroes[i].abilityAsset[j].abilityEffect;
 					if (spellScriptName != null) {
 /////					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
+					
+					//Type t = System.Type.GetType(spellScriptName);
 					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
+
 					heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
+
+					Ability[] abilityComponent = heroGO.gameObject.GetComponents<Ability>();
+
+					Debug.Log ("Cooldown: " + deck.heroes[i].abilityAsset[j].abilityCoolDown);
+
+					abilityComponent[j].abilityCooldown = deck.heroes[i].abilityAsset[j].abilityCoolDown;
+
 					
 
 					}
 				}
 
 				heroManager.abilities.AddRange(heroGO.GetComponentsInChildren<Ability>());
+
+				heroManager.UpdateUI();
+				heroManager.CreateHeroPanel();
 
 				
 
@@ -81,6 +98,7 @@ public class Player : MonoBehaviour {
 		}
 
 	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -144,7 +162,7 @@ public class Player : MonoBehaviour {
 					{
 						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
 
-						selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
+						//selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
 
 						myHeroIsSelected = true;
 					}
@@ -177,11 +195,26 @@ public class Player : MonoBehaviour {
 						//replace with applying button's ability to target
 						//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
 
-						button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroPanel>().hero,pointerObject.gameObject.GetComponent<HeroManager>());
+						
+						//check if ability is active and can be used
 
-						GameManager.Instance.CheckHealth ();
-						GameManager.Instance.DeselectAllHeroes ();
-						GameManager.Instance.NextTurn();
+						//if (button.GetComponent<Ability>().CanUseAbility())
+						//{
+							button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
+
+							//reset cooldown
+
+
+
+						//}
+						
+
+
+						//let the gamemanager decide these:
+
+						//GameManager.Instance.//CheckHealth ();
+						//GameManager.Instance.//DeselectAllHeroes ();
+						//GameManager.Instance.//NextTurn();
 						//turn off dragging
 						dragging = false;
 					}

@@ -13,4 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Super Crush
   icon: {fileID: 21300000, guid: 5f911703813ea1746a6ff18149a4a04a, type: 3}
+  description: 'Name: Super Crush  Attack ALL enemies.  Chance to Stun for 1 turn.  CD:
+    3'
   abilityEffect: SuperCrush
+  abilityCoolDown: 3
+  abilityBuffs: []
+  abilityDebuffs:
+  - debuff: 6
+    duration: 0

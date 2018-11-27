@@ -16,15 +16,6 @@ MonoBehaviour:
   description: 'Name: Mach Crush  Attack all enemies.  Deal additional 100 damage
     for each debuff on an enemy.  CD:4'
   abilityEffect: MachCrush
-  abilityBuffs:
-  - buff: 0
-    duration: 0
-  - buff: 2
-    duration: 0
-  abilityDebuffs:
-  - debuff: 2
-    duration: 0
-  - debuff: 5
-    duration: 0
-  - debuff: 8
-    duration: 0
+  abilityCoolDown: 4
+  abilityBuffs: []
+  abilityDebuffs: []

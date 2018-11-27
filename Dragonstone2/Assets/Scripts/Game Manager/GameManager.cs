@@ -41,6 +41,13 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyDown ("a"))
+		{
+			CheckHealth ();
+			DeselectAllHeroes ();
+			NextTurn();
+		}
+
 	
 	}
 
@@ -148,6 +155,35 @@ public class GameManager : MonoBehaviour {
 
 					}
 			}
+
+		//ReduceAbilityCooldown();
+
+	}
+
+	public void ReduceAbilityCooldown()
+	{
+		foreach (Player player in Players)
+		{
+			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+			{
+				HeroPanel heroPanel = hero.GetComponentInChildren<HeroPanel>();
+				foreach (Button button in heroPanel.skillsBtn)
+				{
+					if (button.GetComponent<Ability>() != null)
+					{
+						foreach (Ability ability in button.GetComponents<Ability>())
+						{
+							if (ability.remainingCooldown > 0)
+								ability.remainingCooldown -= 1;
+						}
+
+					}
+
+
+				}
+
+			}
+		}
 
 	}
 
