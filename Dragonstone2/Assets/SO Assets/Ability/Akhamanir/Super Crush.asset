@@ -3,21 +3,21 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e04adaa294486d4bb9208c93490dc4c, type: 3}
-  m_Name: Mega Smash
+  m_Name: Super Crush
   m_EditorClassIdentifier: 
-  abilityName: Mega Smash
-  icon: {fileID: 21300000, guid: 317cb045a22152b458faa0251972acd9, type: 3}
-  description: 'Name:  Mega Smash  Attack an enemy.  Chance to inflict Poison for
-    2 turns.'
-  abilityEffect: MegaSmash
-  abilityCoolDown: 1
+  abilityName: Super Crush
+  icon: {fileID: 21300000, guid: 5f911703813ea1746a6ff18149a4a04a, type: 3}
+  description: 'Name: Super Crush  Attack ALL enemies.  Chance to Stun for 1 turn.  CD:
+    3'
+  abilityEffect: SuperCrush
+  abilityCoolDown: 3
   abilityBuffs: []
   abilityDebuffs:
-  - debuff: 10
-    duration: 2
+  - debuff: 6
+    duration: 0

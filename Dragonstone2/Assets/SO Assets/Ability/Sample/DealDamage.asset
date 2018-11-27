@@ -3,14 +3,18 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e04adaa294486d4bb9208c93490dc4c, type: 3}
-  m_Name: Kamehame
+  m_Name: DealDamage
   m_EditorClassIdentifier: 
   abilityName: 
   icon: {fileID: 0}
+  description: 
   abilityEffect: 
+  abilityCoolDown: 0
+  abilityBuffs: []
+  abilityDebuffs: []

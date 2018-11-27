@@ -6,6 +6,8 @@ public class AbilityAsset : ScriptableObject {
 
 	public string abilityName;
 	public Sprite icon;
+
+	[TextArea(5,10)]
 	public string description;
 
 	[Header("AbilityInfo - must be typed correctly")]
