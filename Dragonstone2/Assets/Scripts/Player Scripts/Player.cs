@@ -198,15 +198,16 @@ public class Player : MonoBehaviour {
 						
 						//check if ability is active and can be used
 
-						//if (button.GetComponent<Ability>().CanUseAbility())
-						//{
+						if (button.GetComponent<Ability>().CanUseAbility())
+						{
 							button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
 
 							//reset cooldown
+							button.GetComponent<Ability>().ResetCooldown();
 
 
 
-						//}
+						}
 						
 
 

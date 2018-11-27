@@ -10,6 +10,11 @@ public class Ability : MonoBehaviour {
 
 	public bool canUseAbility;
 
+	void Start ()
+	{
+		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
+	}
+
 	public virtual void UseAbility ()
 	{
 
@@ -29,7 +34,7 @@ public class Ability : MonoBehaviour {
 		if (remainingCooldown == 0)
 		{
 			canUseAbility = true;
-			ResetCooldown();
+			//ResetCooldown();
 		}
 		else Debug.Log ("Can't use ability"); 	
 		return canUseAbility;
@@ -42,6 +47,15 @@ public class Ability : MonoBehaviour {
 	{
 		remainingCooldown = abilityCooldown;
 		canUseAbility = false;
+
+	}
+
+	public virtual void GameManagerNextTurn()
+	{
+		if (remainingCooldown > 0)
+		{
+			remainingCooldown -= 1;
+		}
 
 	}
 }

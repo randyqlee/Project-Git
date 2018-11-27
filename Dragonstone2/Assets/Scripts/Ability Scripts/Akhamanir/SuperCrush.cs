@@ -16,24 +16,8 @@ public class SuperCrush : Ability {
 
 			Debug.Log ("Using  SuperCrush");
 
-			GameManager.Instance.Attack (attacker, defender);
-			//TO Be FIXED
-			/*
-
-			foreach (Player player in GameManager.Instance.Players )
-			{
-
-				if (player.tag != GetComponentInParent<HeroManager>().tag)
-				{
-					foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
-					{
-						GameManager.Instance.Attack (attacker, hero);
-					}
-				}
-			}
-
-			*/
-		
+			GameManager.Instance.AttackAll (attacker, defender);
+	
 
 	}
 }
