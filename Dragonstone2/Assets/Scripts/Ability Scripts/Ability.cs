@@ -52,7 +52,7 @@ public class Ability : MonoBehaviour {
 
 	public virtual void GameManagerNextTurn()
 	{
-		if (remainingCooldown > 0)
+		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		{
 			remainingCooldown -= 1;
 		}

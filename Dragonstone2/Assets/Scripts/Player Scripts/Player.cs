@@ -90,9 +90,6 @@ public class Player : MonoBehaviour {
 				heroManager.UpdateUI();
 				heroManager.CreateHeroPanel();
 
-				
-
-
 			}
 
 		}

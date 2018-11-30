@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour {
 	public delegate void Event_NextTurn();
 	public event Event_NextTurn e_NextTurn = delegate {};
 
+	public bool isInitialTurn = true;
+
 	void Awake ()
 	{
 
@@ -38,11 +40,13 @@ public class GameManager : MonoBehaviour {
 
 
 		}
+		
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 
 		if (Input.GetKeyDown ("a"))
 		{

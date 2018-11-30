@@ -163,7 +163,6 @@ public class HeroManager : MonoBehaviour
 		heroPanel.GetComponent<HeroPanel>().CreateHeroPanel();
 		heroPanel.SetActive(false);
 		heroPanel.transform.SetParent(transform);
-	
 
 	}
 

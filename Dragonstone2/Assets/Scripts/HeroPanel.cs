@@ -41,7 +41,6 @@ public class HeroPanel : MonoBehaviour {
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityCooldown = hero.abilityAssets[i].abilityCoolDown;
 			skillsBtn[i].gameObject.GetComponent<Ability>().remainingCooldown = hero.abilityAssets[i].abilityCoolDown;
 
-
 			if (skillsBtn[i].GetComponent<TextMesh>() == null)
 			{
 			skillsBtn[i].gameObject.AddComponent<TextMesh>();
