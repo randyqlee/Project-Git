@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [System.Serializable]
-public class Buff : MonoBehaviour{
+public class Debuff : MonoBehaviour{
 
-	public BuffAsset buff;
-	public Sprite buffIcon;
+	public DebuffAsset debuff;
+	public Sprite debuffIcon;
 	public int duration;
 	public GameObject source;
 
@@ -19,7 +19,7 @@ public class Buff : MonoBehaviour{
 	//	this.duration = duration;
 	//}
 
-	public Buff New (int duration, GameObject source)
+	public Debuff New (int duration, GameObject source)
 	{
 		this.duration = duration;
 		this.source = source;
@@ -33,7 +33,7 @@ public class Buff : MonoBehaviour{
 
 	}
 
-	public void DecreaseDuration ()
+	public virtual void DecreaseDuration ()
 	{
 		if (GetComponentInParent<Player>().isActive)
 		{
