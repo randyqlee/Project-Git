@@ -44,12 +44,9 @@ public class HeroManager : MonoBehaviour
 
 
 	void Awake () {
-//		if (heroAsset != null)
-//			ReadHeroFromAsset();
 
 	col = GetComponent<CapsuleCollider2D>();
 	isSelected = false;
-
 
 	}
 	// Use this for initialization
@@ -59,42 +56,10 @@ public class HeroManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-/* 		HeroPanel heroPanel;
-
-		if (GameObject.FindGameObjectWithTag("HeroPanel") != null && isSelected)
-			{
-				heroPanel = GameObject.FindGameObjectWithTag("HeroPanel").GetComponentInChildren<HeroPanel>();
-				heroPanel.heroPortrait.sprite = image;
-			}
-*/
 
 
 	}
 
-	void ReadHeroFromAsset()
-	{
-/* 
-		heroName = heroAsset.heroName;
-		image = heroAsset.image;
-		maxHealth = heroAsset.maxHealth;
-		attack = heroAsset.attack;
-		defense = heroAsset.defense;
-		chance = heroAsset.chance;
-
-		rarity = heroAsset.rarity;
-*/
-	}
-/*
-	void OnMouseDown ()
-	{
-		if (player.isActive)
-		{
-			Debug.Log("Hero clicked: " + heroName);
-			GameManager.Instance.DeselectAllHeroes();
-			SelectHero();
-		}
-	}
-*/
 	public void SelectHero()
 	{
 		Debug.Log("Hero: " + heroName);
@@ -106,21 +71,9 @@ public class HeroManager : MonoBehaviour
 		isSelected = true;
 		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
 
-		/*
-		player.heroPanel.SetActive(true);
-		//player.heroPanel.GetComponent<HeroPanel>().heroPortrait = image;
-		player.heroPanel.GetComponent<HeroPanel>().hero = this;
-		player.heroPanel.GetComponent<HeroPanel>().UpdateUI();
-		*/
 		heroPanel.SetActive(true);
 
-		//heroPanel.GetComponent<HeroPanel>().EnableMouseOver();
-		//heroPanel.GetComponent<HeroPanel>().hero = this;
-		//heroPanel.GetComponent<HeroPanel>().UpdateHeroPanel();
 
-	//	player.heroPanel.GetComponent<HeroPanel>().heroPortrait.GetComponentInChildren<Image>().sprite = image;
-
-				
 
 	}
 
@@ -128,8 +81,7 @@ public class HeroManager : MonoBehaviour
 	{
 		Debug.Log ("Deselecting " + name);
 		isSelected = false;
-		//player.heroPanel.SetActive(false);
-		//heroPanel.GetComponent<HeroPanel>().DisableMouseOver();
+
 		heroPanel.SetActive(false);
 		glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
 	}
@@ -165,10 +117,6 @@ public class HeroManager : MonoBehaviour
 		
 		heroPanel.transform.SetParent(transform);
 		heroPanel.SetActive(false);
-		//if (abilities.Count > 0)
-		//{
-		//	heroPanel.SetActive(false);
-		//}
 
 	}
 

@@ -28,11 +28,18 @@ public class Player : MonoBehaviour {
 
 
 	void Awake () {
-		isActive = false;
+
 	}
 
 	// Use this for initialization
 	void Start () {
+
+
+
+	}
+
+	public void InitHeroes ()
+	{
 
 		deck = GetComponent<Deck>();
 
@@ -67,42 +74,12 @@ public class Player : MonoBehaviour {
 				{
 					string spellScriptName = deck.heroes[i].abilityAsset[j].abilityEffect;
 					if (spellScriptName != null) {
-/////					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
-					
-					//Type t = System.Type.GetType(spellScriptName);
-					//heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
-
-					heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
-
-					//Ability[] abilityComponent = heroGO.gameObject.GetComponents<Ability>();
-
-					//Debug.Log ("Cooldown: " + deck.heroes[i].abilityAsset[j].abilityCoolDown);
-
-					//abilityComponent[j].abilityCooldown = deck.heroes[i].abilityAsset[j].abilityCoolDown;
-
-
-					
-
+						heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
 					}
 				}
 
-
-
-				heroManager.UpdateUI();
-				heroManager.CreateHeroPanel();
-
-
-				//heroManager.abilities.AddRange(heroGO.GetComponentsInChildren<Ability>());
-
-				//foreach (Ability ability in heroManager.abilities)
-				//Debug.Log(ability);
-
-				//if (heroManager.abilities != null)
-				//{
-				//	heroManager.gameObject.GetComponentInChildren<HeroPanel>().gameObject.SetActive(false);
-				//}
-
-
+				//heroManager.UpdateUI();
+				//heroManager.CreateHeroPanel();
 
 			}
 

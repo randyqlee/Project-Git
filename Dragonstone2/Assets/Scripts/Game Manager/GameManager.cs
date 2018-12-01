@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager Instance;
 
 	//placeholder for Player gameobjects
-	public Player[] Players; 
+	public Player[] players; 
 
 	public delegate void Event_NextTurn();
 	public event Event_NextTurn e_NextTurn = delegate {};
@@ -26,31 +26,79 @@ public class GameManager : MonoBehaviour {
 
 		Instance = this;
 		//find all Players in the scene and store them in array
-		Players = GameObject.FindObjectsOfType<Player>();
+
 	}
 
 	// Use this for initialization
 	void Start () {
 
+		StartCoroutine (GameLoop());
 
-		Players[0].isActive = true;
-		foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+
+
+	}
+
+
+	IEnumerator GameLoop()
+	{
+		yield return StartCoroutine (InitPlayers());
+
+		yield return StartCoroutine (InitHeroes());
+
+		yield return StartCoroutine (InitHeroUI());
+
+		yield return StartCoroutine (StartBattle());
+
+	}
+
+	IEnumerator InitPlayers()
+	{
+		players = GameObject.FindObjectsOfType<Player>();
+
+		players[1].isActive = true;
+		players[0].isActive = false;
+
+
+
+		yield return null;
+	}
+
+	IEnumerator InitHeroes()
+	{
+		foreach (Player player in players)
+			player.GetComponent<Player>().InitHeroes();
+
+		yield return null;
+	}
+
+	IEnumerator InitHeroUI()
+	{
+		foreach (Player player in players)
+			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+			{
+				hero.UpdateUI();
+				hero.CreateHeroPanel();
+			}
+
+		yield return null;
+	}
+
+	IEnumerator StartBattle()
+	{
+
+		foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 		{
 			var image = hero.glow.GetComponent<Image>().color;
 			image.a = 1f;
 			hero.glow.GetComponent<Image>().color = image;
-
-			//foreach (Ability ability in hero.GetComponentsInChildren<Ability>())
-			//{
-			//	ability.remainingCooldown -= 1;
-			//}
-
-
 		}
 
-		
+		NextTurn();
 
+
+		yield return null;
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -92,7 +140,7 @@ public class GameManager : MonoBehaviour {
 
 	public void AttackAll (HeroManager attacker, HeroManager defender)
 	{
-		foreach (Player player in GameManager.Instance.Players )
+		foreach (Player player in GameManager.Instance.players )
 		{
 			if (player.tag == defender.gameObject.tag)
 			{
@@ -128,7 +176,7 @@ public class GameManager : MonoBehaviour {
 
 	public void CheckHealth ()
 	{
-		foreach (Player player in Players)
+		foreach (Player player in players)
 		{
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
@@ -145,7 +193,7 @@ public class GameManager : MonoBehaviour {
 
 	public void DeselectAllHeroes ()
 	{
-		foreach (Player player in Players)
+		foreach (Player player in players)
 		{
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
@@ -162,12 +210,12 @@ public class GameManager : MonoBehaviour {
 	public void NextTurn ()
 	{
 
-		if (Players[0].isActive)
+		if (players[0].isActive)
 				{
-					Players[0].isActive = false;
-					Players[1].isActive = true;
+					players[0].isActive = false;
+					players[1].isActive = true;
 
-					foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+					foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 					{
 						var image = hero.glow.GetComponent<Image>().color;
 						image.a = 0f;
@@ -175,7 +223,7 @@ public class GameManager : MonoBehaviour {
 
 
 					}
-					foreach (HeroManager hero in Players[1].GetComponentsInChildren<HeroManager>())
+					foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
 					{
 						var image = hero.glow.GetComponent<Image>().color;
 						image.a = 1f;
@@ -185,9 +233,9 @@ public class GameManager : MonoBehaviour {
 					}
 				}
 			else {
-					Players[1].isActive = false;
-					Players[0].isActive = true;
-					foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
+					players[1].isActive = false;
+					players[0].isActive = true;
+					foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 					{
 						var image = hero.glow.GetComponent<Image>().color;
 						image.a = 1f;
@@ -195,7 +243,7 @@ public class GameManager : MonoBehaviour {
 
 
 					}
-					foreach (HeroManager hero in Players[1].GetComponentsInChildren<HeroManager>())
+					foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
 					{
 						var image = hero.glow.GetComponent<Image>().color;
 						image.a = 0f;
