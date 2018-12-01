@@ -159,10 +159,16 @@ public class HeroManager : MonoBehaviour
 	{
 
 		heroPanel = Instantiate(heroPanel);
+		//heroPanel.SetActive(true);
 		heroPanel.GetComponent<HeroPanel>().hero = this;
 		heroPanel.GetComponent<HeroPanel>().CreateHeroPanel();
-		heroPanel.SetActive(false);
+		
 		heroPanel.transform.SetParent(transform);
+		heroPanel.SetActive(false);
+		//if (abilities.Count > 0)
+		//{
+		//	heroPanel.SetActive(false);
+		//}
 
 	}
 

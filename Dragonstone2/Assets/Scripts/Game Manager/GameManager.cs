@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
 	public delegate void Event_NextTurn();
 	public event Event_NextTurn e_NextTurn = delegate {};
 
+
 	public bool isInitialTurn = true;
 
 	void Awake ()
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
 		Players[0].isActive = true;
 		foreach (HeroManager hero in Players[0].GetComponentsInChildren<HeroManager>())
 		{
@@ -38,8 +40,14 @@ public class GameManager : MonoBehaviour {
 			image.a = 1f;
 			hero.glow.GetComponent<Image>().color = image;
 
+			//foreach (Ability ability in hero.GetComponentsInChildren<Ability>())
+			//{
+			//	ability.remainingCooldown -= 1;
+			//}
+
 
 		}
+
 		
 
 	}

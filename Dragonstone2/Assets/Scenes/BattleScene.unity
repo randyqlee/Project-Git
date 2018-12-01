@@ -707,3 +707,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
+  isInitialTurn: 1

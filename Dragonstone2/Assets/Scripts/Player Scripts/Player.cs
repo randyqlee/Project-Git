@@ -70,25 +70,39 @@ public class Player : MonoBehaviour {
 /////					//ability = System.Activator.CreateInstance(System.Type.GetType(spellScriptName)) as Ability;
 					
 					//Type t = System.Type.GetType(spellScriptName);
-					heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
+					//heroGO.gameObject.AddComponent(System.Type.GetType(spellScriptName));
 
 					heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
 
-					Ability[] abilityComponent = heroGO.gameObject.GetComponents<Ability>();
+					//Ability[] abilityComponent = heroGO.gameObject.GetComponents<Ability>();
 
-					Debug.Log ("Cooldown: " + deck.heroes[i].abilityAsset[j].abilityCoolDown);
+					//Debug.Log ("Cooldown: " + deck.heroes[i].abilityAsset[j].abilityCoolDown);
 
-					abilityComponent[j].abilityCooldown = deck.heroes[i].abilityAsset[j].abilityCoolDown;
+					//abilityComponent[j].abilityCooldown = deck.heroes[i].abilityAsset[j].abilityCoolDown;
+
 
 					
 
 					}
 				}
 
-				heroManager.abilities.AddRange(heroGO.GetComponentsInChildren<Ability>());
+
 
 				heroManager.UpdateUI();
 				heroManager.CreateHeroPanel();
+
+
+				//heroManager.abilities.AddRange(heroGO.GetComponentsInChildren<Ability>());
+
+				//foreach (Ability ability in heroManager.abilities)
+				//Debug.Log(ability);
+
+				//if (heroManager.abilities != null)
+				//{
+				//	heroManager.gameObject.GetComponentInChildren<HeroPanel>().gameObject.SetActive(false);
+				//}
+
+
 
 			}
 

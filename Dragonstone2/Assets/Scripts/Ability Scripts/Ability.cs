@@ -10,7 +10,7 @@ public class Ability : MonoBehaviour {
 
 	public bool canUseAbility;
 
-	void Start ()
+	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
 	}
@@ -52,6 +52,10 @@ public class Ability : MonoBehaviour {
 
 	public virtual void GameManagerNextTurn()
 	{
+
+
+		Debug.Log ("Cooldown of " + name + " : " + remainingCooldown);
+
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		{
 			remainingCooldown -= 1;
