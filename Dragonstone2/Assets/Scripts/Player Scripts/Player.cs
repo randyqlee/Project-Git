@@ -81,6 +81,8 @@ public class Player : MonoBehaviour {
 				//heroManager.UpdateUI();
 				//heroManager.CreateHeroPanel();
 
+				heroManager.origHealth = heroManager.maxHealth;
+
 			}
 
 		}

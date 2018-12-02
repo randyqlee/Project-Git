@@ -79,7 +79,7 @@ public class HeroPanel : MonoBehaviour {
 		 skillText.GetComponent<Text>().text = null;
 	 }
 
-	}
+	
 
 
 

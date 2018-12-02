@@ -42,6 +42,10 @@ public class HeroManager : MonoBehaviour
 	public GameObject skillText;
 	public GameObject heroPanel;
 
+	public Image healthBar;
+
+	public int origHealth;
+
 
 	void Awake () {
 
@@ -105,6 +109,7 @@ public class HeroManager : MonoBehaviour
 		healthText.text = maxHealth.ToString();
 		attackText.text = attack.ToString();
 		defenseText.text = defense.ToString();
+		UpdateHealthBar();
 	}
 
 	public void CreateHeroPanel()
@@ -136,6 +141,11 @@ public class HeroManager : MonoBehaviour
 		damageText.enabled = false;
 
 		yield return null;
+	}
+
+	public void UpdateHealthBar()
+	{
+		healthBar.fillAmount = ((float) maxHealth)/origHealth;
 	}
 
 

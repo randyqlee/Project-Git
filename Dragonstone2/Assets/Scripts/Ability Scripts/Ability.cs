@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
 
@@ -48,6 +49,9 @@ public class Ability : MonoBehaviour {
 		remainingCooldown = abilityCooldown;
 		canUseAbility = false;
 
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+
 	}
 
 	public virtual void GameManagerNextTurn()
@@ -59,6 +63,9 @@ public class Ability : MonoBehaviour {
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		{
 			remainingCooldown -= 1;
+
+			//update Button UI
+			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
 
 	}
