@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
 
 		}
 
-	}
+	}//InitHeroes
 	
 	
 	// Update is called once per frame
@@ -104,6 +104,7 @@ public class Player : MonoBehaviour {
 			{
 
 				
+			#region Hero Dragging Scripts
 			/*	THIS IS ONLY FOR HERO DRAGGING TO ANOTHER HERO
 				if(pointerObject.gameObject.GetComponent<HeroManager>() != null && isActive)
 				{
@@ -144,6 +145,9 @@ public class Player : MonoBehaviour {
 				}
 			*/
 
+			#endregion
+
+			
 				//THIS IS FOR HERO ABILITY DRAGGING TO HERO
 				//HERO is selected
 				if(pointerObject.gameObject.GetComponent<HeroManager>() != null)

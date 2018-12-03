@@ -36,6 +36,7 @@ public class Ability : MonoBehaviour {
 		{
 			canUseAbility = true;
 			//ResetCooldown();
+			Debug.Log ("Can use ability");
 		}
 		else Debug.Log ("Can't use ability"); 	
 		return canUseAbility;

@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator InitHeroes()
 	{
-		foreach (Player player in players)
-			player.GetComponent<Player>().InitHeroes();
+		 foreach (Player player in players)
+		 	player.GetComponent<Player>().InitHeroes();
 
 		yield return null;
 	}
