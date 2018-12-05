@@ -605,11 +605,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114012780963367342, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06,
-        type: 2}
-      propertyPath: heroPanel
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06, type: 2}
   m_IsPrefabAsset: 0
@@ -652,17 +647,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114095475046996018, guid: 561a0f8280bb7244f8af998fd59b812d,
-        type: 2}
-      propertyPath: heroPanel
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114850609324458544, guid: 561a0f8280bb7244f8af998fd59b812d,
-        type: 2}
-      propertyPath: heroes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561a0f8280bb7244f8af998fd59b812d, type: 2}
   m_IsPrefabAsset: 0

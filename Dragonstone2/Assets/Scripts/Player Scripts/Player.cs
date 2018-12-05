@@ -25,6 +25,9 @@ public class Player : MonoBehaviour {
 
 	Button button;
 
+	public GameObject targetPointer;
+	public GameObject targetPointerGO;
+
 
 
 	void Awake () {
@@ -177,55 +180,81 @@ public class Player : MonoBehaviour {
 						button = pointerObject.gameObject.GetComponent<Button>();
 
 						dragging = true;
+
+						targetPointerGO = Instantiate(targetPointer, button.gameObject.transform.position, button.gameObject.transform.rotation, button.gameObject.transform);
+
+
 						
 					}
 				}
 
 				if (dragging)
 				{
-					//ensure that the end of drag is pointing to a Hero
-					if (Input.GetMouseButtonUp(0) && pointerObject.gameObject.GetComponent<HeroManager>() != null)
+					if (Input.GetMouseButtonUp(0))
 					{
-						//replace with applying button's ability to target
-						//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
-
-						
-						//check if ability is active and can be used
-
-						if (button.GetComponent<Ability>().CanUseAbility())
+					//ensure that the end of drag is pointing to a Hero
+						if (pointerObject.gameObject.GetComponent<HeroManager>() != null)
 						{
-							button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
+							//replace with applying button's ability to target
+							//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
 
-							//reset cooldown
-							button.GetComponent<Ability>().ResetCooldown();
+							
+							//check if ability is active and can be used
+
+							if (button.GetComponent<Ability>().CanUseAbility())
+							{
+								button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
+
+								//reset cooldown
+								button.GetComponent<Ability>().ResetCooldown();
 
 
 
+							}
+							
+
+
+							//let the gamemanager decide these:
+
+							//GameManager.Instance.//CheckHealth ();
+							//GameManager.Instance.//DeselectAllHeroes ();
+							//GameManager.Instance.//NextTurn();
+							//turn off dragging
+							dragging = false;
+							Debug.Log ("Destroying: " + targetPointerGO.name);
+							Destroy(targetPointerGO);
 						}
-						
 
-
-						//let the gamemanager decide these:
-
-						//GameManager.Instance.//CheckHealth ();
-						//GameManager.Instance.//DeselectAllHeroes ();
-						//GameManager.Instance.//NextTurn();
-						//turn off dragging
-						dragging = false;
+						else 
+						{
+							Debug.Log ("no target:");
+							dragging = false;
+							Destroy(targetPointerGO);
+						}
 					}
 
-					//if (Input.GetMouseButtonUp(0))
-					//{
-					//	dragging = false;
-					//}
+				}
 
+				else
+				{
+					if (targetPointerGO != null)
+					{
+						Destroy(targetPointerGO);
+					}
 				}
 
 			}
 
 			else 
 				if (Input.GetMouseButtonUp(0))
+				{
 					dragging = false;
+					if (targetPointerGO != null)
+					{
+						Destroy(targetPointerGO);
+					}
+				}
+				
 
 		}
 		
