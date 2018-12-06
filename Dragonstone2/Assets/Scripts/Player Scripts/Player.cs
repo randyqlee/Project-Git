@@ -153,7 +153,7 @@ public class Player : MonoBehaviour {
 			
 				//THIS IS FOR HERO ABILITY DRAGGING TO HERO
 				//HERO is selected
-				if(pointerObject.gameObject.GetComponent<HeroManager>() != null)
+				if(pointerObject.gameObject.GetComponent<HeroManager>() != null )
 				{
 					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag)
 					{
@@ -193,7 +193,7 @@ public class Player : MonoBehaviour {
 					if (Input.GetMouseButtonUp(0))
 					{
 					//ensure that the end of drag is pointing to a Hero
-						if (pointerObject.gameObject.GetComponent<HeroManager>() != null)
+						if (pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
 						{
 							//replace with applying button's ability to target
 							//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());

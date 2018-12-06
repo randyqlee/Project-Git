@@ -48,6 +48,7 @@ public class Buff : MonoBehaviour{
 	{
 		//remove from HeroManager
 		//unsubscribe
+		GameManager.Instance.e_NextTurn -= DecreaseDuration;
 	}
 
 
