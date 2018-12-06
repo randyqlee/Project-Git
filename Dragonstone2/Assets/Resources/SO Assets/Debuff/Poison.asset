@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: 
   debuff: 10
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b5311cf18e86f32448ef708fa4379d14, type: 3}
   value: 100
   description: Take 100 damage at the start of your turn
