@@ -166,8 +166,9 @@ public class Player : MonoBehaviour {
 
 					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
 					{
+
 						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
-						myHeroIsSelected = false;
+						//myHeroIsSelected = false;
 					}
 					
 				}

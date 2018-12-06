@@ -125,12 +125,12 @@ public class GameManager : MonoBehaviour {
 
 		defender.maxHealth = defender.maxHealth - atk_damage;
 
-		attacker.maxHealth = attacker.maxHealth - def_damage;
+		//attacker.maxHealth = attacker.maxHealth - def_damage;
 
 		//display damage in UI
 
 		defender.DisplayDamageText(atk_damage);
-		attacker.DisplayDamageText(def_damage);
+		//attacker.DisplayDamageText(def_damage);
 
 		
 		CheckHealth ();
@@ -153,12 +153,12 @@ public class GameManager : MonoBehaviour {
 
 					hero.maxHealth = hero.maxHealth - atk_damage;
 
-					attacker.maxHealth = attacker.maxHealth - def_damage;
+					//attacker.maxHealth = attacker.maxHealth - def_damage;
 
 					//display damage in UI
 
 					hero.DisplayDamageText(atk_damage);
-					attacker.DisplayDamageText(def_damage);
+					//attacker.DisplayDamageText(def_damage);
 
 					CheckHealth ();
 
