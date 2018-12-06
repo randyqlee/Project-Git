@@ -9,11 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 941d18fce52140641ba6fef29d819430, type: 3}
-  m_Name: Increase Attack
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  buff: 2
-  icon: {fileID: 21300000, guid: 81212d79afd18064f9214a09964f56fa, type: 3}
-  value: 50
-  description: 'Increase attack Damage by 50
-
-'
+  buff: 4
+  icon: {fileID: 21300000, guid: de1a1ccc6d8f71a43b23e1bd43c2da30, type: 3}
+  value: 1000
+  description: Gain a shield worth 1000 HP (Disappears after buff effect or after
+    total damage exceeds shield)

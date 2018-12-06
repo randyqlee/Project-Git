@@ -8,12 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 941d18fce52140641ba6fef29d819430, type: 3}
-  m_Name: Increase Attack
+  m_Script: {fileID: 11500000, guid: f7b57fcec1d3c384aa56b13cf6c112a1, type: 3}
+  m_Name: Unlucky
   m_EditorClassIdentifier: 
-  buff: 2
-  icon: {fileID: 21300000, guid: 81212d79afd18064f9214a09964f56fa, type: 3}
-  value: 50
-  description: 'Increase attack Damage by 50
-
-'
+  debuff: 2
+  icon: {fileID: 21300000, guid: cfdaa04d1166e604a916130a965257a7, type: 3}
+  value: 20
+  description: Decrease Chance by 20%

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 941d18fce52140641ba6fef29d819430, type: 3}
-  m_Name: Increase Attack
+  m_Name: Critical Strike
   m_EditorClassIdentifier: 
-  buff: 2
-  icon: {fileID: 21300000, guid: 81212d79afd18064f9214a09964f56fa, type: 3}
-  value: 50
-  description: 'Increase attack Damage by 50
-
-'
+  buff: 6
+  icon: {fileID: 21300000, guid: 7a228a59c0461c4499f67400276d32a5, type: 3}
+  value: 0
+  description: Increase damage randomly (x2 or x3)
