@@ -46,6 +46,17 @@ public class HeroManager : MonoBehaviour
 
 	public int origHealth;
 
+	public int shield;
+
+	public delegate void Event_TakeDamage();
+	public event Event_TakeDamage e_TakeDamage = delegate {};
+
+
+	public bool hasCritical;
+	public bool hasImmunity;
+	public bool hasRevenge;
+	public bool hasReflect;
+	public bool hasDefender;
 
 	void Awake () {
 
@@ -148,5 +159,31 @@ public class HeroManager : MonoBehaviour
 		healthBar.fillAmount = ((float) maxHealth)/origHealth;
 	}
 
+	public void TakeDamage(int damage, HeroManager source)
+	{
+		maxHealth = TotalHealth - damage;
+
+		shield = shield - damage;
+		if ( shield < 0 )
+			shield = 0;
+
+		e_TakeDamage();
+		
+
+	}
+
+	public int TotalHealth
+	{
+
+		get
+		{
+			return (maxHealth + shield);
+		}
+
+		set
+		{
+
+		}
+	}
 
 }

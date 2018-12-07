@@ -19,7 +19,9 @@ public class MegaSmash : Ability {
 
 
 		//just for testing of buff
-		defender.gameObject.AddComponent<Poison>().New(buffDuration,gameObject);
+		//defender.gameObject.AddComponent<Poison>().New(buffDuration,gameObject);
+
+		GameManager.Instance.AddDebuffComponent<Poison>(buffDuration,attacker,defender);
 
 		GameManager.Instance.Attack (attacker, defender);
 

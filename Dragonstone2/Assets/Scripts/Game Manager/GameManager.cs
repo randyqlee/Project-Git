@@ -118,24 +118,96 @@ public class GameManager : MonoBehaviour {
 
 	public void Attack (HeroManager attacker, HeroManager defender)
 	{
-		int atk_damage = attacker.attack - defender.defense;
-		int def_damage = defender.attack - attacker.defense;
+		if (NoDefender(defender.GetComponentInParent<Player>()))
+		{
+			int atk_damage = attacker.attack - defender.defense;
+			//int def_damage = defender.attack - attacker.defense;
 
-		Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
+			Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
 
-		defender.maxHealth = defender.maxHealth - atk_damage;
+			//defender.maxHealth = defender.maxHealth - atk_damage;
 
-		//attacker.maxHealth = attacker.maxHealth - def_damage;
+			if (defender.hasReflect)
+			{
+				attacker.TakeDamage (defender.attack-attacker.defense, defender);
+			}
+			
+			else 
+			{
+				defender.TakeDamage(atk_damage, attacker);
+				if (defender.hasRevenge)
+				{
+					attacker.TakeDamage (defender.attack-attacker.defense, defender);
+				}
+			}
 
-		//display damage in UI
+			//attacker.maxHealth = attacker.maxHealth - def_damage;
 
-		defender.DisplayDamageText(atk_damage);
-		//attacker.DisplayDamageText(def_damage);
+			//display damage in UI
 
-		
-		CheckHealth ();
-		DeselectAllHeroes ();
-		NextTurn();
+			defender.DisplayDamageText(atk_damage);
+			//attacker.DisplayDamageText(def_damage);
+
+			
+
+			
+			CheckHealth ();
+			DeselectAllHeroes ();
+			NextTurn();
+		}
+		else
+		{
+			if (defender.hasDefender)
+			{
+				int atk_damage = attacker.attack - defender.defense;
+				//int def_damage = defender.attack - attacker.defense;
+
+				Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
+
+				//defender.maxHealth = defender.maxHealth - atk_damage;
+
+				if (defender.hasReflect)
+				{
+					attacker.TakeDamage (defender.attack-attacker.defense, defender);
+				}
+				
+				else 
+				{
+					defender.TakeDamage(atk_damage, attacker);
+					if (defender.hasRevenge)
+					{
+						attacker.TakeDamage (defender.attack-attacker.defense, defender);
+					}
+				}
+
+				//attacker.maxHealth = attacker.maxHealth - def_damage;
+
+				//display damage in UI
+
+				defender.DisplayDamageText(atk_damage);
+				//attacker.DisplayDamageText(def_damage);
+
+				
+
+				
+				CheckHealth ();
+				DeselectAllHeroes ();
+				NextTurn();
+
+			}
+			else
+				Debug.Log ("Attack Hero with defender only");
+		}
+	}
+
+	bool NoDefender(Player player)
+	{
+		foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+		{
+			if (hero.hasDefender)
+				return false;
+		}
+		return true;
 	}
 
 	public void AttackAll (HeroManager attacker, HeroManager defender)
@@ -147,11 +219,13 @@ public class GameManager : MonoBehaviour {
 				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 				{
 					int atk_damage = attacker.attack - hero.defense;
-					int def_damage = hero.attack - attacker.defense;
+					//int def_damage = hero.attack - attacker.defense;
 
 					Debug.Log (attacker.gameObject.name + " is attacking: " + hero.gameObject.name + " for " + atk_damage + " hitpoints!");	
 
-					hero.maxHealth = hero.maxHealth - atk_damage;
+					//hero.maxHealth = hero.maxHealth - atk_damage;
+
+					hero.TakeDamage(atk_damage, attacker);
 
 					//attacker.maxHealth = attacker.maxHealth - def_damage;
 
@@ -255,6 +329,25 @@ public class GameManager : MonoBehaviour {
 
 		//trigger delegates for next turn - ex. decrease cooldown for abilities
 		e_NextTurn();
+
+	}
+
+	public void AddDebuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Debuff
+	{
+
+		if (target.hasImmunity)
+		{
+			Debug.Log ("Target Hero has immunity");
+		}
+
+		else
+		target.gameObject.AddComponent<T>().New(duration,source.gameObject);
+
+	}
+
+	public void AddBuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Buff
+	{
+
 
 	}
 
