@@ -11,6 +11,9 @@ public class Ability : MonoBehaviour {
 
 	public bool canUseAbility;
 
+	public List<AbilityBuffs> abilityBuffs;
+	public List<AbilityDebuffs> abilityDebuffs;
+
 	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
@@ -24,8 +27,23 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 
+		if (abilityBuffs != null)
+		{
+			foreach (AbilityBuffs abilityBuff in abilityBuffs)
+			{
+				GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 
-		Debug.Log ("Using ability: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
+			}
+		}
+
+		if (abilityDebuffs != null)
+		{
+			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+			{
+				GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+
+			}
+		}
 
 	}
 

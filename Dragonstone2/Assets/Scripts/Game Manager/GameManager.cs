@@ -332,7 +332,46 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void AddDebuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Debuff
+
+
+	public void AddDebuffComponent (string debuffName, int duration, HeroManager source, HeroManager target)
+	{
+
+		if (target.hasImmunity)
+		{
+			Debug.Log ("Target Hero has immunity");
+		}
+
+		else
+		(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+
+	}
+
+
+
+	public void AddBuffComponent (string buffName, int duration, HeroManager source, HeroManager target)
+	{
+
+		if (target.hasImmunity)
+		{
+			Debug.Log ("Target Hero has immunity");
+		}
+
+		else
+		(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+
+	}
+
+/*
+	public void AddBuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Buff
+	{
+
+
+	}
+
+*/
+/*
+		public void AddDebuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Debuff
 	{
 
 		if (target.hasImmunity)
@@ -344,11 +383,7 @@ public class GameManager : MonoBehaviour {
 		target.gameObject.AddComponent<T>().New(duration,source.gameObject);
 
 	}
+*/
 
-	public void AddBuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Buff
-	{
-
-
-	}
 
 }
