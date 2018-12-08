@@ -1,0 +1,7 @@
+8 Dec 2018
+
+1.  Need to cap the damage to 0.  Negative damage should not be applicable.
+2.  Prposed solution for 2a and 2b:  Values check before apply damage in TakeDamage function.  If attack and/or armor is negative, cap to zero.
+    2a.  Need a solution for Negative attacks.  Scenario is crippled strike and Decrease Attack Debuffs.
+    2b.  Need a soluton for Negative armor, for stacking effects (though there should be none)
+
