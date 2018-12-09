@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class DecreaseAttack : Buff {
+public class DecreaseAttack : Debuff {
 
 
 
@@ -13,13 +13,13 @@ int temp;
 void Awake (){
 
 	//get debuff asset
-	this.buff = Resources.Load<BuffAsset>("SO Assets/Debuff/Decrease Attack");
+	this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Decrease Attack");
 
 	//attach debuff Icon to Hero UI
-	this.buffIcon = buff.icon;
+	this.debuffIcon = debuff.icon;
 
 	//apply effect
-	gameObject.GetComponent<HeroManager>().attack -= buff.value;
+	gameObject.GetComponent<HeroManager>().attack -= debuff.value;
 
 	
 	}//Awake
@@ -33,7 +33,7 @@ void Awake (){
 
 		
 		//remove effect	
-		gameObject.GetComponent<HeroManager>().attack += buff.value;
+		gameObject.GetComponent<HeroManager>().attack += debuff.value;
 
 		//call parent OnDestroy
 		base.OnDestroy();

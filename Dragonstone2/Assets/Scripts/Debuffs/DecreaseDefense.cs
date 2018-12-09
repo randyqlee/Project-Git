@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecreaseDefense : Buff {
+public class DecreaseDefense : Debuff {
 
 	
 
@@ -10,13 +10,13 @@ public class DecreaseDefense : Buff {
 	void Awake () {
 
 		//get buff asset
-		this.buff = Resources.Load<BuffAsset>("SO Assets/Debuff/Decrease Defense");
+		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Decrease Defense");
 
 		//attach buff icon to Hero UI
-		this.buffIcon = buff.icon;
+		this.debuffIcon = debuff.icon;
 		
 		//apply effect
-		gameObject.GetComponent<HeroManager>().defense -= buff.value;		
+		gameObject.GetComponent<HeroManager>().defense -= debuff.value;		
 	}
 
 		
@@ -29,7 +29,7 @@ public class DecreaseDefense : Buff {
 	protected override void OnDestroy(){
 
 		//remove effect
-		gameObject.GetComponent<HeroManager>().defense += buff.value;	
+		gameObject.GetComponent<HeroManager>().defense += debuff.value;	
 
 		//call parent OnDestroy
 		base.OnDestroy();
