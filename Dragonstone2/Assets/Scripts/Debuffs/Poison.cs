@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Poison : Debuff {
 
-//increase attack damage by 50
-
 	// Use this for initialization
 	void Awake () {
 		//get buff asset
@@ -16,7 +14,7 @@ public class Poison : Debuff {
 
 		
 	}
-
+	//apply effect here
 	public override void DecreaseDuration()
 	{
 		if (GetComponentInParent<Player>().isActive)
