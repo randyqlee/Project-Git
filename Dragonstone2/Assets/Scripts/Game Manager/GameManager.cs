@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour {
 				attacker.TakeDamage (defender.attack-attacker.defense, defender);
 			}
 			
+			//normal damage route
 			else 
 			{
 				defender.TakeDamage(atk_damage, attacker);
@@ -166,9 +167,10 @@ public class GameManager : MonoBehaviour {
 
 				//defender.maxHealth = defender.maxHealth - atk_damage;
 
+				//hasReflect
 				if (defender.hasReflect)
 				{
-					attacker.TakeDamage (defender.attack-attacker.defense, defender);
+					attacker.TakeDamage (attacker.attack-attacker.defense, defender);
 				}
 				
 				else 
@@ -194,12 +196,15 @@ public class GameManager : MonoBehaviour {
 				DeselectAllHeroes ();
 				NextTurn();
 
-			}
+			}//has Defender
+
 			else
 				Debug.Log ("Attack Hero with defender only");
 		}
-	}
+	}//Attack Method
 
+
+	//Defender check
 	bool NoDefender(Player player)
 	{
 		foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
@@ -244,7 +249,7 @@ public class GameManager : MonoBehaviour {
 
 		DeselectAllHeroes ();
 		NextTurn();
-	}
+	}//AttackAll
 
 
 
