@@ -340,6 +340,11 @@ public class GameManager : MonoBehaviour {
 		if (target.hasImmunity)
 		{
 			Debug.Log ("Target Hero has immunity");
+			//Immunity Implementation
+
+		} else if (source.hasCrippledStrike){
+			Debug.Log ("Source Hero has Crippled Strike");
+			//Crippled Strike Implementation
 		}
 
 		else

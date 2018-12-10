@@ -8,7 +8,7 @@ public class DecreaseAttack : Debuff {
 
 
 //Decrease attack damage by 60	
-int temp;
+
 
 void Awake (){
 

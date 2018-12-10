@@ -51,12 +51,15 @@ public class HeroManager : MonoBehaviour
 	public delegate void Event_TakeDamage();
 	public event Event_TakeDamage e_TakeDamage = delegate {};
 
-
+	[Header("Buff Flags")]
 	public bool hasCritical;
 	public bool hasImmunity;
 	public bool hasRevenge;
 	public bool hasReflect;
 	public bool hasDefender;
+
+	[Header("Debuff Flags")]
+	public bool hasCrippledStrike;
 
 	void Awake () {
 

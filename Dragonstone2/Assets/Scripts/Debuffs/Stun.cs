@@ -13,13 +13,13 @@ void Awake(){
 		//attach icon to Hero UI
 		this.debuffIcon = debuff.icon;
 
-		
+		//enable heroPanel instance
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
 			Debug.Log("Skills Button" +skillsButton);
 
-			//start at i=1 to select 2nd and 3rd skill
+			
 			for(int i = 0; i <skillsButton.Count; i++){
 				//disable the BoxCollider2D for the listener
 				skillsButton[i].GetComponent<BoxCollider2D>().enabled = false;
@@ -27,6 +27,7 @@ void Awake(){
 				skillsButton[i].interactable = false;
 			}		
 
+			//disable heroPanel again after setting colliders off
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
 	}
 
@@ -45,12 +46,13 @@ void Awake(){
 
 	protected override void OnDestroy(){
 
+		//enable instance 
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
 			Debug.Log("Skills Button" +skillsButton);
 
-			//start at i=1 to select 2nd and 3rd skill
+			
 			for(int i = 0; i <skillsButton.Count; i++){
 				//disable the BoxCollider2D for the listener
 				skillsButton[i].GetComponent<BoxCollider2D>().enabled = true;
@@ -58,6 +60,7 @@ void Awake(){
 				skillsButton[i].interactable = true;
 			}		
 
+			//disable instance after modifications
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
 
 			base.OnDestroy();
