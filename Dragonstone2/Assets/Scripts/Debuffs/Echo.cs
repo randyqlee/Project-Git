@@ -21,6 +21,8 @@ public class Echo : Debuff {
 
 	protected override void OnDestroy(){
 		gameObject.GetComponent<HeroManager>().hasEcho = false;
+
+		base.OnDestroy();
 	}
 
 
