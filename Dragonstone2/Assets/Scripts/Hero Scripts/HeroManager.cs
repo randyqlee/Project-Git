@@ -60,6 +60,7 @@ public class HeroManager : MonoBehaviour
 
 	[Header("Debuff Flags")]
 	public bool hasCrippledStrike;
+	public bool hasEcho;
 
 	void Awake () {
 

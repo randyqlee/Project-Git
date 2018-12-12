@@ -129,13 +129,21 @@ public class GameManager : MonoBehaviour {
 
 			if (defender.hasReflect)
 			{
-				attacker.TakeDamage (defender.attack-attacker.defense, defender);
+				attacker.TakeDamage (attacker.attack-attacker.defense, defender);
 			}
+
+			if(attacker.hasEcho)
+			{
+				attacker.TakeDamage (attacker.attack-attacker.defense, attacker);
+				defender.TakeDamage(atk_damage, attacker);
+			}
+			
 			
 			//normal damage route
 			else 
 			{
 				defender.TakeDamage(atk_damage, attacker);
+				
 				if (defender.hasRevenge)
 				{
 					attacker.TakeDamage (defender.attack-attacker.defense, defender);
@@ -170,8 +178,16 @@ public class GameManager : MonoBehaviour {
 				//hasReflect
 				if (defender.hasReflect)
 				{
+					//source is defender, but uses attacker's attack power
 					attacker.TakeDamage (attacker.attack-attacker.defense, defender);
 				}
+
+				//hasEcho
+				//if(attacker.hasEcho) {
+					
+
+
+				//}
 				
 				else 
 				{
