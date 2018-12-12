@@ -118,55 +118,9 @@ public class GameManager : MonoBehaviour {
 
 	public void Attack (HeroManager attacker, HeroManager defender)
 	{
-		if (NoDefender(defender.GetComponentInParent<Player>()))
+		if (IsTargetValid(attacker,defender))
 		{
-			int atk_damage = attacker.attack - defender.defense;
-			//int def_damage = defender.attack - attacker.defense;
-
-			Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
-
-			//defender.maxHealth = defender.maxHealth - atk_damage;
-
-			if (defender.hasReflect)
-			{
-				attacker.TakeDamage (attacker.attack-attacker.defense, defender);
-			}
-
-			if(attacker.hasEcho)
-			{
-				attacker.TakeDamage (attacker.attack-attacker.defense, attacker);
-				defender.TakeDamage(atk_damage, attacker);
-			}
-			
-			
-			//normal damage route
-			else 
-			{
-				defender.TakeDamage(atk_damage, attacker);
-				
-				if (defender.hasRevenge)
-				{
-					attacker.TakeDamage (defender.attack-attacker.defense, defender);
-				}
-			}
-
-			//attacker.maxHealth = attacker.maxHealth - def_damage;
-
-			//display damage in UI
-
-			defender.DisplayDamageText(atk_damage);
-			//attacker.DisplayDamageText(def_damage);
-
-			
-
-			
-			CheckHealth ();
-			DeselectAllHeroes ();
-			NextTurn();
-		}
-		else
-		{
-			if (defender.hasDefender)
+			if (NoDefender(defender.GetComponentInParent<Player>()))
 			{
 				int atk_damage = attacker.attack - defender.defense;
 				//int def_damage = defender.attack - attacker.defense;
@@ -175,23 +129,23 @@ public class GameManager : MonoBehaviour {
 
 				//defender.maxHealth = defender.maxHealth - atk_damage;
 
-				//hasReflect
 				if (defender.hasReflect)
 				{
-					//source is defender, but uses attacker's attack power
 					attacker.TakeDamage (attacker.attack-attacker.defense, defender);
 				}
 
-				//hasEcho
-				//if(attacker.hasEcho) {
-					
-
-
-				//}
+				if(attacker.hasEcho)
+				{
+					attacker.TakeDamage (attacker.attack-attacker.defense, attacker);
+					defender.TakeDamage(atk_damage, attacker);
+				}
 				
+				
+				//normal damage route
 				else 
 				{
 					defender.TakeDamage(atk_damage, attacker);
+					
 					if (defender.hasRevenge)
 					{
 						attacker.TakeDamage (defender.attack-attacker.defense, defender);
@@ -211,11 +165,60 @@ public class GameManager : MonoBehaviour {
 				CheckHealth ();
 				DeselectAllHeroes ();
 				NextTurn();
-
-			}//has Defender
-
+			}
 			else
-				Debug.Log ("Attack Hero with defender only");
+			{
+				if (defender.hasDefender)
+				{
+					int atk_damage = attacker.attack - defender.defense;
+					//int def_damage = defender.attack - attacker.defense;
+
+					Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
+
+					//defender.maxHealth = defender.maxHealth - atk_damage;
+
+					//hasReflect
+					if (defender.hasReflect)
+					{
+						//source is defender, but uses attacker's attack power
+						attacker.TakeDamage (attacker.attack-attacker.defense, defender);
+					}
+
+					//hasEcho
+					//if(attacker.hasEcho) {
+						
+
+
+					//}
+					
+					else 
+					{
+						defender.TakeDamage(atk_damage, attacker);
+						if (defender.hasRevenge)
+						{
+							attacker.TakeDamage (defender.attack-attacker.defense, defender);
+						}
+					}
+
+					//attacker.maxHealth = attacker.maxHealth - def_damage;
+
+					//display damage in UI
+
+					defender.DisplayDamageText(atk_damage);
+					//attacker.DisplayDamageText(def_damage);
+
+					
+
+					
+					CheckHealth ();
+					DeselectAllHeroes ();
+					NextTurn();
+
+				}//has Defender
+
+				else
+					Debug.Log ("Attack Hero with defender only");
+			}
 		}
 	}//Attack Method
 
@@ -357,22 +360,107 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuffComponent (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
-
-		if (target.hasImmunity)
+		if (IsTargetValid(source, target))
 		{
-			Debug.Log ("Target Hero has immunity");
-			//Immunity Implementation
+			if (target.hasImmunity)
+			{
+				Debug.Log ("Target Hero has immunity");
+				//Immunity Implementation
 
-		} else if (source.hasCrippledStrike){
-			Debug.Log ("Source Hero has Crippled Strike");
-			//Crippled Strike Implementation
+			} else if (source.hasCrippledStrike){
+				Debug.Log ("Source Hero has Crippled Strike");
+				//Crippled Strike Implementation
+			} else if (target.hasMalaise){
+				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+
+			} else if (IsChanceSuccess(source)){ //check for Chance
+				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+			}
 		}
+	}
 
-		else
-		(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+	public void AddDebuffComponentRandom (string debuffName, int duration, HeroManager source, HeroManager target, int targetCount)
+	{
+		//HeroManager[] heroList = target.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
+		List<HeroManager> heroList = new List<HeroManager>();
+		heroList.AddRange(target.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>());
+		List<HeroManager> randomHeroList = RandomHeroList (heroList);
+
+		int count = 0;
+		int heroCounter = 0;
+
+		while (count < targetCount && heroCounter < randomHeroList.Count)
+		{
+			target = randomHeroList[heroCounter];
+
+			if (target.hasImmunity)
+			{
+				Debug.Log ("Target Hero has immunity");
+				//Immunity Implementation
+
+			} else if (source.hasCrippledStrike){
+				Debug.Log ("Source Hero has Crippled Strike");
+				//Crippled Strike Implementation
+			} else if (target.hasMalaise){
+				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				count++;
+
+			} else if (IsChanceSuccess(source)){ //check for Chance
+				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				count++;
+			}
+			heroCounter++;
+		}
 
 	}
 
+	List<HeroManager> RandomHeroList(List<HeroManager> heroList) {
+
+		List<HeroManager> randomHeroList = new List<HeroManager>();
+		randomHeroList.AddRange(heroList);
+
+		for (int i = 0; i < randomHeroList.Count; i++) {
+         HeroManager temp = randomHeroList[i];
+         int randomIndex = Random.Range(i, randomHeroList.Count);
+         randomHeroList[i] = randomHeroList[randomIndex];
+         randomHeroList[randomIndex] = temp;
+     }
+
+
+		return randomHeroList;
+	}
+
+	public List<HeroManager> EnemyHeroList(HeroManager source) {
+
+		List<HeroManager> enemyHeroList = new List<HeroManager>();
+		foreach (Player player in GameManager.Instance.players )
+		{
+			if (player.tag != source.gameObject.tag)
+			{
+				foreach (HeroManager enemyHero in player.GetComponentsInChildren<HeroManager>())
+				{
+					enemyHeroList.Add(enemyHero);
+				}
+			}
+		}
+		return enemyHeroList;
+	}
+
+	public List<HeroManager> AllyHeroList(HeroManager source) {
+
+		List<HeroManager> allyHeroList = new List<HeroManager>();
+		foreach (Player player in GameManager.Instance.players )
+		{
+			if (player.tag == source.gameObject.tag)
+			{
+				foreach (HeroManager enemyHero in player.GetComponentsInChildren<HeroManager>())
+				{
+					allyHeroList.Add(enemyHero);
+				}
+			}
+		}
+		return allyHeroList;
+	}
 
 
 	public void AddBuffComponent (string buffName, int duration, HeroManager source, HeroManager target)
@@ -383,10 +471,59 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("Target Hero has immunity");
 		}
 
-		else
-		(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+		else if (IsChanceSuccess(source)) //check for Chance
+			(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
 
 	}
+
+	public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
+	{
+
+		if (target.hasImmunity)
+		{
+			Debug.Log ("Target Hero has immunity");
+		}
+
+		else if (IsChanceSuccess(source)) //check for Chance
+			(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+
+	}
+
+	public void Heal (HeroManager source, HeroManager target)
+	{
+		if (!target.hasUnhealable)
+		{
+
+		}
+	}
+
+
+	bool IsChanceSuccess (HeroManager source)
+	{
+		float chance = source.chance;
+
+
+		if ((1-Random.value) < chance/100)
+			return true;
+		else return false;
+	}
+
+	bool IsTargetValid(HeroManager attacker, HeroManager defender)
+	{
+		if (attacker.GetComponent<Taunt>() != null)
+			if (attacker.GetComponent<Taunt>().source == defender)
+				return true;
+			else return false;
+		else return false;
+	}
+
+	public void DealDamage (int damage, HeroManager source, HeroManager target)
+	{
+		target.TakeDamage (damage, source);
+	}
+
+}
+
 
 /*
 	public void AddBuffComponent <T> (int duration, HeroManager source, HeroManager target) where T:Buff
@@ -410,6 +547,3 @@ public class GameManager : MonoBehaviour {
 
 	}
 */
-
-
-}

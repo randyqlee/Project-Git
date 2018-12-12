@@ -5,6 +5,7 @@ using UnityEngine;
 public class SuperCrush : Ability {
 
 
+	int targetCount = 2;
 	public override void UseAbility ()
 	{
 		Debug.Log ("Using  SuperCrush");
@@ -17,6 +18,8 @@ public class SuperCrush : Ability {
 			Debug.Log ("Using  SuperCrush");
 
 			GameManager.Instance.AttackAll (attacker, defender);
+
+			base.UseAbilityRandom (attacker,defender,targetCount);
 	
 
 	}

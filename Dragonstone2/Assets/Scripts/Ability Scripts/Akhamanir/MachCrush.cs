@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MachCrush : Ability {
 
+	int bonus = 50;
+
 	public override void UseAbility ()
 	{
 		Debug.Log ("Using  MachCrush");
@@ -14,23 +16,17 @@ public class MachCrush : Ability {
 	{
 		Debug.Log ("Using  MachCrush");
 
-			GameManager.Instance.Attack (attacker, defender);
-			//TO Be FIXED
-			/*
-
-			foreach (Player player in GameManager.Instance.Players )
+			GameManager.Instance.AttackAll (attacker, defender);
+			
+		List<HeroManager> enemyHeroList = GameManager.Instance.EnemyHeroList(attacker);
+		foreach (HeroManager enemyHero in enemyHeroList)
+		{
+			if (enemyHero.GetComponents<Debuff>() != null)
 			{
-
-				if (player.tag != GetComponentInParent<HeroManager>().tag)
-				{
-					foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
-					{
-						GameManager.Instance.Attack (attacker, hero);
-					}
-				}
+				GameManager.Instance.DealDamage (bonus * enemyHero.GetComponents<Debuff>().Length, attacker, defender);
 			}
+		}
 
-			*/
 	}
 }
 

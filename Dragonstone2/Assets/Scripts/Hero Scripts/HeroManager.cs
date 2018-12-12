@@ -61,7 +61,8 @@ public class HeroManager : MonoBehaviour
 	[Header("Debuff Flags")]
 	public bool hasCrippledStrike;
 	public bool hasEcho;
-
+	public bool hasMalaise;
+	public bool hasUnhealable;
 	void Awake () {
 
 	col = GetComponent<CapsuleCollider2D>();

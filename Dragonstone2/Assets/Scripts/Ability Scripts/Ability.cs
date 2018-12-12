@@ -47,6 +47,29 @@ public class Ability : MonoBehaviour {
 
 	}
 
+
+	public virtual void UseAbilityRandom (HeroManager attacker, HeroManager defender, int targetCount)
+	{
+
+		if (abilityBuffs != null)
+		{
+			foreach (AbilityBuffs abilityBuff in abilityBuffs)
+			{
+				GameManager.Instance.AddBuffComponentRandom(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender, targetCount);
+
+			}
+		}
+
+		if (abilityDebuffs != null)
+		{
+			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+			{
+				GameManager.Instance.AddDebuffComponentRandom(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender,targetCount);
+
+			}
+		}
+
+	}
 	public bool CanUseAbility()
 	{	
 		canUseAbility = false;
