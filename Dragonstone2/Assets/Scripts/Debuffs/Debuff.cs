@@ -43,6 +43,8 @@ public class Debuff : MonoBehaviour{
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
 
+		gameObject.GetComponent<HeroManager>().UpdateUI();
+
 	}
 
 	public virtual void DecreaseDuration ()

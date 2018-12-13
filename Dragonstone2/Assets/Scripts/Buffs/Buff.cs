@@ -35,6 +35,8 @@ public class Buff : MonoBehaviour{
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
 
+		gameObject.GetComponent<HeroManager>().UpdateUI();
+
 	}
 
 	public void DecreaseDuration ()
