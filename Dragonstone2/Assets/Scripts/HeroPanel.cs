@@ -35,6 +35,8 @@ public class HeroPanel : MonoBehaviour {
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityCooldown = hero.abilityAssets[i].abilityCoolDown;
 			skillsBtn[i].gameObject.GetComponent<Ability>().remainingCooldown = hero.abilityAssets[i].abilityCoolDown;
 
+			skillsBtn[i].gameObject.GetComponent<Ability>().target = hero.abilityAssets[i].target;
+
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityBuffs = hero.abilityAssets[i].abilityBuffs;
 
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityDebuffs = hero.abilityAssets[i].abilityDebuffs;

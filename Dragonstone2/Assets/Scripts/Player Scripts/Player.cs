@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 	public GameObject targetPointer;
 	public GameObject targetPointerGO;
 
-
+	Target target;
 
 	void Awake () {
 
@@ -73,6 +73,7 @@ public class Player : MonoBehaviour {
 
 
 //add the abilities script to hero object
+/*
 				for (int j = 0; j < deck.heroes[i].abilityAsset.Count; j++)
 				{
 					string spellScriptName = deck.heroes[i].abilityAsset[j].abilityEffect;
@@ -80,7 +81,15 @@ public class Player : MonoBehaviour {
 						heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset[j]);
 					}
 				}
+*/
 
+				for (int j = 0; j < deck.heroes[i].abilityAsset2.Count; j++)
+				{
+					string spellScriptName = deck.heroes[i].abilityAsset2[j].abilityEffect;
+					if (spellScriptName != null) {
+						heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset2[j]);
+					}
+				}
 				//heroManager.UpdateUI();
 				//heroManager.CreateHeroPanel();
 
@@ -101,6 +110,10 @@ public class Player : MonoBehaviour {
 		if (isActive)
 		{
 			GameObject pointerObject = UpdateMouseOver();
+
+
+					
+
 		
 
 			if (pointerObject != null )
@@ -184,13 +197,17 @@ public class Player : MonoBehaviour {
 
 						targetPointerGO = Instantiate(targetPointer, button.gameObject.transform.position, button.gameObject.transform.rotation, button.gameObject.transform);
 
+						target = pointerObject.gameObject.GetComponent<Button>().GetComponent<Ability>().target;
 
+						Debug.Log(target.ToString());
 						
 					}
 				}
 
 				if (dragging)
 				{
+					
+		
 					if (Input.GetMouseButtonUp(0))
 					{
 					//ensure that the end of drag is pointing to a Hero
@@ -247,6 +264,7 @@ public class Player : MonoBehaviour {
 			}
 
 			else 
+			{
 				if (Input.GetMouseButtonUp(0))
 				{
 					dragging = false;
@@ -255,8 +273,61 @@ public class Player : MonoBehaviour {
 						Destroy(targetPointerGO);
 					}
 				}
+			}
+			if (dragging)
+			{
+				if (pointerObject == null)
+					{
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.red;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+					}
 				
+	
+				else if (target.ToString() == "Enemies")
+				{
+					if (pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
+					{
+						
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.green;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+					}
 
+					else
+					{
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.red;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+					}
+				}
+
+				else if (target.ToString() == "Allies")
+				{
+					if (pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag == tag)
+					{
+						
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.green;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+					}
+
+					else
+					{
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.red;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+					}
+				}
+
+				else if (target.ToString() == "Any")
+				{
+					if (pointerObject.gameObject.GetComponent<HeroManager>() != null)
+					{
+						
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.green;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.green;
+					}
+				}
+
+
+
+			}
 		}
 		
 	}

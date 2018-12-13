@@ -23,9 +23,11 @@ public class HeroAsset : ScriptableObject
 
 	public Rarity rarity;
 
-	[Header("Abilities - must be typed correctly")]
+	[Header("Use Ability Asset 2")]
 
 	public List<AbilityAsset> abilityAsset;
+
+	public List<AbilityAsset2> abilityAsset2;
 
 
 }

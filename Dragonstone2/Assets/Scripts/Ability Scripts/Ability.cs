@@ -11,6 +11,8 @@ public class Ability : MonoBehaviour {
 
 	public bool canUseAbility;
 
+	public Target target;
+
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 

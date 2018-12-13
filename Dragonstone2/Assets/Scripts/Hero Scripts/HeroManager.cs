@@ -19,7 +19,8 @@ public class HeroManager : MonoBehaviour
 	public int defense;
 	public float chance;
 
-	public List<AbilityAsset> abilityAssets;
+	//public List<AbilityAsset> abilityAssets;
+	public List<AbilityAsset2> abilityAssets;
 	public List<Ability> abilities;
 
 	public Rarity rarity;
