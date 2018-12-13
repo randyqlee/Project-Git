@@ -211,7 +211,7 @@ public class Player : MonoBehaviour {
 					if (Input.GetMouseButtonUp(0))
 					{
 					//ensure that the end of drag is pointing to a Hero
-						if (pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
+						if (target.ToString() == "Enemies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
 						{
 							//replace with applying button's ability to target
 							//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
@@ -219,6 +219,9 @@ public class Player : MonoBehaviour {
 							
 							//check if ability is active and can be used
 
+							Debug.Log ("Attacking Enemy");
+							ApplySkill(pointerObject);
+/* 
 							if (button.GetComponent<Ability>().CanUseAbility())
 							{
 								button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
@@ -241,13 +244,32 @@ public class Player : MonoBehaviour {
 							dragging = false;
 							Debug.Log ("Destroying: " + targetPointerGO.name);
 							Destroy(targetPointerGO);
+*/
+							
 						}
 
-						else 
+						else if (target.ToString() == "Allies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag == tag)
+						{
+
+							Debug.Log ("Attacking Ally");
+							ApplySkill(pointerObject);
+
+						}
+
+						else if (target.ToString() == "Any" && pointerObject.gameObject.GetComponent<HeroManager>() != null)
+						{
+
+							Debug.Log ("Attacking Any");
+							ApplySkill(pointerObject);
+
+						}
+
+						else
 						{
 							Debug.Log ("no target:");
 							dragging = false;
 							Destroy(targetPointerGO);
+
 						}
 					}
 
@@ -345,6 +367,33 @@ public class Player : MonoBehaviour {
 		else return null;
 
     }
+
+	void ApplySkill(GameObject pointerObject)
+	{
+		if (button.GetComponent<Ability>().CanUseAbility())
+		{
+			button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
+
+			//reset cooldown
+			button.GetComponent<Ability>().ResetCooldown();
+
+
+
+		}
+		
+
+
+		//let the gamemanager decide these:
+
+		//GameManager.Instance.//CheckHealth ();
+		//GameManager.Instance.//DeselectAllHeroes ();
+		//GameManager.Instance.//NextTurn();
+		//turn off dragging
+		dragging = false;
+		Debug.Log ("Destroying: " + targetPointerGO.name);
+		Destroy(targetPointerGO);
+
+	}
 
 
 
