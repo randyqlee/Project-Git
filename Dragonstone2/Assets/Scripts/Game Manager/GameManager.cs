@@ -514,7 +514,7 @@ public class GameManager : MonoBehaviour {
 			if (attacker.GetComponent<Taunt>().source == defender)
 				return true;
 			else return false;
-		else return false;
+		else return true;
 	}
 
 	public void DealDamage (int damage, HeroManager source, HeroManager target)

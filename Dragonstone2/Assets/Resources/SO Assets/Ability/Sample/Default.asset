@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e04adaa294486d4bb9208c93490dc4c, type: 3}
-  m_Name: New AbilityAsset
+  m_Name: Default
   m_EditorClassIdentifier: 
   abilityName: 
   icon: {fileID: 0}
