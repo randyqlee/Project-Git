@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 750
   attack: 80
   defense: 60
-  chance: 35
+  chance: 100
   rarity: 3
   abilityAsset:
   - {fileID: 11400000, guid: 245710a559952f84080a67791abc6806, type: 2}

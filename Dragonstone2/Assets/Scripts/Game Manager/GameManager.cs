@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour {
 
 	// static
@@ -371,13 +372,67 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Source Hero has Crippled Strike");
 				//Crippled Strike Implementation
 			} else if (target.hasMalaise){
-				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				AddDebuff(debuffName, duration, source, target);
 
 			} else if (IsChanceSuccess(source)){ //check for Chance
-				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				AddDebuff(debuffName, duration, source, target);
 			}
 		}
 	}
+
+	void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
+	{
+		if (!target.gameObject.GetComponent(System.Type.GetType(debuffName)))
+		{
+			(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+		}
+		else
+		{
+			Debug.Log ("Debuff Already exists!");
+			Debuff debuff = target.gameObject.GetComponent(System.Type.GetType(debuffName)) as Debuff;
+			
+			if (debuff.duration < duration)
+				debuff.duration = duration;
+		}
+	}
+
+
+	void AddBuff (string buffName, int duration, HeroManager source, HeroManager target)
+	{
+		if (!target.gameObject.GetComponent(System.Type.GetType(buffName)))
+		{
+			(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+		}
+		else
+		{
+			Debug.Log ("Buff Already exists!");
+			Buff buff = target.gameObject.GetComponent(System.Type.GetType(buffName)) as Buff;
+			
+			if (buff.duration < duration)
+				buff.duration = duration;
+		}
+	}
+
+/*
+	void AddDebuff <T> (string debuffName, int duration, HeroManager source, HeroManager target) where T:Debuff
+	{
+		if (!target.gameObject.GetComponent(System.Type.GetType(debuffName)))
+		{
+			(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+		}
+		else
+		{
+			Debug.Log ("Debuff Already exists!");
+			
+			if (target.gameObject.GetComponent<T>().duration < duration)
+				target.gameObject.GetComponent<T>().duration = duration;
+		}
+
+	}
+*/
+
 
 	public void AddDebuffComponentRandom (string debuffName, int duration, HeroManager source, HeroManager target, int targetCount)
 	{
@@ -402,11 +457,13 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Source Hero has Crippled Strike");
 				//Crippled Strike Implementation
 			} else if (target.hasMalaise){
-				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				AddDebuff(debuffName, duration, source, target);
 				count++;
 
 			} else if (IsChanceSuccess(source)){ //check for Chance
-				(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+				AddDebuff(debuffName, duration, source, target);
 				count++;
 			}
 			heroCounter++;
@@ -472,7 +529,10 @@ public class GameManager : MonoBehaviour {
 		}
 
 		else if (IsChanceSuccess(source)) //check for Chance
-			(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+		{
+			//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+			AddBuff(buffName, duration, source, target);
+		}
 
 	}
 
@@ -485,7 +545,9 @@ public class GameManager : MonoBehaviour {
 		}
 
 		else if (IsChanceSuccess(source)) //check for Chance
-			(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+		{	//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+			AddBuff(buffName, duration, source, target);
+		}
 
 	}
 
