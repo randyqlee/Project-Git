@@ -20,7 +20,12 @@ public class GameManager : MonoBehaviour {
 	public event Event_NextTurn e_NextTurn = delegate {};
 
 
+	public delegate void Event_HeroKilled();
+	public event Event_HeroKilled e_HeroKilled = delegate {};
+
 	public bool isInitialTurn = true;
+
+	public bool isTurnPaused = false;
 
 	void Awake ()
 	{
@@ -281,13 +286,19 @@ public class GameManager : MonoBehaviour {
 			{
 				if (hero.maxHealth < 0)
 					{
-						Debug.Log ("Destroying " + hero.name);
-						Destroy (hero.gameObject);
+						KillHero(hero);
 					}
 				hero.UpdateUI();
 
 			}
 		}
+	}
+
+	public void KillHero (HeroManager hero)
+	{
+		Debug.Log ("Destroying " + hero.name);
+		Destroy (hero.gameObject);
+		e_HeroKilled();
 	}
 
 	public void DeselectAllHeroes ()
@@ -308,53 +319,56 @@ public class GameManager : MonoBehaviour {
 
 	public void NextTurn ()
 	{
+		if (!isTurnPaused)
+		{
 
-		if (players[0].isActive)
-				{
-					players[0].isActive = false;
-					players[1].isActive = true;
-
-					foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+			if (players[0].isActive)
 					{
-						var image = hero.glow.GetComponent<Image>().color;
-						image.a = 0f;
-						hero.glow.GetComponent<Image>().color = image;
+						players[0].isActive = false;
+						players[1].isActive = true;
+
+						foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+						{
+							var image = hero.glow.GetComponent<Image>().color;
+							image.a = 0f;
+							hero.glow.GetComponent<Image>().color = image;
 
 
+						}
+						foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
+						{
+							var image = hero.glow.GetComponent<Image>().color;
+							image.a = 1f;
+							hero.glow.GetComponent<Image>().color = image;
+
+
+						}
 					}
-					foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
-					{
-						var image = hero.glow.GetComponent<Image>().color;
-						image.a = 1f;
-						hero.glow.GetComponent<Image>().color = image;
+				else {
+						players[1].isActive = false;
+						players[0].isActive = true;
+						foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+						{
+							var image = hero.glow.GetComponent<Image>().color;
+							image.a = 1f;
+							hero.glow.GetComponent<Image>().color = image;
 
 
-					}
+						}
+						foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
+						{
+							var image = hero.glow.GetComponent<Image>().color;
+							image.a = 0f;
+							hero.glow.GetComponent<Image>().color = image;
+
+
+						}
 				}
-			else {
-					players[1].isActive = false;
-					players[0].isActive = true;
-					foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
-					{
-						var image = hero.glow.GetComponent<Image>().color;
-						image.a = 1f;
-						hero.glow.GetComponent<Image>().color = image;
 
-
-					}
-					foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
-					{
-						var image = hero.glow.GetComponent<Image>().color;
-						image.a = 0f;
-						hero.glow.GetComponent<Image>().color = image;
-
-
-					}
-			}
-
-		//trigger delegates for next turn - ex. decrease cooldown for abilities
-		e_NextTurn();
-
+			//trigger delegates for next turn - ex. decrease cooldown for abilities
+			e_NextTurn();
+		}
+		
 	}
 
 

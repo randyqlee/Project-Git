@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Alicia
+  m_EditorClassIdentifier: 
+  heroName: Alicia
+  image: {fileID: 0}
+  maxHealth: 659
+  attack: 79
+  defense: 69
+  chance: 29
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Essence Explosion
+    icon: {fileID: 0}
+    description: Attack and enemy with a chance to Decrease Defense for 2 turns.
+    abilityEffect: EssenceExplosion
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 1
+      duration: 2
+  - abilityName: Storm of Midnight
+    icon: {fileID: 0}
+    description: Attack all enemies, deal additional damage equivalent to the highest
+      defense among your enemies.
+    abilityEffect: StormOfMidnight
+    abilityCoolDown: 3
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Frost Rush
+    icon: {fileID: 0}
+    description: Attack all enemies, gain an additional turn if an enemy dies.
+    abilityEffect: FrostRush
+    abilityCoolDown: 5
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
