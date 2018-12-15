@@ -36,8 +36,7 @@ MonoBehaviour:
       duration: 2
   - abilityName: SealOfLight
     icon: {fileID: 21300000, guid: c3bec0f89b0a6af49b037143388b36e2, type: 3}
-    description: "Name: Seal of Light\r\n\r\nAttack an enemy and silence it for 2
-      turns."
+    description: "Seal of Light\r:Attack an enemy and silence it for 2 turns."
     abilityEffect: SealOfLight
     abilityCoolDown: 3
     target: 0
@@ -47,8 +46,8 @@ MonoBehaviour:
       duration: 2
   - abilityName: GodsShield
     icon: {fileID: 21300000, guid: 6cd809aab582b774181d6abb4852859f, type: 3}
-    description: "Name: God's Shield\r\n\r\nImmune to all debuffs.  Reduce the chance
-      stat of all enemies by 5%."
+    description: "God's Shield\r:Immune to all debuffs.  Reduce the chance stat of
+      all enemies by 5%."
     abilityEffect: GodsShield
     abilityCoolDown: 0
     target: 1

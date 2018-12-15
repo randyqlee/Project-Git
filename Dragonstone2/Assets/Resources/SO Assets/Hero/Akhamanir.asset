@@ -21,7 +21,7 @@ MonoBehaviour:
   abilityAsset: []
   abilityAsset2:
   - abilityName: MegaSmash
-    icon: {fileID: 21300000, guid: 317cb045a22152b458faa0251972acd9, type: 3}
+    icon: {fileID: 21300000, guid: a2d68b8145670014aa825f51208b13fc, type: 3}
     description: 'Name:  Mega Smash  Attack an enemy.  Chance to inflict Poison for
       2 turns.'
     abilityEffect: MegaSmash
@@ -32,7 +32,7 @@ MonoBehaviour:
     - debuff: 10
       duration: 2
   - abilityName: SuperCrush
-    icon: {fileID: 21300000, guid: 5f911703813ea1746a6ff18149a4a04a, type: 3}
+    icon: {fileID: 21300000, guid: 1ca4a89590d1b644abaa485016867fb2, type: 3}
     description: 'Name: Super Crush  Attack ALL enemies.  Chance to Stun for 1 turn.  CD:
       3'
     abilityEffect: SuperCrush
@@ -43,7 +43,7 @@ MonoBehaviour:
     - debuff: 6
       duration: 0
   - abilityName: MachCrush
-    icon: {fileID: 21300000, guid: 8c54395663ae55941a9d64399ed5e70c, type: 3}
+    icon: {fileID: 21300000, guid: 8a9549041331d8248957bdb14c1a65bb, type: 3}
     description: 'Name: Mach Crush  Attack all enemies.  Deal additional 50 damage
       for each debuff on an enemy.  CD:4'
     abilityEffect: MachCrush
