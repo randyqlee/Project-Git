@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Malaise
   m_EditorClassIdentifier: 
   debuff: 9
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8d52c49deaa04f44795b60ff08343f65, type: 3}
   value: 40
-  description: 
+  description: 100% chance to receive debuffs

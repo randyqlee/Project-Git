@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b57fcec1d3c384aa56b13cf6c112a1, type: 3}
   m_Name: Echo
   m_EditorClassIdentifier: 
-  debuff: 0
-  icon: {fileID: 0}
+  debuff: 8
+  icon: {fileID: 21300000, guid: a132e7d41e3dcef4dbc18360206456e3, type: 3}
   value: 0
-  description: 
+  description: Receive the same damage you deal to enemies
