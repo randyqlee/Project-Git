@@ -234,7 +234,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: b22164a5ba1af8849a3685d76827a0d8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7e09a05033432b4f8153d4f6ff4372f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -253,7 +253,7 @@ Transform:
   m_GameObject: {fileID: 120021524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.006, y: -0.014, z: 0}
-  m_LocalScale: {x: 2.3317928, y: 6.3129144, z: 1}
+  m_LocalScale: {x: 0.8744223, y: 1.6670039, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -605,6 +605,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114219961264691276, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06,
+        type: 2}
+      propertyPath: heroes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874,
+        type: 2}
+    - target: {fileID: 114219961264691276, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06,
+        type: 2}
+      propertyPath: heroes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7,
+        type: 2}
+    - target: {fileID: 114219961264691276, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06,
+        type: 2}
+      propertyPath: heroes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06, type: 2}
   m_IsPrefabAsset: 0

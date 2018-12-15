@@ -254,8 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroes:
   - {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874, type: 2}
-  - {fileID: 11400000, guid: 627d859b16fcdf045aa3ef9c4892a60e, type: 2}
-  - {fileID: 11400000, guid: afa725b4f96866f45b87f7dfd9c107d9, type: 2}
+  - {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7, type: 2}
+  - {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7, type: 2}
   - {fileID: 11400000, guid: a50332d46201ae94d98b8949984fcd75, type: 2}
 --- !u!120 &120167514432478870
 LineRenderer:

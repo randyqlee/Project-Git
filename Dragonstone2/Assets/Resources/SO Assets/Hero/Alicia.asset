@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Alicia
   m_EditorClassIdentifier: 
   heroName: Alicia
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: a27a0a310ee332c42a46636d2a232b9a, type: 3}
   maxHealth: 659
   attack: 79
   defense: 69
