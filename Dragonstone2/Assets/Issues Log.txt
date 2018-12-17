@@ -5,3 +5,7 @@
     2a.  Need a solution for Negative attacks.  Scenario is crippled strike and Decrease Attack Debuffs.
     2b.  Need a soluton for Negative armor, for stacking effects (though there should be none)
 
+17 Dec 2018
+1.  Protection of SO variables (read only)
+2.  Taunt and Defender Issues
+3.  Create a Hero with heal effect example
