@@ -29,9 +29,17 @@ public class Buff : MonoBehaviour{
 
 	}
 
+	public int Duration
+	{
+		get{ return this.duration;}
+		set{ this.duration = value;}
+	}
+
+
 	void Start ()
 	{
 		GameManager.Instance.e_NextTurn += DecreaseDuration;
+		
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
 

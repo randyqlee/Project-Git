@@ -167,6 +167,7 @@ public class HeroManager : MonoBehaviour
 
 	public void TakeDamage(int damage, HeroManager source)
 	{
+
 		maxHealth = TotalHealth - damage;
 
 		shield = shield - damage;

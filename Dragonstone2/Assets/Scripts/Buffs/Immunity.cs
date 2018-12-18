@@ -9,6 +9,8 @@ public class Immunity : Buff {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Immunity");
 
+		this.buffIcon = buff.icon;
+
 		gameObject.GetComponent<HeroManager>().hasImmunity = true;
 		
 	}

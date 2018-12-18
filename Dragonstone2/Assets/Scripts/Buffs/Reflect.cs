@@ -9,6 +9,8 @@ public class Reflect : Buff {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Reflect");
 
+		this.buffIcon = buff.icon;
+
 
 	}
 	// Use this for initialization

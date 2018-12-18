@@ -9,14 +9,16 @@ public class CriticalStrike : Buff {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Critical Strike");
 
+		this.buffIcon = buff.icon;
+
 		gameObject.GetComponent<HeroManager>().hasCritical = true;
 		
 	}
 
 	// Use this for initialization
-	void Start () {
+	// void Start () {
 		
-	}
+	// }
 	
 	// Update is called once per frame
 	void Update () {
