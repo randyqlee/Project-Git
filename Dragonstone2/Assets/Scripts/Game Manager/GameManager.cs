@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour {
 	public void Attack (HeroManager attacker, HeroManager defender)	{
 
 		
+		//checks for Taunt
 		if (IsTargetValid(attacker,defender))
 		{
 			CriticalStrikeCheck(attacker, defender);
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour {
 
 
 	//Defender check
-	bool NoDefender(Player player)
+	public bool NoDefender(Player player)
 	{
 		foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 		{
@@ -213,7 +214,6 @@ public class GameManager : MonoBehaviour {
 				
 			}
 		}
-
 		
 		
 		DeselectAllHeroes ();
@@ -536,9 +536,10 @@ public class GameManager : MonoBehaviour {
 		if (attacker.GetComponent<Taunt>() != null)
 			if (attacker.GetComponent<Taunt>().source == defender)
 				return true;
-			else return false;
+			else return false;		 
 		else return true;
-	}
+				
+	}//IsTargetValid
 
 	public void DealDamage (int damage, HeroManager source, HeroManager target)
 	{

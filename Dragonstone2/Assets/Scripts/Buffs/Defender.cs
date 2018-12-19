@@ -9,12 +9,14 @@ public class Defender : Buff {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Defender");
 
+		//attach buf Icon to Hero UI
+		this.buffIcon = buff.icon;
+
+		gameObject.GetComponent<HeroManager>().hasDefender = true;
+
 
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,6 +25,8 @@ public class Defender : Buff {
 
 	protected override void OnDestroy()
 	{
+
+		gameObject.GetComponent<HeroManager>().hasDefender = false;
 
 		//call parent OnDestroy
 		base.OnDestroy();
