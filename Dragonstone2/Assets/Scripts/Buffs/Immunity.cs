@@ -14,10 +14,7 @@ public class Immunity : Buff {
 		gameObject.GetComponent<HeroManager>().hasImmunity = true;
 		
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
