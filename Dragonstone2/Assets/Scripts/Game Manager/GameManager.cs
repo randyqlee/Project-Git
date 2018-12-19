@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour {
 
 	public void AttackAll (HeroManager attacker, HeroManager defender)
 	{
-		CriticalStrikeCheck(attacker, defender);
+		
 
 		foreach (Player player in GameManager.Instance.players )
 		{
@@ -205,6 +205,7 @@ public class GameManager : MonoBehaviour {
 
 					//set defender in current hero iteration to trigger reflect properly
 					defender = hero;
+					CriticalStrikeCheck(attacker, defender);
 					AttackStatusChecks(attacker, defender);				
 					CheckHealth ();		
 
