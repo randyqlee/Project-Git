@@ -130,18 +130,7 @@ public class GameManager : MonoBehaviour {
 		
 		if (IsTargetValid(attacker,defender))
 		{
-
-			if(attacker.hasCritical){
-					attackersAttack = 2*attacker.attack;
-				} else {
-					attackersAttack = attacker.attack;
-				}
-
-				if(defender.hasCritical){
-					defendersAttack = 2*defender.attack;
-				} else {
-					defendersAttack = defender.attack;
-				}
+			CriticalStrikeCheck(attacker, defender);
 
 			if (NoDefender(defender.GetComponentInParent<Player>()))
 			{
@@ -264,13 +253,15 @@ public class GameManager : MonoBehaviour {
 
 	public void AttackAll (HeroManager attacker, HeroManager defender)
 	{
+		CriticalStrikeCheck(attacker, defender);
+
 		foreach (Player player in GameManager.Instance.players )
 		{
 			if (player.tag == defender.gameObject.tag)
 			{
 				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 				{
-					int atk_damage = attacker.attack - hero.defense;
+					int atk_damage = attackersAttack - hero.defense;
 					//int def_damage = hero.attack - attacker.defense;
 
 					Debug.Log (attacker.gameObject.name + " is attacking: " + hero.gameObject.name + " for " + atk_damage + " hitpoints!");	
@@ -623,6 +614,32 @@ public class GameManager : MonoBehaviour {
 		target.TakeDamage (damage, source);
 	}
 
+	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
+
+		if(attacker.hasCritical){
+					//50% chance for critical strike to be x2 or x3 damage
+					if (1-Random.value < 0.5){
+						attackersAttack = 2*attacker.attack;
+					} else {
+						attackersAttack = 3*attacker.attack;
+					}
+
+				} else {
+					attackersAttack = attacker.attack;
+				}
+
+				if(defender.hasCritical){
+					//50% chance for critical strike to be x2 or x3 damage
+					if (1-Random.value < 0.5){
+						defendersAttack = 2*defender.attack;
+					} else {
+						defendersAttack = 3*defender.attack;
+					}
+				} else {
+					defendersAttack = defender.attack;
+				}
+
+	}
 	
 
 }
