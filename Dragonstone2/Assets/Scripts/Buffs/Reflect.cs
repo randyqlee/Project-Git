@@ -11,12 +11,12 @@ public class Reflect : Buff {
 
 		this.buffIcon = buff.icon;
 
+		gameObject.GetComponent<HeroManager>().hasReflect = true;
+
 
 	}
 	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,6 +26,7 @@ public class Reflect : Buff {
 	protected override void OnDestroy()
 	{
 
+		gameObject.GetComponent<HeroManager>().hasReflect = false;
 		//call parent OnDestroy
 		base.OnDestroy();
 	}

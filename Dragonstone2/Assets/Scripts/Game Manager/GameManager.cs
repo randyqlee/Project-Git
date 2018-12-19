@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool isTurnPaused = false;
 
-	int attackersAttack, defendersAttack;
+	int attackersAttack, defendersAttack, atk_damage;
 
 	
 	void Awake ()
@@ -135,48 +135,8 @@ public class GameManager : MonoBehaviour {
 			if (NoDefender(defender.GetComponentInParent<Player>()))
 			{
 						
-				
+				AttackStatusChecks(attacker, defender);
 
-				int atk_damage = attackersAttack - defender.defense;
-				//int def_damage = defender.attack - attacker.defense;							
-
-				Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
-
-				//defender.maxHealth = defender.maxHealth - atk_damage;
-
-				if (defender.hasReflect)
-				{
-					attacker.TakeDamage (attackersAttack-attacker.defense, defender);
-				}
-
-				if(attacker.hasEcho)
-				{
-					attacker.TakeDamage (attackersAttack-attacker.defense, attacker);
-					defender.TakeDamage(atk_damage, attacker);
-				}
-				
-				
-				//normal damage route
-				else 
-				{
-					defender.TakeDamage(atk_damage, attacker);
-					
-					if (defender.hasRevenge)
-					{
-						attacker.TakeDamage (defendersAttack-attacker.defense, defender);
-					}
-				}
-
-				//attacker.maxHealth = attacker.maxHealth - def_damage;
-
-				//display damage in UI
-
-				defender.DisplayDamageText(atk_damage);
-				//attacker.DisplayDamageText(def_damage);
-
-				
-
-				
 				CheckHealth ();
 				DeselectAllHeroes ();
 				NextTurn();
@@ -187,45 +147,7 @@ public class GameManager : MonoBehaviour {
 			{
 				if (defender.hasDefender)
 				{
-					int atk_damage = attackersAttack - defender.defense;
-					//int def_damage = defender.attack - attacker.defense;
-
-					Debug.Log (attacker.gameObject.name + " is attacking: " + defender.gameObject.name + " for " + atk_damage + " hitpoints!");	
-
-					//defender.maxHealth = defender.maxHealth - atk_damage;
-
-					//hasReflect
-					if (defender.hasReflect)
-					{
-						//source is defender, but uses attacker's attack power
-						attacker.TakeDamage (attackersAttack-attacker.defense, defender);
-					}
-
-					//hasEcho
-					//if(attacker.hasEcho) {
-						
-
-
-					//}
-					
-					else 
-					{
-						defender.TakeDamage(atk_damage, attacker);
-						if (defender.hasRevenge)
-						{
-							attacker.TakeDamage (defendersAttack-attacker.defense, defender);
-						}
-					}
-
-					//attacker.maxHealth = attacker.maxHealth - def_damage;
-
-					//display damage in UI
-
-					defender.DisplayDamageText(atk_damage);
-					//attacker.DisplayDamageText(def_damage);
-
-					
-
+					AttackStatusChecks(attacker, defender);	
 					
 					CheckHealth ();
 					DeselectAllHeroes ();
@@ -236,7 +158,9 @@ public class GameManager : MonoBehaviour {
 				else
 					Debug.Log ("Attack Hero with defender only");
 			}
-		}
+
+		}//If IsTargetValid
+
 	}//Attack Method
 
 
@@ -261,30 +185,36 @@ public class GameManager : MonoBehaviour {
 			{
 				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 				{
-					int atk_damage = attackersAttack - hero.defense;
-					//int def_damage = hero.attack - attacker.defense;
+					#region old code
+					// int atk_damage = attackersAttack - hero.defense;
+					// //int def_damage = hero.attack - attacker.defense;
 
-					Debug.Log (attacker.gameObject.name + " is attacking: " + hero.gameObject.name + " for " + atk_damage + " hitpoints!");	
+					// Debug.Log (attacker.gameObject.name + " is attacking: " + hero.gameObject.name + " for " + atk_damage + " hitpoints!");	
 
-					//hero.maxHealth = hero.maxHealth - atk_damage;
+					// //hero.maxHealth = hero.maxHealth - atk_damage;
 
-					hero.TakeDamage(atk_damage, attacker);
+					// hero.TakeDamage(atk_damage, attacker);
 
-					//attacker.maxHealth = attacker.maxHealth - def_damage;
+					// //attacker.maxHealth = attacker.maxHealth - def_damage;
 
-					//display damage in UI
+					// //display damage in UI
 
-					hero.DisplayDamageText(atk_damage);
-					//attacker.DisplayDamageText(def_damage);
+					// hero.DisplayDamageText(atk_damage);
+					// //attacker.DisplayDamageText(def_damage);
+					#endregion
 
-					CheckHealth ();
+					//set defender in current hero iteration to trigger reflect properly
+					defender = hero;
+					AttackStatusChecks(attacker, defender);				
+					CheckHealth ();		
 
 				}
+				
 			}
 		}
 
 		
-
+		
 		DeselectAllHeroes ();
 		NextTurn();
 	}//AttackAll
@@ -614,6 +544,7 @@ public class GameManager : MonoBehaviour {
 		target.TakeDamage (damage, source);
 	}
 
+	//Checks for Critical Strike Flag and modifies attack damage
 	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
 
 		if(attacker.hasCritical){
@@ -638,6 +569,45 @@ public class GameManager : MonoBehaviour {
 				} else {
 					defendersAttack = defender.attack;
 				}
+
+	}//Critical Strike Check
+
+	//Checks and resolves resolution of Reflect, Echo, and Revenge
+	public void AttackStatusChecks(HeroManager attacker, HeroManager defender){
+
+		if (defender.hasReflect){
+
+					atk_damage = attackersAttack-attacker.defense;
+					attacker.TakeDamage (atk_damage, defender);
+					Debug.Log("Damage Reflected");
+
+					attacker.DisplayDamageText(atk_damage);
+				} else {
+					//Normal Damage	route
+					atk_damage = attackersAttack - defender.defense;
+					defender.TakeDamage(atk_damage, attacker);
+					defender.DisplayDamageText(atk_damage);
+				}
+
+				//Revenge
+				if (defender.hasRevenge)
+				{
+						atk_damage = defendersAttack-attacker.defense;
+						attacker.TakeDamage (atk_damage, defender);
+						Debug.Log("Revenge!");
+
+						attacker.DisplayDamageText(atk_damage);
+				}
+
+				//Echo
+				if(attacker.hasEcho)
+				{
+					atk_damage = attackersAttack-attacker.defense;
+					attacker.TakeDamage (atk_damage, attacker);				
+					Debug.Log("Echo Damage");
+
+					attacker.DisplayDamageText(atk_damage);
+				} 
 
 	}
 	

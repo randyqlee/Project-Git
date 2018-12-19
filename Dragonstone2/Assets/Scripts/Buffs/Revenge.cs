@@ -9,12 +9,13 @@ public class Revenge : Buff {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Revenge");
 
+		this.buffIcon = buff.icon;
+
+		gameObject.GetComponent<HeroManager>().hasRevenge = true;
 
 	}
 	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,6 +25,7 @@ public class Revenge : Buff {
 	protected override void OnDestroy()
 	{
 
+		gameObject.GetComponent<HeroManager>().hasRevenge = false;
 		//call parent OnDestroy
 		base.OnDestroy();
 	}
