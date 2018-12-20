@@ -36,12 +36,12 @@ MonoBehaviour:
     description: 'Name: Super Crush  Attack ALL enemies.  Chance to Stun for 1 turn.  CD:
       3'
     abilityEffect: SuperCrush
-    abilityCoolDown: 3
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:
-    - debuff: 6
-      duration: 2
+    - debuff: 8
+      duration: 100
   - abilityName: MachCrush
     icon: {fileID: 21300000, guid: 8a9549041331d8248957bdb14c1a65bb, type: 3}
     description: 'Name: Mach Crush  Attack all enemies.  Deal additional 50 damage
