@@ -24,30 +24,53 @@ public class Ability : MonoBehaviour {
 
 	public virtual void UseAbility ()
 	{
-
+		ResetCooldown();
 	}
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
 
-		if (abilityBuffs != null)
-		{
-			foreach (AbilityBuffs abilityBuff in abilityBuffs)
+		// if (abilityBuffs != null)
+		// {
+		// 	foreach (AbilityBuffs abilityBuff in abilityBuffs)
+		// 	{
+		// 		GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+
+		// 	}
+		// }
+
+		// if (abilityDebuffs != null)
+		// {
+		// 	foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+		// 	{
+		// 		GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+
+		// 	}
+		// }
+
+		if(GameManager.Instance.canTargetHero){
+			if (abilityBuffs != null)
 			{
-				GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+				foreach (AbilityBuffs abilityBuff in abilityBuffs)
+				{
+					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 
+				}
 			}
-		}
 
-		if (abilityDebuffs != null)
-		{
-			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+			if (abilityDebuffs != null)
 			{
-				GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+				foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+				{
+					GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
 
+				}
 			}
-		}
+
+			ResetCooldown();
+
+		}//canTargetHero = True
 
 	}
 
@@ -72,6 +95,8 @@ public class Ability : MonoBehaviour {
 
 			}
 		}
+
+		ResetCooldown();
 
 	}
 	public bool CanUseAbility()

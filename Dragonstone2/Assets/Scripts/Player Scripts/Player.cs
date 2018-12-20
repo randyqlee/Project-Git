@@ -384,7 +384,7 @@ public class Player : MonoBehaviour {
 			button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
 
 			//reset cooldown
-			button.GetComponent<Ability>().ResetCooldown();
+			//button.GetComponent<Ability>().ResetCooldown();
 
 
 			//floating text
