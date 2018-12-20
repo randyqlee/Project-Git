@@ -17,7 +17,7 @@ public class Ability : MonoBehaviour {
 	public List<AbilityDebuffs> abilityDebuffs;
 
 	//used in CheckTauntDefender
-	public bool canTargetHero;
+	//public bool canTargetHero;
 
 	void Awake ()
 	{
@@ -33,31 +33,9 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
-		//check Taunt or Defender Flag
+		GameManager.Instance.CheckTauntAndDefender(attacker, defender);
 
-		// if (abilityBuffs != null)
-		// {
-		// 	foreach (AbilityBuffs abilityBuff in abilityBuffs)
-		// 	{
-		// 		GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
-
-		// 	}
-		// }
-
-		// if (abilityDebuffs != null)
-		// {
-		// 	foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
-		// 	{
-		// 		GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
-
-		// 	}
-		// }
-
-		//if No Defender or Target has Defender
-
-		CheckTauntAndDefender(attacker, defender);
-
-		if(canTargetHero){
+		if(GameManager.Instance.canTargetHero){
 			if (abilityBuffs != null)
 			{
 				foreach (AbilityBuffs abilityBuff in abilityBuffs)
@@ -127,20 +105,11 @@ public class Ability : MonoBehaviour {
 
 	public void ResetCooldown()
 	{
-		// remainingCooldown = abilityCooldown;
-		// canUseAbility = false;
+		remainingCooldown = abilityCooldown;
+		canUseAbility = false;
 
-		// //update Button UI
-		// gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
-
-		
-		if(canTargetHero){
-			remainingCooldown = abilityCooldown;
-			canUseAbility = false;
-
-			//update Button UI
-			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
-		} else {}
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();	
 
 	}
 
@@ -160,19 +129,19 @@ public class Ability : MonoBehaviour {
 
 	}//GameManagerNext Turn
 
-	public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
+	// public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
 
-		//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
-		if (GameManager.Instance.NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+	// 	//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
+	// 	if (GameManager.Instance.NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
 
-			canTargetHero = true;
+	// 		canTargetHero = true;
 
-		 } else {
+	// 	 } else {
 
-			 canTargetHero = false;
-			 Debug.Log ("Invalid Target: Attack Defender Only");
-		 }
+	// 		 canTargetHero = false;
+	// 		 Debug.Log ("Invalid Target: Attack Defender Only");
+	// 	 }
 
 
-	}//Check Taunt and Defender
+	// }//Check Taunt and Defender
 }
