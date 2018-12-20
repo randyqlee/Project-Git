@@ -41,7 +41,12 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public void InitHeroes ()
+	//public void InitHeroes ()
+	//{
+	//	StartCoroutine (InitHeroesRoutine());
+	//}
+
+	public IEnumerator InitHeroesRoutine ()
 	{
 
 		deck = GetComponent<Deck>();
@@ -50,6 +55,7 @@ public class Player : MonoBehaviour {
 		{
 			for (int i = 0; i < deck.heroes.Count; i++)
 			{
+				yield return new WaitForSeconds (1f);
 				Transform spawnLocation = spawnLocations.GetComponent<SpawnLocations>().spawn[i].transform;
 				heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
 				
@@ -69,6 +75,7 @@ public class Player : MonoBehaviour {
 
 				heroGO.GetComponentInChildren<Image>().sprite = deck.heroes[i].image;
 				heroGO.name = heroManager.heroName;
+				heroGO.GetComponentInChildren<OverheadText>().FloatingText(heroGO.name.ToString());
 				
 
 
@@ -98,6 +105,8 @@ public class Player : MonoBehaviour {
 			}
 
 		}
+
+		yield return null;
 
 	}//InitHeroes
 	

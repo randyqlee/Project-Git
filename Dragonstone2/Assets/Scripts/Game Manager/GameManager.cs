@@ -62,14 +62,25 @@ public class GameManager : MonoBehaviour {
 
 	}
 
+	public void BattleTextMessage(string message)
+	{
+		GetComponentInChildren<BattleTextController>().FloatingText(message);
+	}
+
 
 	IEnumerator GameLoop()
 	{
 		yield return StartCoroutine (InitPlayers());
+		yield return new WaitForSeconds (2f);
 
 		yield return StartCoroutine (InitHeroes());
 
+		yield return new WaitForSeconds (2f);
+
 		yield return StartCoroutine (InitHeroUI());
+
+		yield return new WaitForSeconds (2f);
+		
 
 		yield return StartCoroutine (StartBattle());
 
@@ -77,6 +88,9 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator InitPlayers()
 	{
+		
+
+
 		players = GameObject.FindObjectsOfType<Player>();
 
 		players[1].isActive = true;
@@ -89,17 +103,29 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator InitHeroes()
 	{
+		BattleTextMessage("Initializing Heroes");
+
 		 foreach (Player player in players)
-		 	player.GetComponent<Player>().InitHeroes();
+		 {
+		 	//player.GetComponent<Player>().InitHeroes();
+			
+			yield return StartCoroutine (player.GetComponent<Player>().InitHeroesRoutine());
+		 }
 
 		yield return null;
 	}
 
 	IEnumerator InitHeroUI()
 	{
+		BattleTextMessage("Initializing Hero UI");
+
+
 		foreach (Player player in players)
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
+				hero.transform.Find("HeroUI").gameObject.transform.Find("Health").gameObject.SetActive(true);
+				hero.transform.Find("HeroUI").gameObject.transform.Find("Attack").gameObject.SetActive(true);
+				hero.transform.Find("HeroUI").gameObject.transform.Find("Defense").gameObject.SetActive(true);
 				hero.UpdateUI();
 				hero.CreateHeroPanel();
 			}
@@ -107,8 +133,13 @@ public class GameManager : MonoBehaviour {
 		yield return null;
 	}
 
+
+
 	IEnumerator StartBattle()
 	{
+
+		BattleTextMessage("Start Battle!");
+		yield return new WaitForSeconds (1f);
 
 		foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 		{
@@ -280,64 +311,96 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	bool IsGameOver()
+	{
+		foreach (Player player in players)
+		{
+			if (player.GetComponentsInChildren<HeroManager>().Length == 0)
+			{
+				
+				if (player.tag == "Player 1")
+				{
+					BattleTextMessage ("Player 2 Wins!");
+				}
+				else
+				{
+					BattleTextMessage ("Player 1 Wins!");
+				}
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public void NextTurn ()
 	{
-		if (ATBCoroutine != null)
-		StopCoroutine (ATBCoroutine);
-		//StopAllCoroutines();
-		StartATBCoroutine ();
-		//StartCoroutine (StartAttackSequence());
 
-		if (!isTurnPaused)
+		if (!IsGameOver())
 		{
+			if (ATBCoroutine != null)
+			StopCoroutine (ATBCoroutine);
+			//StopAllCoroutines();
+			StartATBCoroutine ();
+			//StartCoroutine (StartAttackSequence());
 
-			if (players[0].isActive)
-					{
-						players[0].isActive = false;
-						players[1].isActive = true;
+			if (!isTurnPaused)
+			{
 
-						foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+				if (players[0].isActive)
 						{
-							var image = hero.glow.GetComponent<Image>().color;
-							image.a = 0f;
-							hero.glow.GetComponent<Image>().color = image;
+							players[0].isActive = false;
+							players[1].isActive = true;
+
+							foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+							{
+								var image = hero.glow.GetComponent<Image>().color;
+								image.a = 0f;
+								hero.glow.GetComponent<Image>().color = image;
 
 
+							}
+							foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
+							{
+								var image = hero.glow.GetComponent<Image>().color;
+								image.a = 1f;
+								hero.glow.GetComponent<Image>().color = image;
+
+
+							}
+
+							BattleTextMessage ("Player 2");
 						}
-						foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
-						{
-							var image = hero.glow.GetComponent<Image>().color;
-							image.a = 1f;
-							hero.glow.GetComponent<Image>().color = image;
+					else {
+							players[1].isActive = false;
+							players[0].isActive = true;
+							foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+							{
+								var image = hero.glow.GetComponent<Image>().color;
+								image.a = 1f;
+								hero.glow.GetComponent<Image>().color = image;
 
 
-						}
+							}
+							foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
+							{
+								var image = hero.glow.GetComponent<Image>().color;
+								image.a = 0f;
+								hero.glow.GetComponent<Image>().color = image;
+
+
+							}
+
+							BattleTextMessage ("Player 1");
 					}
-				else {
-						players[1].isActive = false;
-						players[0].isActive = true;
-						foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
-						{
-							var image = hero.glow.GetComponent<Image>().color;
-							image.a = 1f;
-							hero.glow.GetComponent<Image>().color = image;
 
+				//trigger delegates for next turn - ex. decrease cooldown for abilities
+				e_NextTurn();
 
-						}
-						foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
-						{
-							var image = hero.glow.GetComponent<Image>().color;
-							image.a = 0f;
-							hero.glow.GetComponent<Image>().color = image;
-
-
-						}
-				}
-
-			//trigger delegates for next turn - ex. decrease cooldown for abilities
-			e_NextTurn();
-			
-			
+				
+				
+				
+			}
 		}
 
 		
