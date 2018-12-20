@@ -23,7 +23,7 @@ public class OverheadText : MonoBehaviour {
 	}
 
 
-	void FloatingText (string message)
+	public void FloatingText (string message)
 	{
 		StartCoroutine (DelayMessage(message));
 
