@@ -29,7 +29,22 @@ public class GameManager : MonoBehaviour {
 
 	int attackersAttack, defendersAttack, atk_damage;
 
-	
+
+//for timer bar
+	public float globalATB = 700;
+	public float maxCharacterTurn = 10f;
+
+	[SerializeField] Image timerBar;
+	public float tempTimer;
+	float delta = 0.1f;
+
+	private IEnumerator ATBCoroutine;
+//
+
+
+
+
+
 	void Awake ()
 	{
 
@@ -102,7 +117,11 @@ public class GameManager : MonoBehaviour {
 			hero.glow.GetComponent<Image>().color = image;
 		}
 
+		transform.Find("UI").gameObject.transform.Find("Turn Timer").gameObject.SetActive(true);
+
 		NextTurn();
+
+
 
 
 		yield return null;
@@ -263,6 +282,12 @@ public class GameManager : MonoBehaviour {
 
 	public void NextTurn ()
 	{
+		if (ATBCoroutine != null)
+		StopCoroutine (ATBCoroutine);
+		//StopAllCoroutines();
+		StartATBCoroutine ();
+		//StartCoroutine (StartAttackSequence());
+
 		if (!isTurnPaused)
 		{
 
@@ -311,8 +336,38 @@ public class GameManager : MonoBehaviour {
 
 			//trigger delegates for next turn - ex. decrease cooldown for abilities
 			e_NextTurn();
+			
+			
 		}
+
 		
+
+
+		
+	}
+
+	IEnumerator StartAttackSequence()
+	{
+
+		
+		tempTimer = maxCharacterTurn;
+		while (tempTimer >0)
+		{
+			
+			yield return new WaitForSeconds (delta);
+			tempTimer -= delta;
+			timerBar.fillAmount = tempTimer/maxCharacterTurn;
+		}
+
+		
+		timerBar.fillAmount = 1;
+		NextTurn ();
+	}
+
+	void StartATBCoroutine ()
+	{
+		ATBCoroutine = StartAttackSequence();
+		StartCoroutine (ATBCoroutine);
 	}
 
 
