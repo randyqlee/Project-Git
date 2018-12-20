@@ -16,12 +16,6 @@ public class Ability : MonoBehaviour {
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 
-<<<<<<< HEAD
-	//used in CheckTauntDefender
-	//public bool canTargetHero;
-
-=======
->>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
@@ -36,17 +30,10 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
-<<<<<<< HEAD
-		GameManager.Instance.CheckTauntAndDefender(attacker, defender);
-
-		if(GameManager.Instance.canTargetHero){
-			if (abilityBuffs != null)
-=======
 
 		if (abilityBuffs != null)
 		{
 			foreach (AbilityBuffs abilityBuff in abilityBuffs)
->>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 			{
 				GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 
@@ -109,11 +96,7 @@ public class Ability : MonoBehaviour {
 		canUseAbility = false;
 
 		//update Button UI
-<<<<<<< HEAD
-		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();	
-=======
 		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
->>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 
 	}
 
@@ -131,25 +114,5 @@ public class Ability : MonoBehaviour {
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
 
-<<<<<<< HEAD
-	}//GameManagerNext Turn
-
-	// public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
-
-	// 	//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
-	// 	if (GameManager.Instance.NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
-
-	// 		canTargetHero = true;
-
-	// 	 } else {
-
-	// 		 canTargetHero = false;
-	// 		 Debug.Log ("Invalid Target: Attack Defender Only");
-	// 	 }
-
-
-	// }//Check Taunt and Defender
-=======
 	}
->>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 }
