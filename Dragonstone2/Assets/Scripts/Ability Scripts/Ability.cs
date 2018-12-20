@@ -16,6 +16,9 @@ public class Ability : MonoBehaviour {
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 
+	//used in CheckTauntDefender
+	public bool canTargetHero;
+
 	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
@@ -30,26 +33,54 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
+		//check Taunt or Defender Flag
 
-		if (abilityBuffs != null)
-		{
-			foreach (AbilityBuffs abilityBuff in abilityBuffs)
+		// if (abilityBuffs != null)
+		// {
+		// 	foreach (AbilityBuffs abilityBuff in abilityBuffs)
+		// 	{
+		// 		GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+
+		// 	}
+		// }
+
+		// if (abilityDebuffs != null)
+		// {
+		// 	foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+		// 	{
+		// 		GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+
+		// 	}
+		// }
+
+		//if No Defender or Target has Defender
+
+		CheckTauntAndDefender(attacker, defender);
+
+		if(canTargetHero){
+			if (abilityBuffs != null)
 			{
-				GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+				foreach (AbilityBuffs abilityBuff in abilityBuffs)
+				{
+					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 
+				}
 			}
-		}
 
-		if (abilityDebuffs != null)
-		{
-			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+			if (abilityDebuffs != null)
 			{
-				GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+				foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
+				{
+					GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
 
+				}
 			}
-		}
 
-	}
+			ResetCooldown();
+
+		}else {}
+
+	}//USeAbility
 
 
 	public virtual void UseAbilityRandom (HeroManager attacker, HeroManager defender, int targetCount)
@@ -73,7 +104,11 @@ public class Ability : MonoBehaviour {
 			}
 		}
 
+		ResetCooldown();
+
+	
 	}
+
 	public bool CanUseAbility()
 	{	
 		canUseAbility = false;
@@ -92,11 +127,20 @@ public class Ability : MonoBehaviour {
 
 	public void ResetCooldown()
 	{
-		remainingCooldown = abilityCooldown;
-		canUseAbility = false;
+		// remainingCooldown = abilityCooldown;
+		// canUseAbility = false;
 
-		//update Button UI
-		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		// //update Button UI
+		// gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+
+		
+		if(canTargetHero){
+			remainingCooldown = abilityCooldown;
+			canUseAbility = false;
+
+			//update Button UI
+			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		} else {}
 
 	}
 
@@ -114,5 +158,21 @@ public class Ability : MonoBehaviour {
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
 
-	}
+	}//GameManagerNext Turn
+
+	public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
+
+		//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
+		if (GameManager.Instance.NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+
+			canTargetHero = true;
+
+		 } else {
+
+			 canTargetHero = false;
+			 Debug.Log ("Invalid Target: Attack Defender Only");
+		 }
+
+
+	}//Check Taunt and Defender
 }
