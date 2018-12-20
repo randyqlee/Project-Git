@@ -16,9 +16,12 @@ public class Ability : MonoBehaviour {
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 
+<<<<<<< HEAD
 	//used in CheckTauntDefender
 	//public bool canTargetHero;
 
+=======
+>>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
@@ -33,32 +36,33 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
+<<<<<<< HEAD
 		GameManager.Instance.CheckTauntAndDefender(attacker, defender);
 
 		if(GameManager.Instance.canTargetHero){
 			if (abilityBuffs != null)
+=======
+
+		if (abilityBuffs != null)
+		{
+			foreach (AbilityBuffs abilityBuff in abilityBuffs)
+>>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 			{
-				foreach (AbilityBuffs abilityBuff in abilityBuffs)
-				{
-					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+				GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 
-				}
 			}
+		}
 
-			if (abilityDebuffs != null)
+		if (abilityDebuffs != null)
+		{
+			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
 			{
-				foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
-				{
-					GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
+				GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
 
-				}
 			}
+		}
 
-			ResetCooldown();
-
-		}else {}
-
-	}//USeAbility
+	}
 
 
 	public virtual void UseAbilityRandom (HeroManager attacker, HeroManager defender, int targetCount)
@@ -82,11 +86,7 @@ public class Ability : MonoBehaviour {
 			}
 		}
 
-		ResetCooldown();
-
-	
 	}
-
 	public bool CanUseAbility()
 	{	
 		canUseAbility = false;
@@ -109,7 +109,11 @@ public class Ability : MonoBehaviour {
 		canUseAbility = false;
 
 		//update Button UI
+<<<<<<< HEAD
 		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();	
+=======
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+>>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 
 	}
 
@@ -127,6 +131,7 @@ public class Ability : MonoBehaviour {
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
 
+<<<<<<< HEAD
 	}//GameManagerNext Turn
 
 	// public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
@@ -144,4 +149,7 @@ public class Ability : MonoBehaviour {
 
 
 	// }//Check Taunt and Defender
+=======
+	}
+>>>>>>> parent of cf13af5... Defender and Taunt Upgrade
 }
