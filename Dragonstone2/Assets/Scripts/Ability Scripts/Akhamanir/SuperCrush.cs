@@ -8,12 +8,12 @@ public class SuperCrush : Ability {
 	int targetCount = 2;
 	public override void UseAbility ()
 	{
-		Debug.Log ("Using  SuperCrush");
 
 	}
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
+
 
 			Debug.Log ("Using  SuperCrush");
 

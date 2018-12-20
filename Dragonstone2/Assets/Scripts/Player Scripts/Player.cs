@@ -378,6 +378,10 @@ public class Player : MonoBehaviour {
 			button.GetComponent<Ability>().ResetCooldown();
 
 
+			//floating text
+			button.GetComponentInParent<HeroManager>().E_PopupMSG(button.GetComponent<Ability>().GetType().ToString());
+
+
 
 		}
 		

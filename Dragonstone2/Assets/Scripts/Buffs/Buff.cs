@@ -54,6 +54,8 @@ public class Buff : MonoBehaviour{
 			this.duration--;
 			if (this.duration == 0)
 				Destroy (this);
+			else
+				buffPanel.UpdateBuffIconCD(buff.buff.ToString(), this.duration);
 		}
 
 	}
@@ -68,7 +70,7 @@ public class Buff : MonoBehaviour{
 
 	public void AddIcon()
 	{
-		buffPanel.AddIcon (buff.buff.ToString(), buffIcon);
+		buffPanel.AddIcon (buff.buff.ToString(), buffIcon, duration);
 
 	}
 

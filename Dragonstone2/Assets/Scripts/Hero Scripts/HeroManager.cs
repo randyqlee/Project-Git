@@ -64,10 +64,18 @@ public class HeroManager : MonoBehaviour
 	public bool hasEcho;
 	public bool hasMalaise;
 	public bool hasUnhealable;
+
+	public delegate void Event_PopupMsg(string message);
+	public event Event_PopupMsg e_PopupMSG = delegate {};
+
+
 	void Awake () {
 
 	col = GetComponent<CapsuleCollider2D>();
 	isSelected = false;
+
+
+
 
 	}
 	// Use this for initialization
@@ -175,6 +183,7 @@ public class HeroManager : MonoBehaviour
 			shield = 0;
 
 		e_TakeDamage();
+		e_PopupMSG(damage.ToString());
 		
 
 	}
@@ -191,6 +200,11 @@ public class HeroManager : MonoBehaviour
 		{
 
 		}
+	}
+
+	public void E_PopupMSG (string message)
+	{
+		e_PopupMSG (message);
 	}
 
 }

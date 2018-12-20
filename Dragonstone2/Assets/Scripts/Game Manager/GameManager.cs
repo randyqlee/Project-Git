@@ -407,8 +407,13 @@ public class GameManager : MonoBehaviour {
 			Debuff debuff = target.gameObject.GetComponent(System.Type.GetType(debuffName)) as Debuff;
 			
 			if (debuff.duration < duration)
+			{
 				debuff.duration = duration;
+				debuff.gameObject.GetComponentInChildren<BuffPanel>().UpdateBuffIconCD(debuffName,duration);
+
+			}
 		}
+		target.E_PopupMSG(debuffName);
 	}
 
 
@@ -548,8 +553,14 @@ public class GameManager : MonoBehaviour {
 			Buff buff = target.gameObject.GetComponent(System.Type.GetType(buffName)) as Buff;
 			
 			if (buff.duration < duration)
+			{
 				buff.duration = duration;
+				buff.gameObject.GetComponentInChildren<BuffPanel>().UpdateBuffIconCD(buffName,duration);
+			}
+
 		}
+
+		target.E_PopupMSG(buffName);
 	}//AddBuff
 
 	public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)

@@ -54,6 +54,8 @@ public class Debuff : MonoBehaviour{
 			this.duration--;
 			if (this.duration == 0)
 				Destroy (this);
+			else
+				buffPanel.UpdateBuffIconCD(debuff.debuff.ToString(), this.duration);
 		}
 
 	}
@@ -68,7 +70,7 @@ public class Debuff : MonoBehaviour{
 
 	public void AddIcon()
 	{
-		buffPanel.AddIcon (debuff.debuff.ToString(), debuffIcon);
+		buffPanel.AddIcon (debuff.debuff.ToString(), debuffIcon, duration);
 
 	}
 

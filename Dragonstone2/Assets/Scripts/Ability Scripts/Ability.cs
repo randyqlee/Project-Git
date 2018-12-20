@@ -19,6 +19,7 @@ public class Ability : MonoBehaviour {
 	void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
+		
 	}
 
 	public virtual void UseAbility ()
@@ -28,6 +29,7 @@ public class Ability : MonoBehaviour {
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
+		
 
 		if (abilityBuffs != null)
 		{
