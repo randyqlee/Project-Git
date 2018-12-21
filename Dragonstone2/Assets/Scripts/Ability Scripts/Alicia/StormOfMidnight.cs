@@ -6,7 +6,7 @@ public class StormOfMidnight : Ability {
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		GameManager.Instance.AttackAll (attacker, defender);
+		GameManager.Instance.AttackAll (attacker, defender);		
 			
 		List<HeroManager> enemyHeroList = GameManager.Instance.EnemyHeroList(attacker);
 		
@@ -28,7 +28,15 @@ public class StormOfMidnight : Ability {
 			GameManager.Instance.DealDamage (bonus, attacker, defender);
 		}
 
-	}
+
+		// //TEST CODE
+		// GameManager.Instance.Attack (attacker, defender);
+
+		// base.UseAbility(attacker, defender);
+
+
+
+	}//UseAbility
 
 
 }

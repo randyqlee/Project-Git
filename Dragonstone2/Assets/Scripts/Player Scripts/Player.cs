@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
 		{
 			for (int i = 0; i < deck.heroes.Count; i++)
 			{
-				yield return new WaitForSeconds (1f);
+				//yield return new WaitForSeconds (1f);
 				Transform spawnLocation = spawnLocations.GetComponent<SpawnLocations>().spawn[i].transform;
 				heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
 				

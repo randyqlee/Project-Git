@@ -74,15 +74,15 @@ public class GameManager : MonoBehaviour {
 	IEnumerator GameLoop()
 	{
 		yield return StartCoroutine (InitPlayers());
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 
 		yield return StartCoroutine (InitHeroes());
 
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 
 		yield return StartCoroutine (InitHeroUI());
 
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 		
 
 		yield return StartCoroutine (StartBattle());
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		BattleTextMessage("Start Battle!");
-		yield return new WaitForSeconds (1f);
+		//yield return new WaitForSeconds (1f);
 
 		foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 		{
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour {
 		// {
 		// 	CriticalStrikeCheck(attacker, defender);
 
-		// 	#region Old Attack Code
+		 	#region Old Attack Code
 		// 	// if (NoDefender(defender.GetComponentInParent<Player>()))
 		// 	// {
 						
@@ -213,11 +213,11 @@ public class GameManager : MonoBehaviour {
 		// 	// 	else
 		// 	// 		Debug.Log ("Attack Hero with defender only");
 		// 	// }
-		// 	#endregion
+		 	#endregion
 
-		// 	//CheckTauntAndDefender Implementation
+		// 	//CheckDefender Implementation
 
-		// 	CheckTauntAndDefender(attacker, defender);
+		// 	CheckDefender(attacker, defender);
 		// 	if(canTargetHero){
 		// 			AttackStatusChecks(attacker, defender);						
 		// 			CheckHealth ();
@@ -230,15 +230,18 @@ public class GameManager : MonoBehaviour {
 
 			CriticalStrikeCheck(attacker, defender);
 
-			//CheckTauntAndDefender Implementation
+			//CheckDefender Implementation
 
-			CheckTauntAndDefender(attacker, defender);
+			CheckTaunt(attacker, defender);
+			//CheckDefender(attacker, defender);			
+			//CheckTaunt(attacker, defender);
+
+
 			if(canTargetHero){
 					AttackStatusChecks(attacker, defender);						
 					CheckHealth ();
 					DeselectAllHeroes ();
 					NextTurn();
-
 			}
 
 		
@@ -468,7 +471,27 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuffComponent (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
-		if (IsTargetValid(source, target))
+		// if (IsTargetValid(source, target))
+		// {
+		// 	if (target.hasImmunity)
+		// 	{
+		// 		Debug.Log ("Target Hero has immunity");
+		// 		//Immunity Implementation
+
+		// 	} else if (source.hasCrippledStrike){
+		// 		Debug.Log ("Source Hero has Crippled Strike");
+		// 		//Crippled Strike Implementation
+		// 	} else if (target.hasMalaise){
+		// 		//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+		// 		AddDebuff(debuffName, duration, source, target);
+
+		// 	} else if (IsChanceSuccess(source)){ //check for Chance
+		// 		//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
+		// 		AddDebuff(debuffName, duration, source, target);
+		// 	}
+		// }//IsTargetValid
+
+		if (canTargetHero)
 		{
 			if (target.hasImmunity)
 			{
@@ -486,7 +509,7 @@ public class GameManager : MonoBehaviour {
 				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
 				AddDebuff(debuffName, duration, source, target);
 			}
-		}
+		}//IsTargetValid
 	}
 
 	void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
@@ -620,7 +643,21 @@ public class GameManager : MonoBehaviour {
 
 	public void AddBuffComponent (string buffName, int duration, HeroManager source, HeroManager target)
 	{
-		if(IsTargetValid(source, target))
+		// if(IsTargetValid(source, target))
+		// {
+		// 	if (target.hasImmunity)
+		// 	{
+		// 		Debug.Log ("Target Hero has immunity");
+		// 	}
+
+		// 	else if (IsChanceSuccess(source)) //check for Chance
+		// 	{
+		// 		//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+		// 		AddBuff(buffName, duration, source, target);
+		// 	}
+		// }//IsTargetValid
+
+		if(canTargetHero)
 		{
 			if (target.hasImmunity)
 			{
@@ -632,7 +669,9 @@ public class GameManager : MonoBehaviour {
 				//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
 				AddBuff(buffName, duration, source, target);
 			}
-		}
+		}//IsTargetValid
+
+		
 	}
 
 	void AddBuff (string buffName, int duration, HeroManager source, HeroManager target)
@@ -691,15 +730,15 @@ public class GameManager : MonoBehaviour {
 		else return false;
 	}
 
-	bool IsTargetValid(HeroManager attacker, HeroManager defender)
-	{
-		if (attacker.GetComponent<Taunt>() != null)
-			if (attacker.GetComponent<Taunt>().source == defender)
-				return true;
-			else return false;		 
-		else return true;
+	// bool IsTargetValid(HeroManager attacker, HeroManager defender)
+	// {
+	// 	if (attacker.GetComponent<Taunt>() != null)
+	// 		if (attacker.GetComponent<Taunt>().source == defender)
+	// 			return true;
+	// 		else return false;		 
+	// 	else return true;
 				
-	}//IsTargetValid
+	// }//IsTargetValid
 
 	public void DealDamage (int damage, HeroManager source, HeroManager target)
 	{
@@ -773,67 +812,33 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void CheckTauntAndDefender(HeroManager attacker, HeroManager defender){
+	public void CheckDefender(HeroManager attacker, HeroManager defender){
 
+		
 		//For Defender
 		//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
-		// if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+		if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
 
-		// 	canTargetHero = true;
+			canTargetHero = true;
 		
-		//  }  else {
+		 }  else {
 
-		// 	 canTargetHero = false;
-		// 	 Debug.Log ("Invalid Target: Attack Defender Only");
-		//  }	
+			 canTargetHero = false;
+			 Debug.Log ("Invalid Target: Attack Defender Only");
+		 }	
+	
 
-		 //TEST CODE
-		 //if target is ally
-		 if(defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag){
-			 
-			 canTargetHero = true;
-			 
-		 }
+	}//CheckDefender
 
-		 //if Has Taunt is True and Has Defender is True
-		 else if(!NoDefender(defender.GetComponentInParent<Player>())&& attacker.hasTaunt){
-			 if(defender.hasDefender || attacker.GetComponent<Taunt>().source == defender){
-				 canTargetHero = true;
-			 } else {
-				 canTargetHero = false;
-			 }
-
-		 } 
-
-		 //Has Taunt is True and Has Defender is False
-		 else if(attacker.hasTaunt && NoDefender(defender.GetComponentInParent<Player>()) ) {
-			 
-			 Debug.Log("ATTACKER HAS TAUNT AND NO DEFENDER");
-			 if(attacker.GetComponent<Taunt>().source.GetComponent<HeroManager>() == defender){
-				 canTargetHero = true;
-				 
-			 } else {
-				 canTargetHero = false;
-				  
-			 }
-
-		 }
-
-		 else if(!NoDefender(defender.GetComponentInParent<Player>())&& !attacker.hasTaunt){
-			 if(defender.hasDefender){
-				 canTargetHero = true;
-			 } else {
-				 canTargetHero = false;
-			 }
-
-		 }
-		 else {
-			 canTargetHero = true;
-		 }
-
-		 //
-
-	}//CheckTauntAndDefender
+	public void CheckTaunt(HeroManager attacker, HeroManager defender){
+		
+			if(!attacker.hasTaunt || attacker.GetComponent<Taunt>().source.GetComponent<HeroManager>() == defender || defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+				canTargetHero = true;
+			} else {
+				canTargetHero = false;
+				Debug.Log ("Invalid Target: Attack Defender Only");
+			}
+	}
 	
 
 }//GameManager
