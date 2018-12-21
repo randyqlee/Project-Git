@@ -29,9 +29,9 @@ public class Ability : MonoBehaviour {
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		GameManager.Instance.CheckTaunt(attacker, defender);
-		//GameManager.Instance.CheckDefender(attacker, defender);
 		//GameManager.Instance.CheckTaunt(attacker, defender);
+		GameManager.Instance.CheckDefender(attacker, defender);
+		GameManager.Instance.CheckTaunt(attacker, defender);
 
 		if(GameManager.Instance.canTargetHero){
 			

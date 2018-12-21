@@ -232,9 +232,9 @@ public class GameManager : MonoBehaviour {
 
 			//CheckDefender Implementation
 
-			CheckTaunt(attacker, defender);
-			//CheckDefender(attacker, defender);			
 			//CheckTaunt(attacker, defender);
+			CheckDefender(attacker, defender);			
+			CheckTaunt(attacker, defender);
 
 
 			if(canTargetHero){
