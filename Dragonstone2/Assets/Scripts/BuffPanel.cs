@@ -8,8 +8,6 @@ public class BuffPanel : MonoBehaviour {
 	public List <GameObject> buffIcons;
 	public RectTransform panel;
 
-//	EventManager e;
-
 	GameObject buffImg;
 
 
@@ -17,20 +15,19 @@ public class BuffPanel : MonoBehaviour {
 	void Start () {
 		buffIcons = new List<GameObject>();
 
-//		e = GetComponentInParent<EventManager>();
-//		e.e_AddBuff += AddIcon;
-//		e.e_RemoveBuff += RemoveIcon;
 	}
 
 	public void AddIcon (string buffName, Sprite buffIcon, int duration)
 	{
+		//create GameObject and add Transform
 		buffImg = new GameObject();
 		buffImg.name = buffName;
 		buffImg.AddComponent<RectTransform>();
 
+		//add the Image sprite for Icon of buff
 		buffImg.AddComponent<Image>().sprite = buffIcon;
 
-
+		//add the TextMesh for cooldown of the buff
 		buffImg.AddComponent<TextMesh>();
 		TextMesh buffDurationText = buffImg.GetComponent<TextMesh>();
 		buffDurationText.offsetZ = -0.15f;
@@ -39,15 +36,12 @@ public class BuffPanel : MonoBehaviour {
 		buffDurationText.color = Color.black;
 		buffDurationText.text = duration.ToString();
 
+		//add the buff GameObject to the panel
 		buffImg.transform.SetParent(panel, false);
 
 		buffIcons.Add(buffImg);
-
-
-
-
-
 	}
+
 
 	public void UpdateBuffIconCD(string buffName, int duration)
 	{
@@ -58,8 +52,6 @@ public class BuffPanel : MonoBehaviour {
 				buffIcons[i].GetComponent<TextMesh>().text = duration.ToString();
 			}
 		}
-
-
 	}
 
 	public void RemoveIcon (string buffName)

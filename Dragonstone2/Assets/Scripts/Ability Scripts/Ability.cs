@@ -96,9 +96,6 @@ public class Ability : MonoBehaviour {
 		}
 		else Debug.Log ("Can't use ability"); 	
 		return canUseAbility;
-
-
-
 	}
 
 	public void ResetCooldown()
@@ -113,7 +110,6 @@ public class Ability : MonoBehaviour {
 
 	public virtual void GameManagerNextTurn()
 	{
-
 
 		Debug.Log ("Cooldown of " + name + " : " + remainingCooldown);
 

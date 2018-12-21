@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1207816042626736
 GameObject:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1353729697250706
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1651576000922394
 GameObject:
   m_ObjectHideFlags: 1
@@ -481,6 +481,7 @@ MonoBehaviour:
   hasRevenge: 0
   hasReflect: 0
   hasDefender: 0
+  hasTaunt: 0
   hasCrippledStrike: 0
   hasEcho: 0
   hasMalaise: 0

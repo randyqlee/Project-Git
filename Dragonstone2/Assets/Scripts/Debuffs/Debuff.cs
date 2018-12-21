@@ -14,13 +14,6 @@ public class Debuff : MonoBehaviour{
 	public BuffPanel buffPanel;
 
 
-
-	//public Buff(BuffAsset buff, int duration)
-	//{
-	//	this.buff = buff;
-	//	this.duration = duration;
-	//}
-
 	public Debuff New (int duration, GameObject source)
 	{
 		this.duration = duration;

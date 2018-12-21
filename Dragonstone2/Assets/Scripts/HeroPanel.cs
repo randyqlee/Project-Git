@@ -50,20 +50,20 @@ public class HeroPanel : MonoBehaviour {
 			skillsBtn[i].GetComponent<TextMesh>().text = hero.abilityAssets[i].description;
 
 			if (skillsBtn[i].gameObject.GetComponent<EventTrigger>() == null)
-				{
+			{
 
 				EventTrigger eventTrigger = skillsBtn[i].gameObject.AddComponent<EventTrigger>();
 
-			EventTrigger.Entry pointerEntry = new EventTrigger.Entry( );
-			pointerEntry.eventID = EventTriggerType.PointerEnter;
-			pointerEntry.callback.AddListener( ( data ) => { OnPointerEnter( (PointerEventData)data ); } );
-			eventTrigger.triggers.Add(pointerEntry);
+				EventTrigger.Entry pointerEntry = new EventTrigger.Entry( );
+				pointerEntry.eventID = EventTriggerType.PointerEnter;
+				pointerEntry.callback.AddListener( ( data ) => { OnPointerEnter( (PointerEventData)data ); } );
+				eventTrigger.triggers.Add(pointerEntry);
 
-			EventTrigger.Entry pointerExit = new EventTrigger.Entry( );
-			pointerExit.eventID = EventTriggerType.PointerExit;
-			pointerExit.callback.AddListener( ( data ) => { OnPointerExit( (PointerEventData)data ); } );
-			eventTrigger.triggers.Add(pointerExit);
-				}
+				EventTrigger.Entry pointerExit = new EventTrigger.Entry( );
+				pointerExit.eventID = EventTriggerType.PointerExit;
+				pointerExit.callback.AddListener( ( data ) => { OnPointerExit( (PointerEventData)data ); } );
+				eventTrigger.triggers.Add(pointerExit);
+			}
 			
 		}
 

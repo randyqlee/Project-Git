@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
 		{
 			for (int i = 0; i < deck.heroes.Count; i++)
 			{
-				//yield return new WaitForSeconds (1f);
+				yield return new WaitForSeconds (0.2f);
 				Transform spawnLocation = spawnLocations.GetComponent<SpawnLocations>().spawn[i].transform;
 				heroGO =  Instantiate(heroPrefab, spawnLocation.position, spawnLocation.rotation, transform);
 				
@@ -118,94 +118,47 @@ public class Player : MonoBehaviour {
 
 		if (isActive)
 		{
-			GameObject pointerObject = UpdateMouseOver();
+			//if player is active, capture mouse pointer per frame
+			GameObject pointerObject = UpdateMouseOver();		
 
-
-					
-
-		
-
+			//if an object's collider is "hit"
 			if (pointerObject != null )
 			{
-
-				
-			#region Hero Dragging Scripts
-			/*	THIS IS ONLY FOR HERO DRAGGING TO ANOTHER HERO
-				if(pointerObject.gameObject.GetComponent<HeroManager>() != null && isActive)
-				{
-
-
-
-					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag && !dragging)
-					{
-
-
-						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
-
-						selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
-						
-
-						dragging = true;			
-
-
-					}
-
-					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
-					{
-						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
-					}
-				
-
-					if (Input.GetMouseButtonUp(0) && selectedHero != null && pointerObject.gameObject.tag != gameObject.tag && dragging)
-					{
-						GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
-						dragging = false;
-					}
-
-					if (Input.GetMouseButtonUp(0))
-					{
-						dragging = false;
-					}
-				
-				}
-			*/
-
-			#endregion
-
 			
 				//THIS IS FOR HERO ABILITY DRAGGING TO HERO
-				//HERO is selected
+				//check that the object hit is a HERO.
 				if(pointerObject.gameObject.GetComponent<HeroManager>() != null )
 				{
 					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag)
 					{
+						//if own hero is selected
 						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
-
-						//selectedHero = pointerObject.gameObject.GetComponent<HeroManager>();
-
 						myHeroIsSelected = true;
 					}
 
 					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
 					{
-
+						//if enemy hero is selected
 						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
-						//myHeroIsSelected = false;
 					}
 					
 				}
 
-				//BUTTON is selected
+				//if own Hero was selected, and pointer is now on an ability button
 				if(pointerObject.gameObject.GetComponent<Button>() != null && myHeroIsSelected)
 				{
+					//if the button is clicked
 					if (Input.GetMouseButtonDown(0))
 					{
 						button = pointerObject.gameObject.GetComponent<Button>();
 
+						//dragging is now active while the button is held down
 						dragging = true;
 
+						//dragging pointer object is displayed
 						targetPointerGO = Instantiate(targetPointer, button.gameObject.transform.position, button.gameObject.transform.rotation, button.gameObject.transform);
 
+						//get the Ability script that corresponds to the button clicked
 						target = pointerObject.gameObject.GetComponent<Button>().GetComponent<Ability>().target;
 
 						Debug.Log(target.ToString());
@@ -216,61 +169,26 @@ public class Player : MonoBehaviour {
 				if (dragging)
 				{
 					
-		
+					//while dragging and mouse button is released
 					if (Input.GetMouseButtonUp(0))
 					{
 					//ensure that the end of drag is pointing to a Hero
 						if (target.ToString() == "Enemies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
 						{
-							//replace with applying button's ability to target
-							//GameManager.Instance.Attack (selectedHero, pointerObject.gameObject.GetComponent<HeroManager>());
-
-							
-							//check if ability is active and can be used
-
 							Debug.Log ("Attacking Enemy");
 							ApplySkill(pointerObject);
-/* 
-							if (button.GetComponent<Ability>().CanUseAbility())
-							{
-								button.GetComponent<Ability>().UseAbility(button.GetComponentInParent<HeroManager>(),pointerObject.gameObject.GetComponent<HeroManager>());
-
-								//reset cooldown
-								button.GetComponent<Ability>().ResetCooldown();
-
-
-
-							}
-							
-
-
-							//let the gamemanager decide these:
-
-							//GameManager.Instance.//CheckHealth ();
-							//GameManager.Instance.//DeselectAllHeroes ();
-							//GameManager.Instance.//NextTurn();
-							//turn off dragging
-							dragging = false;
-							Debug.Log ("Destroying: " + targetPointerGO.name);
-							Destroy(targetPointerGO);
-*/
-							
 						}
 
 						else if (target.ToString() == "Allies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag == tag)
 						{
-
 							Debug.Log ("Attacking Ally");
 							ApplySkill(pointerObject);
-
 						}
 
 						else if (target.ToString() == "Any" && pointerObject.gameObject.GetComponent<HeroManager>() != null)
 						{
-
 							Debug.Log ("Attacking Any");
 							ApplySkill(pointerObject);
-
 						}
 
 						else
@@ -349,18 +267,13 @@ public class Player : MonoBehaviour {
 				else if (target.ToString() == "Any")
 				{
 					if (pointerObject.gameObject.GetComponent<HeroManager>() != null)
-					{
-						
+					{						
 						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.green;
 						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.green;
 					}
 				}
-
-
-
 			}
-		}
-		
+		}		
 	}
 
 	private GameObject UpdateMouseOver()
@@ -392,22 +305,13 @@ public class Player : MonoBehaviour {
 
 
 
-		}
-		
-
-
-		//let the gamemanager decide these:
+		}		//let the gamemanager decide these:
 
 		//GameManager.Instance.//CheckHealth ();
 		//GameManager.Instance.//DeselectAllHeroes ();
 		//GameManager.Instance.//NextTurn();
 		//turn off dragging
 		dragging = false;
-		Debug.Log ("Destroying: " + targetPointerGO.name);
 		Destroy(targetPointerGO);
-
 	}
-
-
-
 }

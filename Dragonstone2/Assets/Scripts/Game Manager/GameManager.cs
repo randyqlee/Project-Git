@@ -44,10 +44,6 @@ public class GameManager : MonoBehaviour {
 	private IEnumerator ATBCoroutine;
 //
 
-
-
-
-
 	void Awake ()
 	{
 
@@ -61,45 +57,31 @@ public class GameManager : MonoBehaviour {
 
 		StartCoroutine (GameLoop());
 
-
-
 	}
 
 	public void BattleTextMessage(string message)
 	{
-		//GetComponentInChildren<BattleTextController>().FloatingText(message);
+		GetComponentInChildren<BattleTextController>().FloatingText(message);
 	}
 
 
 	IEnumerator GameLoop()
 	{
 		yield return StartCoroutine (InitPlayers());
-		//yield return new WaitForSeconds (2f);
-
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroes());
-
-		//yield return new WaitForSeconds (2f);
-
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroUI());
-
-		//yield return new WaitForSeconds (2f);
-		
-
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (StartBattle());
-
 	}
 
 	IEnumerator InitPlayers()
 	{
-		
-
 
 		players = GameObject.FindObjectsOfType<Player>();
-
 		players[1].isActive = true;
 		players[0].isActive = false;
-
-
 
 		yield return null;
 	}
@@ -110,7 +92,6 @@ public class GameManager : MonoBehaviour {
 
 		 foreach (Player player in players)
 		 {
-		 	//player.GetComponent<Player>().InitHeroes();
 			
 			yield return StartCoroutine (player.GetComponent<Player>().InitHeroesRoutine());
 		 }
@@ -142,7 +123,7 @@ public class GameManager : MonoBehaviour {
 	{
 
 		BattleTextMessage("Start Battle!");
-		//yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (1f);
 
 		foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 		{
@@ -154,29 +135,20 @@ public class GameManager : MonoBehaviour {
 		transform.Find("UI").gameObject.transform.Find("Turn Timer").gameObject.SetActive(true);
 
 		NextTurn();
-
-
-
-
 		yield return null;
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
-
-
+		//just for debugging, to simulate NextTurn
 		if (Input.GetKeyDown ("a"))
 		{
 			CheckHealth ();
 			DeselectAllHeroes ();
 			NextTurn();
-		}
-
-	
+		}	
 	}
-
-
 
 	public void Attack (HeroManager attacker, HeroManager defender)	{
 
@@ -372,11 +344,10 @@ public class GameManager : MonoBehaviour {
 
 		if (!IsGameOver())
 		{
+			Debug.Log (IsGameOver());
 			if (ATBCoroutine != null)
 			StopCoroutine (ATBCoroutine);
-			//StopAllCoroutines();
 			StartATBCoroutine ();
-			//StartCoroutine (StartAttackSequence());
 
 			if (!isTurnPaused)
 			{
@@ -429,18 +400,10 @@ public class GameManager : MonoBehaviour {
 					}
 
 				//trigger delegates for next turn - ex. decrease cooldown for abilities
-				e_NextTurn();
-
-				
-				
+				e_NextTurn();			
 				
 			}
-		}
-
-		
-
-
-		
+		}		
 	}
 
 	IEnumerator StartAttackSequence()
@@ -467,29 +430,8 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine (ATBCoroutine);
 	}
 
-
-
 	public void AddDebuffComponent (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
-		// if (IsTargetValid(source, target))
-		// {
-		// 	if (target.hasImmunity)
-		// 	{
-		// 		Debug.Log ("Target Hero has immunity");
-		// 		//Immunity Implementation
-
-		// 	} else if (source.hasCrippledStrike){
-		// 		Debug.Log ("Source Hero has Crippled Strike");
-		// 		//Crippled Strike Implementation
-		// 	} else if (target.hasMalaise){
-		// 		//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
-		// 		AddDebuff(debuffName, duration, source, target);
-
-		// 	} else if (IsChanceSuccess(source)){ //check for Chance
-		// 		//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
-		// 		AddDebuff(debuffName, duration, source, target);
-		// 	}
-		// }//IsTargetValid
 
 		if (canTargetHero)
 		{
@@ -535,7 +477,7 @@ public class GameManager : MonoBehaviour {
 
 
 	
-
+//Another implementation of AddDebuff, with generic Type as input
 /*
 	void AddDebuff <T> (string debuffName, int duration, HeroManager source, HeroManager target) where T:Debuff
 	{
@@ -557,7 +499,6 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuffComponentRandom (string debuffName, int duration, HeroManager source, HeroManager target, int targetCount)
 	{
-		//HeroManager[] heroList = target.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
 		List<HeroManager> heroList = new List<HeroManager>();
 		heroList.AddRange(target.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>());
 		List<HeroManager> randomHeroList = RandomHeroList (heroList);
@@ -578,12 +519,10 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Source Hero has Crippled Strike");
 				//Crippled Strike Implementation
 			} else if (target.hasMalaise){
-				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
 				AddDebuff(debuffName, duration, source, target);
 				count++;
 
 			} else if (IsChanceSuccess(source)){ //check for Chance
-				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
 				AddDebuff(debuffName, duration, source, target);
 				count++;
 			}
@@ -643,19 +582,6 @@ public class GameManager : MonoBehaviour {
 
 	public void AddBuffComponent (string buffName, int duration, HeroManager source, HeroManager target)
 	{
-		// if(IsTargetValid(source, target))
-		// {
-		// 	if (target.hasImmunity)
-		// 	{
-		// 		Debug.Log ("Target Hero has immunity");
-		// 	}
-
-		// 	else if (IsChanceSuccess(source)) //check for Chance
-		// 	{
-		// 		//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
-		// 		AddBuff(buffName, duration, source, target);
-		// 	}
-		// }//IsTargetValid
 
 		if(canTargetHero)
 		{
@@ -666,7 +592,6 @@ public class GameManager : MonoBehaviour {
 
 			else if (IsChanceSuccess(source)) //check for Chance
 			{
-				//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
 				AddBuff(buffName, duration, source, target);
 			}
 		}//IsTargetValid
