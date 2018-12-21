@@ -29,8 +29,8 @@ MonoBehaviour:
     target: 0
     abilityBuffs: []
     abilityDebuffs:
-    - debuff: 10
-      duration: 2
+    - debuff: 7
+      duration: 5
   - abilityName: SuperCrush
     icon: {fileID: 21300000, guid: 1ca4a89590d1b644abaa485016867fb2, type: 3}
     description: 'Name: Super Crush  Attack ALL enemies.  Chance to Stun for 1 turn.  CD:

@@ -14,14 +14,20 @@ public class Taunt : Debuff {
 		this.debuffIcon = debuff.icon;
 
 		//apply effect
+		gameObject.GetComponent<HeroManager>().hasTaunt = true;
 		
 	}
-	void Start () {
-		
+
+	protected override void OnDestroy()
+	{
+
+		gameObject.GetComponent<HeroManager>().hasTaunt = false;
+
+		//call parent OnDestroy
+		base.OnDestroy();
 	}
 	
+	
 	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }

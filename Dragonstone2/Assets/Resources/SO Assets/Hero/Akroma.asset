@@ -14,7 +14,7 @@ MonoBehaviour:
   heroName: Akroma
   image: {fileID: 21300000, guid: 325b82cd201b09a4da237f687c3bc2ec, type: 3}
   maxHealth: 710
-  attack: 50
+  attack: 100
   defense: 50
   chance: 45
   rarity: 3

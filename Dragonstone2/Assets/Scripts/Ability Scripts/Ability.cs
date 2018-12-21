@@ -30,31 +30,16 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
-
-		// if (abilityBuffs != null)
-		// {
-		// 	foreach (AbilityBuffs abilityBuff in abilityBuffs)
-		// 	{
-		// 		GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
-
-		// 	}
-		// }
-
-		// if (abilityDebuffs != null)
-		// {
-		// 	foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
-		// 	{
-		// 		GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
-
-		// 	}
-		// }
+		GameManager.Instance.CheckTauntAndDefender(attacker, defender);
 
 		if(GameManager.Instance.canTargetHero){
+			
 			if (abilityBuffs != null)
 			{
 				foreach (AbilityBuffs abilityBuff in abilityBuffs)
 				{
 					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
+					Debug.Log("ABILITY BUFF SUCCESS");
 
 				}
 			}

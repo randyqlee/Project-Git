@@ -58,6 +58,7 @@ public class HeroManager : MonoBehaviour
 	public bool hasRevenge;
 	public bool hasReflect;
 	public bool hasDefender;
+	public bool hasTaunt;
 
 	[Header("Debuff Flags")]
 	public bool hasCrippledStrike;

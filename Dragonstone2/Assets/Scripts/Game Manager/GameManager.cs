@@ -181,39 +181,54 @@ public class GameManager : MonoBehaviour {
 	public void Attack (HeroManager attacker, HeroManager defender)	{
 
 		
-		//checks for Taunt
-		if (IsTargetValid(attacker,defender))
-		{
-			CriticalStrikeCheck(attacker, defender);
+		// //checks for Taunt
+		// if (IsTargetValid(attacker,defender))
+		// {
+		// 	CriticalStrikeCheck(attacker, defender);
 
-			#region Old Attack Code
-			// if (NoDefender(defender.GetComponentInParent<Player>()))
-			// {
+		// 	#region Old Attack Code
+		// 	// if (NoDefender(defender.GetComponentInParent<Player>()))
+		// 	// {
 						
-			// 	AttackStatusChecks(attacker, defender);
+		// 	// 	AttackStatusChecks(attacker, defender);
 
-			// 	CheckHealth ();
-			// 	DeselectAllHeroes ();
-			// 	NextTurn();
-			// }
+		// 	// 	CheckHealth ();
+		// 	// 	DeselectAllHeroes ();
+		// 	// 	NextTurn();
+		// 	// }
 
 
-			// else
-			// {
-			// 	if (defender.hasDefender)
-			// 	{
-			// 		AttackStatusChecks(attacker, defender);	
+		// 	// else
+		// 	// {
+		// 	// 	if (defender.hasDefender)
+		// 	// 	{
+		// 	// 		AttackStatusChecks(attacker, defender);	
 					
-			// 		CheckHealth ();
-			// 		DeselectAllHeroes ();
-			// 		NextTurn();
+		// 	// 		CheckHealth ();
+		// 	// 		DeselectAllHeroes ();
+		// 	// 		NextTurn();
 
-			// 	}//has Defender
+		// 	// 	}//has Defender
 
-			// 	else
-			// 		Debug.Log ("Attack Hero with defender only");
-			// }
-			#endregion
+		// 	// 	else
+		// 	// 		Debug.Log ("Attack Hero with defender only");
+		// 	// }
+		// 	#endregion
+
+		// 	//CheckTauntAndDefender Implementation
+
+		// 	CheckTauntAndDefender(attacker, defender);
+		// 	if(canTargetHero){
+		// 			AttackStatusChecks(attacker, defender);						
+		// 			CheckHealth ();
+		// 			DeselectAllHeroes ();
+		// 			NextTurn();
+
+		// 	}
+
+		// }//If IsTargetValid
+
+			CriticalStrikeCheck(attacker, defender);
 
 			//CheckTauntAndDefender Implementation
 
@@ -226,7 +241,7 @@ public class GameManager : MonoBehaviour {
 
 			}
 
-		}//If IsTargetValid
+		
 
 	}//Attack Method
 
@@ -762,19 +777,63 @@ public class GameManager : MonoBehaviour {
 
 		//For Defender
 		//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
-		if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+		// if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
 
-			canTargetHero = true;
+		// 	canTargetHero = true;
+		
+		//  }  else {
 
-		 } else {
+		// 	 canTargetHero = false;
+		// 	 Debug.Log ("Invalid Target: Attack Defender Only");
+		//  }	
 
-			 canTargetHero = false;
-			 Debug.Log ("Invalid Target: Attack Defender Only");
+		 //TEST CODE
+		 //if target is ally
+		 if(defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag){
+			 
+			 canTargetHero = true;
+			 
 		 }
 
-		//For Taunt
+		 //if Has Taunt is True and Has Defender is True
+		 else if(!NoDefender(defender.GetComponentInParent<Player>())&& attacker.hasTaunt){
+			 if(defender.hasDefender || attacker.GetComponent<Taunt>().source == defender){
+				 canTargetHero = true;
+			 } else {
+				 canTargetHero = false;
+			 }
 
-	}//Check Taunt and Defender
+		 } 
+
+		 //Has Taunt is True and Has Defender is False
+		 else if(attacker.hasTaunt && NoDefender(defender.GetComponentInParent<Player>()) ) {
+			 
+			 Debug.Log("ATTACKER HAS TAUNT AND NO DEFENDER");
+			 if(attacker.GetComponent<Taunt>().source.GetComponent<HeroManager>() == defender){
+				 canTargetHero = true;
+				 
+			 } else {
+				 canTargetHero = false;
+				  
+			 }
+
+		 }
+
+		 else if(!NoDefender(defender.GetComponentInParent<Player>())&& !attacker.hasTaunt){
+			 if(defender.hasDefender){
+				 canTargetHero = true;
+			 } else {
+				 canTargetHero = false;
+			 }
+
+		 }
+		 else {
+			 canTargetHero = true;
+		 }
+
+		 //
+
+	}//CheckTauntAndDefender
 	
 
 }//GameManager

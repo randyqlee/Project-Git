@@ -28,7 +28,7 @@ MonoBehaviour:
     target: 1
     abilityBuffs:
     - buff: 0
-      duration: 100
+      duration: 5
     abilityDebuffs: []
   - abilityName: Storm of Midnight
     icon: {fileID: 21300000, guid: 165c2d6355168cc4c8a7aaf74efdeacb, type: 3}
