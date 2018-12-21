@@ -8,30 +8,34 @@ public class Recovery : Buff {
 	void Awake () {
 		//get buff asset
 		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Recovery");
+		
+		this.buffIcon = buff.icon;
+
+		gameObject.GetComponent<HeroManager>().hasRecovery = true;
+
 		GameManager.Instance.e_NextTurn += Recover;
 
 
 	}
 	// Use this for initialization
-	void Start () {
-		
-	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
+	
 	protected override void OnDestroy()
 	{
+
+		gameObject.GetComponent<HeroManager>().hasRecovery = false;
+		GameManager.Instance.e_NextTurn -= Recover;
 
 		//call parent OnDestroy
 		base.OnDestroy();
 	}
 
-	void Recover()
+	public void Recover()
 	{
-		gameObject.GetComponent<HeroManager>().maxHealth += buff.value;
+		if(gameObject.GetComponent<HeroManager>().hasRecovery && gameObject.GetComponentInParent<Player>().isActive){
+			gameObject.GetComponent<HeroManager>().maxHealth += buff.value;
+		}
+		
 		
 	}
 }

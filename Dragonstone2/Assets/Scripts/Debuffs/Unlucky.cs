@@ -5,20 +5,20 @@ using UnityEngine;
 public class Unlucky : Debuff {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 		//get debuff asset
 		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Unlucky");
+
+		//attach icon to Hero UI
+		this.debuffIcon = debuff.icon;
 
 		//apply effect
 		gameObject.GetComponent<HeroManager>().chance -= debuff.value;
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 
 	protected override void OnDestroy(){
 
