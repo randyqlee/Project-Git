@@ -16,9 +16,7 @@ public class Unhealable : Debuff {
 		gameObject.GetComponent<HeroManager>().hasUnhealable = true;		
 		
 	}
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {

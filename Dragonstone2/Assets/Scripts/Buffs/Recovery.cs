@@ -33,17 +33,13 @@ public class Recovery : Buff {
 
 	public void Recover()
 	{
-		if(gameObject.GetComponent<HeroManager>().hasRecovery && gameObject.GetComponentInParent<Player>().isActive 
-		&& gameObject.GetComponent<HeroManager>().maxHealth < gameObject.GetComponent<HeroManager>().origHealth){
+		if(gameObject.GetComponent<HeroManager>().hasRecovery && gameObject.GetComponentInParent<Player>().isActive) 
+		{			
 			
-			gameObject.GetComponent<HeroManager>().maxHealth += buff.value;
-			
-			//cap healing to origHealth
-			if(gameObject.GetComponent<HeroManager>().maxHealth > gameObject.GetComponent<HeroManager>().origHealth){
-				gameObject.GetComponent<HeroManager>().maxHealth = gameObject.GetComponent<HeroManager>().origHealth;
-			}
-		}
+			//gameObject.GetComponent<HeroManager>().maxHealth += buff.value;
+			GameManager.Instance.Heal(gameObject.GetComponent<HeroManager>(), buff.value);			
 		
+		}		
 		
-	}
+	}//Recover
 }
