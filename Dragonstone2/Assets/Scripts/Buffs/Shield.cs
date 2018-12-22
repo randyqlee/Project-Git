@@ -7,6 +7,7 @@ public class Shield : Buff {
 
 	//include listener for when hero takes damage
 
+	[SerializeField]
 	int remainingShield;
 
 
@@ -20,6 +21,7 @@ public class Shield : Buff {
 		//apply effect
 
 		gameObject.GetComponent<HeroManager>().shield += buff.value;
+		remainingShield = buff.value;
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage += CheckShieldValue;
 
@@ -37,10 +39,17 @@ public class Shield : Buff {
 
 	void CheckShieldValue()
 	{
+		Debug.Log("CHECK SHIELD VALUE");
 		remainingShield = gameObject.GetComponent<HeroManager>().shield;
-		if (remainingShield <= 0)
 
-		OnDestroy();
+		if (remainingShield <= 0){
+			OnDestroy();
+			
+			//should not wait for DecreaseDuration
+			Destroy(this);
+			
+		}
+		
 
 	}
 
@@ -49,7 +58,7 @@ public class Shield : Buff {
 		//remove effect
 		if (remainingShield > 0)
 			gameObject.GetComponent<HeroManager>().shield -= remainingShield;
-			gameObject.GetComponent<HeroManager>().maxHealth -= remainingShield;
+			//gameObject.GetComponent<HeroManager>().maxHealth -= remainingShield;
 			gameObject.GetComponent<HeroManager>().UpdateUI();
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage -= CheckShieldValue;

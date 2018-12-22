@@ -178,16 +178,39 @@ public class HeroManager : MonoBehaviour
 	public void TakeDamage(int damage, HeroManager source)
 	{
 
-		maxHealth = TotalHealth - damage;
+		// //original code start
+		// maxHealth = TotalHealth - damage;
 
-		shield = shield - damage;
-		if ( shield < 0 )
+		// shield = shield - damage;
+		// if ( shield < 0 )
+		// 	shield = 0;
+
+		// e_TakeDamage();
+		// e_PopupMSG(damage.ToString());
+		// //original code end
+
+		//New Code Test
+		if (shield <=0){
 			shield = 0;
+			maxHealth -=damage;
+			e_TakeDamage();
+			e_PopupMSG(damage.ToString());
 
-		e_TakeDamage();
-		e_PopupMSG(damage.ToString());
+		}else{			
+			shield-= damage;
+			e_TakeDamage();
+			e_PopupMSG(damage.ToString());
+			
+		if(shield < 0){
+			int netDamage = shield;
+			shield = 0;
+			maxHealth +=netDamage;
+			e_TakeDamage();
+			e_PopupMSG(damage.ToString());
+		}//shield
+		}	
 		
-
+		
 	}
 
 	public int TotalHealth
