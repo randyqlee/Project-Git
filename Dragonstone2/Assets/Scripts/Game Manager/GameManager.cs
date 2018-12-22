@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	int attackersAttack, defendersAttack, atk_damage;
 
 	//for Defender and Taunt Implementation - CheckDefenderAndTaunt
-	public bool canTargetHero;
+	public bool canTargetHero, checkDefender;
 
 //for timer bar
 	public float globalATB = 700;
@@ -153,59 +153,9 @@ public class GameManager : MonoBehaviour {
 	public void Attack (HeroManager attacker, HeroManager defender)	{
 
 		
-		// //checks for Taunt
-		// if (IsTargetValid(attacker,defender))
-		// {
-		// 	CriticalStrikeCheck(attacker, defender);
-
-		 	#region Old Attack Code
-		// 	// if (NoDefender(defender.GetComponentInParent<Player>()))
-		// 	// {
-						
-		// 	// 	AttackStatusChecks(attacker, defender);
-
-		// 	// 	CheckHealth ();
-		// 	// 	DeselectAllHeroes ();
-		// 	// 	NextTurn();
-		// 	// }
-
-
-		// 	// else
-		// 	// {
-		// 	// 	if (defender.hasDefender)
-		// 	// 	{
-		// 	// 		AttackStatusChecks(attacker, defender);	
+			CriticalStrikeCheck(attacker, defender);		
 					
-		// 	// 		CheckHealth ();
-		// 	// 		DeselectAllHeroes ();
-		// 	// 		NextTurn();
-
-		// 	// 	}//has Defender
-
-		// 	// 	else
-		// 	// 		Debug.Log ("Attack Hero with defender only");
-		// 	// }
-		 	#endregion
-
-		// 	//CheckDefender Implementation
-
-		// 	CheckDefender(attacker, defender);
-		// 	if(canTargetHero){
-		// 			AttackStatusChecks(attacker, defender);						
-		// 			CheckHealth ();
-		// 			DeselectAllHeroes ();
-		// 			NextTurn();
-
-		// 	}
-
-		// }//If IsTargetValid
-
-			CriticalStrikeCheck(attacker, defender);
-
-			//CheckDefender Implementation
-
-			//CheckTaunt(attacker, defender);
-			CheckDefender(attacker, defender);			
+			//Checks for Taunt and Defender
 			CheckTaunt(attacker, defender);
 
 
@@ -745,10 +695,12 @@ public class GameManager : MonoBehaviour {
 		if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
 
 			canTargetHero = true;
+			checkDefender = true;
 		
 		 }  else {
 
 			 canTargetHero = false;
+			 checkDefender = false;
 			 Debug.Log ("Invalid Target: Attack Defender Only");
 		 }	
 	
@@ -757,12 +709,18 @@ public class GameManager : MonoBehaviour {
 
 	public void CheckTaunt(HeroManager attacker, HeroManager defender){
 		
-			if(!attacker.hasTaunt || attacker.GetComponent<Taunt>().source.GetComponent<HeroManager>() == defender || defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
-				canTargetHero = true;
+			
+			if(attacker.GetComponent<Taunt>() != null ){
+				if(attacker.GetComponent<Taunt>().source.GetComponent<HeroManager>() == defender || defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+					canTargetHero = true;	
+					Debug.Log("attacker.GetComponent<Taunt>() != null");
+				}	else{
+					canTargetHero = false;
+				}
+
 			} else {
-				canTargetHero = false;
-				Debug.Log ("Invalid Target: Attack Defender Only");
-			}
+				CheckDefender(attacker, defender);
+			}			
 	}
 	
 
