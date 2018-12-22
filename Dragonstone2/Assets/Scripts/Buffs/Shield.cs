@@ -22,13 +22,13 @@ public class Shield : Buff {
 		gameObject.GetComponent<HeroManager>().shield += buff.value;
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage += CheckShieldValue;
+
+		
 		
 	}
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	
 	// Update is called once per frame
 	void Update () {
@@ -49,6 +49,8 @@ public class Shield : Buff {
 		//remove effect
 		if (remainingShield > 0)
 			gameObject.GetComponent<HeroManager>().shield -= remainingShield;
+			gameObject.GetComponent<HeroManager>().maxHealth -= remainingShield;
+			gameObject.GetComponent<HeroManager>().UpdateUI();
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage -= CheckShieldValue;
 

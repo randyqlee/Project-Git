@@ -68,11 +68,11 @@ public class GameManager : MonoBehaviour {
 	IEnumerator GameLoop()
 	{
 		yield return StartCoroutine (InitPlayers());
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroes());
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroUI());
-		yield return new WaitForSeconds (2f);
+		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (StartBattle());
 	}
 

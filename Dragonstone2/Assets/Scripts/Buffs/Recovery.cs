@@ -23,8 +23,9 @@ public class Recovery : Buff {
 	protected override void OnDestroy()
 	{
 
-		gameObject.GetComponent<HeroManager>().hasRecovery = false;
+		
 		GameManager.Instance.e_NextTurn -= Recover;
+		gameObject.GetComponent<HeroManager>().hasRecovery = false;
 
 		//call parent OnDestroy
 		base.OnDestroy();
@@ -32,8 +33,15 @@ public class Recovery : Buff {
 
 	public void Recover()
 	{
-		if(gameObject.GetComponent<HeroManager>().hasRecovery && gameObject.GetComponentInParent<Player>().isActive){
+		if(gameObject.GetComponent<HeroManager>().hasRecovery && gameObject.GetComponentInParent<Player>().isActive 
+		&& gameObject.GetComponent<HeroManager>().maxHealth < gameObject.GetComponent<HeroManager>().origHealth){
+			
 			gameObject.GetComponent<HeroManager>().maxHealth += buff.value;
+			
+			//cap healing to origHealth
+			if(gameObject.GetComponent<HeroManager>().maxHealth > gameObject.GetComponent<HeroManager>().origHealth){
+				gameObject.GetComponent<HeroManager>().maxHealth = gameObject.GetComponent<HeroManager>().origHealth;
+			}
 		}
 		
 		

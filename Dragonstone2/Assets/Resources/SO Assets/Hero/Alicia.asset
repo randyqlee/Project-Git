@@ -27,7 +27,7 @@ MonoBehaviour:
     abilityCoolDown: 1
     target: 1
     abilityBuffs:
-    - buff: 0
+    - buff: 7
       duration: 5
     abilityDebuffs: []
   - abilityName: Storm of Midnight
@@ -35,10 +35,12 @@ MonoBehaviour:
     description: Attack all enemies, deal additional damage equivalent to the highest
       defense among your enemies.
     abilityEffect: StormOfMidnight
-    abilityCoolDown: 3
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
-    abilityDebuffs: []
+    abilityDebuffs:
+    - debuff: 10
+      duration: 5
   - abilityName: Frost Rush
     icon: {fileID: 21300000, guid: 08ee8a92408b1094f94a7c52aea6225b, type: 3}
     description: Attack all enemies, gain an additional turn if an enemy dies.
