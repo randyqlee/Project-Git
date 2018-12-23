@@ -27,7 +27,7 @@ MonoBehaviour:
     abilityCoolDown: 1
     target: 1
     abilityBuffs:
-    - buff: 7
+    - buff: 4
       duration: 5
     abilityDebuffs: []
   - abilityName: Storm of Midnight

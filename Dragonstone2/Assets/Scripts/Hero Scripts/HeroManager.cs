@@ -18,6 +18,7 @@ public class HeroManager : MonoBehaviour
 	public int attack;
 	public int defense;
 	public float chance;
+	public int shield;
 
 	//public List<AbilityAsset> abilityAssets;
 	public List<AbilityAsset2> abilityAssets;
@@ -33,6 +34,7 @@ public class HeroManager : MonoBehaviour
 	public Text healthText;
 	public Text attackText;
 	public Text defenseText;
+	public Text shieldText;
 
 	public Text damageText;
 
@@ -47,7 +49,7 @@ public class HeroManager : MonoBehaviour
 
 	public int origHealth;
 
-	public int shield;
+	
 
 	public delegate void Event_TakeDamage();
 	public event Event_TakeDamage e_TakeDamage = delegate {};

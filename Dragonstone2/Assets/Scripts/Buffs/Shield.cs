@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Shield : Buff {
@@ -22,6 +23,8 @@ public class Shield : Buff {
 
 		gameObject.GetComponent<HeroManager>().shield += buff.value;
 		remainingShield = buff.value;
+		gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(true);
+		gameObject.GetComponent<HeroManager>().shieldText.text = gameObject.GetComponent<HeroManager>().shield.ToString();
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage += CheckShieldValue;
 
@@ -39,13 +42,16 @@ public class Shield : Buff {
 
 	void CheckShieldValue()
 	{
-		Debug.Log("CHECK SHIELD VALUE");
-		remainingShield = gameObject.GetComponent<HeroManager>().shield;
+		
+		gameObject.GetComponent<HeroManager>().shieldText.text = gameObject.GetComponent<HeroManager>().shield.ToString();
+		remainingShield = gameObject.GetComponent<HeroManager>().shield;		
 
 		if (remainingShield <= 0){
+			
+			gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(false);
 			OnDestroy();
 			
-			//should not wait for DecreaseDuration
+			//should not wait for DecreaseDr
 			Destroy(this);
 			
 		}
@@ -55,6 +61,8 @@ public class Shield : Buff {
 
 	protected override void OnDestroy()
 	{
+		
+		gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(false);
 		//remove effect
 		if (remainingShield > 0)
 			gameObject.GetComponent<HeroManager>().shield -= remainingShield;
@@ -62,6 +70,8 @@ public class Shield : Buff {
 			gameObject.GetComponent<HeroManager>().UpdateUI();
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage -= CheckShieldValue;
+
+		
 
 		//call parent OnDestroy
 		base.OnDestroy();
