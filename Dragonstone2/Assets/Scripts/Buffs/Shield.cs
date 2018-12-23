@@ -23,9 +23,10 @@ public class Shield : Buff {
 
 		gameObject.GetComponent<HeroManager>().shield += buff.value;
 		remainingShield = buff.value;
+		//display shield icon
 		gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(true);
-		gameObject.GetComponent<HeroManager>().shieldText.text = gameObject.GetComponent<HeroManager>().shield.ToString();
 
+		gameObject.GetComponent<HeroManager>().shieldText.text = gameObject.GetComponent<HeroManager>().shield.ToString();
 		gameObject.GetComponent<HeroManager>().e_TakeDamage += CheckShieldValue;
 
 		
@@ -34,24 +35,14 @@ public class Shield : Buff {
 
 	// Use this for initialization
 	
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	void CheckShieldValue()
 	{
 		
-		gameObject.GetComponent<HeroManager>().shieldText.text = gameObject.GetComponent<HeroManager>().shield.ToString();
 		remainingShield = gameObject.GetComponent<HeroManager>().shield;		
 
 		if (remainingShield <= 0){
 			
-			gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(false);
-			OnDestroy();
-			
-			//should not wait for DecreaseDr
+			OnDestroy();		
 			Destroy(this);
 			
 		}
@@ -61,12 +52,11 @@ public class Shield : Buff {
 
 	protected override void OnDestroy()
 	{
-		
+		//remove shield icon
 		gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(false);
 		//remove effect
 		if (remainingShield > 0)
 			gameObject.GetComponent<HeroManager>().shield -= remainingShield;
-			//gameObject.GetComponent<HeroManager>().maxHealth -= remainingShield;
 			gameObject.GetComponent<HeroManager>().UpdateUI();
 
 		gameObject.GetComponent<HeroManager>().e_TakeDamage -= CheckShieldValue;

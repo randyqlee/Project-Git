@@ -138,6 +138,7 @@ public class HeroManager : MonoBehaviour
 		healthText.text = maxHealth.ToString();
 		attackText.text = attack.ToString();
 		defenseText.text = defense.ToString();
+		shieldText.text = shield.ToString();
 		UpdateHealthBar();
 	}
 
