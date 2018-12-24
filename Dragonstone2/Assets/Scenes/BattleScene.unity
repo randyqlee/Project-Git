@@ -984,11 +984,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114735982429561936, guid: bb4d770f14b63134bab77068de0353d4,
-        type: 2}
-      propertyPath: maxCharacterTurn
-      value: 9999
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4d770f14b63134bab77068de0353d4, type: 2}
   m_IsPrefabAsset: 0
