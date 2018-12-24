@@ -23,7 +23,7 @@ public class Lucky : Buff {
 	}
 
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 		//remove effect
 		gameObject.GetComponent<HeroManager>().chance -= buff.value;

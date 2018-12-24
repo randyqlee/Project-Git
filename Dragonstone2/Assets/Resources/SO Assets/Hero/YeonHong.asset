@@ -14,7 +14,7 @@ MonoBehaviour:
   heroName: YeonHong
   image: {fileID: 21300000, guid: f02a8801cbda6f34092a4585b9ec0b64, type: 3}
   maxHealth: 780
-  attack: 76
+  attack: 74
   defense: 63
   chance: 100
   rarity: 3
@@ -22,9 +22,10 @@ MonoBehaviour:
   abilityAsset2:
   - abilityName: Graceful Touch
     icon: {fileID: 21300000, guid: ea0399b7c5d23e145af94d2360b89573, type: 3}
-    description: Attack an enemy with a chance to deal Crippled Strike.
+    description: Graceful Touch:Attack an enemy with a chance to deal Crippled Strike
+      for 1 turn.
     abilityEffect: GracefulTouch
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -32,19 +33,22 @@ MonoBehaviour:
       duration: 1
   - abilityName: Blade Fan
     icon: {fileID: 21300000, guid: b42964c08be0349418552fb0c72c8c55, type: 3}
-    description: Attack and deal critical strike to an enemy, with a chance to remove
-      up to 3 buffs (random).
+    description: 'Blade Fan:  Attack and deal critical strike to an enemy, with a
+      chance to remove up to 3 buffs (random).
+
+'
     abilityEffect: BladeFan
-    abilityCoolDown: 4
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs: []
-  - abilityName: Charge Vitality
+  - abilityName: Charge Vitaliy
     icon: {fileID: 21300000, guid: 5c0b4c0fee36f814ba8436f40db7b53e, type: 3}
-    description: "\rHeal 500 HP of a target ally.  That ally immediately takes a turn
-      after this one.  (You can't target yourself)"
+    description: 'Charge Vitality:  Heal 500 HP of a target ally.  That ally immediately
+      takes a turn after this one.  (This skill''s cooldown can''t be refreshed or
+      reduced)'
     abilityEffect: ChargeVitality
-    abilityCoolDown: 4
-    target: 1
+    abilityCoolDown: 1
+    target: 0
     abilityBuffs: []
     abilityDebuffs: []

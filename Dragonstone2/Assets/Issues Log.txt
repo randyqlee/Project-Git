@@ -9,3 +9,6 @@
 1.  Protection of SO variables (read only)
 2.  Taunt and Defender Issues
 3.  Create a Hero with heal effect example
+
+23 Dec 2018
+1.  Negative life due to non-attack effects does not kill the Hero

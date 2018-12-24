@@ -50,7 +50,7 @@ public class Shield : Buff {
 
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 		//remove shield icon
 		gameObject.GetComponent<HeroManager>().transform.Find("HeroUI").gameObject.transform.Find("Shield").gameObject.SetActive(false);

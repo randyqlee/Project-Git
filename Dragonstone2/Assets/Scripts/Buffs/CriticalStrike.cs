@@ -25,7 +25,7 @@ public class CriticalStrike : Buff {
 		
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasCritical = false;

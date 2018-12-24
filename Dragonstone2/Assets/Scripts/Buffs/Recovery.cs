@@ -20,7 +20,7 @@ public class Recovery : Buff {
 	// Use this for initialization
 	
 	
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		

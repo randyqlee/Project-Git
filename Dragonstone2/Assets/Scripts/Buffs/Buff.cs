@@ -53,12 +53,13 @@ public class Buff : MonoBehaviour{
 
 	}
 
-	protected virtual void OnDestroy()
+	public virtual void OnDestroy()
 	{
 		RemoveIcon();
 		//remove from HeroManager
 		//unsubscribe
 		GameManager.Instance.e_NextTurn -= DecreaseDuration;
+		Destroy(this);
 	}
 
 	public void AddIcon()

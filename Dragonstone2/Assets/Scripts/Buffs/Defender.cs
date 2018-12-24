@@ -17,7 +17,7 @@ public class Defender : Buff {
 
 	}
 	
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasDefender = false;

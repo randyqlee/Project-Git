@@ -30,7 +30,7 @@ public class IncreaseAttack : Buff {
 		//gameObject.GetComponent<HeroManager>().attack += buff.value;
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 		//remove effect
 		gameObject.GetComponent<HeroManager>().attack -= buff.value;

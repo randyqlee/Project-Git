@@ -21,7 +21,7 @@ public class CounterAttack : Buff {
 		
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		//call parent OnDestroy

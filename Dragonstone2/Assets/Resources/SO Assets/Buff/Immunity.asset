@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Immunity
   m_EditorClassIdentifier: 
   buff: 1
-  icon: {fileID: 21300000, guid: 6d3452fffbdf52b489abb66e48fd9443, type: 3}
+  icon: {fileID: 21300000, guid: d3e0fa9760b9ae34ab5e31276ad89a31, type: 3}
   value: 0
   description: "Can\u2019t be debuffed"

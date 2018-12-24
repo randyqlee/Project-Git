@@ -21,7 +21,7 @@ public class Immunity : Buff {
 		
 	}
 	
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasImmunity = false;

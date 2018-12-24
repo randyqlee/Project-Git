@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Shield
   m_EditorClassIdentifier: 
   buff: 4
-  icon: {fileID: 21300000, guid: de1a1ccc6d8f71a43b23e1bd43c2da30, type: 3}
-  value: 1000
+  icon: {fileID: 21300000, guid: 4cb771058fee74246b47882cf9452e7c, type: 3}
+  value: 123
   description: Gain a shield worth 1000 HP (Disappears after buff effect or after
     total damage exceeds shield)

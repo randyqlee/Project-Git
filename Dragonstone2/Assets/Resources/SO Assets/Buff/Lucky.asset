@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Lucky
   m_EditorClassIdentifier: 
   buff: 5
-  icon: {fileID: 21300000, guid: 364b495e57c580d4691891a71fa685f1, type: 3}
+  icon: {fileID: 21300000, guid: 4849c7ee68025054ab05bf636484f149, type: 3}
   value: 20
   description: Increase Chance by 20%

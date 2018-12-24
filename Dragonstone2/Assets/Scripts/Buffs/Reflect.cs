@@ -23,7 +23,7 @@ public class Reflect : Buff {
 		
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasReflect = false;

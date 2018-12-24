@@ -22,7 +22,7 @@ public class Revenge : Buff {
 		
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasRevenge = false;

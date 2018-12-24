@@ -28,7 +28,7 @@ public class IncreaseDefense : Buff {
 	}
 
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 		//remove effect
 		gameObject.GetComponent<HeroManager>().defense -= buff.value;

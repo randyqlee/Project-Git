@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargeVitality : MonoBehaviour {
+public class ChargeVitality : Ability {
 
-	// Use this for initialization
-	void Start () {
-		
+	public override void UseAbility(HeroManager attacker, HeroManager defender){
+
+		GameManager.Instance.Attack(attacker, defender);
+		base.UseAbility(attacker, defender);		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 	public bool isTurnPaused = false;
 
 	//critical strike Implementation
-	int attackersAttack, defendersAttack, atk_damage;
+	public int attackersAttack, defendersAttack, atk_damage;
 
 	//for Defender and Taunt Implementation - CheckDefenderAndTaunt
 	public bool canTargetHero, checkDefender;
@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour {
 		return false;
 	}
 
-	public void NextTurn ()
+	public void  NextTurn ()
 	{
 
 		if (!IsGameOver())
@@ -590,8 +590,7 @@ public class GameManager : MonoBehaviour {
 	{
 		if (!target.hasUnhealable)
 		{
-
-			//target.maxHealth +=healValue	
+	
 			target.maxHealth += healValue;
 			if(target.maxHealth > target.origHealth){
 				target.maxHealth = target.origHealth;
@@ -600,7 +599,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			Debug.Log("Target is Unhealable");
 		}
-	}
+	}//Heal
 
 
 	bool IsChanceSuccess (HeroManager source)
@@ -632,29 +631,50 @@ public class GameManager : MonoBehaviour {
 	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
 
 		if(attacker.hasCritical){
-					//50% chance for critical strike to be x2 or x3 damage
-					if (1-Random.value < 0.5){
-						attackersAttack = 2*attacker.attack;
-					} else {
-						attackersAttack = 3*attacker.attack;
-					}
-
+					CriticalAttack(attacker);
 				} else {
 					attackersAttack = attacker.attack;
 				}
 
 				if(defender.hasCritical){
-					//50% chance for critical strike to be x2 or x3 damage
-					if (1-Random.value < 0.5){
-						defendersAttack = 2*defender.attack;
-					} else {
-						defendersAttack = 3*defender.attack;
-					}
+					CriticalAttack(defender);
 				} else {
 					defendersAttack = defender.attack;
 				}
 
+				
+
 	}//Critical Strike Check
+
+	public void CriticalAttack(HeroManager source){
+
+		//50% chance for critical strike to be x2 or x3 damage
+		if (1-Random.value < 0.5)
+		{
+			attackersAttack = 2*source.attack;
+		} 			
+		else 
+		{
+			attackersAttack = 3*source.attack;
+		}
+		
+	}//CriticalAttack
+
+	//For 100% sure critical effects
+	public void OneTurnCritical(HeroManager attacker, HeroManager defender){
+		
+		CriticalAttack(attacker);	
+
+		CheckTaunt(attacker, defender);
+		if(canTargetHero){
+			AttackStatusChecks(attacker, defender);
+			
+			GameManager.Instance.CheckHealth();
+			GameManager.Instance.DeselectAllHeroes();
+			GameManager.Instance.NextTurn();
+		}
+
+	}//OneTurnCritical
 
 	//Checks and resolves resolution of Reflect, Echo, and Revenge
 	public void AttackStatusChecks(HeroManager attacker, HeroManager defender){
