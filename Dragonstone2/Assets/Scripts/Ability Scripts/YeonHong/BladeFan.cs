@@ -8,6 +8,8 @@ public class BladeFan : Ability {
 	//Chance to remove up to 3 buffs (random).
 
 	Buff[] buffs;
+	//List<Buff> buffs = new List<Buff>();
+
 	
 	public override void UseAbility(HeroManager attacker, HeroManager defender){
 
@@ -17,6 +19,7 @@ public class BladeFan : Ability {
 
 		base.UseAbility(attacker, defender);
 
+		
 	}
 
 	//OnDestroy, check Critical buff first before setting hasCritical = false;
@@ -27,12 +30,14 @@ public class BladeFan : Ability {
 			foreach(Buff buff in buffs){
 					
 				buff.OnDestroy();
+				
 					
 			}
 			
 
 		} //if buffs less than or equal to 3
 		else {
+			Shuffle(buffs);
 			for(int i =0; i<3; i++){
 				//need to randomize
 				buffs[i].OnDestroy();
@@ -40,6 +45,20 @@ public class BladeFan : Ability {
 			}
 			
 		}//if buffs is greater than 3
-	}
+	}//Destroy three buffs
+
+	//Fisher-Yates shuffle
+	void Shuffle(Buff[] buffsList){
+		int n = buffsList.Length;
+		while(n>0){
+			n--;
+			int k = Random.Range(0,n);
+			Buff valueTemp = buffsList[k];
+			buffsList[k] = buffsList[n];
+			buffsList[n] = valueTemp;
+
+		} 
+
+	}//shuffle
 
 }
