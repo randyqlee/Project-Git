@@ -5,11 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+	public Animator transitionAnim;
+	public string sceneName;
+
 
 	public void PlayGame()
 	{
-		SceneManager.LoadScene("BattleScene");
+		StartCoroutine (LoadScene("BattleScene"));
 
+	}
+
+	IEnumerator LoadScene (string sceneName)
+	{
+		transitionAnim.SetTrigger("end");
+		yield return new WaitForSeconds (1f);
+		SceneManager.LoadScene(sceneName);
 	}
 
 	public void Options()
