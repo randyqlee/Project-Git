@@ -15,6 +15,7 @@ public class SealOfLight : Ability {
 		Debug.Log ("Using SealOfLight: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
 
 		GameManager.Instance.Attack (attacker, defender);
+		base.UseAbility(attacker, defender);
 
 	}
 }

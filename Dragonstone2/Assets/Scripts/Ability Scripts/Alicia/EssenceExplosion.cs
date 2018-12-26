@@ -10,9 +10,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 
 		base.UseAbility(attacker, defender);
 
-		GameManager.Instance.CheckHealth();
-		GameManager.Instance.DeselectAllHeroes();
-		GameManager.Instance.NextTurn();
+		
 
 	}
 

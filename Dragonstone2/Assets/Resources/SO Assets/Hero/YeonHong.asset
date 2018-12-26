@@ -49,6 +49,8 @@ MonoBehaviour:
       reduced)'
     abilityEffect: ChargeVitality
     abilityCoolDown: 1
-    target: 0
-    abilityBuffs: []
+    target: 1
+    abilityBuffs:
+    - buff: 4
+      duration: 5
     abilityDebuffs: []

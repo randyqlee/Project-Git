@@ -15,6 +15,7 @@ public class  GodsShield : Ability {
 		Debug.Log ("Using  GodsShield: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
 
 		GameManager.Instance.Attack (attacker, defender);
+		base.UseAbility(attacker, defender);
 
 	}
 }

@@ -99,11 +99,22 @@ public class Ability : MonoBehaviour {
 
 	public void ResetCooldown()
 	{
-		remainingCooldown = abilityCooldown;
-		canUseAbility = false;
+		if(!GameManager.Instance.extraTurn){
+			remainingCooldown = abilityCooldown;
+			canUseAbility = false;
 
-		//update Button UI
-		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+			//update Button UI
+			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+
+			GameManager.Instance.EndTurn();
+
+		}else {
+			GameManager.Instance.extraTurn = false;
+			GameManager.Instance.isTurnPaused = false;
+			
+		}
+		
+		
 
 	}
 

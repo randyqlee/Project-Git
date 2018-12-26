@@ -15,6 +15,7 @@ public class SwordOfPromise : Ability {
 		Debug.Log ("Using SwordOfPromise: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
 
 		GameManager.Instance.Attack (attacker, defender);
+		base.UseAbility(attacker, defender);
 
 	}
 }

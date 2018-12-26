@@ -23,15 +23,21 @@ public class GameManager : MonoBehaviour {
 	public delegate void Event_HeroKilled();
 	public event Event_HeroKilled e_HeroKilled = delegate {};
 
+	// public delegate void Ability_Completed();
+	// public event Ability_Completed e_AbilityCompleted = delegate {};	
+
+
 	public bool isInitialTurn = true;
 
 	public bool isTurnPaused = false;
+	
 
 	//critical strike Implementation
 	public int attackersAttack, defendersAttack, atk_damage;
 
 	//for Defender and Taunt Implementation - CheckDefenderAndTaunt
 	public bool canTargetHero, checkDefender;
+	public bool extraTurn;
 
 //for timer bar
 	public float globalATB = 700;
@@ -144,9 +150,7 @@ public class GameManager : MonoBehaviour {
 		//just for debugging, to simulate NextTurn
 		if (Input.GetKeyDown ("a"))
 		{
-			CheckHealth ();
-			DeselectAllHeroes ();
-			NextTurn();
+			EndTurn();
 		}	
 	}
 
@@ -161,9 +165,9 @@ public class GameManager : MonoBehaviour {
 
 			if(canTargetHero){
 					AttackStatusChecks(attacker, defender);						
-					CheckHealth ();
-					DeselectAllHeroes ();
-					NextTurn();
+					
+					//transferred to base.UseAbility()
+					//EndTurn();
 			}
 
 		
@@ -192,38 +196,19 @@ public class GameManager : MonoBehaviour {
 			{
 				foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 				{
-					#region old code
-					// int atk_damage = attackersAttack - hero.defense;
-					// //int def_damage = hero.attack - attacker.defense;
-
-					// Debug.Log (attacker.gameObject.name + " is attacking: " + hero.gameObject.name + " for " + atk_damage + " hitpoints!");	
-
-					// //hero.maxHealth = hero.maxHealth - atk_damage;
-
-					// hero.TakeDamage(atk_damage, attacker);
-
-					// //attacker.maxHealth = attacker.maxHealth - def_damage;
-
-					// //display damage in UI
-
-					// hero.DisplayDamageText(atk_damage);
-					// //attacker.DisplayDamageText(def_damage);
-					#endregion
-
 					//set defender in current hero iteration to trigger reflect properly
 					defender = hero;
 					CriticalStrikeCheck(attacker, defender);
 					AttackStatusChecks(attacker, defender);				
-					CheckHealth ();		
+							
 
 				}
 				
 			}
 		}
 		
-		
-		DeselectAllHeroes ();
-		NextTurn();
+		//transferred to base.UseAbility
+		//EndTurn();
 	}//AttackAll
 
 
@@ -292,6 +277,7 @@ public class GameManager : MonoBehaviour {
 	public void  NextTurn ()
 	{
 
+		Debug.Log("NEXT TURN");
 		if (!IsGameOver())
 		{
 			Debug.Log (IsGameOver());
@@ -669,9 +655,8 @@ public class GameManager : MonoBehaviour {
 		if(canTargetHero){
 			AttackStatusChecks(attacker, defender);
 			
-			GameManager.Instance.CheckHealth();
-			GameManager.Instance.DeselectAllHeroes();
-			GameManager.Instance.NextTurn();
+			//transferred to base.UseAbility
+			//EndTurn();
 		}
 
 	}//OneTurnCritical
@@ -750,7 +735,32 @@ public class GameManager : MonoBehaviour {
 				CheckDefender(attacker, defender);
 			}			
 	}
+
+	public void ExtraTurnStart(){		
+		extraTurn = true;
+		isTurnPaused = true;
+		
+	}
 	
+	public void ExtraTurnEnd(){		
+			isTurnPaused = false;			
+			extraTurn = false;
+			
+			//NextTurn();
+		
+	}
+
+	public void EndTurn(){
+		CheckHealth ();
+		DeselectAllHeroes ();
+		NextTurn();
+
+	}
+
+	public void ExtraTurn(){
+		extraTurn = true;
+		isTurnPaused = true;
+	}
 
 }//GameManager
 
