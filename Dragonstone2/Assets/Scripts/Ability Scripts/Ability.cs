@@ -25,6 +25,7 @@ public class Ability : MonoBehaviour {
 	public virtual void UseAbility ()
 	{
 		ResetCooldown();
+		EndTurnCheck();
 	}
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
@@ -54,6 +55,7 @@ public class Ability : MonoBehaviour {
 			}
 
 			ResetCooldown();
+			EndTurnCheck();
 
 		}//canTargetHero = True
 
@@ -82,6 +84,7 @@ public class Ability : MonoBehaviour {
 		}
 
 		ResetCooldown();
+		EndTurnCheck();
 
 	}
 	public bool CanUseAbility()
@@ -99,24 +102,33 @@ public class Ability : MonoBehaviour {
 
 	public void ResetCooldown()
 	{
-		if(!GameManager.Instance.extraTurn){
-			remainingCooldown = abilityCooldown;
-			canUseAbility = false;
+		
+		remainingCooldown = abilityCooldown;
+		canUseAbility = false;
 
-			//update Button UI
-			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
+		
 
-			GameManager.Instance.EndTurn();
+	#region End Turn incorporated	
+		// if(!GameManager.Instance.extraTurn){
+		// 	remainingCooldown = abilityCooldown;
+		// 	canUseAbility = false;
 
-		}else {
-			GameManager.Instance.extraTurn = false;
-			GameManager.Instance.isTurnPaused = false;
+		// 	//update Button UI
+		// 	gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+
+		// 	GameManager.Instance.EndTurn();
+
+		// }else {
+		// 	GameManager.Instance.extraTurn = false;
+		// 	GameManager.Instance.isTurnPaused = false;
 			
-		}
-		
+		// }
+	#endregion
 		
 
-	}
+	}//Reset Cooldown
 
 	public virtual void GameManagerNextTurn()
 	{
@@ -130,6 +142,39 @@ public class Ability : MonoBehaviour {
 			//update Button UI
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
+	}//GameManager Next Turn
 
-	}
-}
+	public virtual void EndTurnCheck(){
+		if(!GameManager.Instance.isTurnPaused){			
+
+			GameManager.Instance.extraTurn = false;
+			GameManager.Instance.EndTurn();
+
+		} else {
+			
+			GameManager.Instance.isTurnPaused = false;
+			
+		}
+	}//End Turn Check
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}//Ability Class

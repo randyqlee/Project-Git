@@ -580,6 +580,7 @@ public class GameManager : MonoBehaviour {
 			target.maxHealth += healValue;
 			if(target.maxHealth > target.origHealth){
 				target.maxHealth = target.origHealth;
+				target.UpdateUI();
 			}
 
 		} else {
@@ -734,20 +735,6 @@ public class GameManager : MonoBehaviour {
 			} else {
 				CheckDefender(attacker, defender);
 			}			
-	}
-
-	public void ExtraTurnStart(){		
-		extraTurn = true;
-		isTurnPaused = true;
-		
-	}
-	
-	public void ExtraTurnEnd(){		
-			isTurnPaused = false;			
-			extraTurn = false;
-			
-			//NextTurn();
-		
 	}
 
 	public void EndTurn(){
