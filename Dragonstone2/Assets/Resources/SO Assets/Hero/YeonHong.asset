@@ -25,7 +25,7 @@ MonoBehaviour:
     description: Graceful Touch:Attack an enemy with a chance to deal Crippled Strike
       for 1 turn.
     abilityEffect: GracefulTouch
-    abilityCoolDown: 1
+    abilityCoolDown: 8
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -38,7 +38,7 @@ MonoBehaviour:
 
 '
     abilityEffect: BladeFan
-    abilityCoolDown: 1
+    abilityCoolDown: 6
     target: 0
     abilityBuffs: []
     abilityDebuffs: []

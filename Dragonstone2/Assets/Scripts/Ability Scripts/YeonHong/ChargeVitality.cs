@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChargeVitality : Ability {
 
@@ -19,10 +20,10 @@ public class ChargeVitality : Ability {
 
 		foreach(Ability attackerAbility in attackerAbilities){
 			attackerAbility.remainingCooldown--;
-			//attackerAbility.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
+			attackerAbility.GetComponentInChildren<Text>().text = attackerAbility.remainingCooldown.ToString();		
 			if(attackerAbility.remainingCooldown < 0){
 				attackerAbility.remainingCooldown = 0;
-				//attackerAbility.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
+				attackerAbility.GetComponentInChildren<Text>().text = attackerAbility.remainingCooldown.ToString();		
 			}					
 		}//foreach
 
@@ -32,9 +33,11 @@ public class ChargeVitality : Ability {
 		
 		foreach(Ability defenderAbility in defenderAbilities){
 			defenderAbility.remainingCooldown--;
+			defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
 			Debug.Log("defenderAbilities: " +defenderAbility.name);
 			if(defenderAbility.remainingCooldown < 0){
 				defenderAbility.remainingCooldown = 0;
+				defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
 			}					
 		}//foreach
 		defender.GetComponent<HeroManager>().heroPanel.SetActive(false);
