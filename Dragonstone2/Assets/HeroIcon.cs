@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class HeroIcon : MonoBehaviour {
 
 	public HeroAsset heroAsset;
+	public Image heroImage;
 
 	// Use this for initialization
 	void Start () {
 
-		this.GetComponent<Image>().sprite = heroAsset.image;
+		heroImage.sprite = heroAsset.image;
 
 
 	}
