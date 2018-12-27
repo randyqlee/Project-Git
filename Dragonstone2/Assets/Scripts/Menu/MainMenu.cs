@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour {
 
 	public Animator transitionAnim;
 	public string sceneName;
+	public GameObject myCollection;
 
 
 	public void PlayGame()
@@ -15,12 +16,33 @@ public class MainMenu : MonoBehaviour {
 
 	}
 
+
 	IEnumerator LoadScene (string sceneName)
 	{
-		transitionAnim.SetTrigger("end");
-		yield return new WaitForSeconds (1f);
+		transitionAnim.SetTrigger("start");
+		yield return new WaitForSeconds (3f);
 		SceneManager.LoadScene(sceneName);
 	}
+	
+
+	public void MyCollection()
+	{
+		StartCoroutine (LoadMyCollection());
+
+	}
+
+
+	IEnumerator LoadMyCollection ()
+	{
+		transitionAnim.SetTrigger("start");
+		yield return new WaitForSeconds (1.5f);
+		//display mycollection screen
+		myCollection.SetActive(true);
+
+
+
+	}
+
 
 	public void Options()
 	{
