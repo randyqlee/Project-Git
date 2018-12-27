@@ -95,11 +95,6 @@ public class HeroManager : MonoBehaviour
 
 	public void SelectHero()
 	{
-		Debug.Log("Hero: " + heroName);
-		Debug.Log("Health: " + maxHealth);
-		Debug.Log("Attack: " + attack);
-		Debug.Log("Defense: " + defense);
-		Debug.Log("chance: " + chance);
 		GameManager.Instance.DeselectAllHeroes();
 		isSelected = true;
 		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
@@ -112,7 +107,7 @@ public class HeroManager : MonoBehaviour
 
 	public void DeselectHero()
 	{
-		Debug.Log ("Deselecting " + name);
+		//Debug.Log ("Deselecting " + name);
 		isSelected = false;
 
 		heroPanel.SetActive(false);
@@ -121,11 +116,11 @@ public class HeroManager : MonoBehaviour
 
 	public void DisplayHero()
 	{
-		Debug.Log("Hero: " + heroName);
-		Debug.Log("Health: " + maxHealth);
-		Debug.Log("Attack: " + attack);
-		Debug.Log("Defense: " + defense);
-		Debug.Log("chance: " + chance);
+		// Debug.Log("Hero: " + heroName);
+		// Debug.Log("Health: " + maxHealth);
+		// Debug.Log("Attack: " + attack);
+		// Debug.Log("Defense: " + defense);
+		// Debug.Log("chance: " + chance);
 	}
 
 	public void HeroStats()

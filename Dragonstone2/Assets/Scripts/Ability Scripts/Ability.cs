@@ -94,7 +94,7 @@ public class Ability : MonoBehaviour {
 		{
 			canUseAbility = true;
 			//ResetCooldown();
-			Debug.Log ("Can use ability");
+			//Debug.Log ("Can use ability");
 		}
 		else Debug.Log ("Can't use ability"); 	
 		return canUseAbility;
@@ -133,7 +133,7 @@ public class Ability : MonoBehaviour {
 	public virtual void GameManagerNextTurn()
 	{
 
-		Debug.Log ("Cooldown of " + name + " : " + remainingCooldown);
+		
 
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		{

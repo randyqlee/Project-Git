@@ -56,7 +56,7 @@ public class BuffPanel : MonoBehaviour {
 
 	public void RemoveIcon (string buffName)
 	{
-		Debug.Log ("Removing Icon");
+		//Debug.Log ("Removing Icon");
 
 		for(int i = buffIcons.Count - 1; i > -1; i--)
 		{

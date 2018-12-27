@@ -277,10 +277,10 @@ public class GameManager : MonoBehaviour {
 	public void  NextTurn ()
 	{
 
-		Debug.Log("NEXT TURN");
+		
 		if (!IsGameOver())
 		{
-			Debug.Log (IsGameOver());
+			
 			if (ATBCoroutine != null)
 			StopCoroutine (ATBCoroutine);
 			StartATBCoroutine ();
@@ -745,6 +745,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ExtraTurn(){
+		Debug.Log("EXTRA TURN");
 		extraTurn = true;
 		isTurnPaused = true;
 	}

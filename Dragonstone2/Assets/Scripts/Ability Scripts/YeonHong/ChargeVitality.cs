@@ -34,7 +34,7 @@ public class ChargeVitality : Ability {
 		foreach(Ability defenderAbility in defenderAbilities){
 			defenderAbility.remainingCooldown--;
 			defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
-			Debug.Log("defenderAbilities: " +defenderAbility.name);
+			
 			if(defenderAbility.remainingCooldown < 0){
 				defenderAbility.remainingCooldown = 0;
 				defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
@@ -42,13 +42,38 @@ public class ChargeVitality : Ability {
 		}//foreach
 		defender.GetComponent<HeroManager>().heroPanel.SetActive(false);
 
+		//make other heroes unavailable
+		SelectedHeroesExtraTurn (attacker, defender);
+
 		GameManager.Instance.DeselectAllHeroes();
 		defender.SelectHero();
 		
 		GameManager.Instance.ExtraTurn();
+		
 		base.UseAbility(attacker, defender);
+		
 
 	}//UseAbility
+
+	public void SelectedHeroesExtraTurn (HeroManager attacker, HeroManager defender)
+	{
+		
+		HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
+		foreach(HeroManager hero in heroes){
+			
+			if(hero == defender || hero == attacker){			
+				
+				//(hero.gameObject.AddComponent(System.Type.GetType("Stun")) as Debuff).New(1,attacker.gameObject);
+			//if Hero			 
+			 } else {
+				 (hero.gameObject.AddComponent(System.Type.GetType("ChargeVitalityStun")) as Debuff).New(1,attacker.gameObject);
+				 
+			 }
+			 
+			
+		}//foreach
+
+	}//Selected Heroes Extra Turn
 
 	
 

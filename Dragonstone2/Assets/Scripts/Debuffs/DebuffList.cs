@@ -9,5 +9,8 @@
 	Taunt,
 	Echo,
 	Malaise,
-	Poison
+	Poison,
+
+	//AbilityRelatedDebuffs
+	ChargeVitalityStun
 }

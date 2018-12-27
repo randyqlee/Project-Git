@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Stun : Debuff {
+public class ChargeVitalityStun : Debuff {
 
 void Awake(){
 
 		//get buff asset
-		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Stun");
+		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/ChargeVitalityStun");
 
 		//attach icon to Hero UI
 		this.debuffIcon = debuff.icon;
-
+		
 		//enable heroPanel instance
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
@@ -39,10 +39,7 @@ void Awake(){
 	}//DecreaseDuration	
 
 
-	// Update is called once per frame
-	void Update () {
-		
-	}//Update
+	
 
 	protected override void OnDestroy(){
 
@@ -50,7 +47,7 @@ void Awake(){
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
-			Debug.Log("Skills Button" +skillsButton);
+			
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){

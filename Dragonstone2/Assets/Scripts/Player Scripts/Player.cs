@@ -161,7 +161,7 @@ public class Player : MonoBehaviour {
 						//get the Ability script that corresponds to the button clicked
 						target = pointerObject.gameObject.GetComponent<Button>().GetComponent<Ability>().target;
 
-						Debug.Log(target.ToString());
+						//Debug.Log(target.ToString());
 						
 					}
 				}
@@ -175,25 +175,25 @@ public class Player : MonoBehaviour {
 					//ensure that the end of drag is pointing to a Hero
 						if (target.ToString() == "Enemies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag != tag)
 						{
-							Debug.Log ("Attacking Enemy");
+							//ebug.Log ("Attacking Enemy");
 							ApplySkill(pointerObject);
 						}
 
 						else if (target.ToString() == "Allies" && pointerObject.gameObject.GetComponent<HeroManager>() != null && pointerObject.gameObject.GetComponent<HeroManager>().tag == tag)
 						{
-							Debug.Log ("Attacking Ally");
+							//Debug.Log ("Attacking Ally");
 							ApplySkill(pointerObject);
 						}
 
 						else if (target.ToString() == "Any" && pointerObject.gameObject.GetComponent<HeroManager>() != null)
 						{
-							Debug.Log ("Attacking Any");
+							//Debug.Log ("Attacking Any");
 							ApplySkill(pointerObject);
 						}
 
 						else
 						{
-							Debug.Log ("no target:");
+							//Debug.Log ("no target:");
 							dragging = false;
 							Destroy(targetPointerGO);
 

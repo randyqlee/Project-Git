@@ -78,7 +78,7 @@ public class HeroPanel : MonoBehaviour {
 
 		  //skillText.SetActive(true);
 		  skillText.GetComponent<Text>().text = data.pointerEnter.GetComponent<TextMesh>().text;
-          Debug.Log (data.pointerEnter.GetComponent<TextMesh>().text);
+          //Debug.Log (data.pointerEnter.GetComponent<TextMesh>().text);
       }
 	
 	 public void OnPointerExit( PointerEventData data )
