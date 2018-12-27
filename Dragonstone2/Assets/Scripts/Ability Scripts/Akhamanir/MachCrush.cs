@@ -8,25 +8,28 @@ public class MachCrush : Ability {
 
 	public override void UseAbility ()
 	{
-		Debug.Log ("Using  MachCrush");
+		//Debug.Log ("Using  MachCrush");
 
 	}
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		Debug.Log ("Using  MachCrush");
+		//Debug.Log ("Using  MachCrush");
 
-			GameManager.Instance.AttackAll (attacker, defender);
+		//GameManager.Instance.AttackAll (attacker, defender);
 			
 		List<HeroManager> enemyHeroList = GameManager.Instance.EnemyHeroList(attacker);
 		foreach (HeroManager enemyHero in enemyHeroList)
 		{
-			if (enemyHero.GetComponents<Debuff>() != null)
-			{
-				GameManager.Instance.DealDamage (bonus * enemyHero.GetComponents<Debuff>().Length, attacker, defender);
-			}
+			
+			int bonusDamage = bonus * enemyHero.GetComponents<Debuff>().Length;			
+			int totalDamage = bonusDamage + attacker.attack - enemyHero.defense;
+			
+			GameManager.Instance.DealDamage (totalDamage, attacker, enemyHero);
+			
 		}
 
-	}
+		base.UseAbility(attacker, defender);
+	}//UseAbility
 }
 

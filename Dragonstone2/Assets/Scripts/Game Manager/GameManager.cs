@@ -497,7 +497,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 		return enemyHeroList;
-	}
+	}//EnemyHero List
 
 	public List<HeroManager> AllyHeroList(HeroManager source) {
 
