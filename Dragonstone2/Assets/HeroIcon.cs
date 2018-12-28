@@ -16,17 +16,20 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
 	bool dragging = false;
 
+	Vector2 origPosition;
+
 	// Use this for initialization
 	void Start () {
 
 		heroImage.sprite = heroAsset.image;
 		heroPreviewPanel = transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.Find("HeroPreviewPanel").gameObject;
+		
 		UpdateHeroPreviewPanel();
 
 
 		//Improve this
-		heroIcon.sprite = heroAsset.image;
-		heroIcon.gameObject.transform.SetParent(heroPreviewPanel.transform,false);
+		//heroIcon.sprite = heroAsset.image;
+		//heroIcon.gameObject.transform.SetParent(heroPreviewPanel.transform,false);
 
 
         //Fetch the Event Trigger component from your GameObject
@@ -52,7 +55,10 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 	{
 		//do your stuff when highlighted
 		if (!dragging)
+		{
 		UpdateHeroPreviewPanel();
+		origPosition = transform.position;
+		}
 	}
 
 	public void UpdateHeroPreviewPanel()
@@ -82,15 +88,19 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
 		dragging = true;
 
-		heroIcon.gameObject.SetActive(true);
+		//heroIcon.gameObject.SetActive(true);
 
 		Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 		
         //Move the GameObject when you drag it
         //transform.position = rayPoint;
+		transform.position = cursorPosition;
 
-		heroIcon.gameObject.transform.position = cursorPosition;
+		GetComponent<BoxCollider2D>().enabled = false;
+
+		
+		//heroIcon.gameObject.transform.position = cursorPosition;
     }
 
 	public void OnEndDrag(PointerEventData eventData)
@@ -99,12 +109,36 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
         if (hit.collider != null && hit.transform.tag == "DeckSlots")
         {
-			hit.transform.GetComponent<Image>().sprite = heroIcon.sprite;
-			heroIcon.gameObject.SetActive(false);
+			
+			transform.GetComponent<RectTransform>().anchoredPosition = transform.parent.position;
+			//transform.GetComponent<RectTransform>().
+			transform.GetComponent<RectTransform>().localPosition = Vector3.zero;
+			transform.GetComponent<RectTransform>().sizeDelta = Vector3.zero;
+		    transform.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+    		transform.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+    		transform.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+			
+			transform.SetParent(hit.transform,false);
 
-		}	
+			
+			//hit.transform.GetComponent<Image>().sprite = heroIcon.sprite;
+			//heroIcon.gameObject.SetActive(false);
+
+		}
+
+		else if ((hit.collider != null && hit.transform.tag == "AllHeroesScrollPanel"))
+		{
+			//return hero from deck
+
+		}
+
         else 
-		heroIcon.gameObject.SetActive(false);
+		{
+			dragging = false;
+			GetComponent<BoxCollider2D>().enabled = true;
+			transform.position = origPosition;
+
+		}
     }
 
 	public void OnSelect(BaseEventData eventData)

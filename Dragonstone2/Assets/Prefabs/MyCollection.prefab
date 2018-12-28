@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 114280355626180892}
   - component: {fileID: 61281061350596704}
   m_Layer: 5
-  m_Name: Image (14)
+  m_Name: Slot3
   m_TagString: DeckSlots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 114279044574191890}
   - component: {fileID: 61696234862676002}
   m_Layer: 5
-  m_Name: Image (12)
+  m_Name: Slot1
   m_TagString: DeckSlots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 114026142562706496}
   - component: {fileID: 61603295688347898}
   m_Layer: 5
-  m_Name: Image (15)
+  m_Name: Slot4
   m_TagString: DeckSlots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,9 +334,10 @@ GameObject:
   - component: {fileID: 114547075215167262}
   - component: {fileID: 222853698561076742}
   - component: {fileID: 114920411721718442}
+  - component: {fileID: 65632632385350946}
   m_Layer: 5
   m_Name: Scroll View
-  m_TagString: Untagged
+  m_TagString: AllHeroesScrollPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,7 +522,7 @@ GameObject:
   - component: {fileID: 114718950630217232}
   - component: {fileID: 61232357918630702}
   m_Layer: 5
-  m_Name: Image (13)
+  m_Name: Slot2
   m_TagString: DeckSlots
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,6 +662,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 141, y: 141}
   m_EdgeRadius: 0
+--- !u!65 &65632632385350946
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529902403750190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 705.8385, y: 160.01169, z: 1}
+  m_Center: {x: -0.0039164224, y: 1.4287821, z: 0}
 --- !u!114 &114026142562706496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1969,7 +1982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0027770996, y: 0}
+  m_AnchoredPosition: {x: 0.0028076172, y: 0}
   m_SizeDelta: {x: -344.64, y: -408}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!224 &224096830822397644
@@ -2175,7 +2188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0032653809}
+  m_AnchoredPosition: {x: 0, y: 0.0032958984}
   m_SizeDelta: {x: -226, y: -219.26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224329200837010104
