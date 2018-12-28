@@ -22,7 +22,7 @@ public class AllHeroesList : MonoBehaviour {
 			
 			GameObject heroGO = Instantiate (heroIcon); 
 			heroGO.GetComponent<HeroIcon>().heroAsset = heroAsset;
-			heroGO.transform.SetParent(gameObject.transform);
+			heroGO.transform.SetParent(gameObject.transform,false);
 			itemList.Add(heroGO);
 
 		}
@@ -30,6 +30,8 @@ public class AllHeroesList : MonoBehaviour {
 
 		
 	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
