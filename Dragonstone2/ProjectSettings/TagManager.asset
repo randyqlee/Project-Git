@@ -8,6 +8,8 @@ TagManager:
   - Player2
   - HeroPanel
   - Defender
+  - DeckSlots
+  - AllHeroesScrollPanel
   layers:
   - Default
   - TransparentFX
