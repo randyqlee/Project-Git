@@ -5,18 +5,40 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler {
+public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEndDragHandler {
 
 	public HeroAsset heroAsset;
 	public Image heroImage;
 
 	GameObject heroPreviewPanel;
 
+	public Image heroIcon;
+
+	bool dragging = false;
+
 	// Use this for initialization
 	void Start () {
 
 		heroImage.sprite = heroAsset.image;
 		heroPreviewPanel = transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.Find("HeroPreviewPanel").gameObject;
+		UpdateHeroPreviewPanel();
+
+
+		//Improve this
+		heroIcon.sprite = heroAsset.image;
+		heroIcon.gameObject.transform.SetParent(heroPreviewPanel.transform,false);
+
+
+        //Fetch the Event Trigger component from your GameObject
+        EventTrigger trigger = GetComponent<EventTrigger>();
+        //Create a new entry for the Event Trigger
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        //Add a Drag type event to the Event Trigger
+        entry.eventID = EventTriggerType.Drag;
+        //call the OnDragDelegate function when the Event System detects dragging
+        entry.callback.AddListener((data) => { OnDragDelegate((PointerEventData)data); });
+        //Add the trigger entry
+        trigger.triggers.Add(entry);
 
 	}
 
@@ -29,6 +51,7 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler {
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		//do your stuff when highlighted
+		if (!dragging)
 		UpdateHeroPreviewPanel();
 	}
 
@@ -49,6 +72,40 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler {
 
 	}
 
+
+    public void OnDragDelegate(PointerEventData data)
+    {
+        //Create a ray going from the camera through the mouse position
+        //Ray ray = Camera.main.ScreenPointToRay(data.position);
+        //Calculate the distance between the Camera and the GameObject, and go this distance along the ray
+        //Vector3 rayPoint = ray.GetPoint(Vector3.Distance(transform.position, Camera.main.transform.position));
+
+		dragging = true;
+
+		heroIcon.gameObject.SetActive(true);
+
+		Vector2 cursorPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		
+        //Move the GameObject when you drag it
+        //transform.position = rayPoint;
+
+		heroIcon.gameObject.transform.position = cursorPosition;
+    }
+
+	public void OnEndDrag(PointerEventData eventData)
+    {
+		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if (hit.collider != null && hit.transform.tag == "DeckSlots")
+        {
+			hit.transform.GetComponent<Image>().sprite = heroIcon.sprite;
+			heroIcon.gameObject.SetActive(false);
+
+		}	
+        else 
+		heroIcon.gameObject.SetActive(false);
+    }
 
 	public void OnSelect(BaseEventData eventData)
 	{
