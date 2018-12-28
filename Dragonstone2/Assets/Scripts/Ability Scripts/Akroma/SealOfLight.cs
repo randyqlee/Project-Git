@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SealOfLight : Ability {
 
+	int targetCount;
+
 	public override void UseAbility ()
 	{
-		Debug.Log ("Using SealOfLight");
+		//Debug.Log ("Using SealOfLight");
 
 	}
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		Debug.Log ("Using SealOfLight: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
+		//Debug.Log ("Using SealOfLight: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
+		targetCount = GameManager.Instance.EnemyHeroList(attacker).Count;		
 
-		GameManager.Instance.Attack (attacker, defender);
-		base.UseAbility(attacker, defender);
+		GameManager.Instance.AttackAll (attacker, defender);	
+		
+		base.UseAbilityRandom(attacker, defender, targetCount);
 
 	}
 }

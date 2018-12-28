@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class  GodsShield : Ability {
 
-	public override void UseAbility ()
-	{
-		Debug.Log ("Using   GodsShield");
+	
+
+	void Start(){
+
+		PassiveSkillInitialization();
+	}
+
+	public override void PassiveSkillInitialization(){
+		
+		HeroManager hero;
+
+		hero = GetComponentInParent<HeroManager>();
+		//set permanent Immnunity
+		hero.hasPermanentImmunity = true;
+
+		base.PassiveSkillInitialization();
 
 	}
 
-	public override void UseAbility (HeroManager attacker, HeroManager defender)
-	{
-		Debug.Log ("Using  GodsShield: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
-
-		GameManager.Instance.Attack (attacker, defender);
-		base.UseAbility(attacker, defender);
-
-	}
 }

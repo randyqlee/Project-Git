@@ -16,7 +16,7 @@ public class Silence : Debuff {
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
-			Debug.Log("Skills Button" +skillsButton);
+			//Debug.Log("Skills Button" +skillsButton);
 
 			//start at i=1 to select 2nd and 3rd skill
 			for(int i = 1; i <skillsButton.Count; i++){
@@ -42,12 +42,12 @@ public class Silence : Debuff {
 		
 	}//Update
 
-	protected override void OnDestroy(){
+	public override void OnDestroy(){
 
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
-			Debug.Log("Skills Button" +skillsButton);
+			//Debug.Log("Skills Button" +skillsButton);
 
 			//start at i=1 to select 2nd and 3rd skill
 			for(int i = 1; i <skillsButton.Count; i++){

@@ -23,7 +23,7 @@ public class Unhealable : Debuff {
 		
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		gameObject.GetComponent<HeroManager>().hasUnhealable = false;

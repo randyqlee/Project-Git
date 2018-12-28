@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 
 public class GameManager : MonoBehaviour {
@@ -79,7 +80,12 @@ public class GameManager : MonoBehaviour {
 		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroUI());
 		//yield return new WaitForSeconds (2f);
+		yield return StartCoroutine (InitHeroPassives());
+		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (StartBattle());
+		//yield return new WaitForSeconds (2f);
+		
+		
 	}
 
 	IEnumerator InitPlayers()
@@ -118,10 +124,12 @@ public class GameManager : MonoBehaviour {
 				hero.transform.Find("HeroUI").gameObject.transform.Find("Defense").gameObject.SetActive(true);
 				hero.UpdateUI();
 				hero.CreateHeroPanel();
+			
+				
 			}
 
 		yield return null;
-	}
+	}//InitHeroUI
 
 
 
@@ -143,6 +151,33 @@ public class GameManager : MonoBehaviour {
 		NextTurn();
 		yield return null;
 	}
+
+	IEnumerator InitHeroPassives()
+	{
+		BattleTextMessage("Initializing Hero Passives");
+		Debug.Log("Initializing Hero Passives");
+
+
+		foreach (Player player in players)
+			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+			{
+				// //hero.transform.Find("HeroUI").gameObject.transform.Find("Health").gameObject.SetActive(true);
+				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+				// Debug.Log("Hero Panel Name: " +hero.GetComponentInChildren<HeroPanel>().hero);
+				
+				Ability[] abilities = hero.GetComponentsInChildren<Ability>();
+				foreach(Ability ability in abilities){
+					if(ability.skillType == Type.Passive){
+						ability.PassiveSkillInitialization();
+					}
+				}
+
+				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+				
+			}
+
+		yield return null;
+	}//InitHeroUI
 
 	
 	// Update is called once per frame
@@ -229,11 +264,40 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	// //Original Code
+	// public void KillHero (HeroManager hero)
+	// {		
+	// 	Debug.Log ("Destroying " + hero.name);
+	// 	Destroy (hero.gameObject);
+	// 	e_HeroKilled();		
+	// }
+
+	//Original Code
 	public void KillHero (HeroManager hero)
-	{
-		Debug.Log ("Destroying " + hero.name);
-		Destroy (hero.gameObject);
-		e_HeroKilled();
+	{		
+		hero.isDead = true;
+		
+		//Destroy all buffs
+		Buff[] buffs = hero.GetComponents<Buff>();
+		
+			foreach(Buff buff in buffs){					
+				buff.OnDestroy();					
+			}
+
+		//Destroy all debuffs
+		Debuff[] debuffs = hero.GetComponents<Debuff>();
+		
+			foreach(Debuff debuff in debuffs){					
+				debuff.OnDestroy();					
+			}
+		//reinitialize Health
+		hero.maxHealth = hero.origHealth;
+
+		hero.enabled = false;
+		hero.gameObject.SetActive(false);
+		
+		//re-initialize conditions
+		e_HeroKilled();		
 	}
 
 	public void DeselectAllHeroes ()
@@ -371,7 +435,7 @@ public class GameManager : MonoBehaviour {
 
 		if (canTargetHero)
 		{
-			if (target.hasImmunity)
+			if (target.hasImmunity || target.hasPermanentImmunity)
 			{
 				Debug.Log ("Target Hero has immunity");
 				//Immunity Implementation
@@ -446,7 +510,7 @@ public class GameManager : MonoBehaviour {
 		{
 			target = randomHeroList[heroCounter];
 
-			if (target.hasImmunity)
+			if (target.hasImmunity || target.hasPermanentImmunity)
 			{
 				Debug.Log ("Target Hero has immunity");
 				//Immunity Implementation
@@ -521,7 +585,7 @@ public class GameManager : MonoBehaviour {
 
 		if(canTargetHero)
 		{
-			if (target.hasImmunity)
+			if (target.hasImmunity || target.hasPermanentImmunity)
 			{
 				Debug.Log ("Target Hero has immunity");
 			}
@@ -560,7 +624,7 @@ public class GameManager : MonoBehaviour {
 	public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
 	{
 
-		if (target.hasImmunity)
+		if (target.hasImmunity || target.hasPermanentImmunity)
 		{
 			Debug.Log ("Target Hero has immunity");
 		}
@@ -749,6 +813,9 @@ public class GameManager : MonoBehaviour {
 		extraTurn = true;
 		isTurnPaused = true;
 	}
+
+	
+
 
 }//GameManager
 

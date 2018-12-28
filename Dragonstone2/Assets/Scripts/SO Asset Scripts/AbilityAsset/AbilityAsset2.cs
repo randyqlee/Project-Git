@@ -6,13 +6,23 @@ public enum Target
 {
 	Enemies,
 	Allies,
-	Any
+	Any,
+	
 
 }
+
+public enum Type
+{
+	Active,
+	Passive	
+}
+
+
 [System.Serializable]
 public class AbilityAsset2 {
 
 	public string abilityName;
+	public Type skillType;
 	public Sprite icon;
 
 	[TextArea(5,10)]

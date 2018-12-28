@@ -17,6 +17,11 @@ public class SuperCrush : Ability {
 
 			Debug.Log ("Using  SuperCrush");
 
+			targetCount = GameManager.Instance.EnemyHeroList(attacker).Count-1;
+			if(targetCount <= 0) {
+				targetCount = 1;
+			}		
+
 			GameManager.Instance.AttackAll (attacker, defender);
 
 			base.UseAbilityRandom (attacker,defender,targetCount);

@@ -23,7 +23,7 @@ public class CrippledStrike : Debuff {
 	
 	}
 
-	protected override void OnDestroy()	{
+	public override void OnDestroy()	{
 
 		gameObject.GetComponent<HeroManager>().attack +=debuff.value;
 		gameObject.GetComponent<HeroManager>().hasCrippledStrike = false;

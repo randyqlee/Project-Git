@@ -14,9 +14,9 @@ MonoBehaviour:
   heroName: Akroma
   image: {fileID: 21300000, guid: 325b82cd201b09a4da237f687c3bc2ec, type: 3}
   maxHealth: 710
-  attack: 100
+  attack: 200
   defense: 50
-  chance: 45
+  chance: 0
   rarity: 3
   abilityAsset:
   - {fileID: 11400000, guid: eca1160425d75b748be89912ed5e8f42, type: 2}
@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f12b105b6be7733479a9d819c3132f2e, type: 2}
   abilityAsset2:
   - abilityName: SwordOfPromise
+    skillType: 0
     icon: {fileID: 21300000, guid: 79a0081a97e1beb4789160c851930cf3, type: 3}
     description: 'Name: Sword of Promise  Attack an enemy.  If the enemy dies, silence
       another random enemy for 2 turns. '
@@ -35,8 +36,10 @@ MonoBehaviour:
     - debuff: 4
       duration: 2
   - abilityName: SealOfLight
+    skillType: 0
     icon: {fileID: 21300000, guid: c3bec0f89b0a6af49b037143388b36e2, type: 3}
-    description: "Seal of Light\r:Attack an enemy and silence it for 2 turns."
+    description: "Seal of Light\r:Attack ALL enemies with a chance to silence them
+      for 2 turns."
     abilityEffect: SealOfLight
     abilityCoolDown: 3
     target: 0
@@ -45,6 +48,7 @@ MonoBehaviour:
     - debuff: 4
       duration: 2
   - abilityName: GodsShield
+    skillType: 1
     icon: {fileID: 21300000, guid: 6cd809aab582b774181d6abb4852859f, type: 3}
     description: "God's Shield\r:Immune to all debuffs.  Reduce the chance stat of
       all enemies by 5%."

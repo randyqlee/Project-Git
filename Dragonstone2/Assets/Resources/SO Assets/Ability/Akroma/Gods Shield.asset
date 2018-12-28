@@ -17,7 +17,5 @@ MonoBehaviour:
     stat of all enemies by 5%."
   abilityEffect: GodsShield
   abilityCoolDown: 0
-  abilityBuffs:
-  - buff: 1
-    duration: 9999
+  abilityBuffs: []
   abilityDebuffs: []

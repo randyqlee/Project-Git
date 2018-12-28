@@ -28,7 +28,7 @@ void Awake (){
 
 	void OnEnable(){}
             
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 
 		

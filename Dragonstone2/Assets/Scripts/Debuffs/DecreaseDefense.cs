@@ -26,7 +26,7 @@ public class DecreaseDefense : Debuff {
 	}
 
 
-	protected override void OnDestroy(){
+	public override void OnDestroy(){
 
 		//remove effect
 		gameObject.GetComponent<HeroManager>().defense += debuff.value;	

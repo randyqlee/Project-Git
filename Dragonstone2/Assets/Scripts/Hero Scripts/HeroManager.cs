@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 
 // Gets the Hero SO values
@@ -30,6 +31,7 @@ public class HeroManager : MonoBehaviour
 
 	public bool isSelected;
 	public Player player;
+	public bool isDead;
 
 	public Text healthText;
 	public Text attackText;
@@ -72,19 +74,21 @@ public class HeroManager : MonoBehaviour
 	public delegate void Event_PopupMsg(string message);
 	public event Event_PopupMsg e_PopupMSG = delegate {};
 
+	//Passive Skills
+	[HideInInspector]
+	public bool hasPermanentImmunity;
+
 
 	void Awake () {
 
 	col = GetComponent<CapsuleCollider2D>();
 	isSelected = false;
-
-
-
+	
 
 	}
 	// Use this for initialization
-	void Start () {
-		
+	void OnEnable () {
+		isDead = false;	
 	}
 	
 	// Update is called once per frame
@@ -146,7 +150,15 @@ public class HeroManager : MonoBehaviour
 		heroPanel.GetComponent<HeroPanel>().CreateHeroPanel();
 		
 		heroPanel.transform.SetParent(transform);
-		heroPanel.SetActive(false);
+
+
+		Ability[] abilitys = heroPanel.GetComponentsInChildren<Ability>();
+		for(int i=0; i < abilitys.Length; i++) {
+			abilitys[i].skillType = heroPanel.GetComponentInParent<HeroManager>().abilityAssets[i].skillType;
+		}
+
+
+		heroPanel.SetActive(false);		
 
 	}
 

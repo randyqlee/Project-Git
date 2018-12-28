@@ -41,7 +41,7 @@ void Awake(){
 
 	
 
-	protected override void OnDestroy(){
+	public override void OnDestroy(){
 
 		//enable instance 
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);

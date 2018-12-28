@@ -20,7 +20,7 @@ public class Unlucky : Debuff {
 	
 	
 
-	protected override void OnDestroy(){
+	public override void OnDestroy(){
 
 		//remove debuff effect
 		gameObject.GetComponent<HeroManager>().chance += debuff.value;

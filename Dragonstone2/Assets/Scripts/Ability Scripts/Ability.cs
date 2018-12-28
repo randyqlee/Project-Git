@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
 
+	public Type skillType;
 	public int abilityCooldown;
 
 	public int remainingCooldown;
 
 	public bool canUseAbility;
+	//public bool isPassive;
 
 	public Target target;
 
@@ -157,20 +159,14 @@ public class Ability : MonoBehaviour {
 		}
 	}//End Turn Check
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public virtual void PassiveSkillInitialization(){
+		
+		//Disable Access to skill
+		GetComponent<Button>().interactable = false;
+		GetComponentInChildren<Text>().enabled = false;
+		GetComponent<BoxCollider2D>().enabled = false;
+		
+	}	
 
 
 

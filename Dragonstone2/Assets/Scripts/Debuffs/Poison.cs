@@ -36,7 +36,7 @@ public class Poison : Debuff {
 		//gameObject.GetComponent<HeroManager>().attack += buff.value;
 	}
 
-	protected override void OnDestroy()
+	public override void OnDestroy()
 	{
 		//remove effect
 
