@@ -14,18 +14,19 @@ MonoBehaviour:
   heroName: Alicia
   image: {fileID: 21300000, guid: a27a0a310ee332c42a46636d2a232b9a, type: 3}
   maxHealth: 660
-  attack: 80
+  attack: 200
   defense: 70
   chance: 100
   rarity: 3
   abilityAsset: []
   abilityAsset2:
   - abilityName: Essence Explosion
+    skillType: 0
     icon: {fileID: 21300000, guid: 035732fb550eed24fafaaa35c2a2471c, type: 3}
     description: Attack and enemy with a chance to Decrease Defense for 2 turns.
     abilityEffect: EssenceExplosion
     abilityCoolDown: 1
-    target: 1
+    target: 0
     abilityBuffs:
     - buff: 6
       duration: 5
@@ -35,8 +36,11 @@ MonoBehaviour:
       duration: 5
     - buff: 5
       duration: 5
-    abilityDebuffs: []
+    abilityDebuffs:
+    - debuff: 1
+      duration: 2
   - abilityName: Storm of Midnight
+    skillType: 0
     icon: {fileID: 21300000, guid: 165c2d6355168cc4c8a7aaf74efdeacb, type: 3}
     description: Attack all enemies, deal additional damage equivalent to the highest
       defense among your enemies.
@@ -44,14 +48,13 @@ MonoBehaviour:
     abilityCoolDown: 1
     target: 0
     abilityBuffs: []
-    abilityDebuffs:
-    - debuff: 10
-      duration: 5
+    abilityDebuffs: []
   - abilityName: Frost Rush
+    skillType: 0
     icon: {fileID: 21300000, guid: 08ee8a92408b1094f94a7c52aea6225b, type: 3}
     description: Attack all enemies, gain an additional turn if an enemy dies.
     abilityEffect: FrostRush
-    abilityCoolDown: 5
+    abilityCoolDown: 0
     target: 0
     abilityBuffs: []
     abilityDebuffs: []

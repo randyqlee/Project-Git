@@ -16,16 +16,16 @@ public class MachCrush : Ability {
 	{
 		//Debug.Log ("Using  MachCrush");
 
-		//GameManager.Instance.AttackAll (attacker, defender);
+		GameManager.Instance.AttackAll (attacker, defender);
 			
 		List<HeroManager> enemyHeroList = GameManager.Instance.EnemyHeroList(attacker);
 		foreach (HeroManager enemyHero in enemyHeroList)
 		{
 			
 			int bonusDamage = bonus * enemyHero.GetComponents<Debuff>().Length;			
-			int totalDamage = bonusDamage + attacker.attack - enemyHero.defense;
+			//int totalDamage = bonusDamage + attacker.attack - enemyHero.defense;
 			
-			GameManager.Instance.DealDamage (totalDamage, attacker, enemyHero);
+			GameManager.Instance.DealDamage (bonusDamage, attacker, enemyHero);
 			
 		}
 

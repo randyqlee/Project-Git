@@ -4,30 +4,52 @@ using UnityEngine;
 
 
 public class FrostRush : Ability {
-
-
-	bool heroKilled;
 	
+	int targetCount = 2;
 
-	public override void UseAbility (HeroManager attacker, HeroManager defender)
+	public override void UseAbility(HeroManager attacker, HeroManager defender)
 	{
-		if (!GameManager.Instance.isTurnPaused)
-		{
-			GameManager.Instance.e_HeroKilled += AnotherTurn;
-			GameManager.Instance.AttackAll (attacker, defender);
-			GameManager.Instance.e_HeroKilled -= AnotherTurn;
-		}
-		else
-		{
-			GameManager.Instance.isTurnPaused = false;
-			GameManager.Instance.AttackAll (attacker, defender);
-		}
+		
+		attacker.hasCritical = true;
+		GameManager.Instance.AttackAll(attacker, defender);
+		attacker.hasCritical = false;
+
+		//if an enemy dies, take an extraTurn
+		CheckDeadEnemy(attacker, defender);
+		
+		base.UseAbilityRandom(attacker, defender, targetCount);		
 	}
 
-	void AnotherTurn()
-	{
-		GameManager.Instance.isTurnPaused = true;
+	void CheckDeadEnemy(HeroManager attacker, HeroManager defender){
+
+		//Get enemy list
+		List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(attacker);
+		
+		//Check for dead enemies
+		GameManager.Instance.CheckHealth();		
+		
+		foreach(HeroManager enemy in enemies){
+
+			//store SetActive status of the enemy
+			bool temp = enemy.gameObject.activeInHierarchy;
+
+			//temporarily set SetActive to true
+			enemy.gameObject.SetActive(true);
+
+			//if Enemy is Dead, take an extra turn
+			if(enemy.isDead)
+			{
+				GameManager.Instance.ExtraTurn();
+				Debug.Log("Frost Rush EXTRA TURN");
+				//reduce cooldown of ally heroes
+			}
+			//restore enemySetActive to original
+			enemy.gameObject.SetActive(temp); 
+		}
+
 	}
+
+	
 
 
 

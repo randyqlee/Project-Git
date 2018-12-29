@@ -42,7 +42,7 @@ public class Ability : MonoBehaviour {
 				foreach (AbilityBuffs abilityBuff in abilityBuffs)
 				{
 					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
-					Debug.Log("ABILITY BUFF SUCCESS");
+					//Debug.Log("ABILITY BUFF SUCCESS");
 
 				}
 			}
@@ -160,11 +160,13 @@ public class Ability : MonoBehaviour {
 	public virtual void EndTurnCheck(){
 		if(!GameManager.Instance.isTurnPaused){			
 
+			//no extra turn
 			GameManager.Instance.extraTurn = false;
 			GameManager.Instance.EndTurn();
 
 		} else {
 			
+			//resolve extra turn
 			GameManager.Instance.isTurnPaused = false;
 			
 		}

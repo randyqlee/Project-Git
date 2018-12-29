@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour {
 	IEnumerator InitHeroPassives()
 	{
 		BattleTextMessage("Initializing Hero Passives");
-		Debug.Log("Initializing Hero Passives");
+		//Debug.Log("Initializing Hero Passives");
 
 
 		foreach (Player player in players)
@@ -610,7 +610,8 @@ public class GameManager : MonoBehaviour {
 		{
 			if (target.hasImmunity || target.hasPermanentImmunity)
 			{
-				Debug.Log ("Target Hero has immunity");
+				//Debug.Log ("Target Hero has immunity");
+				AddBuff(buffName, duration, source, target);
 			}
 
 			else if (IsChanceSuccess(source)) //check for Chance
@@ -649,7 +650,8 @@ public class GameManager : MonoBehaviour {
 
 		if (target.hasImmunity || target.hasPermanentImmunity)
 		{
-			Debug.Log ("Target Hero has immunity");
+			//Debug.Log ("Target Hero has immunity");
+			AddBuff(buffName, duration, source, target);
 		}
 
 		else if (IsChanceSuccess(source)) //check for Chance
@@ -741,7 +743,7 @@ public class GameManager : MonoBehaviour {
 
 		CheckTaunt(attacker, defender);
 		if(canTargetHero){
-			AttackStatusChecks(attacker, defender);
+		AttackStatusChecks(attacker, defender);
 			
 			//transferred to base.UseAbility
 			//EndTurn();

@@ -14,6 +14,35 @@ public class ChargeVitality : Ability {
 		//Heal
 		GameManager.Instance.Heal(defender, healValue);
 		
+		//Reduce Cooldown of YeonHeong and target Ally by 1
+		SelectHeroesForSkillCooldown(attacker, defender);
+
+		//make other heroes unavailable
+		SelectHeroesForExtraTurn (attacker, defender);
+
+		GameManager.Instance.DeselectAllHeroes();
+		defender.SelectHero();
+		
+		GameManager.Instance.ExtraTurn();
+		
+		base.UseAbility(attacker, defender);		
+
+	}//UseAbility
+
+	public void SelectHeroesForExtraTurn (HeroManager attacker, HeroManager defender)
+	{		
+		HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
+		foreach(HeroManager hero in heroes){			
+			if(hero == defender || hero == attacker){				
+					//Do Nothing	 
+			 } else {
+				 //Prevent selecting other ally heroes
+				 (hero.gameObject.AddComponent(System.Type.GetType("ChargeVitalityStun")) as Debuff).New(1,attacker.gameObject);				 
+			 }			
+		}//foreach
+	}//Selected Heroes Extra Turn
+
+	public void SelectHeroesForSkillCooldown (HeroManager attacker, HeroManager defender){
 		//Reduce Cooldowns by 1
 		//YeonHong CD reduction
 		Ability[] attackerAbilities = attacker.GetComponentsInChildren<Ability>();
@@ -42,39 +71,6 @@ public class ChargeVitality : Ability {
 		}//foreach
 		defender.GetComponent<HeroManager>().heroPanel.SetActive(false);
 
-		//make other heroes unavailable
-		SelectedHeroesExtraTurn (attacker, defender);
-
-		GameManager.Instance.DeselectAllHeroes();
-		defender.SelectHero();
-		
-		GameManager.Instance.ExtraTurn();
-		
-		base.UseAbility(attacker, defender);
-		
-
-	}//UseAbility
-
-	public void SelectedHeroesExtraTurn (HeroManager attacker, HeroManager defender)
-	{
-		
-		HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
-		foreach(HeroManager hero in heroes){
-			
-			if(hero == defender || hero == attacker){			
-				
-				//(hero.gameObject.AddComponent(System.Type.GetType("Stun")) as Debuff).New(1,attacker.gameObject);
-			//if Hero			 
-			 } else {
-				 (hero.gameObject.AddComponent(System.Type.GetType("ChargeVitalityStun")) as Debuff).New(1,attacker.gameObject);
-				 
-			 }
-			 
-			
-		}//foreach
-
-	}//Selected Heroes Extra Turn
-
-	
+	}
 
 }//Charge Vitality
