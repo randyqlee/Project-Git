@@ -500,6 +500,7 @@ MonoBehaviour:
   col: {fileID: 0}
   isSelected: 0
   player: {fileID: 0}
+  isDead: 0
   healthText: {fileID: 114544813389740924}
   attackText: {fileID: 114133997266522186}
   defenseText: {fileID: 114523701665770364}
@@ -522,6 +523,7 @@ MonoBehaviour:
   hasEcho: 0
   hasMalaise: 0
   hasUnhealable: 0
+  hasPermanentImmunity: 0
 --- !u!114 &114216751271800292
 MonoBehaviour:
   m_ObjectHideFlags: 1

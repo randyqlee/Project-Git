@@ -22,6 +22,7 @@ public enum Type
 public class AbilityAsset2 {
 
 	public string abilityName;
+	//public Ability abilityScript;
 	public Type skillType;
 	public Sprite icon;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+
 
 
 public class GameManager : MonoBehaviour {
@@ -75,15 +75,15 @@ public class GameManager : MonoBehaviour {
 	IEnumerator GameLoop()
 	{
 		yield return StartCoroutine (InitPlayers());
-		//yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroes());
-		//yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroUI());
-		//yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroPassives());
-		//yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (StartBattle());
-		//yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (2f);
 		
 		
 	}
@@ -161,14 +161,13 @@ public class GameManager : MonoBehaviour {
 		foreach (Player player in players)
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
-				// //hero.transform.Find("HeroUI").gameObject.transform.Find("Health").gameObject.SetActive(true);
-				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
-				// Debug.Log("Hero Panel Name: " +hero.GetComponentInChildren<HeroPanel>().hero);
 				
+				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+								
 				Ability[] abilities = hero.GetComponentsInChildren<Ability>();
 				foreach(Ability ability in abilities){
 					if(ability.skillType == Type.Passive){
-						ability.PassiveSkillInitialization();
+						ability.UseAbilityPassive();
 					}
 				}
 
@@ -276,7 +275,32 @@ public class GameManager : MonoBehaviour {
 	public void KillHero (HeroManager hero)
 	{		
 		hero.isDead = true;
+				
+		//Disable Passive Abilities		
+		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);							
+		Ability[] abilities = hero.GetComponentsInChildren<Ability>();
 		
+			foreach(Ability ability in abilities){
+					if(ability.skillType == Type.Passive){
+						ability.DisableAbilityPassive();
+					}
+				}
+
+		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+		
+		//Kill Hero
+		hero.enabled = false;
+		hero.gameObject.SetActive(false);
+
+		e_HeroKilled();	
+	}
+
+
+
+
+	//used for revive skills
+	public void ReinitializeHero(HeroManager hero) {
+
 		//Destroy all buffs
 		Buff[] buffs = hero.GetComponents<Buff>();
 		
@@ -290,14 +314,13 @@ public class GameManager : MonoBehaviour {
 			foreach(Debuff debuff in debuffs){					
 				debuff.OnDestroy();					
 			}
-		//reinitialize Health
+		//reinitialize stats
 		hero.maxHealth = hero.origHealth;
+		hero.attack = hero.origAttack;
+		hero.defense = hero.origDefense;
+		hero.chance = hero.origChance;
+		hero.shield = hero.origShield;
 
-		hero.enabled = false;
-		hero.gameObject.SetActive(false);
-		
-		//re-initialize conditions
-		e_HeroKilled();		
 	}
 
 	public void DeselectAllHeroes ()
@@ -809,7 +832,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void ExtraTurn(){
-		Debug.Log("EXTRA TURN");
+	BattleTextMessage("EXTRA TURN!");
 		extraTurn = true;
 		isTurnPaused = true;
 	}

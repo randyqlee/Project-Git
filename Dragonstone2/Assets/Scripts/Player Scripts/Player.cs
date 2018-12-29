@@ -95,12 +95,21 @@ public class Player : MonoBehaviour {
 					string spellScriptName = deck.heroes[i].abilityAsset2[j].abilityEffect;
 					if (spellScriptName != null) {
 						heroManager.abilityAssets.Add(deck.heroes[i].abilityAsset2[j]);
+						
 					}
+
+					
 				}
 				//heroManager.UpdateUI();
 				//heroManager.CreateHeroPanel();
 
+				//Set original reference values
 				heroManager.origHealth = heroManager.maxHealth;
+				heroManager.origAttack = heroManager.attack;
+				heroManager.origDefense = heroManager.defense;
+				heroManager.origChance = heroManager.chance;
+				heroManager.origShield = heroManager.shield;
+
 
 			}
 

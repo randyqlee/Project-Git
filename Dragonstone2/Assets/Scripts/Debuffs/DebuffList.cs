@@ -12,5 +12,8 @@
 	Poison,
 
 	//AbilityRelatedDebuffs
-	ChargeVitalityStun
+	ChargeVitalityStun,
+	GodsShieldUnlucky
+
+	
 }

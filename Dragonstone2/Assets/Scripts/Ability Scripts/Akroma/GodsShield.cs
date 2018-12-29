@@ -5,22 +5,44 @@ using UnityEngine.UI;
 
 public class  GodsShield : Ability {
 
-	
+	float chanceReduction = 5;
+	HeroManager hero;
 
-	void Start(){
+	// void Start(){
 
-		PassiveSkillInitialization();
-	}
+	// 	UseAbilityPassive();
+	// }
 
-	public override void PassiveSkillInitialization(){
+	public override void UseAbilityPassive(){		
 		
-		HeroManager hero;
 
 		hero = GetComponentInParent<HeroManager>();
-		//set permanent Immnunity
+		//apply effect
 		hero.hasPermanentImmunity = true;
 
-		base.PassiveSkillInitialization();
+		List<HeroManager> enemies =  GameManager.Instance.EnemyHeroList(hero);
+		foreach (HeroManager enemy in enemies){
+			enemy.chance -= chanceReduction;
+		}
+
+
+		base.UseAbilityPassive();
+
+	}
+
+	public override void DisableAbilityPassive(){
+
+		hero = GetComponentInParent<HeroManager>();
+		//apply effect
+		
+		List<HeroManager> enemies =  GameManager.Instance.EnemyHeroList(hero);
+		foreach (HeroManager enemy in enemies){
+		
+			enemy.chance += chanceReduction;
+
+		base.DisableAbilityPassive();
+
+		}
 
 	}
 

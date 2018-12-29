@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+
 
 
 // Gets the Hero SO values
@@ -50,6 +50,11 @@ public class HeroManager : MonoBehaviour
 	public Image healthBar;
 
 	public int origHealth;
+
+	[HideInInspector]
+	public int origAttack, origDefense, origShield;
+	[HideInInspector]
+	public float origChance;
 
 	
 

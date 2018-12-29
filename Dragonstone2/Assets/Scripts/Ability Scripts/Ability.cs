@@ -18,7 +18,7 @@ public class Ability : MonoBehaviour {
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 
-	void Awake ()
+	public virtual void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
 		
@@ -89,6 +89,17 @@ public class Ability : MonoBehaviour {
 		EndTurnCheck();
 
 	}
+
+	public virtual void UseAbilityPassive(){
+		
+		//Disable Access to skill UI
+		GetComponent<Button>().interactable = false;
+		GetComponentInChildren<Text>().enabled = false;
+		GetComponent<BoxCollider2D>().enabled = false;
+		
+	}	
+
+
 	public bool CanUseAbility()
 	{	
 		canUseAbility = false;
@@ -159,18 +170,11 @@ public class Ability : MonoBehaviour {
 		}
 	}//End Turn Check
 
-	public virtual void PassiveSkillInitialization(){
-		
-		//Disable Access to skill
-		GetComponent<Button>().interactable = false;
-		GetComponentInChildren<Text>().enabled = false;
-		GetComponent<BoxCollider2D>().enabled = false;
-		
-	}	
 
+	public virtual void DisableAbilityPassive(){
 
+	}//DisableAbilityPassive
 
-
-
+	
 
 }//Ability Class
