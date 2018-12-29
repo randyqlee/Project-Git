@@ -23,7 +23,8 @@ MonoBehaviour:
   - abilityName: Essence Explosion
     skillType: 0
     icon: {fileID: 21300000, guid: 035732fb550eed24fafaaa35c2a2471c, type: 3}
-    description: Attack and enemy with a chance to Decrease Defense for 2 turns.
+    description: 'Essence Explosion: Attack and enemy with a chance to Decrease Defense
+      for 2 turns.'
     abilityEffect: EssenceExplosion
     abilityCoolDown: 1
     target: 1
@@ -40,8 +41,8 @@ MonoBehaviour:
   - abilityName: Storm of Midnight
     skillType: 0
     icon: {fileID: 21300000, guid: 165c2d6355168cc4c8a7aaf74efdeacb, type: 3}
-    description: Attack all enemies, deal additional damage equivalent to the highest
-      defense among your enemies.
+    description: 'Storm of Midnight: Attack all enemies, deal additional damage equivalent
+      to the highest attack among your enemies.'
     abilityEffect: StormOfMidnight
     abilityCoolDown: 1
     target: 0
@@ -50,9 +51,12 @@ MonoBehaviour:
   - abilityName: Frost Rush
     skillType: 0
     icon: {fileID: 21300000, guid: 08ee8a92408b1094f94a7c52aea6225b, type: 3}
-    description: Attack all enemies, gain an additional turn if an enemy dies.
+    description: 'Frost Rush: Attack all enemies, gain an additional turn if an enemy
+      dies.'
     abilityEffect: FrostRush
     abilityCoolDown: 1
     target: 0
     abilityBuffs: []
-    abilityDebuffs: []
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
