@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour {
 	public GameObject myCollection;
 
 
+
+	public HeroAsset[] heroAssets;
+
+
 	public void PlayGame()
 	{
 		StartCoroutine (LoadScene("BattleScene"));

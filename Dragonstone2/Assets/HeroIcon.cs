@@ -12,6 +12,8 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
 	GameObject heroPreviewPanel;
 
+	GameObject myCollection;
+
 	public Image heroIcon;
 
 	bool dragging = false;
@@ -23,6 +25,8 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
 		heroImage.sprite = heroAsset.image;
 		heroPreviewPanel = transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.Find("HeroPreviewPanel").gameObject;
+
+		myCollection = transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.gameObject;
 		
 		UpdateHeroPreviewPanel();
 
@@ -119,6 +123,8 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
     		transform.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
 			
 			transform.SetParent(hit.transform,false);
+
+			myCollection.GetComponent<MyCollection>().playerDeckHeroAssets.Add(heroAsset);
 
 			
 			//hit.transform.GetComponent<Image>().sprite = heroIcon.sprite;

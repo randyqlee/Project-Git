@@ -6,7 +6,7 @@ public class AllHeroesList : MonoBehaviour {
 
 	public List<GameObject> itemList;
 
-	public List<HeroAsset> allHeroAssets;
+	public HeroAsset[] allHeroAssets;
 
 	public GameObject myCollection;
 
@@ -15,6 +15,14 @@ public class AllHeroesList : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
+
+
+		
+	}
+
+	public void InitializeHeroPanel()
+	{
 		allHeroAssets = myCollection.GetComponent<MyCollection>().allHeroAssets;
 
 		foreach (HeroAsset heroAsset in allHeroAssets)
@@ -27,8 +35,6 @@ public class AllHeroesList : MonoBehaviour {
 
 		}
 
-
-		
 	}
 
 

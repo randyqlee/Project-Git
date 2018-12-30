@@ -896,19 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allHeroesPanelContent: {fileID: 1478752957433586}
-  allHeroAssets:
-  - {fileID: 11400000, guid: a50332d46201ae94d98b8949984fcd75, type: 2}
-  - {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874, type: 2}
-  - {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7, type: 2}
-  - {fileID: 11400000, guid: 94b6328cf6c16bf43be410dde1c6c06b, type: 2}
-  - {fileID: 11400000, guid: a50332d46201ae94d98b8949984fcd75, type: 2}
-  - {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874, type: 2}
-  - {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7, type: 2}
-  - {fileID: 11400000, guid: 94b6328cf6c16bf43be410dde1c6c06b, type: 2}
-  - {fileID: 11400000, guid: a50332d46201ae94d98b8949984fcd75, type: 2}
-  - {fileID: 11400000, guid: 96c59b6a45db33b4fb465362891ab874, type: 2}
-  - {fileID: 11400000, guid: 60e1f65d694b11a4d94bc451dedc3dc7, type: 2}
-  - {fileID: 11400000, guid: 94b6328cf6c16bf43be410dde1c6c06b, type: 2}
+  allHeroAssets: []
 --- !u!114 &114186008731224642
 MonoBehaviour:
   m_ObjectHideFlags: 1
