@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
-  m_Name: Anavel
+  m_Name: Test Anavel
   m_EditorClassIdentifier: 
   heroName: Anavel
   image: {fileID: 21300000, guid: ac1d016fd3f354c49963a47b35f967e5, type: 3}
@@ -38,7 +38,7 @@ MonoBehaviour:
     description: Remove all debuffs on all allies and recover HP to each ally equivalent
       to your attack power.
     abilityEffect: GirlsPrayer
-    abilityCoolDown: 4
+    abilityCoolDown: 1
     target: 1
     abilityBuffs: []
     abilityDebuffs: []
@@ -48,7 +48,7 @@ MonoBehaviour:
     description: Decrease defense of all enemies for 3 turns, then Attack all enemies.  Chance
       for Critical Strike.
     abilityEffect: WaterGuardianAngel
-    abilityCoolDown: 5
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:

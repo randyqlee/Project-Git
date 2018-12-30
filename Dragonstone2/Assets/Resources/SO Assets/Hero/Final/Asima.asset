@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Asima
+  m_EditorClassIdentifier: 
+  heroName: Asima
+  image: {fileID: 21300000, guid: 10f153de15e63c047a54f2ec5106d61e, type: 3}
+  maxHealth: 714
+  attack: 81
+  defense: 62
+  chance: 105
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Wound
+    skillType: 0
+    icon: {fileID: 21300000, guid: fe55739cd5b597c4283eb056af01e295, type: 3}
+    description: Attack an enemy with a chance to inflict Poison for 2 turns.
+    abilityEffect: Wound
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 10
+      duration: 2
+  - abilityName: Gouge
+    skillType: 0
+    icon: {fileID: 21300000, guid: ad4fec5121d604d41a28790eb910f76b, type: 3}
+    description: 'Attack and deal critical strike to all enemies with a chance to
+      deal Poison for 2 turns.  Deal additional damage equivalent to your defense
+      to enemies with Poison.  '
+    abilityEffect: Gouge
+    abilityCoolDown: 3
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 10
+      duration: 2
+  - abilityName: Crumble
+    skillType: 0
+    icon: {fileID: 0}
+    description: Attack and deal critical strike to all enemies.  Decrease Defense
+      and Inflict Poison for 2 turns.
+    abilityEffect: Crumble
+    abilityCoolDown: 4
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 1
+      duration: 2
+    - debuff: 10
+      duration: 2

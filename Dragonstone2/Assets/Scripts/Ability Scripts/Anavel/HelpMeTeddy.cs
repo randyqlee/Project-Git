@@ -15,12 +15,12 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 
 		//Check if enemy is stunned
 		if(defender.GetComponents<Debuff>() != null){
-			Debug.Log("Debuff Exists" );
+			
 			
 			Debuff[] debuffs = defender.GetComponents<Debuff>();
 
 			foreach(Debuff debuff in debuffs){
-				Debug.Log("Debuff Name: " +debuff.debuff.name);
+				
 				if(debuff.debuff.name == "Stun"){
 					//there can only be one Stun Debuff at a time					
 					StunBonusDamage(attacker, defender);
