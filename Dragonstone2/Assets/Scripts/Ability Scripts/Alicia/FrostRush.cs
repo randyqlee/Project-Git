@@ -10,9 +10,10 @@ public class FrostRush : Ability {
 	public override void UseAbility(HeroManager attacker, HeroManager defender)
 	{
 		
+		bool criticalStatus = attacker.hasCritical;
 		attacker.hasCritical = true;
 		GameManager.Instance.AttackAll(attacker, defender);
-		attacker.hasCritical = false;
+		attacker.hasCritical = criticalStatus;
 
 		//if an enemy dies, take an extraTurn
 		CheckDeadEnemy(attacker, defender);

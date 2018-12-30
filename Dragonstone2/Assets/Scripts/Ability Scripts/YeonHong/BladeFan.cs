@@ -15,7 +15,13 @@ public class BladeFan : Ability {
 
 		DestroyThreeBuffs(defender);
 		defender.UpdateUI();
-		GameManager.Instance.OneTurnCritical(attacker, defender);		
+		//GameManager.Instance.OneTurnCritical(attacker, defender);		
+
+		bool criticalStatus = attacker.hasCritical;
+		attacker.hasCritical = true;
+		GameManager.Instance.Attack(attacker, defender);
+		attacker.hasCritical = criticalStatus;
+		
 
 		base.UseAbility(attacker, defender);
 

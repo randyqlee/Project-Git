@@ -10,13 +10,13 @@ public class TestDeck : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		GetComponent<Deck>().heroes.Clear();
-		foreach (HeroAsset heroAsset in PlayerDeck.heroAssets)
-		{
-			GetComponent<Deck>().heroes.Add(heroAsset);
+		// GetComponent<Deck>().heroes.Clear();
+		// foreach (HeroAsset heroAsset in PlayerDeck.heroAssets)
+		// {
+		// 	GetComponent<Deck>().heroes.Add(heroAsset);
 
-			heroAssets.Add(heroAsset);
-		}
+		// 	heroAssets.Add(heroAsset);
+		// }
 		
 
 

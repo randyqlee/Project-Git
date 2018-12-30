@@ -13,10 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroName: Akroma
   image: {fileID: 21300000, guid: 325b82cd201b09a4da237f687c3bc2ec, type: 3}
-  maxHealth: 710
-  attack: 100
-  defense: 50
-  chance: 100
+  maxHealth: 720
+  attack: 70
+  defense: 75
+  chance: 35
   rarity: 3
   abilityAsset:
   - {fileID: 11400000, guid: eca1160425d75b748be89912ed5e8f42, type: 2}
@@ -26,15 +26,13 @@ MonoBehaviour:
   - abilityName: SwordOfPromise
     skillType: 0
     icon: {fileID: 21300000, guid: 79a0081a97e1beb4789160c851930cf3, type: 3}
-    description: 'Name: Sword of Promise  Attack an enemy.  If the enemy dies, silence
+    description: 'Sword of Promise:  Attack an enemy.  If the enemy dies, silence
       another random enemy for 2 turns. '
     abilityEffect: SwordOfPromise
     abilityCoolDown: 1
     target: 0
     abilityBuffs: []
-    abilityDebuffs:
-    - debuff: 4
-      duration: 2
+    abilityDebuffs: []
   - abilityName: SealOfLight
     skillType: 0
     icon: {fileID: 21300000, guid: c3bec0f89b0a6af49b037143388b36e2, type: 3}

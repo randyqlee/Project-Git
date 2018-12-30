@@ -678,7 +678,7 @@ public class GameManager : MonoBehaviour {
 	}//Heal
 
 
-	bool IsChanceSuccess (HeroManager source)
+	public bool IsChanceSuccess (HeroManager source)
 	{
 		float chance = source.chance;
 

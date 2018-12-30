@@ -16,11 +16,12 @@ MonoBehaviour:
   maxHealth: 780
   attack: 74
   defense: 63
-  chance: 100
+  chance: 35
   rarity: 3
   abilityAsset: []
   abilityAsset2:
   - abilityName: Graceful Touch
+    skillType: 0
     icon: {fileID: 21300000, guid: ea0399b7c5d23e145af94d2360b89573, type: 3}
     description: Graceful Touch:Attack an enemy with a chance to deal Crippled Strike
       for 1 turn.
@@ -32,6 +33,7 @@ MonoBehaviour:
     - debuff: 5
       duration: 1
   - abilityName: Blade Fan
+    skillType: 0
     icon: {fileID: 21300000, guid: b42964c08be0349418552fb0c72c8c55, type: 3}
     description: 'Blade Fan:  Attack and deal critical strike to an enemy, with a
       chance to remove up to 3 random buffs.
@@ -43,6 +45,7 @@ MonoBehaviour:
     abilityBuffs: []
     abilityDebuffs: []
   - abilityName: Charge Vitaliy
+    skillType: 0
     icon: {fileID: 21300000, guid: 5c0b4c0fee36f814ba8436f40db7b53e, type: 3}
     description: 'Charge Vitality: Heal 500 HP of a target ally and reduce that ally''s
       and your skills cooldown by 1.  You or that ally takes an extra turn.'

@@ -14,9 +14,9 @@ MonoBehaviour:
   heroName: Alicia
   image: {fileID: 21300000, guid: a27a0a310ee332c42a46636d2a232b9a, type: 3}
   maxHealth: 660
-  attack: 200
+  attack: 80
   defense: 70
-  chance: 100
+  chance: 30
   rarity: 3
   abilityAsset: []
   abilityAsset2:
