@@ -11,6 +11,10 @@ public class MyCollection : MonoBehaviour {
 
 	public List<HeroAsset> playerDeckHeroAssets;
 
+	public Animator transitionAnim;
+
+	public GameObject mainMenu;
+
 
 
 	// Use this for initialization
@@ -35,4 +39,25 @@ public class MyCollection : MonoBehaviour {
 		}
 
 	}
+
+	public void Back()
+	{
+		StartCoroutine (LoadMainMenu());
+
+	}
+
+
+	IEnumerator LoadMainMenu ()
+	{
+		transitionAnim.SetTrigger("start");
+		yield return new WaitForSeconds (1.5f);
+		//display mycollection screen
+		
+		mainMenu.SetActive(true);
+		gameObject.SetActive(false);	
+
+
+
+	}
+
 }

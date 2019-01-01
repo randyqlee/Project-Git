@@ -38,6 +38,7 @@ public class MainMenu : MonoBehaviour {
 
 	IEnumerator LoadMyCollection ()
 	{
+		Debug.Log("LoadCollection");
 		transitionAnim.SetTrigger("start");
 		yield return new WaitForSeconds (1.5f);
 		//display mycollection screen
