@@ -76,6 +76,7 @@ public class HeroManager : MonoBehaviour
 	public bool hasMalaise;
 	public bool hasUnhealable;
 	public bool hasAntiBuff;
+	public bool hasBrand;
 
 	public delegate void Event_PopupMsg(string message);
 	public event Event_PopupMsg e_PopupMSG = delegate {};
@@ -194,18 +195,15 @@ public class HeroManager : MonoBehaviour
 	public void TakeDamage(int damage, HeroManager source)
 	{
 
-		// //original code start
-		// maxHealth = TotalHealth - damage;
+		
+		if(hasBrand){
 
-		// shield = shield - damage;
-		// if ( shield < 0 )
-		// 	shield = 0;
+			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
+			int brandDamage = debuff.value;
+			damage += brandDamage;			
+			Debug.Log("Brand Damage: " +brandDamage);
+		}
 
-		// e_TakeDamage();
-		// e_PopupMSG(damage.ToString());
-		// //original code end
-
-		//New Code Test
 		if (shield <=0){
 			shield = 0;
 			maxHealth -=damage;

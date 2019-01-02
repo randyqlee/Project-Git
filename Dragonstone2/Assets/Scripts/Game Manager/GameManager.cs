@@ -731,7 +731,19 @@ public class GameManager : MonoBehaviour {
 
 	public void DealDamage (int damage, HeroManager source, HeroManager target)
 	{
-		target.TakeDamage (damage, source);
+		if(target.hasBrand){
+
+			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
+			int brandDamage = debuff.value;
+			damage += brandDamage;
+			target.TakeDamage (damage, source);
+			Debug.Log("Brand Damage: " +brandDamage);
+
+		}else{
+			target.TakeDamage (damage, source);
+		}
+		
+		
 	}
 
 	//Checks for Critical Strike Flag and modifies attack damage
