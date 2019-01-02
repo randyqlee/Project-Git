@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
   m_Name: Cadiz
   m_EditorClassIdentifier: 
-  heroName: Akroma
+  heroName: Cadiz
   image: {fileID: 21300000, guid: fd950d5b887a5774c805132962595a53, type: 3}
   maxHealth: 747
   attack: 86
@@ -35,8 +35,8 @@ MonoBehaviour:
   - abilityName: Weaken
     skillType: 0
     icon: {fileID: 21300000, guid: bcc1eb899dab93445a392012772551ac, type: 3}
-    description: "Weaken: Attack an enemy twice with a Chance to Decrease Attack and
-      Stun for 2 turns.\r\n"
+    description: "Weaken:  Attack with a chance to inflict Decrease Attack, Unlucky,
+      and AntiBuff for 2 turns. \n"
     abilityEffect: Weaken
     abilityCoolDown: 1
     target: 0
@@ -48,11 +48,11 @@ MonoBehaviour:
       duration: 2
     - debuff: 11
       duration: 2
-  - abilityName: Feast of Blood
+  - abilityName: Feast Of Blood
     skillType: 1
     icon: {fileID: 21300000, guid: c68642907d92fc44bbedfcd23b620084, type: 3}
-    description: Your attacks have a Chance to deal Malaise on enemies and Recovery
-      for Allies, both for 2 turns.
+    description: "Feast of Blood\r: Your attacks inflict Brand on the enemy for 2
+      turns and heal all allies by 30.  When you kill an enemy, gain an extra turn."
     abilityEffect: FeastOfBlood
     abilityCoolDown: 0
     target: 1

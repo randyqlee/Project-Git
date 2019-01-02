@@ -30,9 +30,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 	
 		
 		//ChanceUnhealable
-		UseAbilityRandom(attacker, defender, enemies.Count);
-
-		
+		UseAbilityRandom(attacker, defender, enemies.Count);		
 
 	}
 

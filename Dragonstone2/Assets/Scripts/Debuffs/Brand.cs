@@ -28,7 +28,6 @@ void Awake (){
 	public override void OnDestroy()
 	{
 
-		
 		//remove effect	
 		gameObject.GetComponent<HeroManager>().hasBrand = false;
 
