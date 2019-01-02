@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Taunt
   m_EditorClassIdentifier: 
   debuff: 7
-  icon: {fileID: 21300000, guid: e626610a37cb4e1499a0031c29c0f0d4, type: 3}
+  icon: {fileID: 21300000, guid: a4b52c7df2b2ba54dbdf0692eb1012a4, type: 3}
   value: 0
   description: Can only target hero who applied the Taunt

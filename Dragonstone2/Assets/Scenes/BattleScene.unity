@@ -145,8 +145,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0012207031, y: 0.00012207031}
-  m_SizeDelta: {x: -0.42999268, y: -1.5}
+  m_AnchoredPosition: {x: -0.07499695, y: -0.000015258789}
+  m_SizeDelta: {x: -0.1, y: 0.000030518}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89642318
 MonoBehaviour:
@@ -169,10 +169,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -373,8 +373,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.17919515}
-  m_AnchoredPosition: {x: 85.19995, y: 39.399902}
-  m_SizeDelta: {x: -170.4, y: -78}
+  m_AnchoredPosition: {x: 85.19995, y: 30.799988}
+  m_SizeDelta: {x: -170.4, y: -60.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &619428369
 MonoBehaviour:
@@ -699,7 +699,7 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 21a354063a5492c43815b8e59fcb5430,
+      objectReference: {fileID: 11400000, guid: 1524e78b3b51fd34c9f6beefc3fdca1b,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561a0f8280bb7244f8af998fd59b812d, type: 2}

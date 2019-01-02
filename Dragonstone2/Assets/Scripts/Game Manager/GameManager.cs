@@ -477,7 +477,7 @@ public class GameManager : MonoBehaviour {
 		}//IsTargetValid
 	}
 
-	void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
+	public void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
 		if (!target.gameObject.GetComponent(System.Type.GetType(debuffName)))
 		{
@@ -529,7 +529,7 @@ public class GameManager : MonoBehaviour {
 		int count = 0;
 		int heroCounter = 0;
 
-		while (count < targetCount && heroCounter < randomHeroList.Count)
+		while (count < targetCount && heroCounter < randomHeroList.Count) 
 		{
 			target = randomHeroList[heroCounter];
 
@@ -608,10 +608,10 @@ public class GameManager : MonoBehaviour {
 
 		if(canTargetHero)
 		{
-			if (target.hasImmunity || target.hasPermanentImmunity)
+			if (target.hasAntiBuff)
 			{
-				//Debug.Log ("Target Hero has immunity");
-				AddBuff(buffName, duration, source, target);
+				Debug.Log ("Target Hero has AntiBuff");
+				//AddBuff(buffName, duration, source, target);
 			}
 
 			else if (IsChanceSuccess(source)) //check for Chance
@@ -645,21 +645,52 @@ public class GameManager : MonoBehaviour {
 		target.E_PopupMSG(buffName);
 	}//AddBuff
 
+	// public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
+	// //old code
+	// {
+
+	// 	if (target.hasImmunity || target.hasPermanentImmunity)
+	// 	{
+	// 		//Debug.Log ("Target Hero has immunity");
+	// 		AddBuff(buffName, duration, source, target);
+	// 	}
+
+	// 	else if (IsChanceSuccess(source)) //check for Chance
+	// 	{	//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
+	// 		AddBuff(buffName, duration, source, target);
+	// 	}
+
+	// }
+
 	public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
 	{
+		List<HeroManager> heroList = new List<HeroManager>();
+		heroList.AddRange(target.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>());
+		List<HeroManager> randomHeroList = RandomHeroList (heroList);
 
-		if (target.hasImmunity || target.hasPermanentImmunity)
+		int count = 0;
+		int heroCounter = 0;
+
+		while (count < targetCount && heroCounter < randomHeroList.Count) 
 		{
-			//Debug.Log ("Target Hero has immunity");
-			AddBuff(buffName, duration, source, target);
-		}
+			target = randomHeroList[heroCounter];	
 
-		else if (IsChanceSuccess(source)) //check for Chance
-		{	//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
-			AddBuff(buffName, duration, source, target);
-		}
+			if (target.hasAntiBuff)
+			{
+				Debug.Log ("Target Hero has AntiBuff");
+				//AddBuff(buffName, duration, source, target);
+			}
 
+			else if (IsChanceSuccess(source)){ //check for Chance
+				AddBuff(buffName, duration, source, target);
+				count++;
+			}
+			heroCounter++;
+		}
+		
 	}
+
+
 
 	public void Heal (HeroManager target, int healValue)
 	{

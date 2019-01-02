@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7b57fcec1d3c384aa56b13cf6c112a1, type: 3}
-  m_Name: Unlucky
+  m_Name: AntiBuff
   m_EditorClassIdentifier: 
-  debuff: 2
-  icon: {fileID: 21300000, guid: eb245eec511bd8b48a2cf9585cff2f1a, type: 3}
-  value: 20
-  description: Decrease Chance by 20%
+  debuff: 11
+  icon: {fileID: 21300000, guid: 4e9a8eb587f83ad47870114bb939dcb8, type: 3}
+  value: 0
+  description: "Target can\u2019t be buffed."

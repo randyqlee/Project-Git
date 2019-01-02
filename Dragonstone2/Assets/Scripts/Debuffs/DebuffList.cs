@@ -10,6 +10,8 @@
 	Echo,
 	Malaise,
 	Poison,
+	AntiBuff,
+	Brand,
 
 	//AbilityRelatedDebuffs
 	ChargeVitalityStun,

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Cadiz
+  m_EditorClassIdentifier: 
+  heroName: Akroma
+  image: {fileID: 21300000, guid: fd950d5b887a5774c805132962595a53, type: 3}
+  maxHealth: 747
+  attack: 86
+  defense: 54
+  chance: 105
+  rarity: 3
+  abilityAsset:
+  - {fileID: 11400000, guid: eca1160425d75b748be89912ed5e8f42, type: 2}
+  - {fileID: 11400000, guid: c659667ffb529804f8fade81b2ed552a, type: 2}
+  - {fileID: 11400000, guid: f12b105b6be7733479a9d819c3132f2e, type: 2}
+  abilityAsset2:
+  - abilityName: Vampire Bat
+    skillType: 0
+    icon: {fileID: 21300000, guid: a1f33f841a5eec64b842b3056580d540, type: 3}
+    description: 'Vampire Bat: Attack an Enemy and Heal the damage dealt'
+    abilityEffect: VampireBat
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Weaken
+    skillType: 0
+    icon: {fileID: 21300000, guid: bcc1eb899dab93445a392012772551ac, type: 3}
+    description: "Weaken: Attack an enemy twice with a Chance to Decrease Attack and
+      Stun for 2 turns.\r\n"
+    abilityEffect: Weaken
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 0
+      duration: 2
+    - debuff: 2
+      duration: 2
+    - debuff: 11
+      duration: 2
+  - abilityName: Feast of Blood
+    skillType: 1
+    icon: {fileID: 21300000, guid: c68642907d92fc44bbedfcd23b620084, type: 3}
+    description: Your attacks have a Chance to deal Malaise on enemies and Recovery
+      for Allies, both for 2 turns.
+    abilityEffect: FeastOfBlood
+    abilityCoolDown: 0
+    target: 1
+    abilityBuffs: []
+    abilityDebuffs: []

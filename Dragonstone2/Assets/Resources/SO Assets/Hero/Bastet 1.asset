@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Bastet 1
+  m_EditorClassIdentifier: 
+  heroName: Bastet
+  image: {fileID: 21300000, guid: ad39f5f5c6568ca4ba07b2463a162dcb, type: 3}
+  maxHealth: 714
+  attack: 81
+  defense: 62
+  chance: 105
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: TouchOfSeduction
+    skillType: 0
+    icon: {fileID: 21300000, guid: 97db4507e4dfe76428e10fc16cf13756, type: 3}
+    description: 'TouchOfSeduction: Attack an enemy with a chance to inflict Poison
+      for 2 turns.'
+    abilityEffect: TouchOfSeduction
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 0
+      duration: 2
+  - abilityName: CurseOfTheBeautiful
+    skillType: 0
+    icon: {fileID: 21300000, guid: 8c2b8d6f388e5eb48ac9efe95f051710, type: 3}
+    description: "Curse of the Beautiful: Critical Strike attack all enemies and Inflict
+      Decrease Defense, Crippled Strike, and chance to Unhealable for 2 turns.\r\n"
+    abilityEffect: CurseOfTheBeautiful
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 3
+      duration: 2
+  - abilityName: OasisBlessing
+    skillType: 0
+    icon: {fileID: 21300000, guid: de584f87144a8944e8b7785c561eaf83, type: 3}
+    description: 'Oasis''s Blessing: Each ally gains a Shield, Lucky, and Increase
+      Attack for 3 turns.'
+    abilityEffect: OasisBlessing
+    abilityCoolDown: 1
+    target: 1
+    abilityBuffs:
+    - buff: 4
+      duration: 3
+    - buff: 5
+      duration: 3
+    - buff: 2
+      duration: 3
+    abilityDebuffs: []
