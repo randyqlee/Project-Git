@@ -23,11 +23,10 @@ public class  FeastOfBlood : Ability {
 
 	public void FeastOfBloodAbility(HeroManager attacker, HeroManager defender){
 
-		//Add Brand
-		
-		if(!(defender.hasImmunity || defender.hasPermanentImmunity)){
+		//Add Brand		
+		if(defender.hasImmunity || defender.hasPermanentImmunity){
 
-		}else{
+		}else {
 			GameManager.Instance.AddDebuff("Brand", 2, attacker, defender);	
 		}
 		
@@ -40,10 +39,17 @@ public class  FeastOfBlood : Ability {
 			GameManager.Instance.Heal(ally, healValue);
 		}
 
+		GameManager.Instance.CheckHealth();
 		//Extra Turn
+		bool deadStatus = defender.gameObject.activeInHierarchy;
+		defender.gameObject.SetActive(true);
+		
 		if(defender.isDead){
 			GameManager.Instance.ExtraTurn();
 		} 
+		defender.gameObject.SetActive(deadStatus);
+
+		base.UseAbility(attacker, defender);
 
 
 	}
