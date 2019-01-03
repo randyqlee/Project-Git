@@ -26,7 +26,8 @@ public class HeroPanel : MonoBehaviour {
 
 	{
 	
-		heroPortrait.GetComponentInChildren<Image>().sprite = hero.image;
+		//heroPortrait.GetComponentInChildren<Image>().sprite = hero.image;
+		heroPortrait.GetComponent<Image>().sprite = hero.image;
 		for (int i = 0; i < hero.abilityAssets.Count; i++)
 		{
 			//map the icon and abilities to the button
@@ -40,6 +41,11 @@ public class HeroPanel : MonoBehaviour {
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityBuffs = hero.abilityAssets[i].abilityBuffs;
 
 			skillsBtn[i].gameObject.GetComponent<Ability>().abilityDebuffs = hero.abilityAssets[i].abilityDebuffs;
+
+			GameObject go = skillsBtn[i].gameObject.transform.Find("HoverImage").gameObject;
+			go.SetActive(true);
+			go.GetComponent<Image>().sprite = hero.abilityAssets[i].icon;
+			go.SetActive(false);
 
 
 
@@ -77,6 +83,7 @@ public class HeroPanel : MonoBehaviour {
 		skillText = GameObject.Find("Skill Text");
 
 		  //skillText.SetActive(true);
+
 		  skillText.GetComponent<Text>().text = data.pointerEnter.GetComponent<TextMesh>().text;
           //Debug.Log (data.pointerEnter.GetComponent<TextMesh>().text);
       }
