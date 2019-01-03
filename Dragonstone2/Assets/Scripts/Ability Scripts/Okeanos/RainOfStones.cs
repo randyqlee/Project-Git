@@ -11,28 +11,21 @@ public class RainOfStones : Ability {
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
-		GameManager.Instance.isTurnPaused = true;
+		//Chance extra turn
+		bool extraTurn = GameManager.Instance.IsChanceSuccess(attacker);
+		if(extraTurn){
+			GameManager.Instance.ExtraTurn();
+		} 
+		
+		GameManager.Instance.AttackAll(attacker, defender);
 
-		int enemyCount = GameManager.Instance.EnemyHeroList(attacker).Count;
+		//Stun all
+		int targetCount = GameManager.Instance.EnemyHeroList(attacker).Count;
+		UseAbilityRandom(attacker, defender, targetCount);
 
-		base.UseAbilityRandom(attacker, defender, enemyCount);	
+		
 
-		chanceSuccess = GameManager.Instance.IsChanceSuccess(attacker);
-
-		if(chanceSuccess){
-			//store status of Critical
-			bool criticalStatus = attacker.hasCritical;
-			attacker.hasCritical = true;
-			GameManager.Instance.AttackAll(attacker, defender);
-			//restore original state of hasCritical
-			attacker.hasCritical = criticalStatus;	
-		} else {
-
-			GameManager.Instance.AttackAll(attacker, defender);
-
-		}
-
-		base.UseAbility();			
+					
 
 	}
 

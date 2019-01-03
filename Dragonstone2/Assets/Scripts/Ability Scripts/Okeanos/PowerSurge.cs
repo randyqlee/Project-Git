@@ -30,7 +30,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 		Debuff transferDebuff = debuffs[Random.Range(0,count)];
 
 		//Get details
-		string transferDebuffName = transferDebuff.debuff.name;
+		string transferDebuffName = transferDebuff.debuff.debuff.ToString();
 		Debug.Log("Debuff to be transferred: " +transferDebuffName);
 		int debuffDuration = transferDebuff.duration;
 
@@ -43,9 +43,11 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 
 			GameManager.Instance.AddDebuff(transferDebuffName, debuffDuration, attacker, defender);
 			// //Destroy Debuff
-			// transferDebuff.OnDestroy();
+			
 			
 		}
+
+		transferDebuff.OnDestroy();
 		
 		
 

@@ -7,14 +7,14 @@ public class HoverPreview : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-		Debug.Log ("Mouse Enter");
+		//Debug.Log ("Mouse Enter");
 		gameObject.transform.Find("HoverImage").gameObject.SetActive(true);
 	
 	}
 
 	void OnMouseExit()
 	{
-		Debug.Log ("Mouse Exit");
+		//Debug.Log ("Mouse Exit");
 		gameObject.transform.Find("HoverImage").gameObject.SetActive(false);
 
 	

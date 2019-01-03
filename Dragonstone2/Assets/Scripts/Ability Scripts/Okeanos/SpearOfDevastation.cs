@@ -10,18 +10,30 @@ public class SpearOfDevastation : Ability {
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
-		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
+		//Critical Attack an Enemy
+		bool criticalStatus = attacker.hasCritical;
+		attacker.hasCritical = true;
+		GameManager.Instance.Attack(attacker, defender);
+		attacker.hasCritical = criticalStatus;
 
-		foreach(HeroManager ally in allies ){
-			//recover HP to each ally 
-			GameManager.Instance.Heal(ally, attacker.attack);
+		//Remove a buff
+		Buff[] buffs = defender.GetComponents<Buff>();
+		if(buffs.Length > 0){
+			Buff buff = buffs[Random.Range(0,buffs.Length)];
+			buff.OnDestroy();
 
-			//Destroy debuffs on all allies
-			Debuff[] debuffs = ally.GetComponents<Debuff>();
-			foreach(Debuff debuff in debuffs){				
-				debuff.OnDestroy();
-			}//foreach debuff
-		}//foreach ally
+		}
+
+		//Reset defender abilities to MAX cooldown
+		defender.heroPanel.SetActive(true);
+		Ability[] abilities = defender.GetComponentsInChildren<Ability>();
+		foreach (Ability ability in abilities){
+			//Debug.Log("Abiltiies: " +ability.name);
+			ability.ResetCooldown();
+		}
+		defender.heroPanel.SetActive(false);
+
+
 
 		base.UseAbility();
 

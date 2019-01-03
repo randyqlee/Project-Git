@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 659
   attack: 68
   defense: 64
-  chance: 100
+  chance: 200
   rarity: 3
   abilityAsset: []
   abilityAsset2:
@@ -38,8 +38,8 @@ MonoBehaviour:
     description: "\rSpear of Devastation: Critical Attack an enemy, remove a buff,
       and set all of its skills to MAX cooldown.\r\n"
     abilityEffect: SpearOfDevastation
-    abilityCoolDown: 1
-    target: 1
+    abilityCoolDown: 4
+    target: 0
     abilityBuffs: []
     abilityDebuffs: []
   - abilityName: Rain Of Stones
@@ -48,7 +48,7 @@ MonoBehaviour:
     description: 'Rain of Stones: Attack all enemies with a Chance to Stun and chance
       to gain an extra turn.'
     abilityEffect: RainOfStones
-    abilityCoolDown: 1
+    abilityCoolDown: 5
     target: 0
     abilityBuffs: []
     abilityDebuffs:
