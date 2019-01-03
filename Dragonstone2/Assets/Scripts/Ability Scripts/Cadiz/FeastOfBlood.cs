@@ -18,27 +18,27 @@ public class  FeastOfBlood : Ability {
 	}//Disable
 
 	public override void UseAbility(HeroManager attacker, HeroManager defender){
-		FeastOfBloodAbility(attacker, defender);
-	}
 
-	public void FeastOfBloodAbility(HeroManager attacker, HeroManager defender){
+		//Debug.Log("Feast of Blood Ability");
+			//Add Brand
+			
+			if((defender.hasImmunity || defender.hasPermanentImmunity)){
+				Debug.Log ("Target Hero has immunity");
 
-		//Add Brand		
-		if(defender.hasImmunity || defender.hasPermanentImmunity){
-
-		}else {
-			GameManager.Instance.AddDebuff("Brand", 2, attacker, defender);	
-		}
-		
-		
-		
-		//Heal all for 30
-		int healValue = 30;
-		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
-		foreach(HeroManager ally in allies){
-			GameManager.Instance.Heal(ally, healValue);
-		}
-
+			}else{
+				GameManager.Instance.AddDebuff("Brand", 2, attacker, defender);
+				Debug.Log("Feast of Blood - Brand");	
+			}
+			
+			
+			
+			//Heal all for 30
+			int healValue = 30;
+			List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
+			foreach(HeroManager ally in allies){
+				GameManager.Instance.Heal(ally, healValue);
+			}
+			//Extra Turn		
 		GameManager.Instance.CheckHealth();
 		//Extra Turn
 		bool deadStatus = defender.gameObject.activeInHierarchy;
@@ -48,12 +48,13 @@ public class  FeastOfBlood : Ability {
 			GameManager.Instance.ExtraTurn();
 		} 
 		defender.gameObject.SetActive(deadStatus);
-
-		base.UseAbility(attacker, defender);
-
+		
+		}	
 
 	}
 
 	
 
-}
+	
+
+

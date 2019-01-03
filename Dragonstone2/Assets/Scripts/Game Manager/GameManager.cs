@@ -479,6 +479,7 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
+		Debug.Log("Debuff Name: " +debuffName);
 		if (!target.gameObject.GetComponent(System.Type.GetType(debuffName)))
 		{
 			(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
-  m_Name: Cadiz
+  m_Name: Cadiz 1
   m_EditorClassIdentifier: 
   heroName: Cadiz
   image: {fileID: 21300000, guid: fd950d5b887a5774c805132962595a53, type: 3}

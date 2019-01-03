@@ -10,44 +10,13 @@ public class Weaken : Ability {
 	{		
 		GameManager.Instance.Attack(attacker, defender);
 
-		FeastOfBloodAbility(attacker, defender);
+		//Access Feast of Blood
+		Button[] buttons = attacker.GetComponentsInChildren<Button>();
+		Ability feastOfBlood = buttons[2].GetComponent<Ability>();
+		feastOfBlood.UseAbility(attacker, defender);		
 
 		base.UseAbility(attacker, defender);		
 
 	}
-
-	public void FeastOfBloodAbility(HeroManager attacker, HeroManager defender){
-
-			//Debug.Log("Feast of Blood Ability");
-			//Add Brand
-			
-			if((defender.hasImmunity || defender.hasPermanentImmunity)){
-				Debug.Log ("Target Hero has immunity");
-
-			}else{
-				GameManager.Instance.AddDebuff("Brand", 2, attacker, defender);
-				Debug.Log("Feast of Blood - Brand");	
-			}
-			
-			
-			
-			//Heal all for 30
-			int healValue = 30;
-			List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
-			foreach(HeroManager ally in allies){
-				GameManager.Instance.Heal(ally, healValue);
-			}
-			//Extra Turn		
-		GameManager.Instance.CheckHealth();
-		//Extra Turn
-		bool deadStatus = defender.gameObject.activeInHierarchy;
-		defender.gameObject.SetActive(true);
-		
-		if(defender.isDead){
-			GameManager.Instance.ExtraTurn();
-		} 
-		defender.gameObject.SetActive(deadStatus);
-		
-		}	
 	
 }
