@@ -36,7 +36,10 @@ public class MyCollection : MonoBehaviour {
 		foreach (HeroAsset heroAsset in playerDeckHeroAssets)
 		{
 			PlayerDeck.heroAssets.Add(heroAsset);
+			GameObject.Find("Data Controller").gameObject.GetComponent<DataController>().SaveGameData(heroAsset);
 		}
+
+		//GameObject.Find("Data Controller").gameObject.GetComponent<DataController>().SaveGameData(playerDeckHeroAssets);
 
 	}
 

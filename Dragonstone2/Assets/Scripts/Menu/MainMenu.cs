@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour {
 
 	public void PlayGame()
 	{
-		StartCoroutine (LoadScene("BattleScene"));
+		StartCoroutine (LoadScene("Menu_BattleScene"));
 
 	}
 

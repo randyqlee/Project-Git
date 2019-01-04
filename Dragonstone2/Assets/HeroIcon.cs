@@ -126,6 +126,8 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 
 			myCollection.GetComponent<MyCollection>().playerDeckHeroAssets.Add(heroAsset);
 
+			dragging = false;
+
 			
 			//hit.transform.GetComponent<Image>().sprite = heroIcon.sprite;
 			//heroIcon.gameObject.SetActive(false);
@@ -135,6 +137,12 @@ public class HeroIcon : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IEn
 		else if ((hit.collider != null && hit.transform.tag == "AllHeroesScrollPanel"))
 		{
 			//return hero from deck
+
+			hit.transform.gameObject.GetComponentInChildren<AllHeroesList>().itemList.Add(gameObject);
+			gameObject.transform.SetParent(hit.transform.gameObject.GetComponentInChildren<AllHeroesList>().transform,false);
+			dragging = false;
+
+
 
 		}
 
