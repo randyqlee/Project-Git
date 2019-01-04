@@ -29,7 +29,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 		Ability[] abilities = defender.GetComponentsInChildren<Ability>();
 		foreach (Ability ability in abilities){
 			//Debug.Log("Abiltiies: " +ability.name);
-			ability.ResetCooldown();
+			ability.MaxCooldown();
 		}
 		defender.heroPanel.SetActive(false);
 

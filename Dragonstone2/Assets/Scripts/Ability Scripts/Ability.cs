@@ -12,6 +12,7 @@ public class Ability : MonoBehaviour {
 
 	public bool canUseAbility;
 	//public bool isPassive;
+	public bool cantReduce;
 
 	public Target target;
 
@@ -113,35 +114,64 @@ public class Ability : MonoBehaviour {
 		return canUseAbility;
 	}
 
+	//used by GameManager Next turn for cooldown reduction
 	public void ResetCooldown()
-	{
-		
-		remainingCooldown = abilityCooldown;
-		canUseAbility = false;
+	{	
+	
+			remainingCooldown = abilityCooldown;
+			canUseAbility = false;
 
-		//update Button UI
-		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
-		
-
-	#region End Turn incorporated	
-		// if(!GameManager.Instance.extraTurn){
-		// 	remainingCooldown = abilityCooldown;
-		// 	canUseAbility = false;
-
-		// 	//update Button UI
-		// 	gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
-
-		// 	GameManager.Instance.EndTurn();
-
-		// }else {
-		// 	GameManager.Instance.extraTurn = false;
-		// 	GameManager.Instance.isTurnPaused = false;
-			
-		// }
-	#endregion
-		
+			//update Button UI
+			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
 
 	}//Reset Cooldown
+
+
+	public void ReduceCooldown(int reduction){
+
+		if(cantReduce){
+			Debug.Log("Can't reduce cooldown");			
+		} else {
+		
+		remainingCooldown -= reduction;
+
+		if(remainingCooldown < 0)	
+		remainingCooldown=0;
+
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		}
+	}//Reduce Cooldown
+
+	public void RefreshCooldown (){
+		if(cantReduce)
+		{
+			Debug.Log("Can't reduce cooldown");
+		} 
+		else 
+		{		
+		remainingCooldown = 0;
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		}
+
+	}//RefreshCooldown
+
+	public void MaxCooldown(){
+
+		if(cantReduce)
+		{
+			Debug.Log("Can't set to Max cooldown");
+		} 
+		else 
+		{		
+		remainingCooldown = abilityCooldown;
+		//update Button UI
+		gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+		}
+
+
+	}//MaxCooldown
 
 	public virtual void GameManagerNextTurn()
 	{

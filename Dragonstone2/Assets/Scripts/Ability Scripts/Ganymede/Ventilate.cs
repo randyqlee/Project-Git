@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 
 public class Ventilate : Ability {
-	
-	
 
+	void Start(){
+		cantReduce = true;
+	}
+	
 	public override void UseAbility(HeroManager attacker, HeroManager defender)
 	{
 		
@@ -15,9 +17,8 @@ public class Ventilate : Ability {
 		defender.heroPanel.SetActive(true);
 		Ability[] abilities = defender.GetComponentsInChildren<Ability>();
 		foreach (Ability ability in abilities){
-			//Debug.Log("Abiltiies: " +ability.name);
-			ability.remainingCooldown = 0;
-			ability.gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();		
+			
+			ability.RefreshCooldown();
 		}
 		defender.heroPanel.SetActive(false);
 

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
-  m_Name: Ganymede
+  m_Name: Ganymede 1
   m_EditorClassIdentifier: 
   heroName: Ganymede
   image: {fileID: 21300000, guid: 25e495b3cbf14654cbfa5c7cdf96e2f2, type: 3}
@@ -50,7 +50,7 @@ MonoBehaviour:
     description: 'Seal Magic:  Attack an enemy and reset all its skills to MAX cooldown.  Gain
       an extra turn.'
     abilityEffect: SealMagic
-    abilityCoolDown: 1
+    abilityCoolDown: 5
     target: 0
     abilityBuffs: []
     abilityDebuffs: []
