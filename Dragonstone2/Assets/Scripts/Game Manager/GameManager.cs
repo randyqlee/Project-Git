@@ -254,11 +254,19 @@ public class GameManager : MonoBehaviour {
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
 				if (hero.maxHealth < 0)
+				{
+					if(hero.hasEndure)
+					{
+						hero.maxHealth = 1;
+						BattleTextMessage ("Endure: " +hero.name);
+					} 
+					else 
 					{
 						KillHero(hero);
 					}
-				hero.UpdateUI();
 
+				}	
+				hero.UpdateUI();
 			}
 		}
 	}
@@ -479,7 +487,7 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuff (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
-		Debug.Log("Debuff Name: " +debuffName);
+		//Debug.Log("Debuff Name: " +debuffName);
 		if (!target.gameObject.GetComponent(System.Type.GetType(debuffName)))
 		{
 			(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
@@ -624,7 +632,7 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-	void AddBuff (string buffName, int duration, HeroManager source, HeroManager target)
+	public void AddBuff (string buffName, int duration, HeroManager source, HeroManager target)
 	{
 		if (!target.gameObject.GetComponent(System.Type.GetType(buffName)))
 		{
@@ -751,13 +759,13 @@ public class GameManager : MonoBehaviour {
 	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
 
 		if(attacker.hasCritical){
-					CriticalAttack(attacker);
+					CriticalStrike(attacker);
 				} else {
 					attackersAttack = attacker.attack;
 				}
 
 				if(defender.hasCritical){
-					CriticalAttack(defender);
+					CriticalStrike(defender);
 				} else {
 					defendersAttack = defender.attack;
 				}
@@ -766,7 +774,7 @@ public class GameManager : MonoBehaviour {
 
 	}//Critical Strike Check
 
-	public void CriticalAttack(HeroManager source){
+	public void CriticalStrike(HeroManager source){
 
 		//50% chance for critical strike to be x2 or x3 damage
 		if (1-Random.value < 0.5)
@@ -777,23 +785,25 @@ public class GameManager : MonoBehaviour {
 		{
 			attackersAttack = 3*source.attack;
 		}
+		BattleTextMessage("Critical Strike: " +attackersAttack);
 		
-	}//CriticalAttack
+	}//CriticalStrike	
 
-	//For 100% sure critical effects
-	public void OneTurnCritical(HeroManager attacker, HeroManager defender){
-		
-		CriticalAttack(attacker);	
+	public void AttackCritical(HeroManager attacker, HeroManager defender){
+		bool critStatus = attacker.hasCritical;
+		attacker.hasCritical = true;
+		Attack(attacker, defender);
+		attacker.hasCritical = critStatus;
 
-		CheckTaunt(attacker, defender);
-		if(canTargetHero){
-		AttackStatusChecks(attacker, defender);
-			
-			//transferred to base.UseAbility
-			//EndTurn();
-		}
+	}
 
-	}//OneTurnCritical
+	public void AttackAllCritical(HeroManager attacker, HeroManager defender){
+		bool critStatus = attacker.hasCritical;
+		attacker.hasCritical = true;
+		AttackAll(attacker, defender);
+		attacker.hasCritical = critStatus;
+
+	}
 
 	//Checks and resolves resolution of Reflect, Echo, and Revenge
 	public void AttackStatusChecks(HeroManager attacker, HeroManager defender){

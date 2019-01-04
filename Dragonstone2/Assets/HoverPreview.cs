@@ -14,6 +14,7 @@ public class HoverPreview : MonoBehaviour {
 
 	void OnMouseExit()
 	{
+
 		//Debug.Log ("Mouse Exit");
 		gameObject.transform.Find("HoverImage").gameObject.SetActive(false);
 

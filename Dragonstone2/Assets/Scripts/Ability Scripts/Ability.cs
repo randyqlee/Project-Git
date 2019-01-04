@@ -95,7 +95,7 @@ public class Ability : MonoBehaviour {
 		//Disable Access to skill UI
 		GetComponent<Button>().interactable = false;
 		GetComponentInChildren<Text>().enabled = false;
-		GetComponent<BoxCollider2D>().enabled = false;
+		//GetComponent<BoxCollider2D>().enabled = false;
 		
 	}	
 

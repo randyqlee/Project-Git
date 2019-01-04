@@ -26,7 +26,7 @@ MonoBehaviour:
     description: Graceful Touch:Attack an enemy with a chance to deal Crippled Strike
       for 1 turn.
     abilityEffect: GracefulTouch
-    abilityCoolDown: 3
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -40,7 +40,7 @@ MonoBehaviour:
 
 '
     abilityEffect: BladeFan
-    abilityCoolDown: 4
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs: []
@@ -50,7 +50,7 @@ MonoBehaviour:
     description: 'Charge Vitality: Heal 500 HP of a target ally and reduce that ally''s
       and your skills cooldown by 1.  You or that ally takes an extra turn.'
     abilityEffect: ChargeVitality
-    abilityCoolDown: 5
+    abilityCoolDown: 1
     target: 1
     abilityBuffs: []
     abilityDebuffs: []

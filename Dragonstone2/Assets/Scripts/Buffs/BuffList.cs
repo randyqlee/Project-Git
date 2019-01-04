@@ -8,6 +8,8 @@
 	CriticalStrike,
 	Recovery,
 	Reflect,
+	Endure,
 	Revenge,
+	
 }
 

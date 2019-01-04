@@ -10,7 +10,7 @@
 	Echo,
 	Malaise,
 	Poison,
-	Antibuff,
+	AntiBuff,
 	Brand,
 
 	//AbilityRelatedDebuffs

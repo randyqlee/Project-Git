@@ -50,7 +50,7 @@ void Awake(){
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
-			Debug.Log("Skills Button" +skillsButton);
+			//Debug.Log("Skills Button" +skillsButton);
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){
