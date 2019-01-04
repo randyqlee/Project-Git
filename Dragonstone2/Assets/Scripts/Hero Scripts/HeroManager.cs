@@ -163,6 +163,9 @@ public class HeroManager : MonoBehaviour
 		Ability[] abilitys = heroPanel.GetComponentsInChildren<Ability>();
 		for(int i=0; i < abilitys.Length; i++) {
 			abilitys[i].skillType = heroPanel.GetComponentInParent<HeroManager>().abilityAssets[i].skillType;
+			
+			//all abilities available at the start of the turn
+			abilitys[i].remainingCooldown = 1;
 		}
 
 

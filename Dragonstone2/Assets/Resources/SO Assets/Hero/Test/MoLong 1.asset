@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
-  m_Name: MoLong
+  m_Name: MoLong 1
   m_EditorClassIdentifier: 
   heroName: MoLong
   image: {fileID: 21300000, guid: c19ed82b698521946958ed65292b85bf, type: 3}
