@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Stun : Debuff {
 
 	Type skillTypeTemp;
-
+	Color origColor;
+	HeroManager hero;
 void Awake(){
 
 		//get buff asset
@@ -15,8 +16,10 @@ void Awake(){
 		//attach icon to Hero UI
 		this.debuffIcon = debuff.icon;
 
+		hero = gameObject.GetComponent<HeroManager>();
+
 		//enable heroPanel instance
-		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
+		hero.heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;		
 
@@ -30,6 +33,10 @@ void Awake(){
 
 			//disable heroPanel again after setting colliders off
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+			//change color			
+			origColor = hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color;
+			hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.gray;
 	}
 
 	//apply effect
@@ -61,6 +68,10 @@ void Awake(){
 
 			//disable instance after modifications
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+			//restorecolor
+			hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = origColor;
+			
 
 			base.OnDestroy();
 
