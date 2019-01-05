@@ -7,6 +7,8 @@ public class ChargeVitality : Ability {
 
 	//Heal ally by 500, your and an ally target's cooldown by 1, and take an extra turn.
 	
+	
+
 	int healValue = 500;
 
 	public override void UseAbility(HeroManager attacker, HeroManager defender){
@@ -27,6 +29,7 @@ public class ChargeVitality : Ability {
 		defender.SelectHero();
 		
 		GameManager.Instance.ExtraTurn();
+		
 
 		base.UseAbility();		
 
@@ -44,8 +47,7 @@ public class ChargeVitality : Ability {
 				if(hero == defender || hero == attacker){				
 						//Do Nothing	 
 				} else {
-					//Prevent selecting other ally heroes					
-					hero.gameObject.tag = "Player3";				 
+					GameManager.Instance.AddDebuff("ChargeVitalityStun", 1, attacker, hero);		 
 				}			
 			}//foreach		
 	}//Selected Heroes Extra Turn

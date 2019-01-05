@@ -53,4 +53,6 @@ MonoBehaviour:
     abilityCoolDown: 1
     target: 1
     abilityBuffs: []
-    abilityDebuffs: []
+    abilityDebuffs:
+    - debuff: 13
+      duration: 1

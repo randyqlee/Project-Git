@@ -16,7 +16,8 @@ public enum Type
 	Active,
 	Passive,
 	Silenced,
-	Stunned	
+	Stunned,
+	ExtraTurn
 }
 
 

@@ -39,12 +39,14 @@ void Awake(){
 			hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.gray;
 	}
 
-	//apply effect
-	public override void DecreaseDuration(){
+	// //apply effect
+	// public override void DecreaseDuration(){
 
-			
-		base.DecreaseDuration();
-	}//DecreaseDuration	
+		
+	// 		base.DecreaseDuration();
+					
+		
+	// }//DecreaseDuration	
 
 
 	// Update is called once per frame

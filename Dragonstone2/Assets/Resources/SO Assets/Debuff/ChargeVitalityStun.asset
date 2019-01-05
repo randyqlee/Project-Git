@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b57fcec1d3c384aa56b13cf6c112a1, type: 3}
   m_Name: ChargeVitalityStun
   m_EditorClassIdentifier: 
-  debuff: 11
-  icon: {fileID: 0}
+  debuff: 13
+  icon: {fileID: 21300000, guid: 81078ca12ba2da442b62c342ee89e068, type: 3}
   value: 0
   description: "Hero can\u2019t be used next turn "

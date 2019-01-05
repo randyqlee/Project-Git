@@ -5,38 +5,46 @@ using UnityEngine.UI;
 
 public class ChargeVitalityStun : Debuff {
 
+	Type skillTypeTemp;
+	Color origColor;
+	HeroManager hero;
+
 void Awake(){
 
 		//get buff asset
 		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/ChargeVitalityStun");
 
 		//attach icon to Hero UI
-		this.debuffIcon = debuff.icon;
+		this.debuffIcon = debuff.icon;		
 		
 		//enable heroPanel instance
-		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
+		hero = gameObject.GetComponent<HeroManager>();
+		hero.heroPanel.SetActive(true);
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
 			
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = false;
-				//disable the button's interactable for grey out effect
 				skillsButton[i].interactable = false;
+				skillTypeTemp = skillsButton[i].GetComponent<Ability>().skillType;
+				skillsButton[i].GetComponent<Ability>().skillType = Type.ExtraTurn;
 			}		
 
 			//disable heroPanel again after setting colliders off
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+				//change color			
+			origColor = hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color;
+			hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.gray;
 	}
 
-	//apply effect
-	public override void DecreaseDuration(){
+	// //apply effect
+	// public override void DecreaseDuration(){
 
 			
-		base.DecreaseDuration();
-	}//DecreaseDuration	
+	// 	base.DecreaseDuration();
+	// }//DecreaseDuration	
 
 
 	
@@ -51,14 +59,15 @@ void Awake(){
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = true;
-				//disable the button's interactable for grey out effect
 				skillsButton[i].interactable = true;
+				skillsButton[i].GetComponent<Ability>().skillType = skillTypeTemp;
 			}		
 
 			//disable instance after modifications
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+			//restorecolor
+			hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = origColor;
 
 			base.OnDestroy();
 

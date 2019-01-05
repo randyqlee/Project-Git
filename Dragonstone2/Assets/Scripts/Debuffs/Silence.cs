@@ -37,12 +37,12 @@ public class Silence : Debuff {
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
 	}
 
-	//apply effect
-	public override void DecreaseDuration(){
+	// //apply effect
+	// public override void DecreaseDuration(){
 
 			
-		base.DecreaseDuration();
-	}//DecreaseDuration	
+	// 	base.DecreaseDuration();
+	// }//DecreaseDuration	
 
 
 	// Update is called once per frame
