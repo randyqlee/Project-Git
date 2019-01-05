@@ -18,13 +18,16 @@ public class FrostRush : Ability {
 		//if an enemy dies, take an extraTurn
 		CheckDeadEnemy(attacker, defender);
 		
-		base.UseAbilityRandom(attacker, defender, targetCount);		
+		base.UseAbilityRandom(attacker, defender, targetCount);
+		//base.UseAbility();		
 	}
 
 	void CheckDeadEnemy(HeroManager attacker, HeroManager defender){
 
 		//Get enemy list
 		List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(attacker);
+		//Get allies list
+		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
 		
 		//Check for dead enemies
 		GameManager.Instance.CheckHealth();		
@@ -40,9 +43,18 @@ public class FrostRush : Ability {
 			//if Enemy is Dead, take an extra turn
 			if(enemy.isDead)
 			{
-				GameManager.Instance.ExtraTurn();
-				Debug.Log("Frost Rush EXTRA TURN");
-				//reduce cooldown of ally heroes
+				
+			//use static nature of GameManager to store the list in the variable there, as opposed to passing arguements
+			GameManager.Instance.extraTurnHeroes = allies;
+		    //Select which ally shall have an extra turn
+			foreach(HeroManager ally in GameManager.Instance.extraTurnHeroes){
+				if(ally == attacker){
+					ally.hasExtraTurn = true;
+				}//if
+			}//foreach
+
+			GameManager.Instance.ExtraTurn();
+				
 			}
 			//restore enemySetActive to original
 			enemy.gameObject.SetActive(temp); 

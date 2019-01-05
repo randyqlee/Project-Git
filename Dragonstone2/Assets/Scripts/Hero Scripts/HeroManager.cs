@@ -87,6 +87,10 @@ public class HeroManager : MonoBehaviour
 	[HideInInspector]
 	public bool hasPermanentImmunity;
 
+	//[HideInInspector]
+	public bool hasExtraTurn;
+
+
 
 	void Awake () {
 

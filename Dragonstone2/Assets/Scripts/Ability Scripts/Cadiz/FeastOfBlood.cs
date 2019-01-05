@@ -28,15 +28,13 @@ public class  FeastOfBlood : Ability {
 			}else{
 				GameManager.Instance.AddDebuff("Brand", 2, attacker, defender);
 				Debug.Log("Feast of Blood - Brand");	
-			}
-			
-			
-			
+			}			
 			//Heal all for 30
 			int healValue = 30;
 			List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
 			foreach(HeroManager ally in allies){
 				GameManager.Instance.Heal(ally, healValue);
+				
 			}
 			//Extra Turn		
 		GameManager.Instance.CheckHealth();
@@ -45,6 +43,9 @@ public class  FeastOfBlood : Ability {
 		defender.gameObject.SetActive(true);
 		
 		if(defender.isDead){
+			foreach(HeroManager ally in allies){
+				ally.hasExtraTurn = true;
+			}
 			GameManager.Instance.ExtraTurn();
 		} 
 		defender.gameObject.SetActive(deadStatus);

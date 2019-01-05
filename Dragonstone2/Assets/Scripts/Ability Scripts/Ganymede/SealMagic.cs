@@ -10,6 +10,9 @@ public class SealMagic : Ability {
 		//Attack an enemy
 		GameManager.Instance.Attack(attacker, defender);
 
+		//Get allies list
+		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
+
 		//Reset Skills to Max Cooldown
 		defender.heroPanel.SetActive(true);
 		Ability[] abilities = defender.GetComponentsInChildren<Ability>();
@@ -20,6 +23,9 @@ public class SealMagic : Ability {
 		defender.heroPanel.SetActive(false);
 
 		//Gain an Extra turn
+		foreach(HeroManager ally in allies){
+			ally.hasExtraTurn = true;
+		}
 		GameManager.Instance.ExtraTurn();
 
 		base.UseAbility();

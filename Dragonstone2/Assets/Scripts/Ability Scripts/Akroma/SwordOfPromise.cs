@@ -23,7 +23,7 @@ public class SwordOfPromise : Ability {
 			SealOfLightTrigger(attacker, defender);			
 		} else {
 			ResetCooldown();
-			EndTurnCheck();			
+			GameManager.Instance.ExtraTurnCheck();			
 		}
 		
 		

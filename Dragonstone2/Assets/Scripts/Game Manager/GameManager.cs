@@ -40,6 +40,23 @@ public class GameManager : MonoBehaviour {
 	public bool canTargetHero, checkDefender;
 	public bool extraTurn;
 
+	//Variables used in extra turn
+	[HideInInspector]
+	public List<HeroManager> extraTurnHeroes;
+
+	[HideInInspector]
+	public Type skillTypeTemp;
+
+	[HideInInspector]
+	public List<Type> skillTypeTemps;
+
+	[HideInInspector]
+	public Color origColor;
+
+	[HideInInspector]
+	public List<Color> origColors;
+
+
 //for timer bar
 	public float globalATB = 700;
 	public float maxCharacterTurn = 10f;
@@ -899,11 +916,103 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void ExtraTurn(){
-	BattleTextMessage("EXTRA TURN!");
-		extraTurn = true;
-		isTurnPaused = true;
-	}
+	public void ExtraTurn()
+	{
+
+		if(!extraTurn){
+			BattleTextMessage("EXTRA TURN!");
+		
+			//Set Extra Turn flag to TRUE and pause the GameManager
+			extraTurn = true;
+			isTurnPaused = true;
+
+			//Check which heroes are active during the extra turn
+			foreach(HeroManager extraTurnHero in extraTurnHeroes){
+
+				if(!extraTurnHero.hasExtraTurn)
+				{				
+					skillTypeTemps = new List<Type>();
+
+					//Disable access to Skills	
+					extraTurnHero.heroPanel.SetActive(true);
+					List<Button> skillsButton = extraTurnHero.gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;					
+					for(int i = 0; i <skillsButton.Count; i++)
+					{
+						skillsButton[i].interactable = false;
+						//store the skill Type information
+						//skillTypeTemps[j] = skillsButton[i].GetComponent<Ability>().skillType;
+						skillsButton[i].GetComponent<Ability>().skillType = Type.ExtraTurn;
+					}				
+					extraTurnHero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+					//Grey Out heroes not available in extra turn
+								
+					//origColor = extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color;
+					extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.grey;			
+			
+
+				}//if
+
+			}//foreach	
+
+		}	
+	
+	
+
+
+
+
+	}//Extra Turn
+
+	public void ExtraTurnCheck(){
+
+		if(!isTurnPaused){	
+
+			//NORMAL ROUTE - NO EXTRA TURN		
+
+			//Resolve frozen heroes from an extra turn
+			if(extraTurn){				
+
+				foreach(HeroManager extraTurnhero in extraTurnHeroes){					
+
+						//reset hasExtraturn back to normal
+						extraTurnhero.hasExtraTurn = false;
+
+						//Disable access to skills/abilities
+						extraTurnhero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
+						List<Button> skillsButton = extraTurnhero.gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;						
+						for(int i = 0; i <skillsButton.Count; i++)
+						{
+							skillsButton[i].interactable = true;
+							skillsButton[i].GetComponent<Ability>().skillType = extraTurnhero.abilityAssets[i].skillType;
+							//hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = GameManager.Instance.origColor;
+						}								
+						extraTurnhero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+
+
+						//Restore Original Color (grayed-out from Extra Turn)
+						
+						//hero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = GameManager.Instance.origColor;
+						extraTurnhero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.white;
+										
+
+					
+				}//foreach
+			}//if		
+		
+			//set Extra Turn to false and End the Turn
+			extraTurn = false;
+			EndTurn();
+
+		} else {		
+			
+			//EXTRA TURN
+
+			//Unpause GameManager during Extra Turn
+			isTurnPaused = false;
+			
+		}
+	}//Extra Turn Check
 
 	
 

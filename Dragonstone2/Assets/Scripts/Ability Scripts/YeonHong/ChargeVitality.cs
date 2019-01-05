@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class ChargeVitality : Ability {
 
-	//Heal ally by 500, your and an ally target's cooldown by 1, and take an extra turn.
-	
-	
+	//Heal ally by 500, your and an ally target's cooldown by 1, and take an extra turn.	
 
 	int healValue = 500;
 
@@ -21,36 +19,28 @@ public class ChargeVitality : Ability {
 		YeonReduceCooldown(attacker, defender);
 		
 		
-
-		//make other heroes unavailable
-		SelectHeroesForExtraTurn (attacker, defender);
-
+		//SelectHeroesForExtraTurn (attacker, defender);
 		GameManager.Instance.DeselectAllHeroes();
 		defender.SelectHero();
-		
+
+
+		//Get allies list and set who will have extra turn
+		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
+		//use static nature of GameManager to store the list in the variable there, as opposed to passing arguements
+		GameManager.Instance.extraTurnHeroes = allies;
+
+		//Select which ally shall have an extra turn
+		foreach(HeroManager ally in GameManager.Instance.extraTurnHeroes){
+			if(ally == attacker || ally == defender){
+				ally.hasExtraTurn = true;
+			}//if
+		}//foreach		
 		GameManager.Instance.ExtraTurn();
-		
 
-		base.UseAbility();		
-
-		
+		base.UseAbility();				
 
 	}//UseAbility
 
-	public void SelectHeroesForExtraTurn (HeroManager attacker, HeroManager defender)
-	{				
-		
-			HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
-			foreach(HeroManager hero in heroes)
-			{			
-				//condition
-				if(hero == defender || hero == attacker){				
-						//Do Nothing	 
-				} else {
-					GameManager.Instance.AddDebuff("ChargeVitalityStun", 1, attacker, hero);		 
-				}			
-			}//foreach		
-	}//Selected Heroes Extra Turn
 
 	public void YeonReduceCooldown(HeroManager attacker, HeroManager defender){
 		

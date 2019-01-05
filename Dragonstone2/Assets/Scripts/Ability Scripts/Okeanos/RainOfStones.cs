@@ -11,9 +11,15 @@ public class RainOfStones : Ability {
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		
+		//Get allies list
+		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
+
 		//Chance extra turn
 		bool extraTurn = GameManager.Instance.IsChanceSuccess(attacker);
 		if(extraTurn){
+			foreach(HeroManager ally in allies){
+				ally.hasExtraTurn = true;
+			}
 			GameManager.Instance.ExtraTurn();
 		} 
 		

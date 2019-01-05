@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Ability : MonoBehaviour {
 
-	public Type skillType;
+	public Type skillType;	
+	
+
 	public int abilityCooldown;
 
 	public int remainingCooldown;
@@ -19,16 +21,21 @@ public class Ability : MonoBehaviour {
 	public List<AbilityBuffs> abilityBuffs;
 	public List<AbilityDebuffs> abilityDebuffs;
 
+	[HideInInspector]
+	public List<HeroManager> extraTurnHeroes;
+	
+
 	public virtual void Awake ()
 	{
 		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
+		
 		
 	}
 
 	public virtual void UseAbility ()
 	{
 		ResetCooldown();
-		EndTurnCheck();
+		GameManager.Instance.ExtraTurnCheck(); 
 	}
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
@@ -58,7 +65,7 @@ public class Ability : MonoBehaviour {
 			}
 
 			ResetCooldown();
-			EndTurnCheck();
+			GameManager.Instance.ExtraTurnCheck();
 
 		}//canTargetHero = True
 
@@ -87,7 +94,7 @@ public class Ability : MonoBehaviour {
 		}
 
 		ResetCooldown();
-		EndTurnCheck();
+		GameManager.Instance.ExtraTurnCheck();
 
 	}
 
@@ -187,35 +194,7 @@ public class Ability : MonoBehaviour {
 		}
 	}//GameManager Next Turn
 
-	public virtual void EndTurnCheck(){
-		if(!GameManager.Instance.isTurnPaused){			
-
-			//logic for hero specific extra turns
-			if(GameManager.Instance.extraTurn){				
-				Player player = gameObject.GetComponentInParent<Player>();
-				if(player.isActive){
-					HeroManager[] activeHeroes = player.GetComponentsInChildren<HeroManager>();
-					foreach(HeroManager activeHero in activeHeroes){
-						activeHero.tag = player.tag;
-					}
-				}
-
-			}
-			
-			
-			//no extra turn
-			GameManager.Instance.extraTurn = false;
-			GameManager.Instance.EndTurn();
-
-		} else {
-
-			//EXTRA TURN			
-			
-			//resolve extra turn
-			GameManager.Instance.isTurnPaused = false;
-			
-		}
-	}//End Turn Check
+	
 
 
 	public virtual void DisableAbilityPassive(){
