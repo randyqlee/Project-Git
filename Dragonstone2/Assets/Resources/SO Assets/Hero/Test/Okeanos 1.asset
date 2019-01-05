@@ -53,4 +53,4 @@ MonoBehaviour:
     abilityBuffs: []
     abilityDebuffs:
     - debuff: 6
-      duration: 1
+      duration: 2

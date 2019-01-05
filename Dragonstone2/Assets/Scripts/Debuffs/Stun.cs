@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Stun : Debuff {
 
+	Type skillTypeTemp;
+
 void Awake(){
 
 		//get buff asset
@@ -16,15 +18,14 @@ void Awake(){
 		//enable heroPanel instance
 		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
 
-			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
-			
+			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;		
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = false;
-				//disable the button's interactable for grey out effect
+
 				skillsButton[i].interactable = false;
+				skillTypeTemp = skillsButton[i].GetComponent<Ability>().skillType;
+				skillsButton[i].GetComponent<Ability>().skillType = Type.Stunned;
 			}		
 
 			//disable heroPanel again after setting colliders off
@@ -54,10 +55,8 @@ void Awake(){
 
 			
 			for(int i = 0; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = true;
-				//disable the button's interactable for grey out effect
 				skillsButton[i].interactable = true;
+				skillsButton[i].GetComponent<Ability>().skillType = skillTypeTemp;
 			}		
 
 			//disable instance after modifications

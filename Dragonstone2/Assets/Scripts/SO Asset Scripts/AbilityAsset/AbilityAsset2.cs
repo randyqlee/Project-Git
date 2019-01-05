@@ -14,7 +14,9 @@ public enum Target
 public enum Type
 {
 	Active,
-	Passive	
+	Passive,
+	Silenced,
+	Stunned	
 }
 
 

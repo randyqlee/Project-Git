@@ -78,6 +78,7 @@ public class HeroManager : MonoBehaviour
 	public bool hasUnhealable;
 	public bool hasAntiBuff;
 	public bool hasBrand;
+	public bool hasSilence;
 
 	public delegate void Event_PopupMsg(string message);
 	public event Event_PopupMsg e_PopupMSG = delegate {};

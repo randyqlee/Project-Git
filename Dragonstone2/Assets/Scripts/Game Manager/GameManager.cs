@@ -474,7 +474,10 @@ public class GameManager : MonoBehaviour {
 			} else if (source.hasCrippledStrike){
 				Debug.Log ("Source Hero has Crippled Strike");
 				//Crippled Strike Implementation
-			} else if (target.hasMalaise){
+			} else if (source.hasSilence){
+				Debug.Log ("Source Hero has Silence");
+				//Crippled Strike Implementation
+			}else if (target.hasMalaise){
 				//(target.gameObject.AddComponent(System.Type.GetType(debuffName)) as Debuff).New(duration,source.gameObject);
 				AddDebuff(debuffName, duration, source, target);
 
@@ -550,7 +553,10 @@ public class GameManager : MonoBehaviour {
 			} else if (source.hasCrippledStrike){
 				Debug.Log ("Source Hero has Crippled Strike");
 				//Crippled Strike Implementation
-			} else if (target.hasMalaise){
+			} else if (source.hasSilence){
+				Debug.Log ("Source Hero has Silence");
+				//Crippled Strike Implementation
+			}else if (target.hasMalaise){
 				AddDebuff(debuffName, duration, source, target);
 				count++;
 
@@ -621,6 +627,9 @@ public class GameManager : MonoBehaviour {
 			{
 				Debug.Log ("Target Hero has AntiBuff");
 				//AddBuff(buffName, duration, source, target);
+			} else if (source.hasSilence){
+				Debug.Log ("Source Hero has Silence");
+				//Crippled Strike Implementation
 			}
 
 			else if (IsChanceSuccess(source)) //check for Chance
@@ -688,6 +697,9 @@ public class GameManager : MonoBehaviour {
 			{
 				Debug.Log ("Target Hero has AntiBuff");
 				//AddBuff(buffName, duration, source, target);
+			} else if (source.hasSilence){
+				Debug.Log ("Source Hero has Silence");
+				//Crippled Strike Implementation
 			}
 
 			else if (IsChanceSuccess(source)){ //check for Chance

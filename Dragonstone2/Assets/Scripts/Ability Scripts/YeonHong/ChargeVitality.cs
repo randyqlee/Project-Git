@@ -27,59 +27,29 @@ public class ChargeVitality : Ability {
 		defender.SelectHero();
 		
 		GameManager.Instance.ExtraTurn();
+
+		base.UseAbility();		
+
 		
-		base.UseAbility(attacker, defender);		
 
 	}//UseAbility
 
 	public void SelectHeroesForExtraTurn (HeroManager attacker, HeroManager defender)
-	{		
-		HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
-		foreach(HeroManager hero in heroes){			
-			if(hero == defender || hero == attacker){				
-					//Do Nothing	 
-			 } else {
-				 //Prevent selecting other ally heroes
-				 (hero.gameObject.AddComponent(System.Type.GetType("ChargeVitalityStun")) as Debuff).New(1,attacker.gameObject);				 
-			 }			
-		}//foreach
+	{				
+		
+			HeroManager[] heroes = attacker.GetComponentInParent<Player>().GetComponentsInChildren<HeroManager>();
+			foreach(HeroManager hero in heroes)
+			{			
+				//condition
+				if(hero == defender || hero == attacker){				
+						//Do Nothing	 
+				} else {
+					//Prevent selecting other ally heroes					
+					hero.gameObject.tag = "Player3";				 
+				}			
+			}//foreach		
 	}//Selected Heroes Extra Turn
 
-	#region old code
-	
-	// public void SelectHeroesForSkillCooldown (HeroManager attacker, HeroManager defender){
-	// 	//Reduce Cooldowns by 1
-	// 	//YeonHong CD reduction
-	// 	Ability[] attackerAbilities = attacker.GetComponentsInChildren<Ability>();
-
-	// 	foreach(Ability attackerAbility in attackerAbilities){
-	// 		attackerAbility.remainingCooldown--;
-	// 		attackerAbility.GetComponentInChildren<Text>().text = attackerAbility.remainingCooldown.ToString();		
-	// 		if(attackerAbility.remainingCooldown < 0){
-	// 			attackerAbility.remainingCooldown = 0;
-	// 			attackerAbility.GetComponentInChildren<Text>().text = attackerAbility.remainingCooldown.ToString();		
-	// 		}					
-	// 	}//foreach
-
-	// 	//Ally target CD reduction
-	// 	defender.GetComponent<HeroManager>().heroPanel.SetActive(true);
-	// 	Ability[] defenderAbilities = defender.GetComponentsInChildren<Ability>();
-		
-	// 	foreach(Ability defenderAbility in defenderAbilities){
-	// 		defenderAbility.remainingCooldown--;
-	// 		defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
-			
-	// 		if(defenderAbility.remainingCooldown < 0){
-	// 			defenderAbility.remainingCooldown = 0;
-	// 			defenderAbility.GetComponentInChildren<Text>().text = defenderAbility.remainingCooldown.ToString();		
-	// 		}					
-	// 	}//foreach
-	// 	defender.GetComponent<HeroManager>().heroPanel.SetActive(false);
-
-	// }
-	#endregion
-
-	
 	public void YeonReduceCooldown(HeroManager attacker, HeroManager defender){
 		
 

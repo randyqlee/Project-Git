@@ -104,7 +104,7 @@ public class Ability : MonoBehaviour {
 	public bool CanUseAbility()
 	{	
 		canUseAbility = false;
-		if (remainingCooldown == 0)
+		if (remainingCooldown == 0 && skillType == Type.Active)
 		{
 			canUseAbility = true;
 			//ResetCooldown();
@@ -190,11 +190,26 @@ public class Ability : MonoBehaviour {
 	public virtual void EndTurnCheck(){
 		if(!GameManager.Instance.isTurnPaused){			
 
+			//logic for hero specific extra turns
+			if(GameManager.Instance.extraTurn){				
+				Player player = gameObject.GetComponentInParent<Player>();
+				if(player.isActive){
+					HeroManager[] activeHeroes = player.GetComponentsInChildren<HeroManager>();
+					foreach(HeroManager activeHero in activeHeroes){
+						activeHero.tag = player.tag;
+					}
+				}
+
+			}
+			
+			
 			//no extra turn
 			GameManager.Instance.extraTurn = false;
 			GameManager.Instance.EndTurn();
 
 		} else {
+
+			//EXTRA TURN			
 			
 			//resolve extra turn
 			GameManager.Instance.isTurnPaused = false;

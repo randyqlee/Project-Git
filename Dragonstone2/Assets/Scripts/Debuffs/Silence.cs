@@ -5,25 +5,33 @@ using UnityEngine.UI;
 
 public class Silence : Debuff {
 
+	Type skillTypeTemp;
+	HeroManager hero;
+
 	void Awake(){
 
+		hero = gameObject.GetComponent<HeroManager>();
+		
 		//get buff asset
 		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Silence");
 
 		//attach icon to Hero UI
 		this.debuffIcon = debuff.icon;
 
-		gameObject.GetComponent<HeroManager>().heroPanel.SetActive(true);
+		hero.hasSilence = true;
+		hero.heroPanel.SetActive(true);
+
 
 			List<Button> skillsButton = gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;
 			//Debug.Log("Skills Button" +skillsButton);
 
 			//start at i=1 to select 2nd and 3rd skill
 			for(int i = 1; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = false;
-				//disable the button's interactable for grey out effect
+						
 				skillsButton[i].interactable = false;
+				skillTypeTemp = skillsButton[i].GetComponent<Ability>().skillType;
+				skillsButton[i].GetComponent<Ability>().skillType = Type.Silenced;
+
 			}		
 
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
@@ -51,13 +59,12 @@ public class Silence : Debuff {
 
 			//start at i=1 to select 2nd and 3rd skill
 			for(int i = 1; i <skillsButton.Count; i++){
-				//disable the BoxCollider2D for the listener
-				skillsButton[i].GetComponent<BoxCollider2D>().enabled = true;
-				//disable the button's interactable for grey out effect
 				skillsButton[i].interactable = true;
+				skillsButton[i].GetComponent<Ability>().skillType = skillTypeTemp;
 			}		
 
-			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+			hero.heroPanel.SetActive(false);
+			hero.hasSilence = false;
 
 			base.OnDestroy();
 

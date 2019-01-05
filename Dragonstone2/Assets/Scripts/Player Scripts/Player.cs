@@ -161,14 +161,25 @@ public class Player : MonoBehaviour {
 					{
 						button = pointerObject.gameObject.GetComponent<Button>();
 
-						//dragging is now active while the button is held down
-						dragging = true;
+						// //dragging is now active while the button is held down
+						// dragging = true;
 
 						//dragging pointer object is displayed
 						targetPointerGO = Instantiate(targetPointer, button.gameObject.transform.position, button.gameObject.transform.rotation, button.gameObject.transform);
 
 						//get the Ability script that corresponds to the button clicked
 						target = pointerObject.gameObject.GetComponent<Button>().GetComponent<Ability>().target;
+
+						//Passive and Inactive Implementation
+						Ability target2 = pointerObject.gameObject.GetComponent<Button>().GetComponent<Ability>();
+						if(target2.skillType == Type.Active){
+							//dragging is now active while the button is held down
+						dragging = true;
+
+						}
+
+					
+						
 
 						//Debug.Log(target.ToString());
 						
@@ -236,8 +247,8 @@ public class Player : MonoBehaviour {
 			{
 				if (pointerObject == null)
 					{
-						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.red;
-						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+						targetPointerGO.GetComponentInChildren<LineRenderer>().endColor = Color.blue;
+						targetPointerGO.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
 					}
 				
 	
