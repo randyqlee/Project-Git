@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Kamehame : Ability {
 
-	public override void UseAbility ()
-	{
-
-	}
+	
 
 }

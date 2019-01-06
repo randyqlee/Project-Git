@@ -5,11 +5,7 @@ using UnityEngine;
 public class SuperCrush : Ability {
 
 
-	int targetCount = 2;
-	public override void UseAbility ()
-	{
-
-	}
+	int targetCount;	
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
@@ -17,10 +13,7 @@ public class SuperCrush : Ability {
 
 			Debug.Log ("Using  SuperCrush");
 
-			targetCount = GameManager.Instance.EnemyHeroList(attacker).Count-1;
-			if(targetCount <= 0) {
-				targetCount = 1;
-			}		
+			targetCount = GameManager.Instance.EnemyHeroList(attacker).Count;			
 
 			GameManager.Instance.AttackAll (attacker, defender);
 

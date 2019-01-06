@@ -46,7 +46,7 @@ public class  FeastOfBlood : Ability {
 			foreach(HeroManager ally in allies){
 				ally.hasExtraTurn = true;
 			}
-			GameManager.Instance.ExtraTurn();
+			GameManager.Instance.ExtraTurn(attacker);
 		} 
 		defender.gameObject.SetActive(deadStatus);
 		

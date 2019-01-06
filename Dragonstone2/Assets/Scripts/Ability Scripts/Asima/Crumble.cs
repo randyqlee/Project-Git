@@ -25,7 +25,7 @@ public class Crumble : Ability {
 		attacker.chance = chanceStatus;
 
 
-		base.UseAbility();
+		base.UseAbility(attacker);
 
 		
 

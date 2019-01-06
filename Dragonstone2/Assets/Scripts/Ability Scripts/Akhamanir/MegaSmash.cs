@@ -6,12 +6,6 @@ public class MegaSmash : Ability {
 
 	int buffDuration = 2;
 
-	public override void UseAbility ()
-	{
-		Debug.Log ("Using  MegaSmash");
-
-	}
-
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		Debug.Log ("Using Megasmash: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
@@ -28,11 +22,6 @@ public class MegaSmash : Ability {
 		GameManager.Instance.Attack (attacker, defender);
 
 		base.UseAbility(attacker, defender);
-
-		
-
-
-
 
 	}
 }

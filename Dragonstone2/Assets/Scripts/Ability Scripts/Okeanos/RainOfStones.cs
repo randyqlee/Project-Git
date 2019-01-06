@@ -20,7 +20,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			foreach(HeroManager ally in allies){
 				ally.hasExtraTurn = true;
 			}
-			GameManager.Instance.ExtraTurn();
+			GameManager.Instance.ExtraTurn(attacker);
 		} 
 		
 		GameManager.Instance.AttackAll(attacker, defender);

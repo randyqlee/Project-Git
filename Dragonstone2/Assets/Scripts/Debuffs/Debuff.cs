@@ -55,11 +55,13 @@ public class Debuff : MonoBehaviour{
 
 	public virtual void OnDestroy()
 	{
+		gameObject.GetComponent<HeroManager>().UpdateUI();
 		RemoveIcon();
 		//remove from HeroManager
 		//unsubscribe
 		GameManager.Instance.e_NextTurn -= DecreaseDuration;
 		Destroy(this);
+		
 	}
 
 	public void AddIcon()

@@ -6,12 +6,6 @@ public class MachCrush : Ability {
 
 	int bonus = 50;
 
-	public override void UseAbility ()
-	{
-		//Debug.Log ("Using  MachCrush");
-
-	}
-
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		//Debug.Log ("Using  MachCrush");

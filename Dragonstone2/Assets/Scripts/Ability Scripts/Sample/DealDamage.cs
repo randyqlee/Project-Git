@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DealDamage : Ability {
 
-	public override void UseAbility ()
-	{
-
-	}
+	
 
 }

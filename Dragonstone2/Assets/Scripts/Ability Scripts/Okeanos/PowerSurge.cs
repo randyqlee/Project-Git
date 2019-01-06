@@ -13,7 +13,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 		DebuffTransfer(attacker, defender);	
 
 		
-		base.UseAbility();		
+		base.UseAbility(attacker);		
 
 	}
 

@@ -35,7 +35,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 
 
 
-		base.UseAbility();
+		base.UseAbility(attacker);
 
 		
 

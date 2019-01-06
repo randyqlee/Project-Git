@@ -6,12 +6,6 @@ public class SealOfLight : Ability {
 
 	int targetCount;
 
-	public override void UseAbility ()
-	{
-		//Debug.Log ("Using SealOfLight");
-
-	}
-
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		//Debug.Log ("Using SealOfLight: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);

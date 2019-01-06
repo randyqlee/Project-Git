@@ -45,6 +45,10 @@ public class Buff : MonoBehaviour{
 		if (GetComponentInParent<Player>().isActive)
 		{
 			this.duration--;
+
+			if(this.duration<0)
+			this.duration = 0;
+
 			if (this.duration == 0)
 				Destroy (this);
 			else
@@ -55,11 +59,15 @@ public class Buff : MonoBehaviour{
 
 	public virtual void OnDestroy()
 	{
+		gameObject.GetComponent<HeroManager>().UpdateUI();
 		RemoveIcon();
 		//remove from HeroManager
 		//unsubscribe
 		GameManager.Instance.e_NextTurn -= DecreaseDuration;
 		Destroy(this);
+
+		
+		
 	}
 
 	public void AddIcon()

@@ -23,7 +23,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			}//foreach debuff
 		}//foreach ally
 
-		base.UseAbility();
+		base.UseAbility(attacker);
 
 		
 

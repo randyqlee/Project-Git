@@ -44,16 +44,15 @@ public class FrostRush : Ability {
 			if(enemy.isDead)
 			{
 				
-			//use static nature of GameManager to store the list in the variable there, as opposed to passing arguements
-			GameManager.Instance.extraTurnHeroes = allies;
+			
 		    //Select which ally shall have an extra turn
-			foreach(HeroManager ally in GameManager.Instance.extraTurnHeroes){
+			foreach(HeroManager ally in allies){
 				if(ally == attacker){
 					ally.hasExtraTurn = true;
 				}//if
 			}//foreach
 
-			GameManager.Instance.ExtraTurn();
+			GameManager.Instance.ExtraTurn(attacker);
 				
 			}
 			//restore enemySetActive to original

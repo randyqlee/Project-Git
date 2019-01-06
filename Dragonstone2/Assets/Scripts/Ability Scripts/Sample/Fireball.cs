@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Fireball : Ability {
 
-	public override void UseAbility ()
-	{
 
-	}
 
 }

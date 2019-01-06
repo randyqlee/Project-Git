@@ -32,10 +32,10 @@ public class Ability : MonoBehaviour {
 		
 	}
 
-	public virtual void UseAbility ()
+	public virtual void UseAbility (HeroManager attacker)
 	{
 		ResetCooldown();
-		GameManager.Instance.ExtraTurnCheck(); 
+		GameManager.Instance.ExtraTurnCheck(attacker); 
 	}
 
 	public virtual void UseAbility (HeroManager attacker, HeroManager defender)
@@ -65,7 +65,7 @@ public class Ability : MonoBehaviour {
 			}
 
 			ResetCooldown();
-			GameManager.Instance.ExtraTurnCheck();
+			GameManager.Instance.ExtraTurnCheck(attacker);
 
 		}//canTargetHero = True
 
@@ -94,7 +94,7 @@ public class Ability : MonoBehaviour {
 		}
 
 		ResetCooldown();
-		GameManager.Instance.ExtraTurnCheck();
+		GameManager.Instance.ExtraTurnCheck(attacker);
 
 	}
 
@@ -188,6 +188,10 @@ public class Ability : MonoBehaviour {
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		{
 			remainingCooldown -= 1;
+			if(remainingCooldown<0){
+				remainingCooldown = 0;
+
+			}
 
 			//update Button UI
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();

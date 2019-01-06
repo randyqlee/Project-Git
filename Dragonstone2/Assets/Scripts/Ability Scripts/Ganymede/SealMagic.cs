@@ -26,9 +26,9 @@ public class SealMagic : Ability {
 		foreach(HeroManager ally in allies){
 			ally.hasExtraTurn = true;
 		}
-		GameManager.Instance.ExtraTurn();
+		GameManager.Instance.ExtraTurn(attacker);
 
-		base.UseAbility();
+		base.UseAbility(attacker);
 
 
 

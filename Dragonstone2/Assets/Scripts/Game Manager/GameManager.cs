@@ -41,22 +41,10 @@ public class GameManager : MonoBehaviour {
 	public bool extraTurn;
 
 	//Variables used in extra turn
-	[HideInInspector]
-	public List<HeroManager> extraTurnHeroes;
+	// [HideInInspector]
+	// public List<HeroManager> extraTurnHeroes;
 
-	[HideInInspector]
-	public Type skillTypeTemp;
-
-	[HideInInspector]
-	public List<Type> skillTypeTemps;
-
-	[HideInInspector]
-	public Color origColor;
-
-	[HideInInspector]
-	public List<Color> origColors;
-
-
+	
 //for timer bar
 	public float globalATB = 700;
 	public float maxCharacterTurn = 10f;
@@ -787,19 +775,27 @@ public class GameManager : MonoBehaviour {
 	//Checks for Critical Strike Flag and modifies attack damage
 	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
 
-		if(attacker.hasCritical){
-					CriticalStrike(attacker);
-				} else {
-					attackersAttack = attacker.attack;
-				}
+		if(attacker.hasCritical)
+		{
+			CriticalStrike(attacker);
+		} else 
+		{
+			attackersAttack = attacker.attack;
+		}
+		if(defender.hasCritical)
+		{
+			CriticalStrike(defender);
+		} else 		
+		{
+			defendersAttack = defender.attack;
+		}
 
-				if(defender.hasCritical){
-					CriticalStrike(defender);
-				} else {
-					defendersAttack = defender.attack;
-				}
+		//Prevent Negative Damage
+		if(attackersAttack < 0)
+			attackersAttack = 0;
 
-				
+		if(defendersAttack<0)		
+			defendersAttack = 0;				
 
 	}//Critical Strike Check
 
@@ -837,16 +833,30 @@ public class GameManager : MonoBehaviour {
 	//Checks and resolves resolution of Reflect, Echo, and Revenge
 	public void AttackStatusChecks(HeroManager attacker, HeroManager defender){
 
-		if (defender.hasReflect){
+			int attackersDefense = attacker.defense;
+			int defendersDefense = defender.defense;
 
-					atk_damage = attackersAttack-attacker.defense;
+		if(attackersDefense < 0)
+			attackersDefense = 0;
+
+		if(defendersDefense < 0)		
+			defendersDefense = 0;
+
+		if(attackersAttack < 0)
+			attackersAttack = 0;
+
+		if(defendersAttack<0)		
+			defendersAttack = 0;	
+
+		if (defender.hasReflect){									
+					atk_damage = attackersAttack-attackersDefense;
 					attacker.TakeDamage (atk_damage, defender);
 					Debug.Log("Damage Reflected");
 
 					attacker.DisplayDamageText(atk_damage);
 				} else {
 					//Normal Damage	route
-					atk_damage = attackersAttack - defender.defense;
+					atk_damage = attackersAttack - defendersDefense;
 					defender.TakeDamage(atk_damage, attacker);
 					defender.DisplayDamageText(atk_damage);
 				}
@@ -854,7 +864,7 @@ public class GameManager : MonoBehaviour {
 				//Revenge
 				if (defender.hasRevenge)
 				{
-						atk_damage = defendersAttack-attacker.defense;
+						atk_damage = defendersAttack-attackersDefense;
 						attacker.TakeDamage (atk_damage, defender);
 						Debug.Log("Revenge!");
 
@@ -864,7 +874,7 @@ public class GameManager : MonoBehaviour {
 				//Echo
 				if(attacker.hasEcho)
 				{
-					atk_damage = attackersAttack-attacker.defense;
+					atk_damage = attackersAttack-attackersDefense;
 					attacker.TakeDamage (atk_damage, attacker);				
 					Debug.Log("Echo Damage");
 
@@ -916,7 +926,7 @@ public class GameManager : MonoBehaviour {
 
 	}
 
-	public void ExtraTurn()
+	public void ExtraTurn(HeroManager source)
 	{
 
 		if(!extraTurn){
@@ -926,12 +936,14 @@ public class GameManager : MonoBehaviour {
 			extraTurn = true;
 			isTurnPaused = true;
 
+			List<HeroManager> extraTurnHeroes = AllyHeroList(source);
+
 			//Check which heroes are active during the extra turn
 			foreach(HeroManager extraTurnHero in extraTurnHeroes){
 
 				if(!extraTurnHero.hasExtraTurn)
 				{				
-					skillTypeTemps = new List<Type>();
+					
 
 					//Disable access to Skills	
 					extraTurnHero.heroPanel.SetActive(true);
@@ -939,15 +951,13 @@ public class GameManager : MonoBehaviour {
 					for(int i = 0; i <skillsButton.Count; i++)
 					{
 						skillsButton[i].interactable = false;
-						//store the skill Type information
-						//skillTypeTemps[j] = skillsButton[i].GetComponent<Ability>().skillType;
+						
 						skillsButton[i].GetComponent<Ability>().skillType = Type.ExtraTurn;
 					}				
 					extraTurnHero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
 
 					//Grey Out heroes not available in extra turn
 								
-					//origColor = extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color;
 					extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.grey;			
 			
 
@@ -964,7 +974,9 @@ public class GameManager : MonoBehaviour {
 
 	}//Extra Turn
 
-	public void ExtraTurnCheck(){
+	public void ExtraTurnCheck(HeroManager source){
+
+		List<HeroManager> extraTurnHeroes = AllyHeroList(source);
 
 		if(!isTurnPaused){	
 

@@ -148,9 +148,23 @@ public class HeroManager : MonoBehaviour
 	public void UpdateUI ()
 	{
 		healthText.text = maxHealth.ToString();
-		attackText.text = attack.ToString();
-		defenseText.text = defense.ToString();
+
+		//Display 0 instead of a negative number
+		if(attack < 0){
+			attackText.text = "0";			
+		} else {			
+			attackText.text = attack.ToString();
+		}
+		
+		//Display 0 instead of a negative number
+		if(defense < 0){
+			defenseText.text = "0";
+		} else {
+			defenseText.text = defense.ToString();
+		}
+
 		shieldText.text = shield.ToString();
+
 		UpdateHealthBar();
 	}
 
@@ -204,6 +218,8 @@ public class HeroManager : MonoBehaviour
 	public void TakeDamage(int damage, HeroManager source)
 	{
 
+		if(damage < 0)
+			damage = 0;
 		
 		if(hasBrand){
 
@@ -231,8 +247,7 @@ public class HeroManager : MonoBehaviour
 			e_TakeDamage();
 			e_PopupMSG(damage.ToString());
 		}//shield
-		}	
-		
+		}			
 		
 	}
 

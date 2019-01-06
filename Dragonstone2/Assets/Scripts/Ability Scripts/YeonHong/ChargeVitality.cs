@@ -26,18 +26,17 @@ public class ChargeVitality : Ability {
 
 		//Get allies list and set who will have extra turn
 		List<HeroManager> allies = GameManager.Instance.AllyHeroList(attacker);
-		//use static nature of GameManager to store the list in the variable there, as opposed to passing arguements
-		GameManager.Instance.extraTurnHeroes = allies;
+		
 
 		//Select which ally shall have an extra turn
-		foreach(HeroManager ally in GameManager.Instance.extraTurnHeroes){
+		foreach(HeroManager ally in allies){
 			if(ally == attacker || ally == defender){
 				ally.hasExtraTurn = true;
 			}//if
 		}//foreach		
-		GameManager.Instance.ExtraTurn();
+		GameManager.Instance.ExtraTurn(attacker);
 
-		base.UseAbility();				
+		base.UseAbility(attacker);				
 
 	}//UseAbility
 

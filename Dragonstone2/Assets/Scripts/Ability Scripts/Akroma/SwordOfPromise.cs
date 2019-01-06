@@ -6,12 +6,6 @@ public class SwordOfPromise : Ability {
 
 	int targetCount;
 
-	public override void UseAbility ()
-	{
-		//Debug.Log ("Using  SwordOfPromise");
-
-	}
-
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
 		//Debug.Log ("Using SwordOfPromise: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
@@ -23,7 +17,7 @@ public class SwordOfPromise : Ability {
 			SealOfLightTrigger(attacker, defender);			
 		} else {
 			ResetCooldown();
-			GameManager.Instance.ExtraTurnCheck();			
+			GameManager.Instance.ExtraTurnCheck(attacker);			
 		}
 		
 		
