@@ -15,6 +15,8 @@ public class MyCollection : MonoBehaviour {
 
 	public GameObject mainMenu;
 
+	public PlayerDeck playerDeck;
+
 
 
 	// Use this for initialization
@@ -23,6 +25,8 @@ public class MyCollection : MonoBehaviour {
 		allHeroAssets = Resources.LoadAll <HeroAsset> ("SO Assets/Hero/Final");
 
 		GetComponentInChildren<AllHeroesList>().InitializeHeroPanel();
+
+		playerDeck = GameObject.FindObjectOfType<PlayerDeck>();
 		
 	}
 	
@@ -35,7 +39,7 @@ public class MyCollection : MonoBehaviour {
 	{
 		foreach (HeroAsset heroAsset in playerDeckHeroAssets)
 		{
-			PlayerDeck.heroAssets.Add(heroAsset);
+			playerDeck.heroAssets.Add(heroAsset);
 			GameObject.Find("Data Controller").gameObject.GetComponent<DataController>().SaveGameData(heroAsset);
 		}
 
