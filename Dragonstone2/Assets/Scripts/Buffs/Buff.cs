@@ -32,6 +32,7 @@ public class Buff : MonoBehaviour{
 	void Start ()
 	{
 		GameManager.Instance.e_NextTurn += DecreaseDuration;
+		Debug.Log("Buff Subscribed" +GetComponentInParent<Player>());
 		
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
@@ -43,6 +44,7 @@ public class Buff : MonoBehaviour{
 	public void DecreaseDuration ()
 	{
 		if (GetComponentInParent<Player>().isActive)
+		//Debug.Log("Buff Decrease Duration" +GetComponentInParent<Player>());
 		{
 			this.duration--;
 
@@ -59,8 +61,9 @@ public class Buff : MonoBehaviour{
 
 	public virtual void OnDestroy()
 	{
-		gameObject.GetComponent<HeroManager>().UpdateUI();
-		RemoveIcon();
+		gameObject.GetComponent<HeroManager>().UpdateUI();		
+		
+		RemoveIcon();		
 		//remove from HeroManager
 		//unsubscribe
 		GameManager.Instance.e_NextTurn -= DecreaseDuration;

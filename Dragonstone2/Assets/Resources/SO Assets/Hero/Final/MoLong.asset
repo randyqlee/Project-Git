@@ -28,7 +28,7 @@ MonoBehaviour:
 
 '
     abilityEffect: SequentialAttack
-    abilityCoolDown: 1
+    abilityCoolDown: 0
     target: 0
     abilityBuffs: []
     abilityDebuffs:

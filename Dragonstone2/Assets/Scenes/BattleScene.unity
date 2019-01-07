@@ -657,7 +657,7 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 1524e78b3b51fd34c9f6beefc3fdca1b,
+      objectReference: {fileID: 11400000, guid: 527f523501a1d414ca1a0f7191f0254b,
         type: 2}
     - target: {fileID: 114219961264691276, guid: 5bcfa4a0bd513d44a9bd6cc43cd68c06,
         type: 2}
@@ -717,7 +717,7 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f966100243e65714cb7858c591c598a8,
+      objectReference: {fileID: 11400000, guid: 5e50ca4d786c2d64790440c6c8d124c0,
         type: 2}
     - target: {fileID: 114850609324458544, guid: 561a0f8280bb7244f8af998fd59b812d,
         type: 2}
@@ -735,7 +735,7 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: be32dbf0b66de334180d95f0602b9796,
+      objectReference: {fileID: 11400000, guid: 20b5ecb95b27c884098086676952a383,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561a0f8280bb7244f8af998fd59b812d, type: 2}

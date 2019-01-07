@@ -196,6 +196,8 @@ public class Ability : MonoBehaviour {
 			//update Button UI
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
+
+		
 	}//GameManager Next Turn
 
 	

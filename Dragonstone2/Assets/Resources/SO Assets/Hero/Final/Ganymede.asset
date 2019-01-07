@@ -26,7 +26,7 @@ MonoBehaviour:
     description: 'Serenity:  Critical attack an enemy with a chance to inflict Crippled
       Strike for 2 turns.'
     abilityEffect: Serenity
-    abilityCoolDown: 1
+    abilityCoolDown: 0
     target: 0
     abilityBuffs: []
     abilityDebuffs:

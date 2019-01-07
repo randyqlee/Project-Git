@@ -12,3 +12,8 @@
 
 23 Dec 2018
 1.  Negative life due to non-attack effects does not kill the Hero
+
+5 Jan 2019
+1.  Buffs/Debuffs duration counter should be decreased according to the receiving hero's player turn.  Example: a 1 turn stun is useless given it resolves at the start of receiving player's turn. 
+    a.  Implem check buff/debuff at decrease duration of buffs debuffs.  
+2.  Improve ExtraTurn codesmell - used static variable in GM

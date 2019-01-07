@@ -6,6 +6,7 @@ using UnityEngine;
 
 
 public class SpearOfDevastation : Ability {
+	
 
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
@@ -32,8 +33,6 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			ability.MaxCooldown();
 		}
 		defender.heroPanel.SetActive(false);
-
-
 
 		base.UseAbility(attacker);
 
