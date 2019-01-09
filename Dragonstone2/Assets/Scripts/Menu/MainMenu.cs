@@ -10,14 +10,6 @@ public class MainMenu : MonoBehaviour {
 	public GameObject myCollection;
 
 
-  private void Awake()
-     {
-         //Set screen size for Standalone
- #if UNITY_STANDALONE
-         Screen.SetResolution(480, 800, false);
-         Screen.fullScreen = false;
- #endif
-     }
 
 	public HeroAsset[] heroAssets;
 

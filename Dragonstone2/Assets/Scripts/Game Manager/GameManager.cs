@@ -67,12 +67,9 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//start ONLY if there are 2 players in the game
-
 		StartCoroutine (GameLoop());
 
 	}
-
 
 	public void BattleTextMessage(string message)
 	{

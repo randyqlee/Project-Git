@@ -2418,16 +2418,11 @@ MonoBehaviour:
   hasDefender: 0
   hasTaunt: 0
   hasRecovery: 0
-  hasEndure: 0
   hasCrippledStrike: 0
   hasEcho: 0
   hasMalaise: 0
   hasUnhealable: 0
-  hasAntiBuff: 0
-  hasBrand: 0
-  hasSilence: 0
   hasPermanentImmunity: 0
-  hasExtraTurn: 0
 --- !u!114 &114399492823967910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2718,16 +2713,11 @@ MonoBehaviour:
   hasDefender: 0
   hasTaunt: 0
   hasRecovery: 0
-  hasEndure: 0
   hasCrippledStrike: 0
   hasEcho: 0
   hasMalaise: 0
   hasUnhealable: 0
-  hasAntiBuff: 0
-  hasBrand: 0
-  hasSilence: 0
   hasPermanentImmunity: 0
-  hasExtraTurn: 0
 --- !u!114 &114474104277636794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2808,16 +2798,11 @@ MonoBehaviour:
   hasDefender: 0
   hasTaunt: 0
   hasRecovery: 0
-  hasEndure: 0
   hasCrippledStrike: 0
   hasEcho: 0
   hasMalaise: 0
   hasUnhealable: 0
-  hasAntiBuff: 0
-  hasBrand: 0
-  hasSilence: 0
   hasPermanentImmunity: 0
-  hasExtraTurn: 0
 --- !u!114 &114508289885572010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3698,16 +3683,11 @@ MonoBehaviour:
   hasDefender: 0
   hasTaunt: 0
   hasRecovery: 0
-  hasEndure: 0
   hasCrippledStrike: 0
   hasEcho: 0
   hasMalaise: 0
   hasUnhealable: 0
-  hasAntiBuff: 0
-  hasBrand: 0
-  hasSilence: 0
   hasPermanentImmunity: 0
-  hasExtraTurn: 0
 --- !u!114 &114831661447262068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4048,13 +4028,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1437261336237860}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ddc566d63163e246ab5ec536f3a08c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroAssets: []
-  playerDeck: {fileID: 0}
 --- !u!114 &114990811697390958
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -7,19 +7,16 @@ public class TestDeck : MonoBehaviour {
 
 	public List<HeroAsset> heroAssets;
 
-	public PlayerDeck playerDeck;
-
 	// Use this for initialization
 	void Start () {
 
-		 GetComponent<Deck>().heroes.Clear();
-		 playerDeck = GameObject.FindObjectOfType<PlayerDeck>();
-		 foreach (HeroAsset heroAsset in playerDeck.heroAssets)
-		{
-			GetComponent<Deck>().heroes.Add(heroAsset);
+		// GetComponent<Deck>().heroes.Clear();
+		// foreach (HeroAsset heroAsset in PlayerDeck.heroAssets)
+		// {
+		// 	GetComponent<Deck>().heroes.Add(heroAsset);
 
-			heroAssets.Add(heroAsset);
-		}
+		// 	heroAssets.Add(heroAsset);
+		// }
 		
 
 

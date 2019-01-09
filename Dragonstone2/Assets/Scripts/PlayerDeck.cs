@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeck : MonoBehaviour {
+public static class PlayerDeck {
 
-	public List<HeroAsset> heroAssets;
-
-	void Start () {
-
-		heroAssets = new List<HeroAsset>();
-		DontDestroyOnLoad(gameObject);
-		
-	}
+	public static List<HeroAsset> heroAssets = new List<HeroAsset>();
 
 /*
 properties accessor?
