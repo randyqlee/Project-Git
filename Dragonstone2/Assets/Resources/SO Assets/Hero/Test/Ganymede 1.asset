@@ -27,11 +27,11 @@ MonoBehaviour:
       Strike for 2 turns.'
     abilityEffect: Serenity
     abilityCoolDown: 1
-    target: 1
-    abilityBuffs:
-    - buff: 2
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 5
       duration: 2
-    abilityDebuffs: []
   - abilityName: Ventilate
     skillType: 0
     icon: {fileID: 21300000, guid: 493934afdc63c5546a30d7e4d910fa12, type: 3}

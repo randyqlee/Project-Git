@@ -26,7 +26,7 @@ MonoBehaviour:
     description: 'Essence Explosion:  Attack and enemy with a chance to Decrease Defense
       for 2 turns.'
     abilityEffect: EssenceExplosion
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs:
     - buff: 6

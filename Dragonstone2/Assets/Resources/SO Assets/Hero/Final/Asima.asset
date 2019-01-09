@@ -25,7 +25,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: fe55739cd5b597c4283eb056af01e295, type: 3}
     description: Attack an enemy with a chance to inflict Poison for 2 turns.
     abilityEffect: Wound
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:

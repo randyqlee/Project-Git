@@ -32,7 +32,6 @@ public class Debuff : MonoBehaviour{
 	void Start ()
 	{
 		GameManager.Instance.e_NextTurn += DecreaseDuration;
-		Debug.Log("Debuff Subscribed: " +GetComponentInParent<Player>());
 
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
@@ -43,14 +42,9 @@ public class Debuff : MonoBehaviour{
 
 	public virtual void DecreaseDuration ()
 	{
-		if (GetComponentInParent<Player>().isActive)
-		Debug.Log("Debuff Decrease Duration" +GetComponentInParent<Player>());
+		if (!GetComponentInParent<Player>().isActive)
 		{
 			this.duration--;
-
-			if(this.duration<0)
-			this.duration = 0;
-
 			if (this.duration == 0)
 				Destroy (this);
 			else

@@ -29,7 +29,7 @@ MonoBehaviour:
     description: 'Sword of Promise:  Attack an enemy.  If the enemy dies, silence
       another random enemy for 2 turns. '
     abilityEffect: SwordOfPromise
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs: []

@@ -26,7 +26,7 @@ MonoBehaviour:
     description: 'Power Surge: Attack an enemy.  Transfer a random debuff from you
       to the enemy.'
     abilityEffect: PowerSurge
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:

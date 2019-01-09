@@ -26,7 +26,7 @@ MonoBehaviour:
     description: 'TouchOfSeduction: Attack an enemy with a chance to inflict Poison
       for 2 turns.'
     abilityEffect: TouchOfSeduction
-    abilityCoolDown: 0
+    abilityCoolDown: 1
     target: 0
     abilityBuffs: []
     abilityDebuffs:

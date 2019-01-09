@@ -24,9 +24,6 @@ public class GameManager : MonoBehaviour {
 	public delegate void Event_HeroKilled();
 	public event Event_HeroKilled e_HeroKilled = delegate {};
 
-	public delegate void Event_NewTurn();
-	public event Event_NewTurn e_NewTurn = delegate {};
-
 	// public delegate void Ability_Completed();
 	// public event Ability_Completed e_AbilityCompleted = delegate {};	
 
@@ -189,16 +186,6 @@ public class GameManager : MonoBehaviour {
 		yield return null;
 	}//InitHeroUI
 
-	// IEnumerator EndTurnPhase(){
-	// 	EndTurn();
-	// 	yield return null;
-	// }
-
-	// IEnumerator StartTurnPhase(){
-	// 	e_NewTurn();
-	// 	yield return null;
-	// }
-
 	
 	// Update is called once per frame
 	void Update () {
@@ -206,8 +193,6 @@ public class GameManager : MonoBehaviour {
 		if (Input.GetKeyDown ("a"))
 		{
 			EndTurn();
-			//StartCoroutine(EndTurnPhase());
-			//StartCoroutine(StartTurnPhase());
 		}	
 	}
 
@@ -401,13 +386,10 @@ public class GameManager : MonoBehaviour {
 			
 			if (ATBCoroutine != null)
 			StopCoroutine (ATBCoroutine);
-
 			StartATBCoroutine ();
 
 			if (!isTurnPaused)
 			{
-				//end of turn		
-				//e_NewTurn();
 
 				if (players[0].isActive)
 						{
@@ -454,23 +436,18 @@ public class GameManager : MonoBehaviour {
 							}
 
 							BattleTextMessage ("Player 1");
-							
 					}
-					//e_NewTurn();
 
 				//trigger delegates for next turn - ex. decrease cooldown for abilities
-				e_NextTurn();		
+				e_NextTurn();			
 				
 			}
-			
-		}	
-
-		//delegate here	
+		}		
 	}
 
 	IEnumerator StartAttackSequence()
 	{
-		//e_NewTurn();
+
 		
 		tempTimer = maxCharacterTurn;
 		while (tempTimer >0)
@@ -483,15 +460,11 @@ public class GameManager : MonoBehaviour {
 
 		
 		timerBar.fillAmount = 1;
-
-		
 		NextTurn ();
-		
 	}
 
 	void StartATBCoroutine ()
 	{
-		
 		ATBCoroutine = StartAttackSequence();
 		StartCoroutine (ATBCoroutine);
 	}
@@ -950,11 +923,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void EndTurn(){
-		
 		CheckHealth ();
 		DeselectAllHeroes ();
 		NextTurn();
-		e_NewTurn();
+
 	}
 
 	public void ExtraTurn(HeroManager source)
@@ -1046,8 +1018,6 @@ public class GameManager : MonoBehaviour {
 			//set Extra Turn to false and End the Turn
 			extraTurn = false;
 			EndTurn();
-			//StartCoroutine(EndTurnPhase());
-			//StartCoroutine(StartTurnPhase());
 
 		} else {		
 			
