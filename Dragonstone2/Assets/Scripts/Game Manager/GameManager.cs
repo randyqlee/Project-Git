@@ -425,7 +425,7 @@ public class GameManager : MonoBehaviour {
 	IEnumerator PlayerStartPhase(){		
 		
 		e_PlayerStartPhase();
-		Debug.Log("Player Start Phase");
+		//Debug.Log("Player Start Phase");
 		yield return null;
 		
 	}
@@ -433,7 +433,7 @@ public class GameManager : MonoBehaviour {
 	IEnumerator PlayerMainPhase(){
 		
 		e_PlayerMainPhase();
-		Debug.Log("Player Main Phase");
+		//Debug.Log("Player Main Phase");
 		
 		//Start Timer
 		if (!IsGameOver())
@@ -448,7 +448,7 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator PlayerEndPhase(){
 		e_PlayerEndPhase();
-		Debug.Log("Player End Phase");
+		//Debug.Log("Player End Phase");
 
 		yield return null;
 		
@@ -461,7 +461,7 @@ public class GameManager : MonoBehaviour {
 				SwitchActivePlayers();			
 				
 			}		
-		Debug.Log("Player Transition");
+		//Debug.Log("Player Transition");
 		yield return null;
 		
 	}
@@ -744,7 +744,7 @@ public class GameManager : MonoBehaviour {
 		}
 
 		target.E_PopupMSG(buffName);
-		Debug.Log("Add Buff" +buffName);
+		//Debug.Log("Add Buff" +buffName);
 
 	}//AddBuff
 

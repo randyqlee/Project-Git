@@ -64,10 +64,7 @@ public class Buff : MonoBehaviour{
 		//remove from HeroManager
 		//unsubscribe
 		GameManager.Instance.e_PlayerStartPhase -= DecreaseDuration;
-		Destroy(this);
-
-		
-		
+		Destroy(this);		
 	}
 
 	public void AddIcon()

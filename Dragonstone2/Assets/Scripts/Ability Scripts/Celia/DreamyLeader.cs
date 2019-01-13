@@ -43,8 +43,10 @@ public class DreamyLeader : Ability {
 
 				if(buffs.Length > 0){
 					Buff buff = buffs[Random.Range(0,buffs.Length)];
-					buff.OnDestroy();
-					Debug.Log("Buff Destroyed: " +buff +" from hero: " +enemy );
+					
+					//buff.OnDestroy();					
+					Destroy(buff);
+					//Debug.Log("Buff Destroyeda " +buff +" from hero: " +enemy );
 				}
 
 			}		

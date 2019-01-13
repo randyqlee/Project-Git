@@ -51,9 +51,9 @@ public class HeroManager : MonoBehaviour
 
 	public int origHealth;
 
-	[HideInInspector]
+	
 	public int origAttack, origDefense, origShield;
-	[HideInInspector]
+	
 	public float origChance;
 
 	

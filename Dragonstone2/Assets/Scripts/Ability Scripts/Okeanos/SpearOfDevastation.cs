@@ -20,7 +20,8 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 		Buff[] buffs = defender.GetComponents<Buff>();
 		if(buffs.Length > 0){
 			Buff buff = buffs[Random.Range(0,buffs.Length)];
-			buff.OnDestroy();
+			//buff.OnDestroy();
+			Destroy(buff);
 
 		}
 
