@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 703
   attack: 79
   defense: 65
-  chance: 50
+  chance: 200
   rarity: 3
   abilityAsset: []
   abilityAsset2:

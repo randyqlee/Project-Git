@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Ragdoll 1
+  m_EditorClassIdentifier: 
+  heroName: Ragdoll
+  image: {fileID: 21300000, guid: 403f1115b4cfd6741a0eab24dadc0ba9, type: 3}
+  maxHealth: 769
+  attack: 71
+  defense: 66
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Dragon's Might
+    skillType: 0
+    icon: {fileID: 21300000, guid: 8b284a2db031cd54385efe4d787c1de5, type: 3}
+    description: 'Dragon''s Might: Attack an enemy with a chance to critical strike.  Inflict
+      Poison for 2 turns if you land a Critical Hit.'
+    abilityEffect: DragonsMight
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Torrent
+    skillType: 0
+    icon: {fileID: 21300000, guid: 37533639f08fa14438bc8738e1902a40, type: 3}
+    description: 'Torrent: Attack an enemy, if your HP is below 250, Ignore enemy
+      defense.  Attacks deal additional 35 damage for each 100 HP ragdoll loses.
+
+
+'
+    abilityEffect: Torrent
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Tooth for a Tooth
+    skillType: 1
+    icon: {fileID: 21300000, guid: 8004bb3687eedd84eb5ab1238d2a91d4, type: 3}
+    description: 'Tooth For a Tooth:  An ally gains Lucky for 2 turns when hit by
+      a critical attack. [Automatic Effect]
+
+'
+    abilityEffect: ToothForATooth
+    abilityCoolDown: 0
+    target: 1
+    abilityBuffs: []
+    abilityDebuffs: []

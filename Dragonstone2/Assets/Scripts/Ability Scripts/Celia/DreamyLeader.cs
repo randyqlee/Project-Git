@@ -62,7 +62,7 @@ public class DreamyLeader : Ability {
 
 			}		
 
-		}		
+		}//if playerisActive		
 
 		//base.UseAbility(attacker);		
 

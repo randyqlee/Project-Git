@@ -80,6 +80,9 @@ public class HeroManager : MonoBehaviour
 	public bool hasBrand;
 	public bool hasSilence;
 
+	[HideInInspector]
+	public bool hitByCritical;
+
 	public delegate void Event_PopupMsg(string message);
 	public event Event_PopupMsg e_PopupMSG = delegate {};
 
@@ -90,7 +93,7 @@ public class HeroManager : MonoBehaviour
 	//[HideInInspector]
 	public bool hasExtraTurn;
 
-
+	
 
 	void Awake () {
 
@@ -191,7 +194,6 @@ public class HeroManager : MonoBehaviour
 		heroPanel.SetActive(false);		
 
 	}
-
 
 	public void DisplayDamageText (int damage)
 	{

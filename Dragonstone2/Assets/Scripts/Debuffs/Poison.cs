@@ -20,6 +20,7 @@ public class Poison : Debuff {
 		if (GetComponentInParent<Player>().isActive)
 		{
 			gameObject.GetComponent<HeroManager>().maxHealth -= debuff.value;
+			GameManager.Instance.CheckHealth();
 		}
 
 		base.DecreaseDuration();

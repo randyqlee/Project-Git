@@ -373,7 +373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.17919515}
-  m_AnchoredPosition: {x: 85.19995, y: 30.799835}
+  m_AnchoredPosition: {x: 85.19995, y: 30.799805}
   m_SizeDelta: {x: -170.4, y: -60.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &619428369
@@ -717,13 +717,13 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 5a3b6835002e52d44b82741df7e6ad8c,
+      objectReference: {fileID: 11400000, guid: 571e8ffa753f14d4db4a565e4d08926c,
         type: 2}
     - target: {fileID: 114850609324458544, guid: 561a0f8280bb7244f8af998fd59b812d,
         type: 2}
       propertyPath: heroes.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: b9e4f4e4276bb5c4996c7f614d467d87,
+      objectReference: {fileID: 11400000, guid: 9c07b153a4880d148942550893a3aaec,
         type: 2}
     - target: {fileID: 114850609324458544, guid: 561a0f8280bb7244f8af998fd59b812d,
         type: 2}

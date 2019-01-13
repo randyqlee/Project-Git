@@ -21,8 +21,7 @@ public class GameManager : MonoBehaviour {
 	// public event Event_NextTurn e_NextTurn = delegate {};	
 
 	public delegate void Event_HeroKilled();
-	public event Event_HeroKilled e_HeroKilled = delegate {};
-	
+	public event Event_HeroKilled e_HeroKilled = delegate {};	
 
 	public delegate void Event_PlayerStartPhase();
 	public event Event_PlayerStartPhase e_PlayerStartPhase = delegate {};
@@ -32,6 +31,9 @@ public class GameManager : MonoBehaviour {
 
 	public delegate void Event_PlayerEndPhase();
 	public event Event_PlayerEndPhase e_PlayerEndPhase = delegate {};	
+
+	public delegate void Event_CriticalStrike();
+	public event Event_CriticalStrike e_CriticalStrike = delegate {};
 
 	public bool isInitialTurn = true;
 
@@ -857,14 +859,14 @@ public class GameManager : MonoBehaviour {
 
 		if(attacker.hasCritical)
 		{
-			CriticalStrike(attacker);
+			CriticalStrike(attacker, defender);
 		} else 
 		{
 			attackersAttack = attacker.attack;
 		}
 		if(defender.hasCritical)
 		{
-			CriticalStrike(defender);
+			CriticalStrike(defender, attacker);
 		} else 		
 		{
 			defendersAttack = defender.attack;
@@ -879,7 +881,7 @@ public class GameManager : MonoBehaviour {
 
 	}//Critical Strike Check
 
-	public void CriticalStrike(HeroManager source){
+	public void CriticalStrike(HeroManager source, HeroManager target){
 
 		//50% chance for critical strike to be x2 or x3 damage
 		if (1-Random.value < 0.5)
@@ -891,6 +893,9 @@ public class GameManager : MonoBehaviour {
 			attackersAttack = 3*source.attack;
 		}
 		BattleTextMessage("Critical Strike: " +attackersAttack);
+		target.hitByCritical = true;
+
+		e_CriticalStrike();
 		
 	}//CriticalStrike	
 
