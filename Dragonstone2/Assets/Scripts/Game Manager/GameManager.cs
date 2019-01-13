@@ -1022,6 +1022,10 @@ public class GameManager : MonoBehaviour {
 			extraTurn = true;
 			isTurnPaused = true;
 
+			if (ATBCoroutine != null)
+			StopCoroutine (ATBCoroutine);
+	 		StartATBCoroutine ();
+
 			List<HeroManager> extraTurnHeroes = AllyHeroList(source);
 
 			//Check which heroes are active during the extra turn

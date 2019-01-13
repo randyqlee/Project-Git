@@ -75,6 +75,7 @@ public class Buff : MonoBehaviour{
 
 	public void RemoveIcon()
 	{
+		if(buffPanel != null)
 		buffPanel.RemoveIcon (buff.buff.ToString());
 	}
 

@@ -18,7 +18,9 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 
 		//Remove a buff
 		Buff[] buffs = defender.GetComponents<Buff>();
+
 		if(buffs.Length > 0){
+			Debug.Log("Buffs: " +buffs[0]);
 			Buff buff = buffs[Random.Range(0,buffs.Length)];
 			//buff.OnDestroy();
 			Destroy(buff);
