@@ -895,7 +895,7 @@ public class GameManager : MonoBehaviour {
 		BattleTextMessage("Critical Strike: " +attackersAttack);
 		target.hitByCritical = true;
 
-		e_CriticalStrike();
+		//e_CriticalStrike();
 		
 	}//CriticalStrike	
 
@@ -965,6 +965,12 @@ public class GameManager : MonoBehaviour {
 
 					attacker.DisplayDamageText(atk_damage);
 				} 
+
+				if(attacker.hasCritical){
+					e_CriticalStrike();
+				}else if(defender.hasCritical){
+					e_CriticalStrike();
+				}
 
 	}
 
