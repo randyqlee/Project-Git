@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour {
 		transform.Find("UI").gameObject.transform.Find("Turn Timer").gameObject.SetActive(true);
 
 		//NextTurn();
-		StartCoroutine(PlayerTurn2());
+		StartCoroutine(PlayerTurnEnd());
 		yield return null;
 	}
 
@@ -396,36 +396,45 @@ public class GameManager : MonoBehaviour {
 	// 	}		
 	// }//Next Turn
 
-	IEnumerator PlayerTurn1(){
+	IEnumerator PlayerTurnStart(){
 		
+		StopCoroutine(PlayerTurnEnd());
+
 		yield return StartCoroutine(PlayerStartPhase());
 
 		yield return StartCoroutine(PlayerMainPhase());
 
+		//yield return StartCoroutine(PlayerEndPhase());
+
+		yield return null;
+
 	}
 
-	IEnumerator PlayerTurn2(){
+	IEnumerator PlayerTurnEnd(){
+		
+		StopCoroutine(PlayerTurnStart());
 		
 		yield return StartCoroutine(PlayerEndPhase());
 
 		yield return StartCoroutine(PlayerTransition());
 
-		yield return StartCoroutine(PlayerTurn1());
+		yield return StartCoroutine(PlayerTurnStart());
 
 	}
-
-
 
 	IEnumerator PlayerStartPhase(){		
 		
 		e_PlayerStartPhase();
 		Debug.Log("Player Start Phase");
 		yield return null;
+		
 	}
 
 	IEnumerator PlayerMainPhase(){
 		
+		e_PlayerMainPhase();
 		Debug.Log("Player Main Phase");
+		
 		//Start Timer
 		if (!IsGameOver())
 		{			
@@ -434,14 +443,15 @@ public class GameManager : MonoBehaviour {
 			StartATBCoroutine ();
 		}
 	
-		e_PlayerMainPhase();
-		yield return null;
+		yield return null;	
 	}
 
 	IEnumerator PlayerEndPhase(){
 		e_PlayerEndPhase();
 		Debug.Log("Player End Phase");
+
 		yield return null;
+		
 	}
 
 	IEnumerator PlayerTransition(){
@@ -453,6 +463,7 @@ public class GameManager : MonoBehaviour {
 			}		
 		Debug.Log("Player Transition");
 		yield return null;
+		
 	}
 	
 
@@ -524,7 +535,7 @@ public class GameManager : MonoBehaviour {
 		timerBar.fillAmount = 1;
 
 		//NextTurn ();
-		StartCoroutine(PlayerTurn2());
+		StartCoroutine(PlayerTurnEnd());
 	}
 
 	void StartATBCoroutine ()
@@ -733,6 +744,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		target.E_PopupMSG(buffName);
+		Debug.Log("Add Buff" +buffName);
+
 	}//AddBuff
 
 	// public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
@@ -990,7 +1003,7 @@ public class GameManager : MonoBehaviour {
 		CheckHealth ();
 		DeselectAllHeroes ();
 		//NextTurn();
-		StartCoroutine(PlayerTurn2());
+		StartCoroutine(PlayerTurnEnd());
 
 	}
 

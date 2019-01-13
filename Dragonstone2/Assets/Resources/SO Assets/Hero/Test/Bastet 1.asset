@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 714
   attack: 81
   defense: 62
-  chance: 105
+  chance: 200
   rarity: 3
   abilityAsset: []
   abilityAsset2:
@@ -54,9 +54,9 @@ MonoBehaviour:
     target: 1
     abilityBuffs:
     - buff: 4
-      duration: 3
+      duration: 10
     - buff: 5
-      duration: 3
+      duration: 10
     - buff: 2
-      duration: 3
+      duration: 10
     abilityDebuffs: []

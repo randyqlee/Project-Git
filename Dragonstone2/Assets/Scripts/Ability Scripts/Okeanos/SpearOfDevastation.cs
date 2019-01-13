@@ -31,13 +31,10 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			//Debug.Log("Abiltiies: " +ability.name);
 			ability.MaxCooldown();
 		}
+
 		defender.heroPanel.SetActive(false);
 
-
-
-		base.UseAbility(attacker);
-
-		
+		base.UseAbility(attacker);		
 
 	}
 
