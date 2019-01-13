@@ -23,7 +23,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			if(buffs.Length > 0){
 				Buff buff = buffs[Random.Range(0, buffs.Length)];
 				//Debug.Log("Buff Removed from " +enemy.name +": " +buff.buff.name);
-				buff.OnDestroy();
+				Destroy(buff);
 			}
 		}
 

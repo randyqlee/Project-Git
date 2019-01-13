@@ -42,7 +42,7 @@ public class Shield : Buff {
 
 		if (remainingShield <= 0){
 			
-			OnDestroy();		
+			//OnDestroy();		
 			Destroy(this);
 			
 		}

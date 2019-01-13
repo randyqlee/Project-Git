@@ -35,7 +35,7 @@ public class BladeFan : Ability {
 		if(buffs.Length <=3){
 			foreach(Buff buff in buffs){
 					
-				buff.OnDestroy();
+				Destroy(buff);
 				
 					
 			}
@@ -46,7 +46,8 @@ public class BladeFan : Ability {
 			Shuffle(buffs);
 			for(int i =0; i<3; i++){
 				//need to randomize
-				buffs[i].OnDestroy();
+				//buffs[i].OnDestroy();
+				Destroy(buffs[i]);
 						
 			}
 			

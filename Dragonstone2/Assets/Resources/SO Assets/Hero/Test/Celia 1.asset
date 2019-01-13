@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Celia 1
+  m_EditorClassIdentifier: 
+  heroName: Celia
+  image: {fileID: 21300000, guid: 01d0aaeafd3dfcc40a98a300ae1094df, type: 3}
+  maxHealth: 780
+  attack: 63
+  defense: 74
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Tempting Dream
+    skillType: 0
+    icon: {fileID: 21300000, guid: a0018fe5bc7c9ab448e2a5762cc152e1, type: 3}
+    description: 'Tempting Dream: Attack an enemy with a chance to stun for 1 turn.
+      Deal additonal damage equivalent to your chance.'
+    abilityEffect: TemptingDream
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
+  - abilityName: Nightmare Melody
+    skillType: 0
+    icon: {fileID: 21300000, guid: 6f6e650decd047d4eb669d19f172d9e2, type: 3}
+    description: 'Nightmare Melody: Poison all enemies for 2 turns with a chance to
+      Stun for 1 turn.
+
+
+'
+    abilityEffect: NightmareMelody
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
+  - abilityName: Dreamy Leader
+    skillType: 1
+    icon: {fileID: 21300000, guid: df93469ce906d8840b6f88e90c30ed83, type: 3}
+    description: 'Dreamy Leader (Passive): Removes a random buff on an enemy every
+      turn and stun it for 1 turn if a buff is removed this way. [Automatic Effect]'
+    abilityEffect: DreamyLeader
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

@@ -12,6 +12,7 @@
 	Poison,
 	AntiBuff,
 	Brand,
+	Bomb,
 
 	//AbilityRelatedDebuffs
 	ChargeVitalityStun,

@@ -26,7 +26,7 @@ MonoBehaviour:
     description: 'Tempting Dream: Attack an enemy with a chance to stun for 1 turn.
       Deal additonal damage equivalent to your chance.'
     abilityEffect: TemptingDream
-    abilityCoolDown: 1
+    abilityCoolDown: 0
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -41,7 +41,7 @@ MonoBehaviour:
 
 '
     abilityEffect: NightmareMelody
-    abilityCoolDown: 1
+    abilityCoolDown: 3
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -53,7 +53,7 @@ MonoBehaviour:
     description: 'Dreamy Leader (Passive): Removes a random buff on an enemy every
       turn and stun it for 1 turn if a buff is removed this way. [Automatic Effect]'
     abilityEffect: DreamyLeader
-    abilityCoolDown: 1
+    abilityCoolDown: 0
     target: 0
     abilityBuffs: []
     abilityDebuffs: []

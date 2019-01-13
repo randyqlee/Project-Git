@@ -323,14 +323,14 @@ public class GameManager : MonoBehaviour {
 		Buff[] buffs = hero.GetComponents<Buff>();
 		
 			foreach(Buff buff in buffs){					
-				buff.OnDestroy();					
+				Destroy(buff);				
 			}
 
 		//Destroy all debuffs
 		Debuff[] debuffs = hero.GetComponents<Debuff>();
 		
 			foreach(Debuff debuff in debuffs){					
-				debuff.OnDestroy();					
+				Destroy(debuff);					
 			}
 		//reinitialize stats
 		hero.maxHealth = hero.origHealth;
