@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RainOfStones : Ability {
 	
-	bool chanceSuccess = false;
+	
 
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{

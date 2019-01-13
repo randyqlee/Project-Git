@@ -249,6 +249,7 @@ public class HeroManager : MonoBehaviour
 		}//shield
 		}			
 		
+		GameManager.Instance.CheckHealth();
 	}
 
 	public int TotalHealth

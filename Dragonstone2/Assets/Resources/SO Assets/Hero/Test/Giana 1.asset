@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Giana 1
+  m_EditorClassIdentifier: 
+  heroName: Giana
+  image: {fileID: 21300000, guid: 9d39e045566f43044abfb0096f5c4cc4, type: 3}
+  maxHealth: 703
+  attack: 79
+  defense: 65
+  chance: 50
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Passing Time
+    skillType: 0
+    icon: {fileID: 21300000, guid: 70d63bd1bd3ee5b4c9f757928e801acf, type: 3}
+    description: 'Passing Time:  Attack an enemy with a chance for critical strike.  Gain
+      lucky for 2 turns if you land a critical strike.'
+    abilityEffect: PassingTime
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Fate Of Destruction
+    skillType: 0
+    icon: {fileID: 21300000, guid: 4d4b5cdb5684a22419249dc26af98a6f, type: 3}
+    description: 'Fate of Destruction: Inflict Poison and Bomb for 2 turns to an enemy.  Chance
+      to gain an extra turn.'
+    abilityEffect: FateOfDestruction
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 10
+      duration: 2
+    - debuff: 13
+      duration: 2
+  - abilityName: Critical Error
+    skillType: 0
+    icon: {fileID: 21300000, guid: 89197618e5281134781f83d77285b3dc, type: 3}
+    description: 'Critical Error: Attack all enemies and remove all buffs.  Chance
+      to Stun enemies whose beneficial effect has been removed for 1 turn. '
+    abilityEffect: CriticalError
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour {
 	//placeholder for Player gameobjects
 	public Player[] players; 
 
-	public delegate void Event_NextTurn();
-	public event Event_NextTurn e_NextTurn = delegate {};	
+	// public delegate void Event_NextTurn();
+	// public event Event_NextTurn e_NextTurn = delegate {};	
 
 	public delegate void Event_HeroKilled();
 	public event Event_HeroKilled e_HeroKilled = delegate {};

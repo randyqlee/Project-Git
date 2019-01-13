@@ -47,6 +47,17 @@ public class DreamyLeader : Ability {
 					//buff.OnDestroy();					
 					Destroy(buff);
 					//Debug.Log("Buff Destroyeda " +buff +" from hero: " +enemy );
+
+					//addstun
+					if(enemy.hasImmunity || enemy.hasPermanentImmunity){
+						
+						Debug.Log("Has Immunity");
+
+					}else{
+						GameManager.Instance.AddDebuff("Stun", 1, hero, enemy);
+					}
+					
+
 				}
 
 			}		

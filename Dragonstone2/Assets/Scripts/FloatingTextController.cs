@@ -6,11 +6,11 @@ public class FloatingTextController : MonoBehaviour {
 
 	private FloatingText popupText;
 
-	private GameObject parent;
+	//private GameObject parent;
 
 	public void Initialize()
 	{
-		parent = GameObject.Find ("Canvas");
+		//parent = GameObject.Find ("Canvas");
 		popupText = Resources.Load<FloatingText>("Prefabs/PopupTextParent");
 	}
 

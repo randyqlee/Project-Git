@@ -72,6 +72,7 @@ public class Debuff : MonoBehaviour{
 
 	public void RemoveIcon()
 	{
+		if(buffPanel != null)
 		buffPanel.RemoveIcon (debuff.debuff.ToString());
 	}
 

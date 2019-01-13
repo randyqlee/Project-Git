@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MegaSmash : Ability {
 
-	int buffDuration = 2;
+	//int buffDuration = 2;
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
