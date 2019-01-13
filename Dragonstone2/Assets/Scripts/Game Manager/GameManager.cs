@@ -18,15 +18,20 @@ public class GameManager : MonoBehaviour {
 	public Player[] players; 
 
 	public delegate void Event_NextTurn();
-	public event Event_NextTurn e_NextTurn = delegate {};
-
+	public event Event_NextTurn e_NextTurn = delegate {};	
 
 	public delegate void Event_HeroKilled();
 	public event Event_HeroKilled e_HeroKilled = delegate {};
+	
 
-	// public delegate void Ability_Completed();
-	// public event Ability_Completed e_AbilityCompleted = delegate {};	
+	public delegate void Event_PlayerStartPhase();
+	public event Event_PlayerStartPhase e_PlayerStartPhase = delegate {};
 
+	public delegate void Event_PlayerMainPhase();
+	public event Event_PlayerMainPhase e_PlayerMainPhase = delegate {};
+
+	public delegate void Event_PlayerEndPhase();
+	public event Event_PlayerEndPhase e_PlayerEndPhase = delegate {};	
 
 	public bool isInitialTurn = true;
 
@@ -90,7 +95,6 @@ public class GameManager : MonoBehaviour {
 		yield return StartCoroutine (StartBattle());
 		//yield return new WaitForSeconds (2f);
 		
-		
 	}
 
 	IEnumerator InitPlayers()
@@ -153,7 +157,8 @@ public class GameManager : MonoBehaviour {
 
 		transform.Find("UI").gameObject.transform.Find("Turn Timer").gameObject.SetActive(true);
 
-		NextTurn();
+		//NextTurn();
+		StartCoroutine(PlayerTurn2());
 		yield return null;
 	}
 
@@ -374,21 +379,86 @@ public class GameManager : MonoBehaviour {
 		return false;
 	}
 
-	public void  NextTurn ()
-	{
+	// public void  NextTurn ()
+	// {		
+	// 	if (!IsGameOver())
+	// 	{			
+	// 		if (ATBCoroutine != null)
+	// 		StopCoroutine (ATBCoroutine);
+	// 		StartATBCoroutine ();
 
+	// 		if (!isTurnPaused)
+	// 		{
+	// 			SwitchActivePlayers();				
+	// 			//trigger delegates for next turn - ex. decrease cooldown for abilities
+	// 			e_NextTurn();							
+	// 		}
+	// 	}		
+	// }//Next Turn
+
+	IEnumerator PlayerTurn1(){
 		
+		yield return StartCoroutine(PlayerStartPhase());
+
+		yield return StartCoroutine(PlayerMainPhase());
+
+	}
+
+	IEnumerator PlayerTurn2(){
+		
+		yield return StartCoroutine(PlayerEndPhase());
+
+		yield return StartCoroutine(PlayerTransition());
+
+		yield return StartCoroutine(PlayerTurn1());
+
+	}
+
+
+
+	IEnumerator PlayerStartPhase(){		
+		
+		e_PlayerStartPhase();
+		Debug.Log("Player Start Phase");
+		yield return null;
+	}
+
+	IEnumerator PlayerMainPhase(){
+		
+		Debug.Log("Player Main Phase");
+		//Start Timer
 		if (!IsGameOver())
-		{
-			
+		{			
 			if (ATBCoroutine != null)
 			StopCoroutine (ATBCoroutine);
 			StartATBCoroutine ();
+		}
+	
+		e_PlayerMainPhase();
+		yield return null;
+	}
 
-			if (!isTurnPaused)
+	IEnumerator PlayerEndPhase(){
+		e_PlayerEndPhase();
+		Debug.Log("Player End Phase");
+		yield return null;
+	}
+
+	IEnumerator PlayerTransition(){
+
+		if (!isTurnPaused)
 			{
+				SwitchActivePlayers();			
+				
+			}		
+		Debug.Log("Player Transition");
+		yield return null;
+	}
+	
 
-				if (players[0].isActive)
+
+	void SwitchActivePlayers(){
+		if (players[0].isActive)
 						{
 							players[0].isActive = false;
 							players[1].isActive = true;
@@ -435,11 +505,7 @@ public class GameManager : MonoBehaviour {
 							BattleTextMessage ("Player 1");
 					}
 
-				//trigger delegates for next turn - ex. decrease cooldown for abilities
-				e_NextTurn();			
-				
-			}
-		}		
+
 	}
 
 	IEnumerator StartAttackSequence()
@@ -454,10 +520,11 @@ public class GameManager : MonoBehaviour {
 			tempTimer -= delta;
 			timerBar.fillAmount = tempTimer/maxCharacterTurn;
 		}
-
 		
 		timerBar.fillAmount = 1;
-		NextTurn ();
+
+		//NextTurn ();
+		StartCoroutine(PlayerTurn2());
 	}
 
 	void StartATBCoroutine ()
@@ -922,7 +989,8 @@ public class GameManager : MonoBehaviour {
 	public void EndTurn(){
 		CheckHealth ();
 		DeselectAllHeroes ();
-		NextTurn();
+		//NextTurn();
+		StartCoroutine(PlayerTurn2());
 
 	}
 

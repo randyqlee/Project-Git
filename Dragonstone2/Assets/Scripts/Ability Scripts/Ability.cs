@@ -27,7 +27,7 @@ public class Ability : MonoBehaviour {
 
 	public virtual void Awake ()
 	{
-		GameManager.Instance.e_NextTurn += GameManagerNextTurn;
+		GameManager.Instance.e_PlayerStartPhase += GameManagerNextTurn;
 		
 		
 	}

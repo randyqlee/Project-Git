@@ -13,7 +13,7 @@ public class Recovery : Buff {
 
 		gameObject.GetComponent<HeroManager>().hasRecovery = true;
 
-		GameManager.Instance.e_NextTurn += Recover;
+		GameManager.Instance.e_PlayerStartPhase += Recover;
 
 
 	}
@@ -24,7 +24,7 @@ public class Recovery : Buff {
 	{
 
 		
-		GameManager.Instance.e_NextTurn -= Recover;
+		GameManager.Instance.e_PlayerStartPhase -= Recover;
 		gameObject.GetComponent<HeroManager>().hasRecovery = false;
 
 		//call parent OnDestroy

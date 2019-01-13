@@ -31,7 +31,7 @@ public class Debuff : MonoBehaviour{
 
 	void Start ()
 	{
-		GameManager.Instance.e_NextTurn += DecreaseDuration;
+		GameManager.Instance.e_PlayerEndPhase += DecreaseDuration;
 
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
@@ -42,7 +42,7 @@ public class Debuff : MonoBehaviour{
 
 	public virtual void DecreaseDuration ()
 	{
-		if (!GetComponentInParent<Player>().isActive)
+		if (GetComponentInParent<Player>().isActive)
 		{
 			this.duration--;
 			if (this.duration == 0)
@@ -59,7 +59,7 @@ public class Debuff : MonoBehaviour{
 		RemoveIcon();
 		//remove from HeroManager
 		//unsubscribe
-		GameManager.Instance.e_NextTurn -= DecreaseDuration;
+		GameManager.Instance.e_PlayerEndPhase -= DecreaseDuration;
 		Destroy(this);
 		
 	}

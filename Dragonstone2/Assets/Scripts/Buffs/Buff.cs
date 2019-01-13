@@ -31,7 +31,7 @@ public class Buff : MonoBehaviour{
 
 	void Start ()
 	{
-		GameManager.Instance.e_NextTurn += DecreaseDuration;
+		GameManager.Instance.e_PlayerStartPhase += DecreaseDuration;
 		
 		buffPanel = gameObject.GetComponentInChildren<BuffPanel>();
 		AddIcon();
@@ -63,7 +63,7 @@ public class Buff : MonoBehaviour{
 		RemoveIcon();
 		//remove from HeroManager
 		//unsubscribe
-		GameManager.Instance.e_NextTurn -= DecreaseDuration;
+		GameManager.Instance.e_PlayerStartPhase -= DecreaseDuration;
 		Destroy(this);
 
 		
