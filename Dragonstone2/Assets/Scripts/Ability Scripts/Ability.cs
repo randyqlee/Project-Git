@@ -107,6 +107,11 @@ public class Ability : MonoBehaviour {
 		
 	}	
 
+	public virtual void UseAbilityActive(){
+		
+				
+	}	
+
 
 	public bool CanUseAbility()
 	{	
@@ -202,6 +207,10 @@ public class Ability : MonoBehaviour {
 
 
 	public virtual void DisableAbilityPassive(){
+
+	}//DisableAbilityPassive
+
+	public virtual void DisableAbilityActive(){
 
 	}//DisableAbilityPassive
 

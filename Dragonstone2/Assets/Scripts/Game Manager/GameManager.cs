@@ -181,6 +181,11 @@ public class GameManager : MonoBehaviour {
 					if(ability.skillType == Type.Passive){
 						ability.UseAbilityPassive();
 					}
+
+					//For active skills with Passive
+					if(ability.skillType == Type.Active){
+						ability.UseAbilityActive();
+					}
 				}
 
 				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
@@ -303,6 +308,10 @@ public class GameManager : MonoBehaviour {
 			foreach(Ability ability in abilities){
 					if(ability.skillType == Type.Passive){
 						ability.DisableAbilityPassive();
+					}
+
+					if(ability.skillType == Type.Active){
+						ability.DisableAbilityActive();
 					}
 				}
 

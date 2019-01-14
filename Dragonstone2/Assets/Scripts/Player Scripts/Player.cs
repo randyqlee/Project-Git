@@ -160,6 +160,7 @@ public class Player : MonoBehaviour {
 					if (Input.GetMouseButtonDown(0))
 					{
 						button = pointerObject.gameObject.GetComponent<Button>();
+						//Debug.Log("Ability: " +button.GetComponentInChildren<Ability>());
 
 						// //dragging is now active while the button is held down
 						// dragging = true;
@@ -177,6 +178,11 @@ public class Player : MonoBehaviour {
 						dragging = true;
 
 						}
+
+						// if(target2.skillType == Type.Passive){
+
+							
+						// }
 
 					
 						
@@ -319,12 +325,8 @@ public class Player : MonoBehaviour {
 			//reset cooldown
 			//button.GetComponent<Ability>().ResetCooldown();
 
-
 			//floating text
 			button.GetComponentInParent<HeroManager>().E_PopupMSG(button.GetComponent<Ability>().GetType().ToString());
-
-
-
 		}		//let the gamemanager decide these:
 
 		//GameManager.Instance.//CheckHealth ();

@@ -9,48 +9,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
-  m_Name: Ragdoll 1
+  m_Name: AmeliaUnicorn
   m_EditorClassIdentifier: 
-  heroName: Ragdoll
-  image: {fileID: 21300000, guid: 403f1115b4cfd6741a0eab24dadc0ba9, type: 3}
-  maxHealth: 769
-  attack: 71
-  defense: 66
+  heroName: AmeliaUnicorn
+  image: {fileID: 21300000, guid: 8da842c7a4dc7c14a9301af9d046cba7, type: 3}
+  maxHealth: 823
+  attack: 64
+  defense: 68
   chance: 200
   rarity: 3
   abilityAsset: []
   abilityAsset2:
-  - abilityName: Dragon's Might
+  - abilityName: Ice Horn
     skillType: 0
-    icon: {fileID: 21300000, guid: 8b284a2db031cd54385efe4d787c1de5, type: 3}
-    description: 'Dragon''s Might: Attack an enemy with a chance to critical strike.  Inflict
-      Poison for 2 turns if you land a Critical Hit.'
-    abilityEffect: DragonsMight
+    icon: {fileID: 21300000, guid: 9aaaedc21e9d6a241b1af231574d2630, type: 3}
+    description: 'Ice Horn: Attack an enemy and deal additional 80 damage with a chance
+      to stun for 1 turn.  '
+    abilityEffect: IceHorn
     abilityCoolDown: 0
     target: 0
     abilityBuffs: []
-    abilityDebuffs: []
-  - abilityName: Torrent
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
+  - abilityName: Fierce Charge
     skillType: 0
-    icon: {fileID: 21300000, guid: 37533639f08fa14438bc8738e1902a40, type: 3}
-    description: 'Torrent: Attack an enemy, if your HP is below 250, Ignore enemy
-      defense.  Attacks deal additional 35 damage for each 100 HP ragdoll loses.
-
+    icon: {fileID: 21300000, guid: 17e55dacec6cb614cbd83d5a63b01356, type: 3}
+    description: 'Fierce Charge: Gain Revenge for 2 turns and attack an enemy with
+      a chance to Taunt for 1 turn.  Deal additonal 80 damage.
 
 '
-    abilityEffect: Torrent
+    abilityEffect: FierceCharge
     abilityCoolDown: 0
     target: 0
     abilityBuffs: []
-    abilityDebuffs: []
-  - abilityName: Tooth for a Tooth
-    skillType: 1
-    icon: {fileID: 21300000, guid: 8004bb3687eedd84eb5ab1238d2a91d4, type: 3}
-    description: 'Tooth For a Tooth:  An ally gains Lucky for 2 turns when hit by
-      a critical attack. [Automatic Effect]
+    abilityDebuffs:
+    - debuff: 7
+      duration: 1
+  - abilityName: Human Transformation
+    skillType: 0
+    icon: {fileID: 21300000, guid: 30142ccd2c5b5844787b5364f6085d7c, type: 3}
+    description: 'Human Transformation: Transform into human form and Amelia gains
+      an extra turn.
+
+      Passive effect:  Increase Defense.
+
 
 '
-    abilityEffect: ToothForATooth
+    abilityEffect: HumanTransformation
     abilityCoolDown: 0
     target: 1
     abilityBuffs: []
