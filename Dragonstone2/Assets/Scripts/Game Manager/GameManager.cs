@@ -324,9 +324,6 @@ public class GameManager : MonoBehaviour {
 		e_HeroKilled();	
 	}
 
-
-
-
 	//used for revive skills
 	public void ReinitializeHero(HeroManager hero) {
 

@@ -8,7 +8,8 @@ using System.Reflection;
 public class Player : MonoBehaviour {
 
 	public Deck deck;
-	public HeroManager heroPrefab;
+	public HeroManager heroPrefab, newHero;
+	public HeroAsset heroAsset;
 
 	public GameObject spawnLocations;
 

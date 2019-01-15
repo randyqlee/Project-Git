@@ -23,12 +23,12 @@ public class PurifyingWave : Ability
 						Destroy(debuff);
 					}//foreach debuff
 				}//if debuffs
-				
-				
+								
+			}//foreach HeroManager
 
-				}//foreach HeroManager
+			base.UseAbility(attacker,defender);
 
-			}//UseAbility
+		}//UseAbility
 
 }//class
 
