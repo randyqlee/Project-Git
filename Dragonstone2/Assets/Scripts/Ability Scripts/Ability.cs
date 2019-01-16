@@ -188,6 +188,7 @@ public class Ability : MonoBehaviour {
 	public virtual void GameManagerNextTurn()
 	{		
 		
+		if(this != null)
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
 		//if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().gameObject != null)
 		{
@@ -201,6 +202,11 @@ public class Ability : MonoBehaviour {
 			//update Button UI
 			gameObject.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
 		}
+
+		
+
+
+	
 	}//GameManager Next Turn
 
 	

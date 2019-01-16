@@ -135,11 +135,12 @@ HeroAsset heroAsset;
 		newHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
 								
 				Ability[] abilities = newHero.GetComponentsInChildren<Ability>();
-				foreach(Ability ability in abilities){
+				foreach(Ability ability in abilities){					
 
-					ability.remainingCooldown = 0;
+					ability.remainingCooldown = ability.abilityCooldown;					
+					//ability.remainingCooldown = 0;
 
-					ability.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+					ability.GetComponentInChildren<Text>().text = ability.remainingCooldown.ToString();
 
 					if(ability.skillType == Type.Passive){
 						ability.UseAbilityPassive();
@@ -148,7 +149,7 @@ HeroAsset heroAsset;
 					//For active skills with Passive
 					if(ability.skillType == Type.Active){
 						ability.UseAbilityActive();
-					}
+					}					
 				}
 
 		newHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);	
@@ -174,6 +175,7 @@ HeroAsset heroAsset;
 			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);			
 		}			
 				
+		Destroy(oldHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject);
 		Destroy(oldHero.gameObject);
 		
 

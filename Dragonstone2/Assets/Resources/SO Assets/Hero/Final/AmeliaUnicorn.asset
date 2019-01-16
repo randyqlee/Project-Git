@@ -57,7 +57,7 @@ MonoBehaviour:
 
 '
     abilityEffect: HumanTransformation
-    abilityCoolDown: 2
+    abilityCoolDown: 0
     target: 1
     abilityBuffs: []
     abilityDebuffs: []

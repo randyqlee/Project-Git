@@ -101,7 +101,6 @@ HeroAsset heroAsset;
 				heroManager.abilityAssets.Add(heroAsset.abilityAsset2[j]);
 			}					
 		}	
-
 				heroManager.origHealth = heroManager.maxHealth;
 				heroManager.origAttack = heroManager.attack;
 				heroManager.origDefense = heroManager.defense;
@@ -130,9 +129,10 @@ HeroAsset heroAsset;
 				Ability[] abilities = newHero.GetComponentsInChildren<Ability>();
 				foreach(Ability ability in abilities){
 
-					ability.remainingCooldown = 0;
+					//ability.remainingCooldown = 0;
+					ability.remainingCooldown = ability.abilityCooldown;	
 
-					ability.GetComponentInChildren<Text>().text = remainingCooldown.ToString();
+					ability.GetComponentInChildren<Text>().text = ability.remainingCooldown.ToString();
 
 					if(ability.skillType == Type.Passive){
 						ability.UseAbilityPassive();
@@ -167,15 +167,10 @@ HeroAsset heroAsset;
 		foreach(Debuff debuff in debuffs){
 			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);			
 		}		
+				
 		
-			
-		
+		Destroy(oldHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject);
 		Destroy(oldHero.gameObject);
-		
-		
-
-			
-
 		
 
 		//oldHero.enabled = false;
