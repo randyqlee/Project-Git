@@ -4,59 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class  WarriorsReturn : Ability {
-
-	float chanceReduction = 5;
-	HeroManager hero;
-	BuffPanel buffPanel;
 	
-	public override void UseAbilityPassive(){		
+	HeroManager hero;	
+	
+	public override void UseAbilityPassive(){	
 
-		Sprite permanentImmunity = Resources.Load<Sprite>("BuffIcons/PermanentImmunity");
-		Sprite unluckyAkroma = Resources.Load<Sprite>("BuffIcons/UnluckyAkroma");
-		
-		
-		hero = GetComponentInParent<HeroManager>();
-		buffPanel = hero.gameObject.GetComponentInChildren<BuffPanel>();
-		//apply effect
-		hero.hasPermanentImmunity = true;
-		//add icon
-		buffPanel.AddIcon("PermanentImmunity", permanentImmunity, 0);
-
-		List<HeroManager> enemies =  GameManager.Instance.EnemyHeroList(hero);
-		foreach (HeroManager enemy in enemies){
-			enemy.chance -= chanceReduction;
-
-			//AddIcon
-			BuffPanel buffPanelEnemy = enemy.gameObject.GetComponentInChildren<BuffPanel>();
-			buffPanelEnemy.AddIcon("UnluckyAkroma", unluckyAkroma, 0);
-
-		}		
-		base.UseAbilityPassive();
-
+		GameManager.Instance.e_PlayerStartPhase += WarriorsReturnAbility;
 	}//UsePassive
 
-	public override void DisableAbilityPassive(){
+	public override void DisableAbilityPassive(){	
 
-		buffPanel = hero.gameObject.GetComponentInChildren<BuffPanel>();
-		hero = GetComponentInParent<HeroManager>();
-		//apply effect
-		
-		List<HeroManager> enemies =  GameManager.Instance.EnemyHeroList(hero);
-
-		foreach (HeroManager enemy in enemies){		
-		enemy.chance += chanceReduction;
-
-		//RemoveIcon
-		BuffPanel buffPanelEnemy = enemy.gameObject.GetComponentInChildren<BuffPanel>();
-		buffPanelEnemy.RemoveIcon("UnluckyAkroma");	
-		}
-
-		buffPanel.RemoveIcon("PermanentImmunity");
-
-		base.DisableAbilityPassive();
-
+		GameManager.Instance.e_PlayerStartPhase -= WarriorsReturnAbility;
 	}//Disable
 
+	public void WarriorsReturnAbility(){
+
+			
+		hero = GetComponentInParent<HeroManager>();
+		List<HeroManager> allies = GameManager.Instance.AllyHeroList(hero);
+
+		List<HeroManager> deadAllies = new List<HeroManager>();
+
+		//Get list of dead allies
+		if(remainingCooldown == 0){
+			foreach(HeroManager ally in allies){
+				if(ally.isDead){
+					Debug.Log("Warriors Ability");
+					deadAllies.Add(ally);					
+				}//if ally is dead
+			}//foreach						
+		}//if Remaining Cooldown
+
+		// HeroManager deadAllyRevive = deadAllies[Random.Range(0,deadAllies.Count)];
+
+		// deadAllyRevive.maxHealth = 400;
+		// deadAllyRevive.isDead = false;
+		// deadAllyRevive.gameObject.SetActive(true);		
+
+	}//Warriors Return Ability
 	
 
 }

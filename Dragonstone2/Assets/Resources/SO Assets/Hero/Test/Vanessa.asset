@@ -18,10 +18,7 @@ MonoBehaviour:
   defense: 71
   chance: 200
   rarity: 3
-  abilityAsset:
-  - {fileID: 11400000, guid: eca1160425d75b748be89912ed5e8f42, type: 2}
-  - {fileID: 11400000, guid: c659667ffb529804f8fade81b2ed552a, type: 2}
-  - {fileID: 11400000, guid: f12b105b6be7733479a9d819c3132f2e, type: 2}
+  abilityAsset: []
   abilityAsset2:
   - abilityName: Sword Of Promise
     skillType: 0
@@ -54,7 +51,7 @@ MonoBehaviour:
 
 '
     abilityEffect: WarriorsReturn
-    abilityCoolDown: 6
-    target: 3
+    abilityCoolDown: 0
+    target: 1
     abilityBuffs: []
     abilityDebuffs: []
