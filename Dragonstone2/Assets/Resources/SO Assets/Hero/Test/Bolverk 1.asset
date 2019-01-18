@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Bolverk 1
+  m_EditorClassIdentifier: 
+  heroName: Bolverk
+  image: {fileID: 21300000, guid: 7ffdddc87e52e7846bed393e0eac28f0, type: 3}
+  maxHealth: 812
+  attack: 73
+  defense: 60
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Lightning Strike
+    skillType: 0
+    icon: {fileID: 21300000, guid: fcfaf59d1854b6e4b8139daf0b1666aa, type: 3}
+    description: 'Lightning Strike: Attack an enemy with a chance to steal a random
+      buff.'
+    abilityEffect: LightningStrike
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Learn Knowledge
+    skillType: 1
+    icon: {fileID: 21300000, guid: 08be6b496eb274e4493b96cad978bba5, type: 3}
+    description: 'Learn Knowledge:  At the start of your turn, gain knowledge equivalent
+      to all buffs in play.  If there are no buffs in play, gain 1 knowledge.  You
+      can have up to 5 Knowledge.
+
+
+
+'
+    abilityEffect: LearnKnowledge
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Forbidden Galdr
+    skillType: 0
+    icon: {fileID: 21300000, guid: 7dbcb3c0c29e1f74fb3a150282450da3, type: 3}
+    description: 'Forbidden Galdr:  Deal 100 damage to an enemy for each knowledge
+      you have and heall all your allies for the same amount.  All knowledge will
+      be consumed once you use this skill.
+
+'
+    abilityEffect: ForbiddenGaldr
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

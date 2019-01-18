@@ -804,22 +804,9 @@ public class GameManager : MonoBehaviour {
 		
 	}
 
-
-
 	public void Heal (HeroManager target, int healValue)
 	{
-		if (!target.hasUnhealable)
-		{
-	
-			target.maxHealth += healValue;
-			if(target.maxHealth > target.origHealth){
-				target.maxHealth = target.origHealth;
-				target.UpdateUI();
-			}
-
-		} else {
-			Debug.Log("Target is Unhealable");
-		}
+		target.Healhero(target, healValue);
 	}//Heal
 
 

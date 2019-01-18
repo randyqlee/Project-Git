@@ -55,7 +55,7 @@ MonoBehaviour:
       Passive effect:  At the start of your turn, grant a random ally immunity for
       1 turn.'
     abilityEffect: UnicornTransformation
-    abilityCoolDown: 0
+    abilityCoolDown: 2
     target: 1
     abilityBuffs: []
     abilityDebuffs: []

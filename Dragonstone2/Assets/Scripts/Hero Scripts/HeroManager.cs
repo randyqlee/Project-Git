@@ -197,6 +197,7 @@ public class HeroManager : MonoBehaviour
 
 	public void DisplayDamageText (int damage)
 	{
+		
 		StartCoroutine (DisplayDamage (damage));
 	}
 
@@ -254,6 +255,24 @@ public class HeroManager : MonoBehaviour
 		GameManager.Instance.CheckHealth();
 	}
 
+	public void Healhero (HeroManager target, int healValue)
+	{
+		if (!target.hasUnhealable)
+		{
+	
+			target.maxHealth += healValue;
+			if(target.maxHealth > target.origHealth){
+				target.maxHealth = target.origHealth;
+				e_PopupMSG("Heal: " +healValue.ToString());
+				target.UpdateUI();
+				
+			}
+
+		} else {
+			Debug.Log("Target is Unhealable");
+		}
+	}//Heal
+
 	public int TotalHealth
 	{
 
@@ -272,5 +291,7 @@ public class HeroManager : MonoBehaviour
 	{
 		e_PopupMSG (message);
 	}
+
+	
 
 }
