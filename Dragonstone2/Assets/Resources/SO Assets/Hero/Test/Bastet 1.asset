@@ -38,7 +38,7 @@ MonoBehaviour:
     description: "Curse of the Beautiful: Critical Strike attack all enemies and Inflict
       Decrease Defense, Crippled Strike, and chance to Unhealable for 2 turns.\r\n"
     abilityEffect: CurseOfTheBeautiful
-    abilityCoolDown: 1
+    abilityCoolDown: 5
     target: 0
     abilityBuffs: []
     abilityDebuffs:
@@ -50,7 +50,7 @@ MonoBehaviour:
     description: 'Oasis''s Blessing: Each ally gains a Shield, Lucky, and Increase
       Attack for 3 turns.'
     abilityEffect: OasisBlessing
-    abilityCoolDown: 1
+    abilityCoolDown: 5
     target: 1
     abilityBuffs:
     - buff: 4

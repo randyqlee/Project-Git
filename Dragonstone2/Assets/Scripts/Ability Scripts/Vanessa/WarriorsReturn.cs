@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class  WarriorsReturn : Ability {
 	
-	HeroManager hero;	
+	HeroManager hero;
+	HeroAsset heroAsset;	
 	
 	public override void UseAbilityPassive(){	
 
@@ -17,31 +18,40 @@ public class  WarriorsReturn : Ability {
 		GameManager.Instance.e_PlayerStartPhase -= WarriorsReturnAbility;
 	}//Disable
 
-	public void WarriorsReturnAbility(){
-
-			
+	public void WarriorsReturnAbility()
+	{		
 		hero = GetComponentInParent<HeroManager>();
-		List<HeroManager> allies = GameManager.Instance.AllyHeroList(hero);
+		Player allyPlayer = hero.GetComponentInParent<Player>();
+		int deadHeroesCount = allyPlayer.deadHeroes.Count;
 
-		List<HeroManager> deadAllies = new List<HeroManager>();
+		if(hero.GetComponentInParent<Player>().isActive)
+		{
+			if(remainingCooldown == 0)
+			{
+				canUseAbility = true;
+				
+				if(deadHeroesCount > 0)
+				{
+					
+					GameObject revivedHero = allyPlayer.deadHeroes[Random.Range(0,deadHeroesCount)];
+					allyPlayer.deadHeroes.Remove(revivedHero);
+					HeroManager heroRevived = revivedHero.GetComponent<HeroManager>();
 
-		//Get list of dead allies
-		if(remainingCooldown == 0){
-			foreach(HeroManager ally in allies){
-				if(ally.isDead){
-					Debug.Log("Warriors Ability");
-					deadAllies.Add(ally);					
-				}//if ally is dead
-			}//foreach						
-		}//if Remaining Cooldown
+					GameManager.Instance.ReviveHero(heroRevived);
+					heroRevived.maxHealth = 400;
+	
+					GameManager.Instance.AddBuff("IncreaseAttack", 2, hero, heroRevived);
 
-		// HeroManager deadAllyRevive = deadAllies[Random.Range(0,deadAllies.Count)];
+					heroRevived.UpdateUI();					
 
-		// deadAllyRevive.maxHealth = 400;
-		// deadAllyRevive.isDead = false;
-		// deadAllyRevive.gameObject.SetActive(true);		
+					ResetCooldown();
+					
+				}				
+			}//if cooldown = 0				
+		}
+	}	
 
 	}//Warriors Return Ability
 	
 
-}
+

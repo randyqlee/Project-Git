@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Artamiel
+  m_EditorClassIdentifier: 
+  heroName: Artamiel
+  image: {fileID: 21300000, guid: 9bc5e83a977bf2846afd00a31309f22d, type: 3}
+  maxHealth: 769
+  attack: 60
+  defense: 77
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Heavenly Sword
+    skillType: 0
+    icon: {fileID: 21300000, guid: 9fbb19cdc8199f548a7e5aa65d24995e, type: 3}
+    description: 'Heavenly Sword: Attack an enemy and deal additional damage equal
+      to your defense, with a chance to remove a buff.'
+    abilityEffect: HeavenlySword
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Archangel's Blessing
+    skillType: 0
+    icon: {fileID: 21300000, guid: b333977e7fd94544db025e0999cd0b51, type: 3}
+    description: 'Archangel''s Blessing: Heal an ally for 400 Hp with chance to gain
+      Recovery for 2 turns.
+
+
+'
+    abilityEffect: ArchangelsBlessing
+    abilityCoolDown: 3
+    target: 1
+    abilityBuffs:
+    - buff: 7
+      duration: 2
+    abilityDebuffs: []
+  - abilityName: Judge
+    skillType: 1
+    icon: {fileID: 21300000, guid: d846731dd8c0bc946b639ed96cef4a01, type: 3}
+    description: 'Judge: Counterattack when an enemy critical strikes an ally.  Gain
+      Increase Defense and Lucky for 2 turns whenever this skill is activated.
+
+'
+    abilityEffect: Judge
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

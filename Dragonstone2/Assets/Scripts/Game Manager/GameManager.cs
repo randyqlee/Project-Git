@@ -317,12 +317,19 @@ public class GameManager : MonoBehaviour {
 
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
 		
+		//hero.gameObject.transform.GetInstanceID
 		//Kill Hero
-		hero.enabled = false;
+
+		hero.GetComponentInParent<Player>().DeadHeroes(hero);
+
 		hero.gameObject.SetActive(false);
+
 
 		e_HeroKilled();	
 	}
+
+	
+	
 
 	//used for revive skills
 	public void ReinitializeHero(HeroManager hero) {
@@ -1115,6 +1122,63 @@ public class GameManager : MonoBehaviour {
 		}
 	}//Extra Turn Check
 
+	public void ReviveHero(HeroManager target){
+
+		target.gameObject.SetActive(true);
+		DestroyAllBuffs(target);
+		DestroyAllDebuffs(target);
+
+		//run all passive and automatic abilities
+		target.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+								
+				Ability[] abilities = target.GetComponentsInChildren<Ability>();
+				foreach(Ability ability in abilities){
+					if(ability.skillType == Type.Passive){
+						ability.UseAbilityPassive();
+					}
+					//For active skills with Passive
+					if(ability.skillType == Type.Active){
+						ability.UseAbilityActive();
+					}
+
+					//reset all cooldowns
+					ability.remainingCooldown = ability.abilityCooldown;
+				}
+		target.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+
+		//setHealth back to original health
+		target.maxHealth = target.origHealth;
+
+		//set Glow Selector
+		var image = target.glow.GetComponent<Image>().color;
+		image.a = 1f;
+		target.glow.GetComponent<Image>().color = image;
+
+		//udpate UI
+		target.UpdateUI();
+
+	}//ReviveHero
+
+
+	public void DestroyAllBuffs(HeroManager target){
+		
+		Buff[] buffs = target.GetComponents<Buff>();
+		foreach(Buff buff in buffs)
+		{
+			Destroy(buff);
+			target.UpdateUI();
+		}//foreachBuff
+	}//DestroyAllBuffs
+
+	public void DestroyAllDebuffs(HeroManager target){
+		
+		Debuff[] debuffs = target.GetComponents<Debuff>();
+		foreach(Debuff debuff in debuffs)
+		{
+			Destroy(debuff);
+			target.UpdateUI();
+		}//foreachBuff
+	}//DestroyAllBuffs
 	
 
 

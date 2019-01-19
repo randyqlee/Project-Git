@@ -197,7 +197,7 @@ public class HeroManager : MonoBehaviour
 
 	public void DisplayDamageText (int damage)
 	{
-		
+		if(this.gameObject.activeSelf == true)
 		StartCoroutine (DisplayDamage (damage));
 	}
 

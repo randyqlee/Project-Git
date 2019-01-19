@@ -31,6 +31,9 @@ public class Player : MonoBehaviour {
 
 	Target target;
 
+	public int deadHeroesCount;
+	public List<GameObject> deadHeroes = new List<GameObject>();
+
 	void Awake () {
 
 	}
@@ -337,4 +340,12 @@ public class Player : MonoBehaviour {
 		dragging = false;
 		Destroy(targetPointerGO);
 	}
-}
+
+	public void DeadHeroes(HeroManager hero){
+		
+		deadHeroes.Add(hero.gameObject);
+		deadHeroesCount++;
+	}
+
+
+}//class
