@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour {
 	public void Attack (HeroManager attacker, HeroManager defender)	{
 
 		
-			CriticalStrikeCheck(attacker, defender);		
+			//CriticalStrikeCheck(attacker, defender);		
 					
 			//Checks for Taunt and Defender
 			CheckTaunt(attacker, defender);
@@ -219,9 +219,7 @@ public class GameManager : MonoBehaviour {
 					
 					//transferred to base.UseAbility()
 					//EndTurn();
-			}
-
-		
+			}	
 
 	}//Attack Method
 
@@ -249,7 +247,7 @@ public class GameManager : MonoBehaviour {
 				{
 					//set defender in current hero iteration to trigger reflect properly
 					defender = hero;
-					CriticalStrikeCheck(attacker, defender);
+					//CriticalStrikeCheck(attacker, defender);
 					AttackStatusChecks(attacker, defender);				
 							
 
@@ -327,8 +325,6 @@ public class GameManager : MonoBehaviour {
 
 		e_HeroKilled();	
 	}
-
-	
 	
 
 	//used for revive skills
@@ -893,7 +889,10 @@ public class GameManager : MonoBehaviour {
 			attackersAttack = 3*source.attack;
 		}
 		BattleTextMessage("Critical Strike: " +attackersAttack);
+		
 		target.hitByCritical = true;
+		target.criticalSource = source;
+
 
 		//e_CriticalStrike();
 		
@@ -920,6 +919,8 @@ public class GameManager : MonoBehaviour {
 
 			int attackersDefense = attacker.defense;
 			int defendersDefense = defender.defense;
+		
+		CriticalStrikeCheck(attacker, defender);
 
 		if(attackersDefense < 0)
 			attackersDefense = 0;
@@ -968,8 +969,10 @@ public class GameManager : MonoBehaviour {
 
 				if(attacker.hasCritical){
 					e_CriticalStrike();
+					defender.hitByCritical = false;
 				}else if(defender.hasCritical){
 					e_CriticalStrike();
+					attacker.hitByCritical = false;
 				}
 
 	}

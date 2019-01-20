@@ -41,7 +41,7 @@ public class HeroManager : MonoBehaviour
 	public Text damageText;
 
 
-		public Image heroPortrait;
+	public Image heroPortrait;
 	public List<Button> skillsBtn;
 
 	public GameObject skillText;
@@ -80,8 +80,10 @@ public class HeroManager : MonoBehaviour
 	public bool hasBrand;
 	public bool hasSilence;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public bool hitByCritical;
+	//[HideInInspector]
+	public HeroManager criticalSource;
 
 	public delegate void Event_PopupMsg(string message);
 	public event Event_PopupMsg e_PopupMSG = delegate {};
