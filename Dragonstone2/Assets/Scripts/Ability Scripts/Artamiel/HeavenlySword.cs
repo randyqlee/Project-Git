@@ -2,33 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Heavenly Sword: Attack an enemy and deal additional damage equal to your defense, with a chance to remove a buff.
+
 public class HeavenlySword : Ability {
 
-	int targetCount;
+	int bonusDamage;
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		//Debug.Log ("Using SwordOfPromise: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
-
+		//attack
 		GameManager.Instance.Attack (attacker, defender);
 
-		GameManager.Instance.CheckHealth();
-		if(defender.isDead){
-			SealOfLightTrigger(attacker, defender);			
-		} else {
-			ResetCooldown();
-			GameManager.Instance.ExtraTurnCheck(attacker);			
+		//bouns Damage
+		bonusDamage = attacker.defense;
+		GameManager.Instance.DealDamage(bonusDamage, attacker, defender);
+
+		//Remove Random Buff
+		if(GameManager.Instance.IsChanceSuccess(attacker)){
+			Buff[] buffs = defender.GetComponents<Buff>();
+			Buff randomBuff = buffs[Random.Range(0, buffs.Length)];
+			Destroy(randomBuff);
 		}
-		
-		
-
-	}//Override UseAbility
-	//Seal of Light Replica
-	void SealOfLightTrigger(HeroManager attacker, HeroManager defender) {
-
-		targetCount = GameManager.Instance.EnemyHeroList(attacker).Count;		
-		GameManager.Instance.AttackAll (attacker, defender);			
-		base.UseAbilityRandom(attacker, defender, targetCount);
-		Debug.Log("Seal of Light trigger");
-	}
+	}//Override UseAbility	
 }

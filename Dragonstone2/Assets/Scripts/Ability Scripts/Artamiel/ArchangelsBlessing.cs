@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class ArchangelsBlessing : Ability {
 
-	int targetCount;
-
-	public override void UseAbility (HeroManager attacker, HeroManager defender)
+	//Archangel's Blessing: Heal an ally for 400 Hp with chance to gain Recovery for 2 turns.	
+	
+	public int healValue = 400;		
+	
+	public override void UseAbility (HeroManager attacker, HeroManager defender)	
 	{
-		//Debug.Log ("Using SealOfLight: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
-		targetCount = GameManager.Instance.EnemyHeroList(attacker).Count;		
+		GameManager.Instance.Heal(defender, healValue);
 
-		GameManager.Instance.AttackAll (attacker, defender);	
-		
-		base.UseAbilityRandom(attacker, defender, targetCount);
+		base.UseAbility(attacker, defender);
 
 	}
 }
