@@ -32,9 +32,30 @@ public class  Judge : Ability {
 		foreach(HeroManager ally in allies){
 
 			if(ally.hitByCritical){				
-				HeroManager enemyTarget = ally.criticalSource;			
-				GameManager.Instance.DealDamage(hero.attack, hero, enemyTarget);
-				//GameManager.Instance.Attack(hero, enemyTarget);
+				HeroManager enemyTarget = ally.criticalSource;		
+
+				int attackersAttack;
+				if(hero.hasCritical){
+					if (1-Random.value < 0.5)
+					{
+						attackersAttack = 2*hero.attack;
+					} 			
+					else 
+					{
+						attackersAttack = 3*hero.attack;
+					}
+					GameManager.Instance.BattleTextMessage("Critical Strike: " +attackersAttack);
+					
+					enemyTarget.hitByCritical = true;
+					enemyTarget.criticalSource = hero;		
+
+				}else{
+					attackersAttack = hero.attack;
+				}
+
+				//prevent infinite bounce
+				GameManager.Instance.DealDamage(attackersAttack, hero, enemyTarget);
+				
 				GameManager.Instance.BattleTextMessage("Judge: " +enemyTarget);	
 				Debug.Log("Judge: " +enemyTarget);
 							
