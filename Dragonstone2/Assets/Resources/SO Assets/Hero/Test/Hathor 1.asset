@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Hathor
+  m_EditorClassIdentifier: 
+  heroName: Hathor
+  image: {fileID: 21300000, guid: 862a11c47a07b2444a3460de5d575aed, type: 3}
+  maxHealth: 736
+  attack: 69
+  defense: 71
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Touch Of Seduction
+    skillType: 0
+    icon: {fileID: 21300000, guid: 97db4507e4dfe76428e10fc16cf13756, type: 3}
+    description: 'Touch of Seduction: Attack an enemy with a chance to decrease attack
+      for 2 turns.'
+    abilityEffect: TouchOfSeductionWind
+    abilityCoolDown: 1
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 0
+      duration: 2
+  - abilityName: Sweet Dreams
+    skillType: 0
+    icon: {fileID: 21300000, guid: b636c845f6bc0ae42abeb0d6b56fc6a8, type: 3}
+    description: "Sweet Dreams: Attack an enemy and remove all buffs with a chance
+      to stun 1 for turn. \n"
+    abilityEffect: SweetDreams
+    abilityCoolDown: 3
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
+  - abilityName: Delayed Promise
+    skillType: 0
+    icon: {fileID: 21300000, guid: 19156f1bab491404f9699f14303cc4b0, type: 3}
+    description: 'Delayed Promise: Increase skill cooldowns of enemies by 1 with a
+      chance to stun each enemy for 1-2 turns.
+
+'
+    abilityEffect: DelayedPromise
+    abilityCoolDown: 5
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

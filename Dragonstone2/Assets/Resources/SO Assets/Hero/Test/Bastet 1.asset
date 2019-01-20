@@ -23,7 +23,7 @@ MonoBehaviour:
   - abilityName: TouchOfSeduction
     skillType: 0
     icon: {fileID: 21300000, guid: 97db4507e4dfe76428e10fc16cf13756, type: 3}
-    description: 'TouchOfSeduction: Attack an enemy with a chance to inflict Poison
+    description: 'Touch of Seduction: Attack an enemy with a chance to decrease attack
       for 2 turns.'
     abilityEffect: TouchOfSeduction
     abilityCoolDown: 1
