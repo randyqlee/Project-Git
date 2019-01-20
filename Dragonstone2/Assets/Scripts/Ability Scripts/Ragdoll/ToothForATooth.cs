@@ -10,8 +10,7 @@ HeroManager hero;
 
 	public override void UseAbilityPassive()
 		{
-			GameManager.Instance.e_CriticalStrike += TooThForToothAbility;
-			Debug.Log("Ability Subscribed");
+			GameManager.Instance.e_CriticalStrike += TooThForToothAbility;			
 			base.UseAbilityPassive();
 		}
 
