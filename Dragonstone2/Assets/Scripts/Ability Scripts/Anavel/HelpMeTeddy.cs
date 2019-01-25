@@ -8,7 +8,7 @@ public class HelpMeTeddy : Ability {
 
 public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		GameManager.Instance.Attack (attacker, defender);			
+				
 
 		//Apply stun
 		ApplyDebuff(attacker, defender);
@@ -19,14 +19,21 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 			
 			Debuff[] debuffs = defender.GetComponents<Debuff>();
 
-			foreach(Debuff debuff in debuffs){
+			if(debuffs.Length > 0){
+				foreach(Debuff debuff in debuffs){
 				
 				if(debuff.debuff.name == "Stun"){
 					//there can only be one Stun Debuff at a time					
 					StunBonusDamage(attacker, defender);
 				}//if
-			}//foreach			
+			}//foreach		
+
+		}
+
+				
 		}//if		
+
+		GameManager.Instance.Attack (attacker, defender);	
 		
 		base.UseAbility(attacker, defender);		
 

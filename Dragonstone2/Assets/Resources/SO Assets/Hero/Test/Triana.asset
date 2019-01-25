@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_EditorClassIdentifier: 
+  heroName: Triana
+  image: {fileID: 21300000, guid: ab0029c4b8ca9bd45a0df7440ffe3fe2, type: 3}
+  maxHealth: 736
+  attack: 56
+  defense: 68
+  chance: 200
+  rarity: 3
+  abilityAsset: []
+  abilityAsset2:
+  - abilityName: Tempting Dream
+    skillType: 0
+    icon: {fileID: 21300000, guid: a0018fe5bc7c9ab448e2a5762cc152e1, type: 3}
+    description: 'Tempting Dream: Attack an enemy with a chance to stun for 1 turn.
+      Deal additonal damage equivalent to your chance.'
+    abilityEffect: TemptingDreamWind
+    abilityCoolDown: 0
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs:
+    - debuff: 6
+      duration: 1
+  - abilityName: Healing Music
+    skillType: 0
+    icon: {fileID: 21300000, guid: 4a7cc73a876b75048ab9af613461b77c, type: 3}
+    description: "Healing Music: Remove all debuffs on an ally target then recover
+      the HP of all allies by 150 and grants them immunity for 1 turn. \n\n"
+    abilityEffect: HealingMusic
+    abilityCoolDown: 3
+    target: 1
+    abilityBuffs: []
+    abilityDebuffs: []
+  - abilityName: Salvation Song
+    skillType: 1
+    icon: {fileID: 21300000, guid: 4a069f61801e89848bedf0bca26b3b94, type: 3}
+    description: "Salvation Song : Offsets the incoming damage that may cause your
+      ally to die and instantly gains another turn. \nAutomatic CD: 5 turns"
+    abilityEffect: SalvationSong
+    abilityCoolDown: 5
+    target: 0
+    abilityBuffs: []
+    abilityDebuffs: []

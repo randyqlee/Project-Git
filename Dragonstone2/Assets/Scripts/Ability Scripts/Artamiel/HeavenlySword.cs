@@ -18,10 +18,17 @@ public class HeavenlySword : Ability {
 		GameManager.Instance.DealDamage(bonusDamage, attacker, defender);
 
 		//Remove Random Buff
+				
+		
 		if(GameManager.Instance.IsChanceSuccess(attacker)){
 			Buff[] buffs = defender.GetComponents<Buff>();
-			Buff randomBuff = buffs[Random.Range(0, buffs.Length)];
-			Destroy(randomBuff);
+
+			if(buffs.Length > 0){
+				Buff randomBuff = buffs[Random.Range(0, buffs.Length)];
+				Destroy(randomBuff);
+			}			
 		}
+
+		base.UseAbility(attacker,defender);
 	}//Override UseAbility	
 }

@@ -34,6 +34,8 @@ public class Player : MonoBehaviour {
 	public int deadHeroesCount;
 	public List<GameObject> deadHeroes = new List<GameObject>();
 
+	public List<GameObject> teamHeroes = new List<GameObject>();
+
 	void Awake () {
 
 	}

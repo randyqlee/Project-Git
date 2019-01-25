@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour {
 	public delegate void Event_CriticalStrike();
 	public event Event_CriticalStrike e_CriticalStrike = delegate {};
 
+	public delegate void Event_DealDamage(int damage, HeroManager target);
+	public event Event_DealDamage e_DealDamage = delegate {};
+
 	public bool isInitialTurn = true;
 
 	public bool isTurnPaused = false;
@@ -135,9 +138,14 @@ public class GameManager : MonoBehaviour {
 				hero.transform.Find("HeroUI").gameObject.transform.Find("Defense").gameObject.SetActive(true);
 				hero.UpdateUI();
 				hero.CreateHeroPanel();
-			
+
+				//Add reference to the heroes
+				
+				player.teamHeroes.Add(hero.gameObject);		
 				
 			}
+
+
 
 		yield return null;
 	}//InitHeroUI
@@ -146,7 +154,8 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator StartBattle()
 	{
-
+			
+		
 		BattleTextMessage("Start Battle!");
 		yield return new WaitForSeconds (1f);
 
@@ -840,15 +849,34 @@ public class GameManager : MonoBehaviour {
 			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
 			int brandDamage = debuff.value;
 			damage += brandDamage;
+
+			if(damage >= target.maxHealth){
+				Debug.Log("Lethal Damage: " +damage);
+				//target.lethalDamage = damage;
+				e_DealDamage(damage, target);
+			}
+
+
 			target.TakeDamage (damage, source);
 			Debug.Log("Brand Damage: " +brandDamage);
+			
 
 		}else{
+			
+			if(damage >= target.maxHealth){
+				//target.lethalDamage = damage;
+				Debug.Log("Lethal Damage: " +damage);
+				e_DealDamage(damage, target);
+			}
+
 			target.TakeDamage (damage, source);
+			
 		}
 		
 		
-	}
+	}//Deal Damage
+
+	
 
 	//Checks for Critical Strike Flag and modifies attack damage
 	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {

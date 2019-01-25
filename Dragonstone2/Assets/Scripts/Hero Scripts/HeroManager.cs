@@ -95,7 +95,9 @@ public class HeroManager : MonoBehaviour
 	//[HideInInspector]
 	public bool hasExtraTurn;
 
-	
+	//tracks last damage dealt
+	[HideInInspector]
+	public int lethalDamage;
 
 	void Awake () {
 
@@ -223,37 +225,43 @@ public class HeroManager : MonoBehaviour
 	public void TakeDamage(int damage, HeroManager source)
 	{
 
-		if(damage < 0)
-			damage = 0;
 		
-		if(hasBrand){
+		if(damage < 0)
+			damage = 0;			
+			
+		
+		// if(hasBrand){
 
-			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
-			int brandDamage = debuff.value;
-			damage += brandDamage;			
-			Debug.Log("Brand Damage: " +brandDamage);
-		}
+		// 	DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
+		// 	int brandDamage = debuff.value;
+		// 	damage += brandDamage;			
+			
+		// 	//Debug.Log("Brand Damage: " +brandDamage);
+		// }
 
 		if (shield <=0){
 			shield = 0;
 			maxHealth -=damage;
-			e_TakeDamage();
 			e_PopupMSG(damage.ToString());
+			e_TakeDamage();
+			
 
 		}else{			
 			shield-= damage;
-			e_TakeDamage();
 			e_PopupMSG(damage.ToString());
+			e_TakeDamage();
+			
 			
 		if(shield < 0){
 			int netDamage = shield;
 			shield = 0;
 			maxHealth +=netDamage;
-			e_TakeDamage();
 			e_PopupMSG(damage.ToString());
+			e_TakeDamage();
+			
 		}//shield
 		}			
-		
+				
 		GameManager.Instance.CheckHealth();
 	}
 

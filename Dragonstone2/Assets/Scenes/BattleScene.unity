@@ -735,7 +735,7 @@ Prefab:
         type: 2}
       propertyPath: heroes.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 527f523501a1d414ca1a0f7191f0254b,
+      objectReference: {fileID: 11400000, guid: 113c685cf658b414bb7588325b00b659,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 561a0f8280bb7244f8af998fd59b812d, type: 2}
