@@ -11,7 +11,7 @@ public class SalvationSong : Ability {
 	public override void UseAbilityPassive(){
 
 		GameManager.Instance.e_DealDamage += SalvationSongAbility;
-		Debug.Log("Ability Subscribed: " +this.GetComponent<Ability>().name);
+		
 
 	}
 
@@ -29,15 +29,22 @@ public class SalvationSong : Ability {
 	
 	public void SalvationSongAbility (int damage, HeroManager target)
 	{
-		Debug.Log("Salvation Song Ability");
-			if(remainingCooldown == 0){			
+		
+
+		if(target.tag == this.GetComponentInParent<HeroManager>().tag){
+
+			if(remainingCooldown == 0){
+				Debug.Log("Salvation Song Ability");			
 				target.maxHealth += damage;
 				target.UpdateUI();
-				ResetCooldown();
-			
+				ResetCooldown();		
+				
+		}
+
+	}
+
 
 			
-		}
 
 	}
 

@@ -334,7 +334,6 @@ public class GameManager : MonoBehaviour {
 
 		e_HeroKilled();	
 	}
-	
 
 	//used for revive skills
 	public void ReinitializeHero(HeroManager hero) {
@@ -767,23 +766,7 @@ public class GameManager : MonoBehaviour {
 		//Debug.Log("Add Buff" +buffName);
 
 	}//AddBuff
-
-	// public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
-	// //old code
-	// {
-
-	// 	if (target.hasImmunity || target.hasPermanentImmunity)
-	// 	{
-	// 		//Debug.Log ("Target Hero has immunity");
-	// 		AddBuff(buffName, duration, source, target);
-	// 	}
-
-	// 	else if (IsChanceSuccess(source)) //check for Chance
-	// 	{	//(target.gameObject.AddComponent(System.Type.GetType(buffName)) as Buff).New(duration,source.gameObject);
-	// 		AddBuff(buffName, duration, source, target);
-	// 	}
-
-	// }
+	
 
 	public void AddBuffComponentRandom (string buffName, int duration, HeroManager source, HeroManager target, int targetCount)
 	{
@@ -842,39 +825,58 @@ public class GameManager : MonoBehaviour {
 				
 	// }//IsTargetValid
 
-	public void DealDamage (int damage, HeroManager source, HeroManager target)
+	public void DealDamage (int damage, HeroManager source, HeroManager target)	{
+		
+		StartCoroutine(DealDamageCoroutine(damage, source, target));		
+		
+	}//Deal Damage
+
+	public IEnumerator DealDamageCoroutine (int damage, HeroManager source, HeroManager target)
 	{
 		if(target.hasBrand){
 
 			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
 			int brandDamage = debuff.value;
 			damage += brandDamage;
-
-			if(damage >= target.maxHealth){
-				Debug.Log("Lethal Damage: " +damage);
-				//target.lethalDamage = damage;
-				e_DealDamage(damage, target);
+			
+			//Enumerator
+			if(damage >= target.maxHealth){				
+				//e_DealDamage(damage, target);
+				yield return StartCoroutine(DealDamageEvent(damage, target));
 			}
 
-
-			target.TakeDamage (damage, source);
-			Debug.Log("Brand Damage: " +brandDamage);
+			//Enumerator
+			//target.TakeDamage (damage, source);		
+			yield return StartCoroutine(TakeDamageCoroutine(damage, source, target));			
 			
 
 		}else{
 			
 			if(damage >= target.maxHealth){
-				//target.lethalDamage = damage;
-				Debug.Log("Lethal Damage: " +damage);
-				e_DealDamage(damage, target);
+				//e_DealDamage(damage, target);
+				yield return StartCoroutine(DealDamageEvent(damage, target));
 			}
 
-			target.TakeDamage (damage, source);
+			//target.TakeDamage (damage, source);
+			yield return StartCoroutine(TakeDamageCoroutine(damage, source, target));
 			
 		}
+
+		yield return null;		
 		
-		
-	}//Deal Damage
+	}//Deal Damage1
+
+	public IEnumerator DealDamageEvent(int damage, HeroManager target){
+
+		e_DealDamage(damage, target);	
+		yield return null;
+	}
+
+	public IEnumerator TakeDamageCoroutine(int damage, HeroManager source, HeroManager target){
+
+		StartCoroutine(target.TakeDamageCoroutine(damage, source));
+		yield return null;
+	}
 
 	
 
@@ -964,14 +966,15 @@ public class GameManager : MonoBehaviour {
 
 		if (defender.hasReflect){									
 					atk_damage = attackersAttack-attackersDefense;
-					attacker.TakeDamage (atk_damage, defender);
+					//attacker.TakeDamage (atk_damage, defender);
+					DealDamage(atk_damage, defender, attacker);
 					Debug.Log("Damage Reflected");
-
 					attacker.DisplayDamageText(atk_damage);
 				} else {
 					//Normal Damage	route
 					atk_damage = attackersAttack - defendersDefense;
-					defender.TakeDamage(atk_damage, attacker);
+					//defender.TakeDamage(atk_damage, attacker);
+					DealDamage(atk_damage, attacker, defender);
 					defender.DisplayDamageText(atk_damage);
 				}
 
@@ -979,9 +982,9 @@ public class GameManager : MonoBehaviour {
 				if (defender.hasRevenge)
 				{
 						atk_damage = defendersAttack-attackersDefense;
-						attacker.TakeDamage (atk_damage, defender);
+						//attacker.TakeDamage (atk_damage, defender);
+						DealDamage(atk_damage, defender, attacker);
 						Debug.Log("Revenge!");
-
 						attacker.DisplayDamageText(atk_damage);
 				}
 
@@ -989,7 +992,8 @@ public class GameManager : MonoBehaviour {
 				if(attacker.hasEcho)
 				{
 					atk_damage = attackersAttack-attackersDefense;
-					attacker.TakeDamage (atk_damage, attacker);				
+					//attacker.TakeDamage (atk_damage, attacker);
+					DealDamage(atk_damage, attacker, attacker);				
 					Debug.Log("Echo Damage");
 
 					attacker.DisplayDamageText(atk_damage);

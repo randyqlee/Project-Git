@@ -222,48 +222,71 @@ public class HeroManager : MonoBehaviour
 		healthBar.fillAmount = ((float) maxHealth)/origHealth;
 	}
 
-	public void TakeDamage(int damage, HeroManager source)
+	public IEnumerator TakeDamageCoroutine(int damage, HeroManager source)
 	{
-
 		
 		if(damage < 0)
 			damage = 0;			
-			
-		
-		// if(hasBrand){
-
-		// 	DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
-		// 	int brandDamage = debuff.value;
-		// 	damage += brandDamage;			
-			
-		// 	//Debug.Log("Brand Damage: " +brandDamage);
-		// }
 
 		if (shield <=0){
 			shield = 0;
 			maxHealth -=damage;
-			e_PopupMSG(damage.ToString());
-			e_TakeDamage();
+			
+			//e_PopupMSG(damage.ToString());
+			yield return StartCoroutine(PopUpMsgEvent(damage));
+
+			//e_TakeDamage();
+			yield return StartCoroutine(TakeDamageEvent());
 			
 
 		}else{			
 			shield-= damage;
-			e_PopupMSG(damage.ToString());
-			e_TakeDamage();
+
+			//e_PopupMSG(damage.ToString());
+			yield return StartCoroutine(PopUpMsgEvent(damage));
+			
+			//e_TakeDamage();
+			yield return StartCoroutine(TakeDamageEvent());
 			
 			
-		if(shield < 0){
-			int netDamage = shield;
-			shield = 0;
-			maxHealth +=netDamage;
-			e_PopupMSG(damage.ToString());
-			e_TakeDamage();
-			
-		}//shield
-		}			
+			if(shield < 0){
+				int netDamage = shield;
+				shield = 0;
+				maxHealth +=netDamage;
 				
-		GameManager.Instance.CheckHealth();
+				//e_PopupMSG(damage.ToString());
+				yield return StartCoroutine(PopUpMsgEvent(damage));
+			
+				//e_TakeDamage();
+				yield return StartCoroutine(TakeDamageEvent());
+				
+			}//shield
+		}							
+				
+		//GameManager.Instance.CheckHealth();
+		yield return StartCoroutine(CheckHealthMethod());
+
+		yield return null;
+	}//TakeDamage1
+
+	public IEnumerator PopUpMsgEvent(int damage){
+
+		e_PopupMSG(damage.ToString());
+		yield return null;
 	}
+
+	public IEnumerator TakeDamageEvent(){
+
+		e_TakeDamage();
+		yield return null;
+	}
+
+	public IEnumerator CheckHealthMethod(){
+
+		GameManager.Instance.CheckHealth();
+		yield return null;
+	}
+
 
 	public void Healhero (HeroManager target, int healValue)
 	{

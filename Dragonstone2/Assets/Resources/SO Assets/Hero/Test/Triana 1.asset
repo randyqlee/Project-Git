@@ -8,6 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb81531d84ad634290198acf9fbd8f5, type: 3}
+  m_Name: Triana 1
   m_EditorClassIdentifier: 
   heroName: Triana
   image: {fileID: 21300000, guid: ab0029c4b8ca9bd45a0df7440ffe3fe2, type: 3}
@@ -43,8 +45,8 @@ MonoBehaviour:
   - abilityName: Salvation Song
     skillType: 1
     icon: {fileID: 21300000, guid: 4a069f61801e89848bedf0bca26b3b94, type: 3}
-    description: "Salvation Song : Offsets the incoming damage that may cause your
-      ally to die and instantly gains another turn. \nAutomatic CD: 5 turns"
+    description: 'Salvation Song : Offsets the incoming damage that may cause your
+      ally to die.  Automatic CD: 5 turns'
     abilityEffect: SalvationSong
     abilityCoolDown: 5
     target: 0
