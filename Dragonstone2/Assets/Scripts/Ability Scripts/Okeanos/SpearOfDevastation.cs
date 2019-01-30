@@ -32,10 +32,7 @@ public override void UseAbility (HeroManager attacker, HeroManager defender)
 		defender.heroPanel.SetActive(false);
 
 		//Critical Attack an Enemy
-		bool criticalStatus = attacker.hasCritical;
-		attacker.hasCritical = true;
-		GameManager.Instance.Attack(attacker, defender);
-		attacker.hasCritical = criticalStatus;
+		GameManager.Instance.AttackCritical(attacker, defender);
 
 		base.UseAbility(attacker);		
 

@@ -5,7 +5,6 @@ using UnityEngine;
 //Purifying Wave: Remove all debuffs on all allies and increases their Defense for 2 turns.
 
 public class PurifyingWave : Ability 
-
 {
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 		{	

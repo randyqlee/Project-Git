@@ -565,7 +565,6 @@ public class GameManager : MonoBehaviour {
 
 	public void AddDebuffComponent (string debuffName, int duration, HeroManager source, HeroManager target)
 	{
-
 		if (canTargetHero)
 		{
 			if (target.hasImmunity || target.hasPermanentImmunity)
@@ -876,57 +875,9 @@ public class GameManager : MonoBehaviour {
 
 		StartCoroutine(target.TakeDamageCoroutine(damage, source));
 		yield return null;
-	}
+	}	
 
 	
-
-	//Checks for Critical Strike Flag and modifies attack damage
-	public void CriticalStrikeCheck(HeroManager attacker, HeroManager defender) {
-
-		if(attacker.hasCritical)
-		{
-			CriticalStrike(attacker, defender);
-		} else 
-		{
-			attackersAttack = attacker.attack;
-		}
-		if(defender.hasCritical)
-		{
-			CriticalStrike(defender, attacker);
-		} else 		
-		{
-			defendersAttack = defender.attack;
-		}
-
-		//Prevent Negative Damage
-		if(attackersAttack < 0)
-			attackersAttack = 0;
-
-		if(defendersAttack<0)		
-			defendersAttack = 0;				
-
-	}//Critical Strike Check
-
-	public void CriticalStrike(HeroManager source, HeroManager target){
-
-		//50% chance for critical strike to be x2 or x3 damage
-		if (1-Random.value < 0.5)
-		{
-			attackersAttack = 2*source.attack;
-		} 			
-		else 
-		{
-			attackersAttack = 3*source.attack;
-		}
-		BattleTextMessage("Critical Strike: " +attackersAttack);
-		
-		target.hitByCritical = true;
-		target.criticalSource = source;
-
-
-		//e_CriticalStrike();
-		
-	}//CriticalStrike	
 
 	public void AttackCritical(HeroManager attacker, HeroManager defender){
 		bool critStatus = attacker.hasCritical;
@@ -947,11 +898,11 @@ public class GameManager : MonoBehaviour {
 	//Checks and resolves resolution of Reflect, Echo, and Revenge
 	public void AttackStatusChecks(HeroManager attacker, HeroManager defender){
 
-			int attackersDefense = attacker.defense;
-			int defendersDefense = defender.defense;
+		int attackersDefense = attacker.defense;
+		int defendersDefense = defender.defense;
+		attackersAttack = attacker.attack;
+		defendersAttack = defender.attack;
 		
-		CriticalStrikeCheck(attacker, defender);
-
 		if(attackersDefense < 0)
 			attackersDefense = 0;
 
@@ -963,6 +914,8 @@ public class GameManager : MonoBehaviour {
 
 		if(defendersAttack<0)		
 			defendersAttack = 0;	
+
+		CriticalStrikeCheck(attacker, defender);
 
 		if (defender.hasReflect){									
 					atk_damage = attackersAttack-attackersDefense;
@@ -979,35 +932,54 @@ public class GameManager : MonoBehaviour {
 				}
 
 				//Revenge
-				if (defender.hasRevenge)
-				{
-						atk_damage = defendersAttack-attackersDefense;
-						//attacker.TakeDamage (atk_damage, defender);
-						DealDamage(atk_damage, defender, attacker);
-						Debug.Log("Revenge!");
-						attacker.DisplayDamageText(atk_damage);
-				}
+		if (defender.hasRevenge)
+		{
+			atk_damage = defendersAttack-attackersDefense;
+			//attacker.TakeDamage (atk_damage, defender);
+			DealDamage(atk_damage, defender, attacker);
+			Debug.Log("Revenge!");
+			attacker.DisplayDamageText(atk_damage);
+		}
+		
+	}//Attack Status Checks
 
-				//Echo
-				if(attacker.hasEcho)
-				{
-					atk_damage = attackersAttack-attackersDefense;
-					//attacker.TakeDamage (atk_damage, attacker);
-					DealDamage(atk_damage, attacker, attacker);				
-					Debug.Log("Echo Damage");
+	//Checks for Critical Strike Flag and modifies attack damage
+	public void CriticalStrikeCheck(HeroManager source, HeroManager target) {
+		
+		//For sure Critical
+		if(source.hasCritical)
+		{
+			CriticalStrike(source, target);
+		} else if(IsChanceSuccess(source))
+		{
+			CriticalStrike(source, target);
+		} else 
+		{
+				attackersAttack = source.attack;
+		}		
+					
+	}//Critical Strike Check
 
-					attacker.DisplayDamageText(atk_damage);
-				} 
+	public void CriticalStrike(HeroManager source, HeroManager target){
 
-				if(attacker.hasCritical){
-					e_CriticalStrike();
-					defender.hitByCritical = false;
-				}else if(defender.hasCritical){
-					e_CriticalStrike();
-					attacker.hitByCritical = false;
-				}
+		//50% chance for critical strike to be x2 or x3 damage
+		if (1-Random.value < 0.5)
+		{
+			attackersAttack = 2*source.attack;
+		} 			
+		else 
+		{
+			attackersAttack = 3*source.attack;
+		}
+		
+		BattleTextMessage("Critical Strike: " +attackersAttack);
+		
+		target.hitByCritical = true;
+		target.criticalSource = source;
 
-	}
+		e_CriticalStrike();
+		
+	}//CriticalStrike	
 
 	public void CheckDefender(HeroManager attacker, HeroManager defender){
 

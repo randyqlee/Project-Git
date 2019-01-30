@@ -11,26 +11,17 @@ public class Crumble : Ability {
 	{
 		
 		//Attack and Deal Critical Strike to all enemies
-		bool criticalStatus = attacker.hasCritical;
-		attacker.hasCritical = true;
-		GameManager.Instance.AttackAll(attacker, defender);
-		Debug.Log("Attacker Critical Damage: " +GameManager.Instance.atk_damage);
-		attacker.hasCritical = criticalStatus;
-
-		//Deal decrease defense and Poison to all enemies
-		float chanceStatus = attacker.chance;
-		attacker.chance = 1000f;
-		int enemyCount = GameManager.Instance.EnemyHeroList(attacker).Count;
-		UseAbilityRandom(attacker, defender, enemyCount);
-		attacker.chance = chanceStatus;
-
-
-		base.UseAbility(attacker);
+		GameManager.Instance.AttackAllCritical(attacker, defender);
 
 		
-
-	}
-
-	
-
+		//Deal decrease defense and Poison to all enemies
+		List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(attacker);
+		int enemiesCount = enemies.Count;
+		
+		foreach(HeroManager enemy in enemies){
+			GameManager.Instance.AddDebuffComponent("DecreaseDefense",2,attacker,defender);
+			GameManager.Instance.AddDebuffComponent("Poison",2,attacker,defender);
+		}		
+		base.UseAbility(attacker);	
+	}	
 }

@@ -17,10 +17,8 @@ public class BladeFan : Ability {
 		defender.UpdateUI();
 		//GameManager.Instance.OneTurnCritical(attacker, defender);		
 
-		bool criticalStatus = attacker.hasCritical;
-		attacker.hasCritical = true;
-		GameManager.Instance.Attack(attacker, defender);
-		attacker.hasCritical = criticalStatus;
+		
+		GameManager.Instance.AttackCritical(attacker, defender);
 		
 
 		base.UseAbility(attacker, defender);

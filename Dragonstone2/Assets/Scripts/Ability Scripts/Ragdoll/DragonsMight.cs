@@ -14,10 +14,8 @@ public class DragonsMight : Ability {
 		if(GameManager.Instance.IsChanceSuccess(attacker)){
 
 			//chance to critical
-			bool criticalTemp = attacker.hasCritical;
-			attacker.hasCritical = true;
-			GameManager.Instance.Attack(attacker, defender);
-			attacker.hasCritical = criticalTemp;
+			GameManager.Instance.AttackCritical(attacker, defender);
+			
 
 			//gain lucky
 			if(defender.hasImmunity || defender.hasPermanentImmunity){
