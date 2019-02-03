@@ -34,6 +34,7 @@ public class Ability : MonoBehaviour {
 
 	public virtual void UseAbility (HeroManager attacker)
 	{
+		
 		ResetCooldown();
 		GameManager.Instance.ExtraTurnCheck(attacker); 
 	}

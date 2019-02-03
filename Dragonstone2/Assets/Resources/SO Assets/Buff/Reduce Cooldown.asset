@@ -9,9 +9,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 941d18fce52140641ba6fef29d819430, type: 3}
-  m_Name: Lucky
+  m_Name: Reduce Cooldown
   m_EditorClassIdentifier: 
-  buff: 5
-  icon: {fileID: 21300000, guid: 4849c7ee68025054ab05bf636484f149, type: 3}
-  value: 100
-  description: Increase Chance by 100%
+  buff: 13
+  icon: {fileID: 21300000, guid: 8f38b22d74bac6248add906ff03f88ff, type: 3}
+  value: 1
+  description: At the end of the buff counter, chance to reduce all skill cooldowns
+    by 1.

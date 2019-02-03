@@ -1,5 +1,6 @@
 ﻿public enum BuffList {
-	Defender,
+	
+	Defend,
 	Immunity,
 	IncreaseAttack,
 	IncreaseDefense,
@@ -10,6 +11,10 @@
 	Reflect,
 	Endure,
 	Revenge,
+	Threat,
+	ExtraTurn,
+	ReduceCooldown,
+	ProtectSoul
 	
 }
 

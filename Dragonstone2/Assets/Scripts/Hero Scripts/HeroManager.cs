@@ -66,10 +66,15 @@ public class HeroManager : MonoBehaviour
 	public bool hasImmunity;
 	public bool hasRevenge;
 	public bool hasReflect;
-	public bool hasDefender;
+	public bool hasThreat;
+	public bool hasDefend;
 	public bool hasTaunt;
 	public bool hasRecovery;
 	public bool hasEndure;
+	public bool hasReduceCooldown;
+	public bool hasProtectSoul;
+	
+	
 
 	[Header("Debuff Flags")]
 	public bool hasCrippledStrike;
@@ -238,6 +243,8 @@ public class HeroManager : MonoBehaviour
 			//e_TakeDamage();
 			yield return StartCoroutine(TakeDamageEvent());
 			
+			
+			
 
 		}else{			
 			shield-= damage;
@@ -247,6 +254,7 @@ public class HeroManager : MonoBehaviour
 			
 			//e_TakeDamage();
 			yield return StartCoroutine(TakeDamageEvent());
+		
 			
 			
 			if(shield < 0){
@@ -259,6 +267,8 @@ public class HeroManager : MonoBehaviour
 			
 				//e_TakeDamage();
 				yield return StartCoroutine(TakeDamageEvent());
+			
+				
 				
 			}//shield
 		}							

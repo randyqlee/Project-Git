@@ -234,11 +234,11 @@ public class GameManager : MonoBehaviour {
 
 
 	//Defender check
-	public bool NoDefender(Player player)
+	public bool NoThreat(Player player)
 	{
 		foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 		{
-			if (hero.hasDefender)
+			if (hero.hasThreat)
 				return false;
 		}
 		return true;
@@ -329,15 +329,33 @@ public class GameManager : MonoBehaviour {
 
 		hero.GetComponentInParent<Player>().DeadHeroes(hero);
 
+		
+		
 		hero.gameObject.SetActive(false);
 
-
 		e_HeroKilled();	
+
+		if(hero.hasProtectSoul){
+			StartCoroutine(ProtectSoulRevive(hero));
+		}
+		
+		
+
+
+	}
+
+	public  IEnumerator ProtectSoulRevive(HeroManager hero){
+			hero.gameObject.SetActive(true);
+			ReinitializeHero(hero);
+			Debug.Log("Protect Soul");
+
+		yield return null;
 	}
 
 	//used for revive skills
 	public void ReinitializeHero(HeroManager hero) {
-
+		
+		
 		//Destroy all buffs
 		Buff[] buffs = hero.GetComponents<Buff>();
 		
@@ -357,6 +375,23 @@ public class GameManager : MonoBehaviour {
 		hero.defense = hero.origDefense;
 		hero.chance = hero.origChance;
 		hero.shield = hero.origShield;
+
+		//Trigger Passives
+		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+								
+				Ability[] abilities = hero.GetComponentsInChildren<Ability>();
+				foreach(Ability ability in abilities){
+					if(ability.skillType == Type.Passive){
+						ability.UseAbilityPassive();
+					}
+
+					//For active skills with Passive
+					if(ability.skillType == Type.Active){
+						ability.UseAbilityActive();
+					}
+				}
+
+		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
 
 	}
 
@@ -918,27 +953,54 @@ public class GameManager : MonoBehaviour {
 		CriticalStrikeCheck(attacker, defender);
 
 		if (defender.hasReflect){									
-					atk_damage = attackersAttack-attackersDefense;
-					//attacker.TakeDamage (atk_damage, defender);
-					DealDamage(atk_damage, defender, attacker);
-					Debug.Log("Damage Reflected");
-					attacker.DisplayDamageText(atk_damage);
-				} else {
+					
+			if(!defender.GetComponentInParent<Player>().isActive)
+			{
+				atk_damage = attackersAttack-attackersDefense;
+				//attacker.TakeDamage (atk_damage, defender);
+				DealDamage(atk_damage, defender, attacker);
+				Debug.Log("Damage Reflected");
+				attacker.DisplayDamageText(atk_damage);
+			}					
+					
+		} else {
+					
+					if(defender.hasDefend){
+
+						HeroManager defenderHero = defender.GetComponent<Defend>().source.GetComponent<HeroManager>();						
+						int defenderHerosDefense = defenderHero.defense;
+
+						atk_damage = attackersAttack - defenderHerosDefense;					
+						DealDamage(atk_damage, attacker, defenderHero);
+						defenderHero.DisplayDamageText(atk_damage);
+						Debug.Log("Defend!");					
+
+					}else {
+
 					//Normal Damage	route
 					atk_damage = attackersAttack - defendersDefense;
-					//defender.TakeDamage(atk_damage, attacker);
+					
 					DealDamage(atk_damage, attacker, defender);
 					defender.DisplayDamageText(atk_damage);
-				}
+					}				
+					
+		}
 
 				//Revenge
 		if (defender.hasRevenge)
 		{
-			atk_damage = defendersAttack-attackersDefense;
-			//attacker.TakeDamage (atk_damage, defender);
-			DealDamage(atk_damage, defender, attacker);
-			Debug.Log("Revenge!");
-			attacker.DisplayDamageText(atk_damage);
+			
+			if(!defender.GetComponentInParent<Player>().isActive){
+				Attack(defender, attacker);
+				Debug.Log("Revenge!");
+			}
+			
+			
+			// atk_damage = defendersAttack-attackersDefense;
+			// //attacker.TakeDamage (atk_damage, defender);
+			// DealDamage(atk_damage, defender, attacker);
+			// Debug.Log("Revenge!");
+			// attacker.DisplayDamageText(atk_damage);
 		}
 		
 	}//Attack Status Checks
@@ -981,12 +1043,12 @@ public class GameManager : MonoBehaviour {
 		
 	}//CriticalStrike	
 
-	public void CheckDefender(HeroManager attacker, HeroManager defender){
+	public void CheckThreat(HeroManager attacker, HeroManager defender){
 
 		
 		//For Defender
 		//Check 3 states: 1) No Defender 2) Target has Defender 3) If you're target is an Ally
-		if (NoDefender(defender.GetComponentInParent<Player>())|| defender.hasDefender|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
+		if (NoThreat(defender.GetComponentInParent<Player>())|| defender.hasThreat|| defender.GetComponentInParent<Player>().tag == attacker.GetComponentInParent<Player>().tag ){
 
 			canTargetHero = true;
 			checkDefender = true;
@@ -1013,7 +1075,7 @@ public class GameManager : MonoBehaviour {
 				}
 
 			} else {
-				CheckDefender(attacker, defender);
+				CheckThreat(attacker, defender);
 			}			
 	}
 

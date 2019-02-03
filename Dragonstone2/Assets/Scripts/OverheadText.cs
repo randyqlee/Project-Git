@@ -60,7 +60,7 @@ public class OverheadText : MonoBehaviour {
 		text.gameObject.SetActive(false);
 	}
 
-	IEnumerator PopupText ()
+	public IEnumerator PopupText ()
 	{
 		
 		ShowText();

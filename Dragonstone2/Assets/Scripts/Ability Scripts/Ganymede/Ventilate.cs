@@ -22,7 +22,7 @@ public class Ventilate : Ability {
 		}
 		defender.heroPanel.SetActive(false);
 
-		base.UseAbility(attacker);
+		base.UseAbility(attacker,defender);
 		
 	}
 
