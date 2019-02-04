@@ -44,11 +44,7 @@ MonoBehaviour:
     target: 0
     abilityBuffs: []
     abilityDebuffs:
-    - debuff: 0
-      duration: 10
-    - debuff: 1
-      duration: 10
-    - debuff: 2
+    - debuff: 14
       duration: 10
   - abilityName: Frost Rush
     skillType: 0

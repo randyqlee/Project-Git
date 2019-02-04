@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
 
 	public bool isActive;
 
+	public bool isEndTurn;
+
 //	HeroManager selectedHero;
 
 	public bool dragging = false;
@@ -163,7 +165,7 @@ public class Player : MonoBehaviour {
 				if(pointerObject.gameObject.GetComponent<Button>() != null && myHeroIsSelected)
 				{
 					//if the button is clicked
-					if (Input.GetMouseButtonDown(0))
+					if (Input.GetMouseButtonDown(0) && !isEndTurn)
 					{
 						button = pointerObject.gameObject.GetComponent<Button>();
 						//Debug.Log("Ability: " +button.GetComponentInChildren<Ability>());

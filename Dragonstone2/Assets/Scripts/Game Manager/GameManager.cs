@@ -210,7 +210,8 @@ public class GameManager : MonoBehaviour {
 		//just for debugging, to simulate NextTurn
 		if (Input.GetKeyDown ("a"))
 		{
-			EndTurn();
+			//EndTurn();
+			StartCoroutine(PlayerTurnEnd());
 		}	
 	}
 
@@ -405,6 +406,26 @@ public class GameManager : MonoBehaviour {
 					{
 						hero.DeselectHero();
 					}
+					
+				if (!hero.isSelected)
+					{
+						hero.DeselectHeroPanel();
+					}
+
+			}
+		}
+	}
+
+
+	public void DeselectAllHeroPanels ()
+	{
+		foreach (Player player in players)
+		{
+			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
+			{
+				
+						hero.DeselectHeroPanel();
+				
 				
 
 			}
@@ -451,6 +472,9 @@ public class GameManager : MonoBehaviour {
 	// }//Next Turn
 
 	IEnumerator PlayerTurnStart(){
+		
+		
+		
 		
 		StopCoroutine(PlayerTurnEnd());
 
@@ -527,6 +551,7 @@ public class GameManager : MonoBehaviour {
 						{
 							players[0].isActive = false;
 							players[1].isActive = true;
+							players[1].isEndTurn = false;
 
 							foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 							{
@@ -550,6 +575,8 @@ public class GameManager : MonoBehaviour {
 					else {
 							players[1].isActive = false;
 							players[0].isActive = true;
+							players[0].isEndTurn = false;
+							
 							foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 							{
 								var image = hero.glow.GetComponent<Image>().color;
@@ -1082,8 +1109,9 @@ public class GameManager : MonoBehaviour {
 	public void EndTurn(){
 		CheckHealth ();
 		DeselectAllHeroes ();
+
 		//NextTurn();
-		StartCoroutine(PlayerTurnEnd());
+		//StartCoroutine(PlayerTurnEnd());
 
 	}
 
@@ -1135,8 +1163,6 @@ public class GameManager : MonoBehaviour {
 	
 
 
-
-
 	}//Extra Turn
 
 	public void ExtraTurnCheck(HeroManager source){
@@ -1179,6 +1205,9 @@ public class GameManager : MonoBehaviour {
 		
 			//set Extra Turn to false and End the Turn
 			extraTurn = false;
+
+			source.GetComponentInParent<Player>().isEndTurn = true;
+
 			EndTurn();
 
 		} else {		

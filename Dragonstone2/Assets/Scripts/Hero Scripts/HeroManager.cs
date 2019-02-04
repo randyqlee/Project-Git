@@ -140,11 +140,26 @@ public class HeroManager : MonoBehaviour
 		isSelected = false;
 
 		heroPanel.SetActive(false);
+		
+		
 		glow.GetComponent<Image>().color = new Color32 (195, 71, 91, 255);
+	}
+
+	public void DeselectHeroPanel()
+	{
+		
+		heroPanel.SetActive(false);	
 	}
 
 	public void DisplayHero()
 	{
+		
+		
+		GameManager.Instance.DeselectAllHeroPanels();
+		heroPanel.SetActive(true);
+		
+		
+		
 		// Debug.Log("Hero: " + heroName);
 		// Debug.Log("Health: " + maxHealth);
 		// Debug.Log("Attack: " + attack);

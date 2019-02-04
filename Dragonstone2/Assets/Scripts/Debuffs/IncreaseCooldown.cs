@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ReduceCooldown : Buff {
+public class IncreaseCooldown : Debuff {
 
 
 	void Awake () {
 		//get buff asset
-		this.buff = Resources.Load<BuffAsset>("SO Assets/Buff/Reduce Cooldown");
+		this.debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Increase Cooldown");
 		
-		this.buffIcon = buff.icon;
+		this.debuffIcon = debuff.icon;
 
 		gameObject.GetComponent<HeroManager>().hasReduceCooldown = true;
 
-		GameManager.Instance.e_PlayerStartPhase += ReduceCD;
+		GameManager.Instance.e_PlayerStartPhase += IncreaseCD;
 
 
 	}
@@ -24,14 +25,14 @@ public class ReduceCooldown : Buff {
 	{
 
 		
-		GameManager.Instance.e_PlayerStartPhase -= ReduceCD;
+		GameManager.Instance.e_PlayerStartPhase -= IncreaseCD;
 		gameObject.GetComponent<HeroManager>().hasReduceCooldown = false;
 
 		//call parent OnDestroy
 		base.OnDestroy();
 	}
 
-	public void ReduceCD()
+	public void IncreaseCD()
 	{
 		if(gameObject.GetComponent<HeroManager>().hasReduceCooldown && gameObject.GetComponentInParent<Player>().isActive) 
 		{			
@@ -41,12 +42,14 @@ public class ReduceCooldown : Buff {
 			Ability[] abilities = gameObject.GetComponent<HeroManager>().GetComponentsInChildren<Ability>();
 			foreach (Ability ability in abilities){
 			
-			ability.remainingCooldown -= this.buff.value;
+			ability.remainingCooldown += this.debuff.value;
 			
 			if(ability.remainingCooldown <0)
 			ability.remainingCooldown = 0;
 
-			gameObject.GetComponent<HeroManager>().UpdateUI();
+			ability.GetComponentInChildren<Text>().text = ability.remainingCooldown.ToString();
+			
+			//gameObject.GetComponent<HeroManager>().UpdateUI();
 			
 			}
 			gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);

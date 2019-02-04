@@ -13,6 +13,8 @@
 	AntiBuff,
 	Brand,
 	Bomb,
+	IncreaseCooldown,
+	Oblivion,
 
 	//AbilityRelatedDebuffs
 	ChargeVitalityStun,
