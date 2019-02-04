@@ -42,7 +42,7 @@ public class Buff : MonoBehaviour{
 
 	public void DecreaseDuration ()
 	{
-		if (GetComponentInParent<Player>().isActive)
+		if (GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().isSelected)
 		{
 			this.duration--;
 

@@ -30,6 +30,7 @@ public class HeroManager : MonoBehaviour
 	public CapsuleCollider2D col;
 
 	public bool isSelected;
+	public bool isActive;
 	public Player player;
 	public bool isDead;
 
@@ -126,6 +127,7 @@ public class HeroManager : MonoBehaviour
 	{
 		GameManager.Instance.DeselectAllHeroes();
 		isSelected = true;
+		isActive = true;
 		glow.GetComponent<Image>().color = new Color32 (26, 255, 53, 255);
 
 		heroPanel.SetActive(true);

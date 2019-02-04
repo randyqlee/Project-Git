@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour {
 	public bool canTargetHero, checkDefender;
 	public bool extraTurn;
 
+	int heroTurnP1 = 0;
+	int heroTurnP2 = 0;
+	int player1TeamSize;
+	int player2TeamSize;
+
 	//Variables used in extra turn
 	// [HideInInspector]
 	// public List<HeroManager> extraTurnHeroes;
@@ -97,7 +102,7 @@ public class GameManager : MonoBehaviour {
 		//yield return new WaitForSeconds (2f);
 		yield return StartCoroutine (InitHeroPassives());
 		//yield return new WaitForSeconds (2f);
-		yield return StartCoroutine (StartBattle());
+		yield return StartCoroutine (StartBattle1());
 		//yield return new WaitForSeconds (2f);
 		
 	}
@@ -157,7 +162,7 @@ public class GameManager : MonoBehaviour {
 			
 		
 		BattleTextMessage("Start Battle!");
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (1f);	
 
 		foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
 		{
@@ -171,7 +176,32 @@ public class GameManager : MonoBehaviour {
 		//NextTurn();
 		StartCoroutine(PlayerTurnEnd());
 		yield return null;
-	}
+	}//Start Battle
+
+	IEnumerator StartBattle1()
+	{
+			
+		BattleTextMessage("Start Battle!");
+		yield return new WaitForSeconds (1f);
+
+		//initial turn
+		HeroManager firstPlayer = players[0].teamHeroes[heroTurnP1].GetComponent<HeroManager>();
+		firstPlayer.SelectHero();
+		var image = firstPlayer.glow.GetComponent<Image>().color;
+		image.a = 1f;
+		firstPlayer.glow.GetComponent<Image>().color = image;		
+
+		transform.Find("UI").gameObject.transform.Find("Turn Timer").gameObject.SetActive(true);
+
+		player1TeamSize = players[0].teamHeroes.Count;
+		player2TeamSize = players[1].teamHeroes.Count;
+
+		//heroTurnP1 ++;
+
+		//NextTurn();
+		StartCoroutine(PlayerTurnEnd());
+		yield return null;
+	}//Start Battle
 
 	IEnumerator InitHeroPassives()
 	{
@@ -208,11 +238,21 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//just for debugging, to simulate NextTurn
+		EndPlayerTurn();		
+	}
+
+	public void EndPlayerTurn(){
+
 		if (Input.GetKeyDown ("a"))
 		{
-			//EndTurn();
-			StartCoroutine(PlayerTurnEnd());
+			EndButton();
 		}	
+
+	}
+
+	public void EndButton(){
+		//GameManager.Instance.DeselectAllHeroes();
+		StartCoroutine(PlayerTurnEnd());
 	}
 
 	public void Attack (HeroManager attacker, HeroManager defender)	{
@@ -309,6 +349,23 @@ public class GameManager : MonoBehaviour {
 	{		
 		hero.isDead = true;
 				
+		//Destroy all buffs and debuffs
+		//Destroy all buffs
+		Buff[] buffs = hero.GetComponents<Buff>();
+		
+			foreach(Buff buff in buffs){					
+				Destroy(buff);				
+			}
+
+		//Destroy all debuffs
+		Debuff[] debuffs = hero.GetComponents<Debuff>();
+		
+			foreach(Debuff debuff in debuffs){					
+				Destroy(debuff);					
+			}
+		
+		
+		
 		//Disable Passive Abilities		
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);							
 		Ability[] abilities = hero.GetComponentsInChildren<Ability>();
@@ -329,6 +386,8 @@ public class GameManager : MonoBehaviour {
 		//Kill Hero
 
 		hero.GetComponentInParent<Player>().DeadHeroes(hero);
+
+
 
 		
 		
@@ -536,7 +595,8 @@ public class GameManager : MonoBehaviour {
 
 		if (!isTurnPaused)
 			{
-				SwitchActivePlayers();			
+				//SwitchActivePlayers();
+				SwitchActivePlayers1();				
 				
 			}		
 		//Debug.Log("Player Transition");
@@ -561,6 +621,8 @@ public class GameManager : MonoBehaviour {
 
 
 							}
+
+
 							foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
 							{
 								var image = hero.glow.GetComponent<Image>().color;
@@ -598,7 +660,95 @@ public class GameManager : MonoBehaviour {
 					}
 
 
-	}
+	}//SwitchActivePlayers
+
+
+	void SwitchActivePlayers1(){
+		if (players[0].isActive)
+						{
+							players[0].isActive = false;
+							players[1].isActive = true;
+							players[1].isEndTurn = false;
+
+							
+							GameManager.Instance.DeselectAllHeroes();
+
+							//Set hero.isActive to flase						
+
+
+							if(!IsGameOver()){
+								while(!players[1].teamHeroes[heroTurnP2].activeSelf){							
+									heroTurnP2++;
+									if(heroTurnP2>=player2TeamSize)
+									heroTurnP2 = 0;
+								} 
+							}
+
+							players[1].teamHeroes[heroTurnP2].GetComponent<HeroManager>().SelectHero();
+							var image = players[1].teamHeroes[heroTurnP2].GetComponent<HeroManager>().glow.GetComponent<Image>().color;
+							image.a = 1f;
+							players[1].teamHeroes[heroTurnP2].GetComponent<HeroManager>().glow.GetComponent<Image>().color = image;					
+								
+
+							//Disable Hero Selector
+							foreach (HeroManager hero in players[0].GetComponentsInChildren<HeroManager>())
+							{
+								var image0 = hero.glow.GetComponent<Image>().color;
+								image0.a = 0f;
+								hero.glow.GetComponent<Image>().color = image0;
+							}
+							
+							heroTurnP2++;
+							if(heroTurnP2>=player2TeamSize)
+							heroTurnP2 = 0;
+														
+							
+							BattleTextMessage ("Player 2");
+						}
+					else {
+							players[1].isActive = false;
+							players[0].isActive = true;
+							players[0].isEndTurn = false;
+							
+							
+							//Set Hero Active
+							GameManager.Instance.DeselectAllHeroes();
+
+							if(!IsGameOver()){
+								while(!players[0].teamHeroes[heroTurnP1].activeSelf){							
+									heroTurnP1++;
+									if(heroTurnP1>=player2TeamSize)
+									heroTurnP1 = 0;
+								} 
+							}
+
+
+
+							players[0].teamHeroes[heroTurnP1].GetComponent<HeroManager>().SelectHero();
+
+							var image = players[0].teamHeroes[heroTurnP1].GetComponent<HeroManager>().glow.GetComponent<Image>().color;
+							image.a = 1f;
+							players[0].teamHeroes[heroTurnP1].GetComponent<HeroManager>().glow.GetComponent<Image>().color = image;
+
+
+
+							foreach (HeroManager hero in players[1].GetComponentsInChildren<HeroManager>())
+							{
+								var image1 = hero.glow.GetComponent<Image>().color;
+								image1.a = 0f;
+								hero.glow.GetComponent<Image>().color = image1;			
+
+							}
+
+							heroTurnP1++;
+							if(heroTurnP1>=player1TeamSize)
+							heroTurnP1 = 0;
+
+							BattleTextMessage ("Player 1");
+					}
+
+
+	}//SwitchActivePlayers
 
 	IEnumerator StartAttackSequence()
 	{
@@ -1129,34 +1279,34 @@ public class GameManager : MonoBehaviour {
 			StopCoroutine (ATBCoroutine);
 	 		StartATBCoroutine ();
 
-			List<HeroManager> extraTurnHeroes = AllyHeroList(source);
+			// List<HeroManager> extraTurnHeroes = AllyHeroList(source);
 
-			//Check which heroes are active during the extra turn
-			foreach(HeroManager extraTurnHero in extraTurnHeroes){
+			// //Check which heroes are active during the extra turn
+			// foreach(HeroManager extraTurnHero in extraTurnHeroes){
 
-				if(!extraTurnHero.hasExtraTurn)
-				{				
+			// 	if(!extraTurnHero.hasExtraTurn)
+			// 	{				
 					
 
-					//Disable access to Skills	
-					extraTurnHero.heroPanel.SetActive(true);
-					List<Button> skillsButton = extraTurnHero.gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;					
-					for(int i = 0; i <skillsButton.Count; i++)
-					{
-						skillsButton[i].interactable = false;
+			// 		//Disable access to Skills	
+			// 		extraTurnHero.heroPanel.SetActive(true);
+			// 		List<Button> skillsButton = extraTurnHero.gameObject.GetComponentInChildren<HeroPanel>().skillsBtn;					
+			// 		for(int i = 0; i <skillsButton.Count; i++)
+			// 		{
+			// 			skillsButton[i].interactable = false;
 						
-						skillsButton[i].GetComponent<Ability>().skillType = Type.ExtraTurn;
-					}				
-					extraTurnHero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
+			// 			skillsButton[i].GetComponent<Ability>().skillType = Type.ExtraTurn;
+			// 		}				
+			// 		extraTurnHero.gameObject.GetComponent<HeroManager>().heroPanel.SetActive(false);
 
-					//Grey Out heroes not available in extra turn
+			// 		//Grey Out heroes not available in extra turn
 								
-					extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.grey;			
+			// 		extraTurnHero.transform.Find("HeroUI").gameObject.transform.Find("Image").GetComponent<Image>().color = Color.grey;			
 			
 
-				}//if
+			// 	}//if
 
-			}//foreach	
+			// }//foreach	
 
 		}	
 	

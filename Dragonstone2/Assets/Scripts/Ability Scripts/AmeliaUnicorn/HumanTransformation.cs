@@ -59,7 +59,7 @@ HeroAsset heroAsset;
 		hero = this.GetComponentInParent<HeroManager>();
 		//Debug.Log("hero");
 
-		if(hero.GetComponentInParent<Player>().isActive){
+		if(hero.GetComponentInParent<Player>().isActive && hero.isSelected){
 			GameManager.Instance.AddBuff("IncreaseDefense", 1, hero, hero);
 		}
 
@@ -175,9 +175,18 @@ HeroAsset heroAsset;
 			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);			
 		}			
 				
+		heroManager.SelectHero();
+
+		int x = heroManager.GetComponentInParent<Player>().teamHeroes.Count;
+		for(int y = 0; y<x; y++){
+			if(heroManager.GetComponentInParent<Player>().teamHeroes[y] == oldHero.gameObject){
+				heroManager.GetComponentInParent<Player>().teamHeroes[y] = newHero.gameObject;
+			}
+		}
+
+
 		Destroy(oldHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject);
 		Destroy(oldHero.gameObject);
-		
 
 		//oldHero.enabled = false;
 	}//Create Hero

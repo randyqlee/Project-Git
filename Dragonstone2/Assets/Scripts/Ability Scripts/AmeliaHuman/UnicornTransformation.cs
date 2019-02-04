@@ -46,7 +46,7 @@ HeroAsset heroAsset;
 
 		hero = this.GetComponentInParent<HeroManager>();
 
-		if(hero.GetComponentInParent<Player>().isActive){
+		if(hero.GetComponentInParent<Player>().isActive && hero.isSelected){
 
 			//Debug.Log("hero");
 
@@ -167,7 +167,16 @@ HeroAsset heroAsset;
 		foreach(Debuff debuff in debuffs){
 			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);			
 		}		
-				
+
+		heroManager.SelectHero();
+		
+		int x = heroManager.GetComponentInParent<Player>().teamHeroes.Count;
+		for(int y = 0; y<x; y++){
+			if(heroManager.GetComponentInParent<Player>().teamHeroes[y] == oldHero.gameObject){
+				heroManager.GetComponentInParent<Player>().teamHeroes[y] = newHero.gameObject;
+			}
+		}
+		
 		
 		Destroy(oldHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject);
 		Destroy(oldHero.gameObject);

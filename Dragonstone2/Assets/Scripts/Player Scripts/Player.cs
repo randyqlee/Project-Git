@@ -146,23 +146,25 @@ public class Player : MonoBehaviour {
 				//check that the object hit is a HERO.
 				if(pointerObject.gameObject.GetComponent<HeroManager>() != null )
 				{
-					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag)
-					{
-						//if own hero is selected
-						pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
-						myHeroIsSelected = true;
-					}
+					// if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag == gameObject.tag)
+					// {
+					// 	//if own hero is selected
+					// 	pointerObject.gameObject.GetComponent<HeroManager>().SelectHero();
+					// 	myHeroIsSelected = true;
+					// }
 
-					if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
-					{
+					//if (Input.GetMouseButtonDown(0) && pointerObject.gameObject.tag != gameObject.tag)
+					if (Input.GetMouseButtonDown(0))
+					 {
 						//if enemy hero is selected
 						pointerObject.gameObject.GetComponent<HeroManager>().DisplayHero();
-					}
+					 }
 					
 				}
 
 				//if own Hero was selected, and pointer is now on an ability button
-				if(pointerObject.gameObject.GetComponent<Button>() != null && myHeroIsSelected)
+				//if(pointerObject.gameObject.GetComponent<Button>() != null && myHeroIsSelected)
+				if(pointerObject.gameObject.GetComponent<Button>() != null && pointerObject.gameObject.GetComponentInParent<HeroManager>().isSelected)
 				{
 					//if the button is clicked
 					if (Input.GetMouseButtonDown(0) && !isEndTurn)

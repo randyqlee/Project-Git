@@ -190,12 +190,12 @@ public class Ability : MonoBehaviour {
 	{		
 		
 		if(this != null)
-		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive)
+		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive && gameObject.GetComponentInParent<HeroManager>().isSelected)
 		//if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().gameObject != null)
 		{
 		
 			remainingCooldown -= 1;
-			if(remainingCooldown<0){
+			if(remainingCooldown<=0){
 				remainingCooldown = 0;
 
 			}
