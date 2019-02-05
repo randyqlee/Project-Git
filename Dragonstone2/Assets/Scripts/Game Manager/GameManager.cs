@@ -362,9 +362,7 @@ public class GameManager : MonoBehaviour {
 		
 			foreach(Debuff debuff in debuffs){					
 				Destroy(debuff);					
-			}
-		
-		
+			}		
 		
 		//Disable Passive Abilities		
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);							
@@ -378,6 +376,8 @@ public class GameManager : MonoBehaviour {
 					if(ability.skillType == Type.Active){
 						ability.DisableAbilityActive();
 					}
+
+					
 				}
 
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
@@ -388,9 +388,6 @@ public class GameManager : MonoBehaviour {
 		hero.GetComponentInParent<Player>().DeadHeroes(hero);
 
 
-
-		
-		
 		hero.gameObject.SetActive(false);
 
 		e_HeroKilled();	
@@ -402,7 +399,7 @@ public class GameManager : MonoBehaviour {
 		
 
 
-	}
+	}//killhero
 
 	public  IEnumerator ProtectSoulRevive(HeroManager hero){
 			hero.gameObject.SetActive(true);

@@ -167,6 +167,8 @@ public class Player : MonoBehaviour {
 				if(pointerObject.gameObject.GetComponent<Button>() != null && pointerObject.gameObject.GetComponentInParent<HeroManager>().isSelected)
 				{
 					//if the button is clicked
+					
+					
 					if (Input.GetMouseButtonDown(0) && !isEndTurn)
 					{
 						button = pointerObject.gameObject.GetComponent<Button>();

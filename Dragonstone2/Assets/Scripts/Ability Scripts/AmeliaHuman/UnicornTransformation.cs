@@ -161,13 +161,18 @@ HeroAsset heroAsset;
 		Buff[] buffs = oldHero.GetComponents<Buff>();
 		foreach(Buff buff in buffs){
 			GameManager.Instance.AddBuff(buff.buff.buff.ToString(), buff.duration, oldHero, newHero);			
+			Destroy(buff);
 		}
 
 		Debuff[] debuffs = oldHero.GetComponents<Debuff>();
 		foreach(Debuff debuff in debuffs){
-			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);			
+			GameManager.Instance.AddDebuff(debuff.debuff.debuff.ToString(), debuff.duration, oldHero, newHero);	
+			Destroy(debuff);
 		}		
 
+		
+		
+		
 		heroManager.SelectHero();
 		
 		int x = heroManager.GetComponentInParent<Player>().teamHeroes.Count;
@@ -176,6 +181,8 @@ HeroAsset heroAsset;
 				heroManager.GetComponentInParent<Player>().teamHeroes[y] = newHero.gameObject;
 			}
 		}
+
+		
 		
 		
 		Destroy(oldHero.gameObject.transform.Find("HeroPanel(Clone)").gameObject);

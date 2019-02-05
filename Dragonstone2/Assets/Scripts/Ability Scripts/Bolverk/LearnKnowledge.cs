@@ -26,7 +26,12 @@ public int knowledgePoints = 0;
 	}
 
 	
-		
+	void OnDisable(){
+		GameManager.Instance.e_PlayerStartPhase -= GainKnowledge;
+		GetComponentInChildren<Text>().enabled = false;
+	}	
+
+
 	public void GainKnowledge(){		
 		
 		hero = this.GetComponentInParent<HeroManager>();

@@ -28,8 +28,12 @@ public class Ability : MonoBehaviour {
 	public virtual void Awake ()
 	{
 		GameManager.Instance.e_PlayerStartPhase += GameManagerNextTurn;
+		//GameManager.Instance.e_PlayerEndPhase += GameManagerNextTurn;		
 		
-		
+	}
+
+	public void OnDestroy(){
+		GameManager.Instance.e_PlayerStartPhase -= GameManagerNextTurn;
 	}
 
 	public virtual void UseAbility (HeroManager attacker)
@@ -189,7 +193,9 @@ public class Ability : MonoBehaviour {
 	public virtual void GameManagerNextTurn()
 	{		
 		
-		if(this != null)
+		//TODO: check if hero is not in deadheroes	
+
+		
 		if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive && gameObject.GetComponentInParent<HeroManager>().isSelected)
 		//if (remainingCooldown > 0 && gameObject.GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().gameObject != null)
 		{
