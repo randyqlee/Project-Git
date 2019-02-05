@@ -347,10 +347,85 @@ public class GameManager : MonoBehaviour {
 	//Original Code
 	public void KillHero (HeroManager hero)
 	{		
-		hero.isDead = true;
+		// Debug.Log("Kill Hero: " +hero);
+		// hero.isDead = true;
 				
-		//Destroy all buffs and debuffs
-		//Destroy all buffs
+		// Buff[] buffs = hero.GetComponents<Buff>();
+		
+		// 	foreach(Buff buff in buffs){					
+		// 		Destroy(buff);				
+		// 	}
+
+		// //Destroy all debuffs
+		// Debuff[] debuffs = hero.GetComponents<Debuff>();
+		
+		// 	foreach(Debuff debuff in debuffs){					
+		// 		Destroy(debuff);					
+		// 	}		
+		
+		
+		
+		// //Disable Passive Abilities		
+		// hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);	
+		// Debug.Log("Hero Panel Access: " +hero.transform.Find("HeroPanel(Clone)").gameObject);						
+		// Ability[] abilities = hero.GetComponentsInChildren<Ability>();
+		
+		// 	foreach(Ability ability in abilities){
+		// 			if(ability.skillType == Type.Passive){
+		// 				ability.DisableAbilityPassive();
+		// 				Debug.Log("Passive Ability Disabled: " +ability);
+		// 			}
+
+		// 			if(ability.skillType == Type.Active){
+		// 				ability.DisableAbilityActive();
+		// 				Debug.Log("Active Ability Disabled: " +ability);
+		// 			}
+
+					
+		// 		}
+		// hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+
+		
+		
+		// //hero.gameObject.transform.GetInstanceID
+		// //Kill Hero
+
+		// hero.GetComponentInParent<Player>().DeadHeroes(hero);
+
+
+		// hero.gameObject.SetActive(false);
+
+		// e_HeroKilled();	
+
+		// if(hero.hasProtectSoul){
+		// 	StartCoroutine(ProtectSoulRevive(hero));
+		// }		
+		StartCoroutine(KillHeroCoroutine(hero));
+
+	}//killhero
+
+	public IEnumerator KillHeroCoroutine (HeroManager hero)
+	{		
+					
+		yield return StartCoroutine(DestroyBuffsDebuffs(hero));
+		
+		//Disable Passive Abilities		
+		yield return StartCoroutine(DisablePassives(hero));
+
+		
+		
+		//hero.gameObject.transform.GetInstanceID
+		//Kill Hero
+		yield return StartCoroutine(KillHeroEvent(hero));		
+
+		if(hero.hasProtectSoul){
+			yield return StartCoroutine(ProtectSoulRevive(hero));
+		}		
+
+	}//killhero
+
+	public IEnumerator DestroyBuffsDebuffs(HeroManager hero){
+
 		Buff[] buffs = hero.GetComponents<Buff>();
 		
 			foreach(Buff buff in buffs){					
@@ -364,42 +439,41 @@ public class GameManager : MonoBehaviour {
 				Destroy(debuff);					
 			}		
 		
+		yield return null;
+	}//DestroyBuffsDebuffs
+
+	public IEnumerator DisablePassives(HeroManager hero){
 		//Disable Passive Abilities		
-		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);							
+		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);	
+		
 		Ability[] abilities = hero.GetComponentsInChildren<Ability>();
 		
 			foreach(Ability ability in abilities){
-					if(ability.skillType == Type.Passive){
-						ability.DisableAbilityPassive();
-					}
+					// if(ability.skillType == Type.Passive || ability.skillType == Type.Silenced){
+					// 	ability.DisableAbilityPassive();
+					// 	Debug.Log("Passive Ability Disabled: " +ability);
+					// }
 
-					if(ability.skillType == Type.Active){
-						ability.DisableAbilityActive();
-					}
+					// if(ability.skillType == Type.Active || ability.skillType == Type.Silenced){
+					// 	ability.DisableAbilityActive();
+					// 	Debug.Log("Active Ability Disabled: " +ability);
+					// }
 
+					ability.DisableAbilityPassive();
+					ability.DisableAbilityActive();
 					
 				}
-
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
-		
-		//hero.gameObject.transform.GetInstanceID
-		//Kill Hero
+		yield return null;
+	}//Disable Passives
 
+	public IEnumerator KillHeroEvent(HeroManager hero){
+		hero.isDead = true;
 		hero.GetComponentInParent<Player>().DeadHeroes(hero);
-
-
 		hero.gameObject.SetActive(false);
-
 		e_HeroKilled();	
-
-		if(hero.hasProtectSoul){
-			StartCoroutine(ProtectSoulRevive(hero));
-		}
-		
-		
-
-
-	}//killhero
+		yield return null;
+	}
 
 	public  IEnumerator ProtectSoulRevive(HeroManager hero){
 			hero.gameObject.SetActive(true);

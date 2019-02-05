@@ -23,13 +23,22 @@ public int knowledgePoints = 0;
 
 		GameManager.Instance.e_PlayerStartPhase -= GainKnowledge;
 		GetComponentInChildren<Text>().enabled = false;
+		
 	}
 
+	// void OnEnable(){
+	// 	GameManager.Instance.e_PlayerStartPhase += GainKnowledge;
+	// 	GetComponentInChildren<Text>().enabled = true;
+	// 	Debug.Log("Learn Knowledge Enabled");
+	// }	
+
 	
-	void OnDisable(){
-		GameManager.Instance.e_PlayerStartPhase -= GainKnowledge;
-		GetComponentInChildren<Text>().enabled = false;
-	}	
+	
+	// void OnDisable(){
+	// 	GameManager.Instance.e_PlayerStartPhase -= GainKnowledge;
+	// 	GetComponentInChildren<Text>().enabled = false;
+	// 	Debug.Log("Learn Knowledge Disabled");
+	// }	
 
 
 	public void GainKnowledge(){		
