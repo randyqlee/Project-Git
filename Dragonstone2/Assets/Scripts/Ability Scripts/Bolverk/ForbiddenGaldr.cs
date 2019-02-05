@@ -31,6 +31,8 @@ public class ForbiddenGaldr : Ability {
 
 		learnKnowledge.knowledgePoints = 0;
 
+		learnKnowledge.GetComponentInChildren<Text>().text = learnKnowledge.knowledgePoints.ToString();
+
 		base.UseAbility(attacker, defender);
 
 	}	

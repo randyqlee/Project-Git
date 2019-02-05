@@ -30,6 +30,8 @@ public class Silence : Debuff {
 						
 				skillsButton[i].interactable = false;
 				skillTypeTemp = skillsButton[i].GetComponent<Ability>().skillType;
+
+				if(skillsButton[i].GetComponent<Ability>().skillType == Type.Active)
 				skillsButton[i].GetComponent<Ability>().skillType = Type.Silenced;
 
 			}		

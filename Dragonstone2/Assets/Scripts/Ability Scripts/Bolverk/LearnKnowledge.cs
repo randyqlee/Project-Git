@@ -12,6 +12,7 @@ public class LearnKnowledge : Ability {
 public HeroManager hero;
 //public Buff[] buffs;
 public int knowledgePoints = 0;	
+public int sumKnowledgePoints = 0;
 
 	public override void UseAbilityPassive(){
 		
@@ -44,7 +45,7 @@ public int knowledgePoints = 0;
 	public void GainKnowledge(){		
 		
 		hero = this.GetComponentInParent<HeroManager>();
-		
+
 		List<HeroManager> allies = GameManager.Instance.AllyHeroList(hero);
 		List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(hero);
 
@@ -53,16 +54,23 @@ public int knowledgePoints = 0;
 		heroes.AddRange(enemies);
 		
 		//Get all buffs from each Player
-		if(hero.GetComponentInParent<Player>().isActive){							
+		if(hero.GetComponentInParent<Player>().isActive && hero.isSelected){							
 			foreach(HeroManager hero1 in heroes){
 				
 				Buff[] buffs1 = hero1.GetComponents<Buff>();				
 				foreach(Buff buff in buffs1){					
 					
-					knowledgePoints++;
 					
+					sumKnowledgePoints++;		
 				}//foreach Buff in buffs
 			}//foreach Hero Manager
+
+			if(sumKnowledgePoints == 0)
+			sumKnowledgePoints = 1;
+
+			knowledgePoints += sumKnowledgePoints;
+
+			sumKnowledgePoints = 0;
 
 			if(knowledgePoints < 1){
 				knowledgePoints = 1;

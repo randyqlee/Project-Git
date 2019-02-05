@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 	public GameObject heroPanel;
 	
 	HeroManager heroGO;
-	bool myHeroIsSelected = false;
+	//bool myHeroIsSelected = false;
 
 	Button button;
 

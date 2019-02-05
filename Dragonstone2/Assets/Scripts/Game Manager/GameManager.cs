@@ -213,7 +213,33 @@ public class GameManager : MonoBehaviour {
 			foreach (HeroManager hero in player.GetComponentsInChildren<HeroManager>())
 			{
 				
-				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+				// hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
+								
+				// Ability[] abilities = hero.GetComponentsInChildren<Ability>();
+				// foreach(Ability ability in abilities){
+				// 	if(ability.skillType == Type.Passive){
+				// 		ability.UseAbilityPassive();
+				// 	}
+
+				// 	//For active skills with Passive
+				// 	if(ability.skillType == Type.Active){
+				// 		ability.UseAbilityActive();
+				// 	}
+
+				// 	// ability.UseAbilityPassive();
+				// 	// ability.UseAbilityActive();
+				// }
+
+				// hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+
+				StartCoroutine(EnableHeroPassives(hero));
+			}
+
+		yield return null;
+	}//InitHeroUI
+
+	public IEnumerator EnableHeroPassives(HeroManager hero){
+			hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);
 								
 				Ability[] abilities = hero.GetComponentsInChildren<Ability>();
 				foreach(Ability ability in abilities){
@@ -225,14 +251,15 @@ public class GameManager : MonoBehaviour {
 					if(ability.skillType == Type.Active){
 						ability.UseAbilityActive();
 					}
-				}
 
-				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+					//  ability.UseAbilityPassive();
+					//  ability.UseAbilityActive();
+				}
 				
-			}
+				hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
 
 		yield return null;
-	}//InitHeroUI
+	}
 
 	
 	// Update is called once per frame
@@ -410,7 +437,7 @@ public class GameManager : MonoBehaviour {
 		yield return StartCoroutine(DestroyBuffsDebuffs(hero));
 		
 		//Disable Passive Abilities		
-		yield return StartCoroutine(DisablePassives(hero));
+		yield return StartCoroutine(DisableHeroPassives(hero));
 
 		
 		
@@ -442,7 +469,7 @@ public class GameManager : MonoBehaviour {
 		yield return null;
 	}//DestroyBuffsDebuffs
 
-	public IEnumerator DisablePassives(HeroManager hero){
+	public IEnumerator DisableHeroPassives(HeroManager hero){
 		//Disable Passive Abilities		
 		hero.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);	
 		

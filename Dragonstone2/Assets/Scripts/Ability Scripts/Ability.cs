@@ -105,10 +105,10 @@ public class Ability : MonoBehaviour {
 
 	public virtual void UseAbilityPassive(){
 		
-		//Disable Access to skill UI
+		// Disable Access to skill UI
 		GetComponent<Button>().interactable = false;
 		GetComponentInChildren<Text>().enabled = false;
-		//GetComponent<BoxCollider2D>().enabled = false;
+		GetComponent<BoxCollider2D>().enabled = false;
 		
 	}	
 
