@@ -354,6 +354,7 @@ public class GameManager : MonoBehaviour {
 					} 
 					else 
 					{
+						hero.isDead = true;
 						KillHero(hero);
 					}
 
@@ -434,10 +435,10 @@ public class GameManager : MonoBehaviour {
 	public IEnumerator KillHeroCoroutine (HeroManager hero)
 	{		
 					
-		yield return StartCoroutine(DestroyBuffsDebuffs(hero));
+		//yield return StartCoroutine(DestroyBuffsDebuffs(hero));
 		
 		//Disable Passive Abilities		
-		yield return StartCoroutine(DisableHeroPassives(hero));
+		//yield return StartCoroutine(DisableHeroPassives(hero));
 
 		
 		
@@ -476,16 +477,7 @@ public class GameManager : MonoBehaviour {
 		Ability[] abilities = hero.GetComponentsInChildren<Ability>();
 		
 			foreach(Ability ability in abilities){
-					// if(ability.skillType == Type.Passive || ability.skillType == Type.Silenced){
-					// 	ability.DisableAbilityPassive();
-					// 	Debug.Log("Passive Ability Disabled: " +ability);
-					// }
-
-					// if(ability.skillType == Type.Active || ability.skillType == Type.Silenced){
-					// 	ability.DisableAbilityActive();
-					// 	Debug.Log("Active Ability Disabled: " +ability);
-					// }
-
+					
 					ability.DisableAbilityPassive();
 					ability.DisableAbilityActive();
 					
@@ -1136,7 +1128,8 @@ public class GameManager : MonoBehaviour {
 
 	public void DealDamage (int damage, HeroManager source, HeroManager target)	{
 		
-		StartCoroutine(DealDamageCoroutine(damage, source, target));		
+		//StartCoroutine(DealDamageCoroutine(damage, source, target));		
+		DealDamage1(damage, source, target);
 		
 	}//Deal Damage
 
@@ -1174,6 +1167,40 @@ public class GameManager : MonoBehaviour {
 		yield return null;		
 		
 	}//Deal Damage1
+
+	public void DealDamage1 (int damage, HeroManager source, HeroManager target)
+	{
+		if(target.hasBrand){
+
+			DebuffAsset debuff = Resources.Load<DebuffAsset>("SO Assets/Debuff/Brand");
+			int brandDamage = debuff.value;
+			damage += brandDamage;
+			
+			//Enumerator
+			if(damage >= target.maxHealth){				
+				//e_DealDamage(damage, target);
+				e_DealDamage(damage, target);	
+			}
+
+			//Enumerator
+			//target.TakeDamage (damage, source);		
+			target.TakeDamage(damage, source);		
+			
+
+		}else{
+			
+			if(damage >= target.maxHealth){
+				//e_DealDamage(damage, target);
+				e_DealDamage(damage, target);	
+			}
+
+			//target.TakeDamage (damage, source);
+			target.TakeDamage(damage, source);
+			
+		}			
+		
+	}//Deal Damage1
+
 
 	public IEnumerator DealDamageEvent(int damage, HeroManager target){
 

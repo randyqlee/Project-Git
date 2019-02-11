@@ -8,21 +8,22 @@ public class SwordOfPromise : Ability {
 
 	public override void UseAbility (HeroManager attacker, HeroManager defender)
 	{
-		//Debug.Log ("Using SwordOfPromise: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
+		Debug.Log ("Using SwordOfPromise: attacker - " + attacker.gameObject.name + " , defender - " + defender.gameObject.name);
 
 		GameManager.Instance.Attack (attacker, defender);
 
-		GameManager.Instance.CheckHealth();
 		if(defender.isDead){
-			SealOfLightTrigger(attacker, defender);			
+			SealOfLight sealOfLight = GetComponentInParent<HeroManager>().GetComponentInChildren<SealOfLight>();
+			sealOfLight.UseAbility(attacker, defender);
 		} else {
 			ResetCooldown();
-			GameManager.Instance.ExtraTurnCheck(attacker);			
-		}
-		
-		
+			GameManager.Instance.ExtraTurnCheck(attacker);		
+		}			
 
 	}//Override UseAbility
+
+
+
 	//Seal of Light Replica
 	void SealOfLightTrigger(HeroManager attacker, HeroManager defender) {
 

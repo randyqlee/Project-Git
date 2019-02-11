@@ -15,3 +15,4 @@
 
 20 Jan 2018
 1. Need a better system to resolve:  reflect, echo, revenge, and counterattack
+2. Mix of Logic and Visuals causing lag in logic calculations.

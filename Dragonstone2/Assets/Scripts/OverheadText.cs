@@ -25,7 +25,8 @@ public class OverheadText : MonoBehaviour {
 	public void FloatingText (string message)
 	{
 		
-		StartCoroutine (DelayMessage(message));
+		//StartCoroutine (DelayMessage(message));
+		DelayMessage(message);
 	}
 
 	IEnumerator DelayMessage(string message)

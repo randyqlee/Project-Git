@@ -8,14 +8,17 @@ public class  GodsShield : Ability {
 	float chanceReduction = 5;
 	HeroManager hero;
 	BuffPanel buffPanel;
+	Sprite permanentImmunity;
+	Sprite unluckyAkroma;
+	
 	
 	public override void UseAbilityPassive(){		
 
 		Sprite permanentImmunity = Resources.Load<Sprite>("BuffIcons/PermanentImmunity");
-		Sprite unluckyAkroma = Resources.Load<Sprite>("BuffIcons/UnluckyAkroma");
-		
+		Sprite unluckyAkroma = Resources.Load<Sprite>("BuffIcons/UnluckyAkroma");	
 		
 		hero = GetComponentInParent<HeroManager>();
+
 		buffPanel = hero.gameObject.GetComponentInChildren<BuffPanel>();
 		//apply effect
 		hero.hasPermanentImmunity = true;
@@ -37,10 +40,10 @@ public class  GodsShield : Ability {
 
 	public override void DisableAbilityPassive(){
 
-		buffPanel = hero.gameObject.GetComponentInChildren<BuffPanel>();
-		hero = GetComponentInParent<HeroManager>();
-		//apply effect
 		
+		//apply effect		
+		buffPanel = hero.GetComponentInChildren<BuffPanel>();
+		hero.hasPermanentImmunity = false;	
 		List<HeroManager> enemies =  GameManager.Instance.EnemyHeroList(hero);
 
 		foreach (HeroManager enemy in enemies){		

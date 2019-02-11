@@ -117,6 +117,35 @@ public class HeroManager : MonoBehaviour
 		isDead = false;	
 	}
 	
+	void OnDisable(){
+		Buff[] buffs = this.GetComponents<Buff>();
+		
+			foreach(Buff buff in buffs){					
+				Destroy(buff);				
+			}
+
+		//Destroy all debuffs
+		Debuff[] debuffs = this.GetComponents<Debuff>();
+		
+			foreach(Debuff debuff in debuffs){					
+				Destroy(debuff);					
+			}		
+
+			//Disable Passive Abilities		
+		this.transform.Find("HeroPanel(Clone)").gameObject.SetActive(true);	
+		
+		Ability[] abilities = this.GetComponentsInChildren<Ability>();
+		
+			foreach(Ability ability in abilities){
+					
+					ability.DisableAbilityPassive();
+					ability.DisableAbilityActive();
+					
+				}
+		this.transform.Find("HeroPanel(Clone)").gameObject.SetActive(false);
+	}
+	
+	
 	// Update is called once per frame
 	void Update () {
 
@@ -294,6 +323,58 @@ public class HeroManager : MonoBehaviour
 		yield return StartCoroutine(CheckHealthMethod());
 
 		yield return null;
+	}//TakeDamage1
+
+	public void TakeDamage(int damage, HeroManager source)
+	{
+		
+		if(damage < 0)
+			damage = 0;			
+
+		if (shield <=0){
+			shield = 0;
+			maxHealth -=damage;
+			
+			//e_PopupMSG(damage.ToString());
+			e_PopupMSG(damage.ToString());
+
+			//e_TakeDamage();
+			e_TakeDamage();
+			
+			
+			
+
+		}else{			
+			shield-= damage;
+
+			//e_PopupMSG(damage.ToString());
+			e_PopupMSG(damage.ToString());
+			
+			//e_TakeDamage();
+			e_TakeDamage();
+		
+			
+			
+			if(shield < 0){
+				int netDamage = shield;
+				shield = 0;
+				maxHealth +=netDamage;
+				
+				//e_PopupMSG(damage.ToString());
+				e_PopupMSG(damage.ToString());
+			
+				//e_TakeDamage();
+				e_TakeDamage();
+			
+				
+				
+			}//shield
+		}							
+				
+		//GameManager.Instance.CheckHealth();
+		GameManager.Instance.CheckHealth();
+
+		
 	}//TakeDamage1
 
 	public IEnumerator PopUpMsgEvent(int damage){
