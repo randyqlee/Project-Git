@@ -29,9 +29,7 @@ MonoBehaviour:
     abilityCoolDown: 1
     target: 0
     abilityBuffs: []
-    abilityDebuffs:
-    - debuff: 6
-      duration: 1
+    abilityDebuffs: []
   - abilityName: Spear Of Devastation
     skillType: 0
     icon: {fileID: 21300000, guid: eeb4f099277f72a4f81ec85390d6228e, type: 3}

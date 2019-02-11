@@ -27,12 +27,20 @@ public class Ability : MonoBehaviour {
 
 	public virtual void Awake ()
 	{
-		GameManager.Instance.e_PlayerStartPhase += GameManagerNextTurn;
-		//GameManager.Instance.e_PlayerEndPhase += GameManagerNextTurn;		
+		//GameManager.Instance.e_PlayerStartPhase += GameManagerNextTurn;
+		//GameManager.Instance.e_PlayerEndPhase += GameManagerNextTurn;	
 		
 	}
 
 	public void OnDestroy(){
+		//GameManager.Instance.e_PlayerStartPhase -= GameManagerNextTurn;
+	}
+
+	public void OnEnable(){
+		GameManager.Instance.e_PlayerStartPhase += GameManagerNextTurn;
+	}
+	
+	public void OnDisable(){
 		GameManager.Instance.e_PlayerStartPhase -= GameManagerNextTurn;
 	}
 
@@ -54,6 +62,7 @@ public class Ability : MonoBehaviour {
 			{
 				foreach (AbilityBuffs abilityBuff in abilityBuffs)
 				{
+					if(!defender.isDead)
 					GameManager.Instance.AddBuffComponent(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender);
 					//Debug.Log("ABILITY BUFF SUCCESS");
 
@@ -64,6 +73,7 @@ public class Ability : MonoBehaviour {
 			{
 				foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
 				{
+					if(!defender.isDead)
 					GameManager.Instance.AddDebuffComponent(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender);
 
 				}
@@ -84,6 +94,7 @@ public class Ability : MonoBehaviour {
 		{
 			foreach (AbilityBuffs abilityBuff in abilityBuffs)
 			{
+				if(!defender.isDead)
 				GameManager.Instance.AddBuffComponentRandom(abilityBuff.buff.ToString(),abilityBuff.duration,attacker,defender, targetCount);
 
 			}
@@ -93,6 +104,7 @@ public class Ability : MonoBehaviour {
 		{
 			foreach (AbilityDebuffs abilityDebuffs in abilityDebuffs)
 			{
+				if(!defender.isDead)
 				GameManager.Instance.AddDebuffComponentRandom(abilityDebuffs.debuff.ToString(),abilityDebuffs.duration,attacker,defender,targetCount);
 
 			}

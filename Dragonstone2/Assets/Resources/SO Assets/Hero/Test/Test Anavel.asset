@@ -30,7 +30,7 @@ MonoBehaviour:
     target: 0
     abilityBuffs: []
     abilityDebuffs:
-    - debuff: 6
+    - debuff: 15
       duration: 1
   - abilityName: Girl's Prayer
     skillType: 0

@@ -31,8 +31,6 @@ MonoBehaviour:
     abilityBuffs:
     - buff: 14
       duration: 10
-    - buff: 1
-      duration: 10
     abilityDebuffs: []
   - abilityName: Storm of Midnight
     skillType: 0
