@@ -9,6 +9,7 @@ using UnityEngine;
 public class DreamyLeader : Ability {
 
 	HeroManager hero;
+	Player player;
 
 	public override void UseAbilityPassive(){
 
@@ -31,8 +32,12 @@ public class DreamyLeader : Ability {
 	public void DreamyLeaderAbility ()
 	{
 		hero = gameObject.GetComponentInParent<HeroManager>();
+		player = hero.GetComponentInParent<Player>();
 	
-		List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(hero);
+		
+		if(hero.isSelected&&player.isActive){
+
+			List<HeroManager> enemies = GameManager.Instance.EnemyHeroList(hero);
 		int targetCount = enemies.Count;
 		
 		if(hero.GetComponentInParent<Player>().isActive){			
@@ -64,7 +69,10 @@ public class DreamyLeader : Ability {
 
 		}//if playerisActive		
 
-		//base.UseAbility(attacker);		
+		//base.UseAbility(attacker);	
+
+		}
+			
 
 	}
 
