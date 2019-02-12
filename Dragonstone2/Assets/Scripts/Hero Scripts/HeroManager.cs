@@ -118,6 +118,7 @@ public class HeroManager : MonoBehaviour
 	}
 	
 	void OnDisable(){
+		
 		Buff[] buffs = this.GetComponents<Buff>();
 		
 			foreach(Buff buff in buffs){					

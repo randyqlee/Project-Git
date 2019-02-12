@@ -42,6 +42,7 @@ public class Debuff : MonoBehaviour{
 
 	public virtual void DecreaseDuration ()
 	{
+		
 		if (GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().isSelected)
 		{
 			this.duration--;

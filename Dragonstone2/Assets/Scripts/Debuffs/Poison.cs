@@ -17,13 +17,15 @@ public class Poison : Debuff {
 	//apply effect here
 	public override void DecreaseDuration()
 	{
-		if (GetComponentInParent<Player>().isActive)
+		base.DecreaseDuration();
+		
+		if (GetComponentInParent<Player>().isActive && GetComponentInParent<HeroManager>().isSelected)
 		{
 			gameObject.GetComponent<HeroManager>().maxHealth -= debuff.value;
 			GameManager.Instance.CheckHealth();
 		}
 
-		base.DecreaseDuration();
+		
 
 	}
 	
