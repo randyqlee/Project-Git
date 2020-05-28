@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9006dad03c143c748a19ee3cd216764f, type: 3}
+  m_Name: SampleHero1
+  m_EditorClassIdentifier: 
+  heroName: Sample Hero 1
+  description: SampleHero1
+  heroLevel: 1
+  rarity: 0
+  faction: 0
+  creatureType: 0
+  health: 640000006e00000078000000
+  attack: 640000006e00000078000000
+  chance: 640000006e00000078000000
+  speed: 640000006e00000078000000
+  critical: 640000006e00000078000000
+  debuff: 640000006e00000078000000
+  evasion: 640000006e00000078000000
+  skill_Chance:
+  - {fileID: 11400000, guid: ee600e60f9d47f5448c7c21b835f2df5, type: 2}
+  - {fileID: 11400000, guid: b8598042e0ba4a442829b453a515526e, type: 2}
+  - {fileID: 11400000, guid: d966c60c3ba2c434c8c13e2510b0e534, type: 2}
+  skill_Cooldown:
+  - {fileID: 11400000, guid: 8c1db4960c7acce429a6dd8ae0b2799b, type: 2}
+  - {fileID: 11400000, guid: e781f1d45e6626447bf756835bbd2ac5, type: 2}
+  - {fileID: 11400000, guid: f321d2afc1812b04ab5a0eee3aea6930, type: 2}
+  skill_Rune:
+  - {fileID: 11400000, guid: 31d8c3c467b7fbc4dafd7ea9df08d6f8, type: 2}
+  - {fileID: 11400000, guid: 06d099a2a39cf524aa4dd88b5d0c5f1a, type: 2}
+  - {fileID: 11400000, guid: fc8ddd868cb0f774cb27e7b259d53b66, type: 2}
