@@ -7,8 +7,8 @@ public class HeroAsset : ScriptableObject
 {
     public string heroName;
     public string description;
+    public Sprite[] heroSprite = new Sprite[3];
 
-    public int heroLevel;
     public Rarity rarity;
     public Faction faction;
     public CreatureType creatureType;
