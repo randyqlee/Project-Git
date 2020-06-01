@@ -7,7 +7,7 @@ public class HeroLogic : MonoBehaviour
 {
     public int ID;
     public HeroAsset heroAsset;
-    //public Player owner;
+    public Player owner;
 
     public string heroName;
     public string description;
@@ -23,8 +23,8 @@ public class HeroLogic : MonoBehaviour
     public int debuffResistRate;
     public int evasionRate;
     
-    public SkillAsset skill_Chance;
-    public SkillAsset skill_Cooldown;
-    public SkillAsset skill_Rune;
+    public SkillEffect skill_Chance;
+    public SkillEffect skill_Cooldown;
+    public SkillEffect skill_Rune;
 
 }
