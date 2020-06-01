@@ -1,4 +1,4 @@
-﻿public enum CreatureType
+﻿public enum HeroType
 {
     Attack,
     HP,

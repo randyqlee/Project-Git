@@ -11,15 +11,15 @@ public class HeroAsset : ScriptableObject
 
     public Rarity rarity;
     public Faction faction;
-    public CreatureType creatureType;
+    public HeroType heroType;
 
     public int[] health = new int[3];
     public int[] attack = new int[3];
-    public int[] chance = new int[3];
+    public int[] effectChance = new int[3];
     public int[] speed = new int[3];
-    public int[] critical = new int[3];
-    public int[] debuff = new int[3];
-    public int[] evasion = new int[3];
+    public int[] criticalStrikeRate = new int[3];
+    public int[] debuffResistRate = new int[3];
+    public int[] evasionRate = new int[3];
 
     public SkillAsset[] skill_Chance = new SkillAsset[3];
     public SkillAsset[] skill_Cooldown = new SkillAsset[3];

@@ -11,5 +11,5 @@ public class Hero
     public int heroLevel;
     public Rarity rarity;
     public Faction faction;
-    public CreatureType creatureType;
+    public HeroType heroType;
 }
